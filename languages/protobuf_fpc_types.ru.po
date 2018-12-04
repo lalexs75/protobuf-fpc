@@ -1,0 +1,43 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: protobuf_fpc_types.spropertyalreadyregistered
+msgid "ProtoBuffer: Property %s already registered"
+msgstr "ProtoBuffer: Свойство %s уже зарегистрировано"
+
+#: protobuf_fpc_types.sprotobuferrorreadbooleanvalue
+msgid "ProtoBuffer: Error read boolean value"
+msgstr "ProtoBuffer: Ошибка чтения значения boolean"
+
+#: protobuf_fpc_types.sprotobuferrorreadint64value
+msgid "ProtoBuffer: Error read int64 value"
+msgstr "ProtoBuffer: Ошибка значения числа int64"
+
+#: protobuf_fpc_types.sprotobuferrorreadintegervalue
+msgid "ProtoBuffer: Error read integer value"
+msgstr "ProtoBuffer: Ошибка значения целого числа integer"
+
+#: protobuf_fpc_types.sprotobuferrorreadqwordvalue
+msgid "ProtoBuffer: Error read QWord value"
+msgstr "ProtoBuffer: Ошибка чтения значения QWord"
+
+#: protobuf_fpc_types.sprotobufferpropnotfoundnum
+msgid "ProtoBuffer: Property number %d not found"
+msgstr "ProtoBuffer: Свойство номер %d не найдено"
+
+#: protobuf_fpc_types.sprotobufferpropvalueexpected
+msgid "ProtoBuffer: Value expected for property %s"
+msgstr ""
+
+#: protobuf_fpc_types.sprotobufnotfondproperty
+msgid "ProtoBuffer: Not fond property %s"
+msgstr "ProtoBuffer: Не найдено свойство %s"
+
+#: protobuf_fpc_types.sprotobufunknowproptype
+msgid "ProtoBuffer: Unknow property type - %s"
+msgstr "ProtoBuffer: Не известный тип свойства - %s"
+
+#: protobuf_fpc_types.sprotobufunknowproptypenum
+msgid "ProtoBuffer: Unknow property type - %d"
+msgstr ""
+

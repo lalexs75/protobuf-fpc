@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="protobuf"><module name="protobuf_fpc"><element name="TSerializationObject"><short>Глобальный предок всех классов, поддерживающих серилизацию в формате PROTOBUF</short>
+      </element><element name="TSerializationObject.RegisterProp"><short>Метод для регистрации свойств</short>
+      </element>
+    <element name="TSerializationObjectList"><short>Общий предок для коллекций объектов</short>
+      </element><element name="GSerializationObjectListEnumerator.Create"/><element name="GSerializationObjectList.AddItem"><short>Создать новый элемент коллекции</short>
+      </element><element name="GSerializationObjectList.Items"><short>Элементы коллекции</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

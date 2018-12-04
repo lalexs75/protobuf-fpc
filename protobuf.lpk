@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="protobuf"/>
+    <Type Value="RunAndDesignTime"/>
+    <Author Value="Lagunov A.A."/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="protobuf"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <License Value="LGPL"/>
+    <Version Minor="1" Release="1" Build="1"/>
+    <Files Count="3">
+      <Item1>
+        <Filename Value="protobuf\protobuf_fpc.pas"/>
+        <UnitName Value="protobuf_fpc"/>
+      </Item1>
+      <Item2>
+        <Filename Value="protobuf\protobuf_fpc_types.pas"/>
+        <UnitName Value="protobuf_fpc_types"/>
+      </Item2>
+      <Item3>
+        <Filename Value="protobuf_define.inc"/>
+        <Type Value="Include"/>
+      </Item3>
+    </Files>
+    <LazDoc Paths="docs"/>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="languages"/>
+    </i18n>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="rxnew"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
