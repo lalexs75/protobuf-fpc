@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="14">
+      <Unit0>
+        <Filename Value="ProtoBufTest.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="26"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="protobuftestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ProtoBufTestCase"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="169"/>
+        <CursorPos X="34" Y="154"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="diadoctypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DIADocTypesUnit"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../common/commontesttypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CommonTestTypesUnit"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="228"/>
+        <CursorPos X="23" Y="247"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="googletesttypesunit.pas"/>
+        <UnitName Value="GoogleTestTypesUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="106"/>
+        <CursorPos Y="135"/>
+        <UsageCount Value="20"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="/home/install/source/fpcsrc/rtl/inc/systemh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="491"/>
+        <CursorPos X="20" Y="507"/>
+        <UsageCount Value="11"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../../../protobuf/protobuf_fpc_types.pas"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="25"/>
+        <CursorPos Y="41"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="1135"/>
+        <CursorPos X="3" Y="1162"/>
+        <UsageCount Value="13"/>
+        <Bookmarks Count="2">
+          <Item0 X="46" Y="1119" ID="1"/>
+          <Item1 X="11" Y="930" ID="2"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/typinfo.pp"/>
+        <UnitName Value="TypInfo"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="783"/>
+        <CursorPos X="11" Y="803"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="/home/install/source/fpcsrc/rtl/inc/rttih.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="47" Y="25"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/streams.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="576"/>
+        <CursorPos Y="593"/>
+        <UsageCount Value="11"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="/home/install/source/fpcsrc/packages/fcl-fpcunit/src/fpcunit.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="40"/>
+        <CursorPos X="3" Y="60"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="protobuftestcase.lfm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="406"/>
+        <CursorPos X="3" Y="426"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="180" TopLine="163"/>
+      </Position1>
+      <Position2>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="181" TopLine="163"/>
+      </Position2>
+      <Position3>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="183" TopLine="163"/>
+      </Position3>
+      <Position4>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="184" TopLine="163"/>
+      </Position4>
+      <Position5>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="189" TopLine="163"/>
+      </Position5>
+      <Position6>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="184" TopLine="163"/>
+      </Position6>
+      <Position7>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="185" TopLine="163"/>
+      </Position7>
+      <Position8>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="189" TopLine="163"/>
+      </Position8>
+      <Position9>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="185" TopLine="163"/>
+      </Position9>
+      <Position10>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="186" TopLine="163"/>
+      </Position10>
+      <Position11>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="189" TopLine="163"/>
+      </Position11>
+      <Position12>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="179" TopLine="163"/>
+      </Position12>
+      <Position13>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="180" TopLine="163"/>
+      </Position13>
+      <Position14>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="97" Column="30" TopLine="85"/>
+      </Position14>
+      <Position15>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="13" Column="32"/>
+      </Position15>
+      <Position16>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="273" TopLine="237"/>
+      </Position16>
+      <Position17>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="25" Column="26" TopLine="23"/>
+      </Position17>
+      <Position18>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="152" Column="3" TopLine="143"/>
+      </Position18>
+      <Position19>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="174" Column="25" TopLine="162"/>
+      </Position19>
+      <Position20>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="175" Column="52" TopLine="162"/>
+      </Position20>
+      <Position21>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="1079" Column="16" TopLine="1077"/>
+      </Position21>
+      <Position22>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="197" Column="45" TopLine="185"/>
+      </Position22>
+      <Position23>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="400" Column="25" TopLine="398"/>
+      </Position23>
+      <Position24>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="183" Column="24" TopLine="162"/>
+      </Position24>
+      <Position25>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="1192" Column="3" TopLine="1188"/>
+      </Position25>
+      <Position26>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="182" Column="14" TopLine="162"/>
+      </Position26>
+      <Position27>
+        <Filename Value="../../../protobuf/protobuf_fpc.pas"/>
+        <Caret Line="1157" Column="39" TopLine="1147"/>
+      </Position27>
+      <Position28>
+        <Filename Value="protobuftestcase.pas"/>
+        <Caret Line="155" Column="19" TopLine="143"/>
+      </Position28>
+      <Position29>
+        <Filename Value="../common/commontesttypesunit.pas"/>
+        <Caret Line="148" Column="35" TopLine="112"/>
+      </Position29>
+      <Position30>
+        <Filename Value="../common/commontesttypesunit.pas"/>
+        <Caret Line="140" TopLine="112"/>
+      </Position30>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="1" ActiveMode="default">
+        <Mode0 Name="default"/>
+      </Modes>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="P.FPropName"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>
