@@ -284,7 +284,7 @@ function DecodeValue64(AValue: QWord):Int64;
 implementation
 uses TypInfo
 {$IFDEF DEBUG}
-  , rxAppUtils
+  , rxlogging
 {$ENDIF}
 ;
 function EncodeValue32(AValue: Int32):LongWord;
