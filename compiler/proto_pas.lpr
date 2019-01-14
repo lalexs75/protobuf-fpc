@@ -25,6 +25,10 @@ uses
   Classes, SysUtils, ControlObjects, EnumObject, PasCodegen, ProtoObjects,
   LazFileUtils, ProtoParser, CustApp;
 
+resourcestring
+  sIncludeFolder = 'Include folder : %s';
+  sOutputDirectory = 'Output directory : %s';
+
 type
 
   { TProtoToPasApplication }
@@ -64,7 +68,7 @@ begin
 
 
   ST:=TStringList.Create;
-  GetNonOptions('hoi', ['help','out', 'include'], ST);
+  GetNonOptions('h:o:i:', ['help','out', 'include'], ST);
   if (ST.Count>0) then
   begin
     FFileName:=ST[0];
@@ -72,6 +76,19 @@ begin
       FOutDir:=ExtractFileDir(FFileName);
   end;
   ST.Free;
+
+{  -i /home/install/source/diadocsdk-cpp/proto/
+  -i /home/install/source/diadocsdk-cpp/proto/Departments/
+  -o /usr/local/share/lazarus/components/diadocsdk-fpc/Departments/
+  /home/install/source/diadocsdk-cpp/proto/Departments/DepartmentList.proto
+}
+
+  for S in FCodeGen.IncludeFileFolders do
+    WriteLn(Format(sIncludeFolder, [S]));
+
+  if FOutDir<>'' then
+    writeln(Format(sOutputDirectory, [FOutDir]));
+
 end;
 
 procedure TProtoToPasApplication.ParserStatus(Sender: TProtoParser;
@@ -177,6 +194,9 @@ end;
 
 var
   Application: TProtoToPasApplication;
+
+{$R *.res}
+
 begin
   Application:=TProtoToPasApplication.Create(nil);
   Application.Title:='Proto compiler';
