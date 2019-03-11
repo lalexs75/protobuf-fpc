@@ -242,10 +242,17 @@ end;
 procedure TEnum.GenerateInterfaceSection(AModule: TStrings);
 var
   V: TEnumValue;
+  S: String;
+  i: Integer;
 begin
   AModule.Add('T'+Caption + ' = (');
-  for V in Values do
-    AModule.Add(Format('  %s = %d;', [V.Caption, V.Value]));
+  for i:=0 to Values.Count-1 do
+  begin
+    V:=Values[i];
+    S:=Format('  %s = %d', [V.Caption, V.Value]);
+    if i<Values.Count-1 then S:=S + ',';
+    AModule.Add(S);
+  end;
   AModule.Add(');');
 end;
 
