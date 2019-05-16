@@ -144,13 +144,16 @@ end;
 
 procedure TProtoToPasApplication.DoCompileFromFile(AFileName: string);
 var
-  S: String;
+  S, S1: String;
 begin
   PParser.Compile(AFileName);
   if PParser.State <> cmsError then
   begin
+    S1:=ExtractFileNameOnly(AFileName);
+    FCodeGen.PasUnitName:=S1;
+    S1:=ChangeFileExt(S1, '.pas');
     S:=FCodeGen.GeneratePascalCode;
-    SaveResultFile(ExtractFileNameOnly(AFileName), S);
+    SaveResultFile(S1, S);
   end
   else
     Writeln('Error: '+ PParser.ErrorMessage);
@@ -160,7 +163,7 @@ procedure TProtoToPasApplication.SaveResultFile(AFileName, AText: string);
 var
   F: TFileStream;
 begin
-  AFileName:=ChangeFileExt(AFileName, '.pas');
+  //AFileName:=ChangeFileExt(AFileName, '.pas');
   if FOutDir <> '' then
   begin
     ForceDirectory(FOutDir);
