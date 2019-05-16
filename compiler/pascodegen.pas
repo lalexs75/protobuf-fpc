@@ -33,6 +33,7 @@ type
 
   TPascalCodeGenerator = class
   private
+    FCopyrightInfoFile: string;
     FEnumList:TStringList;
     FIgnoreMissingUnitName: boolean;
     FIncludeFileFolders: TStringList;
@@ -63,12 +64,13 @@ type
     property OnStatus:TCodeGenStatus read FOnStatus write FOnStatus;
     property IncludeFileFolders:TStringList read FIncludeFileFolders;
     property ShowSourceProtoCode:boolean read FShowSourceProtoCode write FShowSourceProtoCode;
+    property CopyrightInfoFile:string read FCopyrightInfoFile write FCopyrightInfoFile;
   end;
 
 function PascalCodeGen(AParser:TProtoParser):string;
 
 implementation
-uses LazFileUtils;
+uses LazFileUtils, rxstrutils;
 
 const
   sProtoExt = '.proto';
@@ -122,8 +124,16 @@ begin
       if FIgnoreMissingUnitName then
         Exit
       else
-        raise Exception.Create('not defined output unit file name');
+        raise Exception.Create('Not defined output unit file name');
   end;
+
+  if (FCopyrightInfoFile<>'') then
+  begin
+    if not FileExists(FCopyrightInfoFile) then
+      raise Exception.CreateFmt('Not found copyright info file name - %s', [FCopyrightInfoFile]);
+    FResultCode.Add(FileToString(FCopyrightInfoFile));
+  end;
+
   FResultCode.Add('unit ' + FPasUnitName+';');
   FResultCode.Add('');
 end;

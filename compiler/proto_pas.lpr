@@ -64,11 +64,13 @@ begin
   IncArr:=GetOptionValues('i','include');
   for S in IncArr do
     FCodeGen.IncludeFileFolders.Add(S);
+
+  FCodeGen.CopyrightInfoFile:=GetOptionValue('c','copyrightinfo');
   FOutDir:=GetOptionValue('o','out');
 
 
   ST:=TStringList.Create;
-  GetNonOptions('h:o:i:', ['help','out', 'include'], ST);
+  GetNonOptions('h:o:i:c:', ['help','out', 'include', 'copyrightinfo'], ST);
   if (ST.Count>0) then
   begin
     FFileName:=ST[0];
@@ -120,7 +122,7 @@ var
   ErrorMsg: String;
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('hoi', ['help','out', 'include']);
+  ErrorMsg:=CheckOptions('hoic', ['help','out', 'include', 'copyrightinfo']);
   if ErrorMsg<>'' then begin
     ShowException(Exception.Create(ErrorMsg));
     Terminate;
@@ -193,9 +195,13 @@ procedure TProtoToPasApplication.WriteHelp;
 begin
   { add your help code here }
   writeln('Usage: ', ExeName, ' -h -o -i --help --out --include <proto_file.proto>');
-  writeln('-h, --help'#9'show help');
+  writeln('Main options:');
   writeln('-o, --out'#9'out folder');
   writeln('-i, --include'#9'include files folder');
+  writeln('Codegeneration options:');
+  writeln('-c, --copyrightinfo'#9'copyright info for file header');
+  writeln('Other options:');
+  writeln('-h, --help'#9'show help');
 end;
 
 var
