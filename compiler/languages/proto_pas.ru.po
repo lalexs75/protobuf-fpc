@@ -22,14 +22,17 @@ msgid "string"
 msgstr ""
 
 #: protoparser.sprotoparserunknowcommand
+#, object-pascal-format
 msgid "Unknow command: %s"
 msgstr "Неизвестная команда: %s"
 
 #: proto_pas.sincludefolder
+#, object-pascal-format
 msgid "Include folder : %s"
 msgstr "Папка включений : %s"
 
 #: proto_pas.soutputdirectory
+#, object-pascal-format
 msgid "Output directory : %s"
 msgstr "Результирующая папка : %s"
 

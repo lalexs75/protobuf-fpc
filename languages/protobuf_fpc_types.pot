@@ -2,6 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: protobuf_fpc_types.spropertyalreadyregistered
+#, object-pascal-format
 msgid "ProtoBuffer: Property %s already registered"
 msgstr ""
 
@@ -22,22 +23,27 @@ msgid "ProtoBuffer: Error read QWord value"
 msgstr ""
 
 #: protobuf_fpc_types.sprotobufferpropnotfoundnum
+#, object-pascal-format
 msgid "ProtoBuffer: Property number %d not found"
 msgstr ""
 
 #: protobuf_fpc_types.sprotobufferpropvalueexpected
+#, object-pascal-format
 msgid "ProtoBuffer: Value expected for property %s"
 msgstr ""
 
 #: protobuf_fpc_types.sprotobufnotfondproperty
+#, object-pascal-format
 msgid "ProtoBuffer: Not fond property %s"
 msgstr ""
 
 #: protobuf_fpc_types.sprotobufunknowproptype
+#, object-pascal-format
 msgid "ProtoBuffer: Unknow property type - %s"
 msgstr ""
 
 #: protobuf_fpc_types.sprotobufunknowproptypenum
+#, object-pascal-format
 msgid "ProtoBuffer: Unknow property type - %d"
 msgstr ""
 

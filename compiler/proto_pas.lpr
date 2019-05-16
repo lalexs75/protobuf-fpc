@@ -162,7 +162,10 @@ var
 begin
   AFileName:=ChangeFileExt(AFileName, '.pas');
   if FOutDir <> '' then
+  begin
+    ForceDirectory(FOutDir);
     AFileName:=AppendPathDelim(FOutDir) + AFileName;
+  end;
   F:=TFileStream.Create(AFileName, fmCreate);
   if AText<>'' then
     F.Write(AText[1], Length(AText));

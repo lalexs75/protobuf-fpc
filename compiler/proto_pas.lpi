@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
+        <CompatibilityMode Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
       <Title Value="Proto compiler"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
@@ -21,8 +21,8 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <RevisionNr Value="2"/>
-      <BuildNr Value="2"/>
+      <RevisionNr Value="3"/>
+      <BuildNr Value="4"/>
       <Language Value="0419"/>
     </VersionInfo>
     <BuildModes Count="1">
