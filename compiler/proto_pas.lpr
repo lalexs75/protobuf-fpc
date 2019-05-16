@@ -49,6 +49,7 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
     procedure WriteHelp; virtual;
+    procedure WriteLogo;
   end;
 
 { TProtoToPasApplication }
@@ -84,6 +85,8 @@ begin
   -o /usr/local/share/lazarus/components/diadocsdk-fpc/Departments/
   /home/install/source/diadocsdk-cpp/proto/Departments/DepartmentList.proto
 }
+
+  WriteLn('Compiling '+FFileName);
 
   for S in FCodeGen.IncludeFileFolders do
     WriteLn(Format(sIncludeFolder, [S]));
@@ -204,6 +207,12 @@ begin
   writeln('-h, --help'#9'show help');
 end;
 
+procedure TProtoToPasApplication.WriteLogo;
+begin
+  writeln('Protobuf files to pascal source code compiller version 1.0 [' + {$I %DATE%}+'] for ' + {$I %FPCTARGETCPU%});
+  writeln('Copyright (c) 2018-2019 by Lagunov Aleksey');
+end;
+
 var
   Application: TProtoToPasApplication;
 
@@ -212,6 +221,7 @@ var
 begin
   Application:=TProtoToPasApplication.Create(nil);
   Application.Title:='Proto compiler';
+  Application.WriteLogo;
   Application.Run;
   Application.Free;
 end.
