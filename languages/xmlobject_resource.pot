@@ -1,0 +1,43 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: xmlobject_resource.sclasspropertynotinit
+#, object-pascal-format
+msgid "Class property not init %s"
+msgstr ""
+
+#: xmlobject_resource.snotfoundpropertyforfield
+#, object-pascal-format
+msgid "Not found property in %s for data field %s"
+msgstr ""
+
+#: xmlobject_resource.spropertyisnotclasstype
+#, object-pascal-format
+msgid "Property is not class type %s"
+msgstr ""
+
+#: xmlobject_resource.spropertynotfound
+#, object-pascal-format
+msgid "Not fond property %s.%s(%s)"
+msgstr ""
+
+#: xmlobject_resource.spropertynotfound1
+#, object-pascal-format
+msgid "Not fond property %s"
+msgstr ""
+
+#: xmlobject_resource.suknowpropertytype
+#, object-pascal-format
+msgid "Uknow property type %s"
+msgstr ""
+
+#: xmlobject_resource.sunknowclassproperty
+#, object-pascal-format
+msgid "Unknow class property %s.%s"
+msgstr ""
+
+#: xmlobject_resource.svalueexpectedrange
+#, object-pascal-format
+msgid "%s.%s - Значение атрибута слишком велико (%s - %d)"
+msgstr ""
+

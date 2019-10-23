@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <Name Value="xmlobjects"/>
+    <Type Value="RunAndDesignTime"/>
+    <Author Value="Лагунов А.А."/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="xmlobject"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <License Value="LGPL3"/>
+    <Version Major="1"/>
+    <Files Count="2">
+      <Item1>
+        <Filename Value="xmlobject/xmlobject.pas"/>
+        <UnitName Value="xmlobject"/>
+      </Item1>
+      <Item2>
+        <Filename Value="xmlobject/xmlobject_resource.pas"/>
+        <UnitName Value="xmlobject_resource"/>
+      </Item2>
+    </Files>
+    <LazDoc Paths="docs"/>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="languages"/>
+    </i18n>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LazUtils"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
