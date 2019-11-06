@@ -104,8 +104,8 @@ type
     procedure InternalWriteChild(FXML: TXMLDocument; AChild:TObject; AElement: TDOMElement; P: TPropertyDef);
     procedure SetAtribute(P: TDOMElement; AttribName, AttribValue:DOMString; Prop:TPropertyDef);
     function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string):TDOMElement;
-    function IsEmpty:Boolean;
   protected
+    function IsEmpty:Boolean;
     procedure RegisterProperty(APropertyName, AXMLName, ARequaredAttribs, ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = '');
     procedure ModifiedProperty(APropertyName:string);
     procedure InternalRegisterPropertys; virtual; abstract;
@@ -114,8 +114,16 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+
     procedure SaveToFile(AFileName:string); virtual;
     procedure LoadFromFile(AFileName:string);
+
+    procedure LoadFromStream(AStream:TStream);
+    procedure SaveToStream(AStream:TStream);
+
+    procedure LoadFromStr(AStr:string);
+    function SaveToStr:string;
+
     procedure SaveToXML(const XML: TXMLDocument);
     procedure LoadFromXML(const XML: TXMLDocument);
   end;
@@ -611,6 +619,48 @@ var
 begin
   ReadXMLFile(FXML, AFileName);
   InternalRead(FXML.DocumentElement);
+  FXML.Free;
+end;
+
+procedure TXmlSerializationObject.LoadFromStream(AStream: TStream);
+var
+  FXML: TXMLDocument;
+begin
+  ReadXMLFile(FXML, AStream);
+  InternalRead(FXML.DocumentElement);
+  FXML.Free;
+end;
+
+procedure TXmlSerializationObject.SaveToStream(AStream: TStream);
+var
+  FXML: TXMLDocument;
+  E: TDOMElement;
+begin
+  FXML:=TXMLDocument.Create;
+  E:=CreateElement(FXML, FXML, RootNodeName);
+  InternalWrite(FXML, E);
+  WriteXML(FXML, AStream);
+  FXML.Free;
+end;
+
+procedure TXmlSerializationObject.LoadFromStr(AStr: string);
+var
+  S: TStringStream;
+begin
+  S:=TStringStream.Create(AStr);
+  LoadFromStream(S);
+  S.Free;
+end;
+
+function TXmlSerializationObject.SaveToStr: string;
+var
+  FXML: TXMLDocument;
+  E: TDOMElement;
+begin
+  FXML:=TXMLDocument.Create;
+  E:=CreateElement(FXML, FXML, RootNodeName);
+  InternalWrite(FXML, E);
+  Result:=FXML.TextContent;
   FXML.Free;
 end;
 
