@@ -108,7 +108,7 @@ type
     function IsEmpty:Boolean;
     procedure RegisterProperty(APropertyName, AXMLName, ARequaredAttribs, ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = '');
     procedure ModifiedProperty(APropertyName:string);
-    procedure InternalRegisterPropertys; virtual; abstract;
+    procedure InternalRegisterPropertys; virtual;
     procedure InternalInitChilds; virtual;
     function RootNodeName:string; virtual;
   public
@@ -586,6 +586,11 @@ begin
     raise Exception.CreateFmt(sPropertyNotFound1, [APropertyName]);
 end;
 
+procedure TXmlSerializationObject.InternalRegisterPropertys;
+begin
+
+end;
+
 constructor TXmlSerializationObject.Create;
 begin
   inherited Create;
@@ -654,14 +659,12 @@ end;
 
 function TXmlSerializationObject.SaveToStr: string;
 var
-  FXML: TXMLDocument;
-  E: TDOMElement;
+  S: TStringStream;
 begin
-  FXML:=TXMLDocument.Create;
-  E:=CreateElement(FXML, FXML, RootNodeName);
-  InternalWrite(FXML, E);
-  Result:=FXML.TextContent;
-  FXML.Free;
+  S:=TStringStream.Create('');
+  SaveToStream(S);
+  Result:=S.DataString;
+  S.Free;
 end;
 
 procedure TXmlSerializationObject.SaveToXML(const XML: TXMLDocument);
