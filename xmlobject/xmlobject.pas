@@ -147,8 +147,77 @@ type
     property Count:Integer read GetCount;
   end;
 
+  { GXMLSerializationObjectListEnumerator }
+
+  generic GXMLSerializationObjectListEnumerator<GObjList, GObjType> = class
+  private
+    FList: TXmlSerializationObjectList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: GObjList);
+    function GetCurrent: GObjType;
+    function MoveNext: Boolean;
+    property Current: GObjType read GetCurrent;
+  end;
+
+  { GXMLSerializationObjectList }
+
+  generic GXMLSerializationObjectList<GObjType> = class(TXmlSerializationObjectList)
+  public type
+    TSerializationObjectListEnumerator = specialize GXMLSerializationObjectListEnumerator<TXmlSerializationObjectList, GObjType>;
+  private
+    function GetItem(AIndex: Integer): GObjType;
+  public
+    constructor Create;
+    function GetEnumerator: TSerializationObjectListEnumerator;
+    function AddItem:GObjType;
+    property Items[AIndex:Integer]:GObjType read GetItem; default;
+  end;
+
 implementation
 uses XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, TypInfo, LazUTF8, xmlobject_resource;
+
+{ GXMLSerializationObjectListEnumerator }
+
+constructor GXMLSerializationObjectListEnumerator.Create(AList: GObjList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function GXMLSerializationObjectListEnumerator.GetCurrent: GObjType;
+begin
+  Result := GObjType(FList.FList[FPosition]);
+end;
+
+function GXMLSerializationObjectListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ GXMLSerializationObjectList }
+
+function GXMLSerializationObjectList.GetItem(AIndex: Integer): GObjType;
+begin
+  Result:=GObjType(FList[AIndex]);
+end;
+
+constructor GXMLSerializationObjectList.Create;
+begin
+  inherited Create(GObjType);
+  //FDataClass:=GObjType;
+end;
+
+function GXMLSerializationObjectList.GetEnumerator: TSerializationObjectListEnumerator;
+begin
+  Result:=TSerializationObjectListEnumerator.Create(Self);
+end;
+
+function GXMLSerializationObjectList.AddItem: GObjType;
+begin
+  Result:=GObjType(InternalAddObject);
+end;
 
 { TXmlSerializationObjectList }
 
