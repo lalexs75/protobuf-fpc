@@ -41,7 +41,7 @@ end;
 
 function TXsdPasCodegen.DoGenInterfaceUses: string;
 begin
-
+  Result:='uses'+LineEnding+'  Classes, SysUtils, xmlobject;'+LineEnding+LineEnding;
 end;
 
 function TXsdPasCodegen.DoGenImplementationUses: string;
@@ -62,18 +62,23 @@ begin
     if CT.Description <> '' then
     Result:=Result + '  {  ' + TrimRight(CT.Description) + '  }'+LineEnding;
 
-    Result:=Result + '  T' + CT.TypeName + ' = class(TXmlSerializationObject);'+LineEnding + '  private' + LineEnding;
+    Result:=Result + '  T' + CT.TypeName + ' = class(TXmlSerializationObject)'+LineEnding + '  private' + LineEnding;
     for PT in CT.Propertys do
       Result:=Result + '    F' + PT.Name + ':' + PT.BaseType + ';'+LineEnding;
 
     for PT in CT.Propertys do
-      if PT.ItemType = pitAttribute then
+      if PT.ItemType in [pitAttribute, pitSimpleType] then
         Result:=Result + '    procedure Set' + PT.Name + '( AValue:' + PT.BaseType + ');'+LineEnding;
 
     Result:=Result+
     '  protected'+LineEnding+
     '    procedure InternalRegisterPropertys; override;'+LineEnding+
-    '    procedure InternalInitChilds; override;'+LineEnding+
+    '    procedure InternalInitChilds; override;'+LineEnding;
+
+    if CT.MainRoot then
+      Result:=Result+'    function RootNodeName:string; override;'+LineEnding;
+
+    Result:=Result+
     '  public'+LineEnding+
     '    destructor Destroy; override;'+LineEnding+
     '  published'+LineEnding;
@@ -82,13 +87,13 @@ begin
     begin
       if PT.Description <> '' then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
       Result:=Result + '    property '+PT.Name + ':'+PT.BaseType + ' read F'+PT.Name;
-      if PT.ItemType = pitAttribute then
+      if PT.ItemType in [pitAttribute, pitSimpleType] then
         Result:=Result + ' write Set' + PT.Name;
       Result:=Result+ ';'+LineEnding;
     end;
     Result:=Result +
     '  end;'+LineEnding+
-    '  TInvoiceItems = specialize GXMLSerializationObjectList<'+CT.TypeName+'>;' + LineEnding + LineEnding;
+    '  TInvoiceItems = specialize GXMLSerializationObjectList<T'+CT.TypeName+'>;' + LineEnding + LineEnding;
   end;
 end;
 
@@ -147,6 +152,12 @@ begin
          '  F'+PT.Name+'.Free;'+LineEnding;
      end;
      Result:=Result + '  inherited Destroy;'+LineEnding+'end;'+LineEnding+LineEnding;
+
+    if CT.MainRoot then
+      Result:=Result+'function T'+CT.TypeName+'.RootNodeName:string;'+LineEnding+
+      'begin'+LineEnding+
+      '  Result:='''+CT.TypeName+''';'+LineEnding+
+      'end;'+LineEnding+LineEnding;
   end;
 end;
 

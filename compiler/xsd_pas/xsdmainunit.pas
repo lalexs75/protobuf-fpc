@@ -55,6 +55,29 @@ begin
     (ATypeName = 'xs:time');
 end;
 
+function GetSimpleType(ATypeName:string):string;
+begin
+  if (ATypeName = 'xs:string') then
+    Result:='String'
+  else
+  if (ATypeName = 'xs:decimal') then
+    Result:='Double'
+  else
+  if (ATypeName = 'xs:integer') then
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:boolean') then
+    Result:='Boolean'
+  else
+  if  (ATypeName = 'xs:date') then
+    Result:='TTime'
+  else
+  if (ATypeName = 'xs:time') then
+    Result:='TDate'
+  else
+    Result:='';
+end;
+
 { TXSDMainForm }
 
 procedure TXSDMainForm.Button1Click(Sender: TObject);
@@ -123,6 +146,7 @@ begin
     if Assigned(R) then
     begin
       FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
+      FComplexType.MainRoot:=true;
       ProcessComplexElement(ANode, R, FComplexType)
     end;
   end;
@@ -172,10 +196,15 @@ begin
       if Assigned(R) then
       begin
         if IsSimpleType(R.NodeValue) then
-          Prop:=AComplexType.Propertys.Add(pitAttribute)
+        begin
+          Prop:=AComplexType.Propertys.Add(pitSimpleType);
+          Prop.BaseType:=GetSimpleType(R.NodeValue);
+        end
         else
+        begin
           Prop:=AComplexType.Propertys.Add(pitClass);
-        Prop.BaseType:=R.NodeValue;
+          Prop.BaseType:=R.NodeValue;
+        end;
         Prop.Name:=S1;
         Prop.Description:=GetAnnotation(FA);
       end;

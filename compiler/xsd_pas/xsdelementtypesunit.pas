@@ -12,7 +12,7 @@ type
   TXSDSimpleTypesEnumerator = class;
   TPropertyItemsEnumerator = class;
 
-  TPropertyItemType = (pitClass, pitAttribute);
+  TPropertyItemType = (pitClass, pitAttribute, pitSimpleType);
 
   { TPropertyItem }
 
