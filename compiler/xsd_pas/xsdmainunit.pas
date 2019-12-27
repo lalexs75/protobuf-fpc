@@ -29,6 +29,7 @@ type
     procedure DumpSchema(ANode:TDOMNode);
     procedure ProcessElement(ANode:TDOMNode);
     procedure ProcessComplexElement(ANode, AContext:TDOMNode; AComplexType: TXSDComplexType);
+    procedure ProcessSimpleType(AContext:TDOMNode;  ASimpleType:TXSDSimpleType);
     function GetAnnotation(AContext:TDOMNode):string;
 
     procedure DoMakePas;
@@ -122,8 +123,15 @@ begin
     if (S = 'xs:complexType') then
     begin
       R:=N.Attributes.GetNamedItem('name');
-        WriteLog(R.NodeName +':'+ R.NodeValue);
-      ProcessComplexElement( R, R, FXSDModule.ComplexTypes.Add(R.NodeValue));
+      WriteLog(R.NodeName +':'+ R.NodeValue);
+      ProcessComplexElement( N, N, FXSDModule.ComplexTypes.Add(R.NodeValue));
+    end
+    else
+    if (S = 'xs:simpleType') then
+    begin
+      R:=N.Attributes.GetNamedItem('name');
+      WriteLog(R.NodeName +':'+ R.NodeValue);
+      ProcessSimpleType(N, FXSDModule.SimpleTypes.Add(R.NodeValue));
     end;
   end;
 end;
@@ -155,13 +163,13 @@ end;
 procedure TXSDMainForm.ProcessComplexElement(ANode, AContext: TDOMNode;
   AComplexType: TXSDComplexType);
 var
-  RAll, FA, R: TDOMNode;
+  RAll, FA, R, FC, FCC: TDOMNode;
   i: Integer;
   S, S1: DOMString;
   Prop: TPropertyItem;
 begin
   WriteLog('Process object : ' + ANode.NodeValue);
-  WriteLog('Process atrubutes : ' + ANode.NodeValue);
+  WriteLog('Process atrubutes : ' + AContext.NodeValue);
   AComplexType.Description:=GetAnnotation(AContext);
 
   for i:=0 to AContext.ChildNodes.Count-1 do
@@ -185,30 +193,71 @@ begin
   if not Assigned(RAll) then
     RAll:=AContext.FindNode('xs:all');
 
-  for i:=0 to RAll.ChildNodes.Count-1 do
+  if Assigned(RAll) then
   begin
-    FA:=RAll.ChildNodes[i];
-    S:=FA.NodeName;
-    if S = 'xs:element' then
+    for i:=0 to RAll.ChildNodes.Count-1 do
     begin
-      S1:=FA.Attributes.GetNamedItem('name').NodeValue;
-      R:=FA.Attributes.GetNamedItem('type');
-      if Assigned(R) then
+      FA:=RAll.ChildNodes[i];
+      S:=FA.NodeName;
+      if S = 'xs:element' then
       begin
-        if IsSimpleType(R.NodeValue) then
+        FC:=FA.FindNode('xs:complexType');
+        if Assigned(FC) then
         begin
-          Prop:=AComplexType.Propertys.Add(pitSimpleType);
-          Prop.BaseType:=GetSimpleType(R.NodeValue);
+          Prop:=AComplexType.Propertys.Add(pitClass);
+          Prop.BaseType:=''; //FA.a NodeValue;
+          Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+{          FCC:=FC.FindNode('xs:sequence');
+          if Assigned(FCC) then
+          begin
+
+          end;
+}
         end
         else
         begin
-          Prop:=AComplexType.Propertys.Add(pitClass);
-          Prop.BaseType:=R.NodeValue;
+          S1:=FA.Attributes.GetNamedItem('name').NodeValue;
+          R:=FA.Attributes.GetNamedItem('type');
+          if Assigned(R) then
+          begin
+            if IsSimpleType(R.NodeValue) then
+            begin
+              Prop:=AComplexType.Propertys.Add(pitSimpleType);
+              Prop.BaseType:=GetSimpleType(R.NodeValue);
+            end
+            else
+            begin
+              Prop:=AComplexType.Propertys.Add(pitClass);
+              Prop.BaseType:=R.NodeValue;
+            end;
+            Prop.Name:=S1;
+            Prop.Description:=GetAnnotation(FA);
+          end;
         end;
-        Prop.Name:=S1;
-        Prop.Description:=GetAnnotation(FA);
       end;
     end;
+  end
+  else
+    S1:=AContext.NodeValue;
+end;
+
+procedure TXSDMainForm.ProcessSimpleType(AContext: TDOMNode;
+  ASimpleType: TXSDSimpleType);
+var
+  R, M: TDOMNode;
+begin
+  ASimpleType.Description:=GetAnnotation(AContext);
+  R:=AContext.FindNode('xs:restriction');
+  if Assigned(R) then
+  begin
+    ASimpleType.BaseName:=R.Attributes.GetNamedItem('base').NodeValue;
+    ASimpleType.PasBaseName:=GetSimpleType(ASimpleType.BaseName);
+    M:=R.FindNode('xs:minLength');
+    if Assigned(M) then
+      ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+    M:=R.FindNode('xs:maxLength');
+    if Assigned(M) then
+      ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
   end;
 end;
 

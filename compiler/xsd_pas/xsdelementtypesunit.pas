@@ -111,16 +111,25 @@ type
 
   TXSDSimpleType = class
   private
+    FBaseName: string;
+    FDescription: string;
+    FMaxLength: integer;
+    FMinLength: integer;
+    FPasBaseName: string;
     FTypeName: string;
   public
     property TypeName:string read FTypeName write FTypeName;
+    property BaseName:string read FBaseName write FBaseName;
+    property PasBaseName:string read FPasBaseName write FPasBaseName;
+    property MaxLength:integer read FMaxLength write FMaxLength;
+    property MinLength:integer read FMinLength write FMinLength;
+    property Description:string read FDescription write FDescription;
   end;
 
   { TXSDSimpleTypes }
 
   TXSDSimpleTypes = class
   private
-    FCount: integer;
     FList:TFPList;
     function GetCount: integer;
     function GetItems(AIndex: Integer): TXSDSimpleType;
@@ -265,37 +274,46 @@ end;
 
 function TXSDSimpleTypes.GetCount: integer;
 begin
-
+  Result:=FList.Count;
 end;
 
 function TXSDSimpleTypes.GetItems(AIndex: Integer): TXSDSimpleType;
 begin
-
+  Result:=TXSDSimpleType(FList[AIndex]);
 end;
 
 constructor TXSDSimpleTypes.Create;
 begin
-
+  inherited Create;
+  FList:=TFPList.Create;
 end;
 
 destructor TXSDSimpleTypes.Destroy;
 begin
+  Clear;
+  FreeAndNil(FList);
   inherited Destroy;
 end;
 
 procedure TXSDSimpleTypes.Clear;
+var
+  I: Integer;
 begin
-
+  for I:=0 to FList.Count-1 do
+    TXSDSimpleType(FList[i]).Free;
+  FList.Clear;
 end;
 
 function TXSDSimpleTypes.GetEnumerator: TXSDSimpleTypesEnumerator;
 begin
-
+  Result:=TXSDSimpleTypesEnumerator.Create(Self);
 end;
 
 function TXSDSimpleTypes.Add(ATypeName: string): TXSDSimpleType;
 begin
-
+  Result:=TXSDSimpleType.Create;
+  Result.TypeName:=ATypeName;
+  FList.Add(Result);
 end;
 
 { TXSDComplexTypesEnumerator }

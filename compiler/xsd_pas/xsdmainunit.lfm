@@ -13,9 +13,9 @@ object XSDMainForm: TXSDMainForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 17
+    Height = 18
     Top = 6
-    Width = 74
+    Width = 85
     BorderSpacing.Around = 6
     Caption = 'Файл схемы'
     ParentColor = False
@@ -26,9 +26,9 @@ object XSDMainForm: TXSDMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Button1
     Left = 12
-    Height = 34
-    Top = 29
-    Width = 507
+    Height = 28
+    Top = 30
+    Width = 502
     FilterIndex = 0
     DefaultExt = '.xsd'
     HideDirectories = False
@@ -44,10 +44,10 @@ object XSDMainForm: TXSDMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 525
-    Height = 33
-    Top = 29
-    Width = 106
+    Left = 520
+    Height = 30
+    Top = 30
+    Width = 111
     Anchors = [akTop, akRight]
     AutoSize = True
     BorderSpacing.Around = 6
@@ -64,8 +64,8 @@ object XSDMainForm: TXSDMainForm
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 352
-    Top = 69
+    Height = 357
+    Top = 64
     Width = 637
     ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -74,12 +74,12 @@ object XSDMainForm: TXSDMainForm
     object TabSheet1: TTabSheet
       Caption = 'Протокол'
       ClientHeight = 321
-      ClientWidth = 627
+      ClientWidth = 631
       object Memo1: TMemo
         Left = 0
         Height = 321
         Top = 0
-        Width = 627
+        Width = 631
         Align = alClient
         TabOrder = 0
       end
@@ -87,7 +87,7 @@ object XSDMainForm: TXSDMainForm
     object TabSheet2: TTabSheet
       Caption = 'Результат'
       ClientHeight = 321
-      ClientWidth = 627
+      ClientWidth = 631
       inline SynEdit1: TSynEdit
         Left = 0
         Height = 307

@@ -21,7 +21,7 @@ type
     function DoGenImplementationUses:string;
     function DoGenClasseInterface:string;
     function DoGenClasseImplementation:string;
-
+    function DoGenSimpleTypes:string;
   public
     constructor Create(AXSDModule:TXSDModule);
     destructor Destroy; override;
@@ -101,6 +101,7 @@ function TXsdPasCodegen.DoGenClasseImplementation: string;
 var
   CT: TXSDComplexType;
   PT: TPropertyItem;
+  SAttr: String;
 begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
@@ -109,7 +110,7 @@ begin
 
      for PT in CT.Propertys do
      begin
-       if PT.ItemType = pitAttribute then
+       if PT.ItemType in [pitAttribute, pitSimpleType] then
        begin
          Result:=Result +
           'procedure T'+CT.TypeName+'.Set'+PT.Name+'(AValue: '+PT.BaseType+');'+LineEnding +
@@ -126,8 +127,14 @@ begin
       'begin'+LineEnding;
      for PT in CT.Propertys do
      begin
-      Result:=Result +
-      '  RegisterProperty('''+PT.Name+''', '''+PT.Name+''', '''', '''', 0, 250);'+LineEnding;
+
+       SAttr:='';
+       if PT.ItemType = pitSimpleType then
+         SAttr:='xsaSimpleObject';
+       //xsaRequared
+
+       Result:=Result +
+        '  RegisterProperty('''+PT.Name+''', '''+PT.Name+''', ['+SAttr+'], '''', 0, 250);'+LineEnding;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
 
@@ -161,6 +168,21 @@ begin
   end;
 end;
 
+function TXsdPasCodegen.DoGenSimpleTypes: string;
+var
+  ST: TXSDSimpleType;
+begin
+  Result:='';
+  for ST in FXSDModule.SimpleTypes do
+  begin
+    if ST.Description <> '' then
+       Result:=Result + '{'+ST.Description+ '}' + LineEnding;
+    Result:=Result + '  T' + ST.TypeName + ' = ' + ST.PasBaseName + ';' + LineEnding + LineEnding;
+  end;
+  if Result <> '' then
+    Result:='type' + LineEnding + Result;
+end;
+
 constructor TXsdPasCodegen.Create(AXSDModule: TXSDModule);
 begin
   inherited Create;
@@ -183,7 +205,9 @@ begin
   if S<>'' then
     S:='type'+LineEnding + S;
 
-  Result:=Result + S + DoGenImplementationUses + DoGenClasseImplementation + 'end.';
+  Result:=Result + DoGenSimpleTypes +
+    S +
+    DoGenImplementationUses + DoGenClasseImplementation + 'end.';
 end;
 
 end.
