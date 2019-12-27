@@ -43,20 +43,23 @@ uses
 
 type
   EExchangeDefinitionError = class(Exception);
-
+//  TXSTypes = (xstString, xstDecimal, xstInteger, xstBoolean, xstDate, xstTime);
+  TXSAttrib = (xsaSimpleObject, xsaRequared);
+  TXSAttribs = set of TXSAttrib;
 
   { TPropertyDef }
 
   TPropertyDef = class
   private
-    FRequaredAttribs:string;
+    FAttribs: TXSAttribs;
+//    FRequaredAttribs:string;
     FCaption: string;
     FMaxSize: integer;
     FMinSize: integer;
     FModified: boolean;
     FPropertyName: string;
-    FRequared: boolean;
-    FSimpleObject: Boolean;
+//    FRequared: boolean;
+//    FSimpleObject: Boolean;
     FXMLName: string;
     FAliases:string;
   public
@@ -64,10 +67,11 @@ type
     property Caption:string read FCaption;
     property XMLName:string read FXMLName;
     property Modified:boolean read FModified;
-    property Requared:boolean read FRequared;
+    //property Requared:boolean read FRequared;
     property MinSize:integer read FMinSize;
     property MaxSize:integer read FMaxSize;
-    property SimpleObject:Boolean read FSimpleObject;
+    //property SimpleObject:Boolean read SimpleObject;
+    property Attribs:TXSAttribs read FAttribs write FAttribs;
   end;
 
   { TPropertyList }
@@ -85,7 +89,7 @@ type
     function PropertyByName(APropertyName:string):TPropertyDef;
     function PropertyByXMLName(AXMLName:string):TPropertyDef;
     function PropertyByAlias(AAliasName:string):TPropertyDef;
-    function Add(const APropertyName, AXMLName, ARequaredAttribs, ACaption:string; AMinSize, AMaxSize:integer):TPropertyDef;
+    function Add(const APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer):TPropertyDef;
     procedure Clear;
     property Count:integer read GetCount;
     property Items[AIndex:integer]:TPropertyDef read GetItems; default;
@@ -106,7 +110,7 @@ type
     function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string):TDOMElement;
   protected
     function IsEmpty:Boolean;
-    procedure RegisterProperty(APropertyName, AXMLName, ARequaredAttribs, ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = '');
+    function RegisterProperty(APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = ''):TPropertyDef;
     procedure ModifiedProperty(APropertyName:string);
     procedure InternalRegisterPropertys; virtual;
     procedure InternalInitChilds; virtual;
@@ -339,19 +343,27 @@ begin
   end;
 end;
 
-function TPropertyList.Add(const APropertyName, AXMLName, ARequaredAttribs,
-  ACaption: string; AMinSize, AMaxSize: integer): TPropertyDef;
+function TPropertyList.Add(const APropertyName, AXMLName: string;
+  AAttribs: TXSAttribs; ACaption: string; AMinSize, AMaxSize: integer
+  ): TPropertyDef;
 begin
   Result:=TPropertyDef.Create;
   FList.Add(Result);
-  Result.FRequaredAttribs:=ARequaredAttribs;
+  Result.FAttribs:=AAttribs;
+//  Result.FRequaredAttribs:=ARequaredAttribs;
   Result.FPropertyName:=APropertyName;
   Result.FCaption:=ACaption;
   Result.FXMLName:=AXMLName;
-  Result.FRequared:=UTF8Pos('О', ARequaredAttribs) > 0;
+(*
+  if UTF8Pos('О', ARequaredAttribs) > 0 then
+    Result.FAttribs:=Result.FAttribs + [xsaRequared];
+*)
   Result.FMaxSize:=AMaxSize;
   Result.FMinSize:=AMinSize;
-  Result.FSimpleObject:=UTF8Pos('П', ARequaredAttribs) > 0;
+(*
+  if UTF8Pos('П', ARequaredAttribs) > 0 then
+    Result.FAttribs:=Result.FAttribs + [xsaSimpleObject]
+*)
 end;
 
 procedure TPropertyList.Clear;
@@ -381,6 +393,7 @@ var
   i: Integer;
   P: TPropertyDef;
   FProp: PPropInfo;
+  E: TDOMElement;
 begin
   for i:=0 to FPropertyList.Count-1 do
   begin
@@ -389,12 +402,23 @@ begin
     FProp:=GetPropInfo(Self, P.FPropertyName);
     if not Assigned(FProp) then
       raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
+
     case FProp^.PropType^.Kind of
       tkChar,
       tkAString,
       tkWString,
       tkSString,
-      tkLString : if P.Modified then SetAtribute(AElement, P.XMLName, GetStrProp(Self, P.PropertyName), P);
+      tkLString :
+        if P.Modified then
+        begin
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E:=CreateElement(FXML, AElement, P.XMLName);
+            E.TextContent:=GetStrProp(Self, P.PropertyName);
+          end
+          else
+            SetAtribute(AElement, P.XMLName, GetStrProp(Self, P.PropertyName), P);
+        end;
 //                  SetAtribute(P: TDOMElement; AttribName, AttribValue:string; AMaxLen:Integer);
 //      tkBool : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsBoolean));
 //      tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
@@ -488,7 +512,7 @@ begin
         raise Exception.CreateFmt(sPropertyNotFound1, [P.FPropertyName]);
 
       K:=FProp^.PropType^.Kind;
-      if (P.FSimpleObject) and (K <> tkClass) then
+      if (xsaSimpleObject in P.Attribs) and (K <> tkClass) then
       begin
         S2:=FNode.TextContent;
         case FProp^.PropType^.Kind of
@@ -577,7 +601,7 @@ begin
     end;
   end
   else
-    raise Exception.CreateFmt('Unkonw object - %s', [AChild.ClassName]);
+    raise Exception.CreateFmt('Unknow object - %s', [AChild.ClassName]);
 end;
 
 function TXmlSerializationObject.IsEmpty: Boolean;
@@ -634,14 +658,12 @@ begin
   Result:='Файл';
 end;
 
-procedure TXmlSerializationObject.RegisterProperty(APropertyName, AXMLName,
-  ARequaredAttribs, ACaption: string; AMinSize, AMaxSize: integer;
-  Aliases: string);
-var
-  P: TPropertyDef;
+function TXmlSerializationObject.RegisterProperty(APropertyName,
+  AXMLName: string; AAttribs: TXSAttribs; ACaption: string; AMinSize,
+  AMaxSize: integer; Aliases: string): TPropertyDef;
 begin
-  P:=FPropertyList.Add(APropertyName, AXMLName, ARequaredAttribs, ACaption, AMinSize, AMaxSize);
-  P.FAliases:=Aliases;
+  Result:=FPropertyList.Add(APropertyName, AXMLName, AAttribs, ACaption, AMinSize, AMaxSize);
+  Result.FAliases:=Aliases;
 end;
 
 procedure TXmlSerializationObject.ModifiedProperty(APropertyName: string);
