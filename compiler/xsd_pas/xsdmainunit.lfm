@@ -6,6 +6,7 @@ object XSDMainForm: TXSDMainForm
   Caption = 'XSDMainForm'
   ClientHeight = 421
   ClientWidth = 637
+  OnCreate = FormCreate
   Position = poScreenCenter
   SessionProperties = 'FileNameEdit1.FileName;CheckBox1.Checked;CheckBox2.Checked;CheckBox3.Checked'
   LCLVersion = '2.1.0.0'
@@ -38,6 +39,7 @@ object XSDMainForm: TXSDMainForm
     BorderSpacing.Around = 6
     MaxLength = 0
     TabOrder = 0
+    OnChange = FileNameEdit1Change
   end
   object Button1: TButton
     AnchorSideTop.Control = Label1
@@ -67,24 +69,11 @@ object XSDMainForm: TXSDMainForm
     Height = 352
     Top = 69
     Width = 637
-    ActivePage = TabSheet3
+    ActivePage = tabEditor
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
-    object TabSheet1: TTabSheet
-      Caption = 'Протокол'
-      ClientHeight = 321
-      ClientWidth = 627
-      object Memo1: TMemo
-        Left = 0
-        Height = 321
-        Top = 0
-        Width = 627
-        Align = alClient
-        TabOrder = 0
-      end
-    end
-    object TabSheet2: TTabSheet
+    object tabEditor: TTabSheet
       Caption = 'Результат'
       ClientHeight = 321
       ClientWidth = 627
@@ -530,9 +519,6 @@ object XSDMainForm: TXSDMainForm
         MouseActions = <>
         MouseTextActions = <>
         MouseSelActions = <>
-        Lines.Strings = (
-          'SynEdit1'
-        )
         VisibleSpecialChars = [vscSpace, vscTabAtLast]
         SelectedColor.BackPriority = 50
         SelectedColor.ForePriority = 50
@@ -618,7 +604,6 @@ object XSDMainForm: TXSDMainForm
           Height = 34
           Top = 30
           Width = 519
-          FileName = 'FileNameEdit2'
           FilterIndex = 0
           HideDirectories = False
           ButtonWidth = 23
@@ -627,7 +612,6 @@ object XSDMainForm: TXSDMainForm
           BorderSpacing.Around = 6
           MaxLength = 0
           TabOrder = 0
-          Text = 'FileNameEdit2'
         end
         object Button2: TButton
           AnchorSideTop.Control = Label2
@@ -642,8 +626,22 @@ object XSDMainForm: TXSDMainForm
           AutoSize = True
           BorderSpacing.Around = 6
           Caption = 'Save to file'
+          OnClick = Button2Click
           TabOrder = 1
         end
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Протокол'
+      ClientHeight = 321
+      ClientWidth = 627
+      object Memo1: TMemo
+        Left = 0
+        Height = 321
+        Top = 0
+        Width = 627
+        Align = alClient
+        TabOrder = 0
       end
     end
     object TabSheet3: TTabSheet

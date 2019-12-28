@@ -47,9 +47,12 @@ type
     SynEdit1: TSynEdit;
     SynFreePascalSyn1: TSynFreePascalSyn;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
+    tabEditor: TTabSheet;
     TabSheet3: TTabSheet;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FileNameEdit1Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
 
     procedure ProcessNode(Sender:TXSDProcessor; ANodeName:string; AMessage:string);
@@ -104,7 +107,20 @@ begin
   FProcessor.Free;
 end;
 
+procedure TXSDMainForm.Button2Click(Sender: TObject);
+begin
+  SynEdit1.Lines.SaveToFile(FileNameEdit2.FileName);
+end;
 
+procedure TXSDMainForm.FileNameEdit1Change(Sender: TObject);
+begin
+  FileNameEdit2.FileName:=ExtractFileNameWithoutExt(FileNameEdit1.FileName)+'.pas';
+end;
+
+procedure TXSDMainForm.FormCreate(Sender: TObject);
+begin
+  PageControl1.ActivePage:=tabEditor;
+end;
 
 procedure TXSDMainForm.ProcessNode(Sender: TXSDProcessor; ANodeName: string;
   AMessage: string);

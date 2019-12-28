@@ -79,6 +79,12 @@ begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
   begin
+    Result:=Result + '  T' + CT.TypeName + ' = class;'+LineEnding;
+  end;
+  Result:=Result + LineEnding;
+
+  for CT in FXSDModule.ComplexTypes do
+  begin
     Result:=Result + '  {  T' + CT.TypeName + '  }'+LineEnding;
 
     if (cgdoDescribeClasses in FDescribeOptions)  and (CT.Description <> '') then
