@@ -156,7 +156,7 @@ end;
 procedure TXSDProcessor.ProcessComplexElement(ANode, AContext: TDOMNode;
   AComplexType: TXSDComplexType);
 var
-  RAll, FA, R, FC: TDOMNode;
+  RAll, FA, R, FC, R1: TDOMNode;
   i: Integer;
   S, S1, ST1: String;
   Prop: TPropertyItem;
@@ -175,9 +175,25 @@ begin
       S1:=FA.Attributes.GetNamedItem('name').NodeValue;
       Prop.Name:=S1;
       Prop.Description:=GetAnnotation(FA);
+
       R:=FA.Attributes.GetNamedItem('type');
       if Assigned(R) then
-        Prop.BaseType:=R.NodeValue;
+        Prop.BaseType:=R.NodeValue
+      else
+      begin
+        R:=FA.FindNode('xs:simpleType');
+        if Assigned(R) then
+        begin
+          R1:=R.FindNode('xs:restriction');
+          if Assigned(R1) then
+          begin
+            Prop.BaseType:=R1.Attributes.GetNamedItem('base').NodeValue;
+            if IsSimpleType(Prop.BaseType) then
+              Prop.BaseType:=GetSimpleType(Prop.BaseType);
+            //Prop.BaseType:=R1.Attributes.GetNamedItem('base');
+          end
+        end
+      end;
     end
   end;
 

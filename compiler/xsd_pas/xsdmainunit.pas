@@ -23,8 +23,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, DOM, EditBtn,
-  ComCtrls, XsdElementTypesUnit, SynEdit, SynHighlighterPas, RxIniPropStorage,
-  XsdProcessorUnit;
+  ComCtrls, ExtCtrls, XsdElementTypesUnit, SynEdit, SynHighlighterPas,
+  RxIniPropStorage, XsdProcessorUnit;
 
 type
 
@@ -32,15 +32,23 @@ type
 
   TXSDMainForm = class(TForm)
     Button1: TButton;
+    Button2: TButton;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
     FileNameEdit1: TFileNameEdit;
+    FileNameEdit2: TFileNameEdit;
     Label1: TLabel;
+    Label2: TLabel;
     Memo1: TMemo;
     PageControl1: TPageControl;
+    Panel1: TPanel;
     RxIniPropStorage1: TRxIniPropStorage;
     SynEdit1: TSynEdit;
     SynFreePascalSyn1: TSynFreePascalSyn;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     procedure Button1Click(Sender: TObject);
   private
 
@@ -64,9 +72,19 @@ var
   FProcessor: TXSDProcessor;
   FCodegen: TXsdPasCodegen;
   FXSDModule: TXSDModule;
+  FDO : TCodeGenDescribeOptions;
 begin
   SynEdit1.Lines.Clear;
   FProcessor:=TXSDProcessor.Create;
+
+  FDO:=[];
+  if CheckBox1.Checked then
+    FDO:=FDO + [cgdoDescribeClasses];
+  if CheckBox2.Checked then
+    FDO:=FDO + [cgdoDescribeClassProperty];
+  if CheckBox3.Checked then
+    FDO:=FDO + [cgdoDescribeTypes];
+
   FProcessor.OnProcessNodeEvent:=@ProcessNode;
   FProcessor.LoadFromFile(FileNameEdit1.FileName);
   FXSDModule:=FProcessor.ExecuteProcessor;
@@ -75,6 +93,8 @@ begin
   begin
     FCodegen:=TXsdPasCodegen.Create(FXSDModule);
     FCodegen.PasUnitName:=ExtractFileNameOnly(FileNameEdit1.FileName);
+    FCodegen.DescribeOptions:=FDO;
+
     SynEdit1.Lines.Text:=FCodegen.GeneratePasCode;
     FCodegen.Free;
   end

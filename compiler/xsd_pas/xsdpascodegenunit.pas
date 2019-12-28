@@ -1,3 +1,20 @@
+{ XSD files compiler to FPC class
+
+  Copyright (C) 2019 Lagunov Aleksey alexs@yandex.ru
+
+  This source is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later
+  version.
+
+  This code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+  details.
+
+  A copy of the GNU General Public License is available on the World Wide Web at
+  <http://www.gnu.org/copyleft/gpl.html>. You can also obtain it by writing to the Free Software Foundation, Inc., 51
+  Franklin Street - Fifth Floor, Boston, MA 02110-1335, USA.
+}
+
 unit XsdPasCodegenUnit;
 
 {$mode objfpc}{$H+}
@@ -8,11 +25,14 @@ uses
   Classes, SysUtils, XsdElementTypesUnit;
 
 type
+  TCodeGenDescribeOption = (cgdoDescribeTypes, cgdoDescribeClasses, cgdoDescribeClassProperty);
+  TCodeGenDescribeOptions = set of TCodeGenDescribeOption;
 
   { TXsdPasCodegen }
 
   TXsdPasCodegen = class
   private
+    FDescribeOptions: TCodeGenDescribeOptions;
     FPasUnitDescription: string;
     FPasUnitName: string;
     FXSDModule: TXSDModule;
@@ -28,6 +48,7 @@ type
     function GeneratePasCode:string;
     property PasUnitName:string read FPasUnitName write FPasUnitName;
     property PasUnitDescription:string read FPasUnitDescription write FPasUnitDescription;
+    property DescribeOptions:TCodeGenDescribeOptions read FDescribeOptions write FDescribeOptions;
   end;
 
 implementation
@@ -59,8 +80,9 @@ begin
   for CT in FXSDModule.ComplexTypes do
   begin
     Result:=Result + '  {  T' + CT.TypeName + '  }'+LineEnding;
-    if CT.Description <> '' then
-    Result:=Result + '  {  ' + TrimRight(CT.Description) + '  }'+LineEnding;
+
+    if (cgdoDescribeClasses in FDescribeOptions)  and (CT.Description <> '') then
+      Result:=Result + '  {  ' + TrimRight(CT.Description) + '  }'+LineEnding;
 
     Result:=Result + '  T' + CT.TypeName + ' = class(TXmlSerializationObject)'+LineEnding + '  private' + LineEnding;
     for PT in CT.Propertys do
@@ -85,18 +107,18 @@ begin
 
     for PT in CT.Propertys do
     begin
-      //if PT.Description <> '' then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
+      //if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
       Result:=Result + '    property '+PT.Name + ':'+PT.BaseType + ' read F'+PT.Name;
       if PT.ItemType in [pitAttribute, pitSimpleType] then
         Result:=Result + ' write Set' + PT.Name;
 
-      if PT.Description <> '' then Result:=Result + '    {' + TrimRight(PT.Description) + '}';
+      if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}';
 
       Result:=Result+ ';'+LineEnding;
     end;
     Result:=Result +
     '  end;'+LineEnding+
-    '  TInvoiceItems = specialize GXMLSerializationObjectList<T'+CT.TypeName+'>;' + LineEnding + LineEnding;
+    '  T' + CT.TypeName +'s = specialize GXMLSerializationObjectList<T'+CT.TypeName+'>;' + LineEnding + LineEnding;
   end;
 end;
 
@@ -178,7 +200,7 @@ begin
   Result:='';
   for ST in FXSDModule.SimpleTypes do
   begin
-    if ST.Description <> '' then
+    if (cgdoDescribeTypes in FDescribeOptions) and (ST.Description <> '') then
        Result:=Result + '{'+ST.Description+ '}' + LineEnding;
     Result:=Result + '  T' + ST.TypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
   end;
