@@ -57,6 +57,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="XsdProcessorUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

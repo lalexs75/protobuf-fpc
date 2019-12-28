@@ -85,10 +85,13 @@ begin
 
     for PT in CT.Propertys do
     begin
-      if PT.Description <> '' then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
+      //if PT.Description <> '' then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
       Result:=Result + '    property '+PT.Name + ':'+PT.BaseType + ' read F'+PT.Name;
       if PT.ItemType in [pitAttribute, pitSimpleType] then
         Result:=Result + ' write Set' + PT.Name;
+
+      if PT.Description <> '' then Result:=Result + '    {' + TrimRight(PT.Description) + '}';
+
       Result:=Result+ ';'+LineEnding;
     end;
     Result:=Result +
@@ -177,7 +180,7 @@ begin
   begin
     if ST.Description <> '' then
        Result:=Result + '{'+ST.Description+ '}' + LineEnding;
-    Result:=Result + '  T' + ST.TypeName + ' = ' + ST.PasBaseName + ';' + LineEnding + LineEnding;
+    Result:=Result + '  T' + ST.TypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
   end;
   if Result <> '' then
     Result:='type' + LineEnding + Result;
