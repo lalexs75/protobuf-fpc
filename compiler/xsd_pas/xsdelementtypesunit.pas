@@ -25,6 +25,10 @@ uses
   Classes, SysUtils;
 
 type
+  TXSDSimpleType = class;
+  TXSDComplexType = class;
+  TXSDComplexTypes = class;
+  TXSDModule = class;
   TXSDComplexTypesEnumerator = class;
   TXSDSimpleTypesEnumerator = class;
   TPropertyItemsEnumerator = class;
@@ -39,12 +43,17 @@ type
     FDescription: string;
     FItemType: TPropertyItemType;
     FName: string;
+    FXSDSimpleType: TXSDSimpleType;
+    FOwner: TXSDComplexType;
   public
+    constructor Create(AOwner:TXSDComplexType);
+    function PascalBaseType:string;
     procedure UpdatePascalNames;
     property Name:string read FName write FName;
     property BaseType:string read FBaseType write FBaseType;
     property ItemType:TPropertyItemType read FItemType write FItemType;
     property Description:string read FDescription write FDescription;
+    property XSDSimpleType:TXSDSimpleType read FXSDSimpleType;
   end;
 
   { TPropertyItems }
@@ -52,10 +61,11 @@ type
   TPropertyItems = class
   private
     FList:TFPList;
+    FOwner: TXSDComplexType;
     function GetCount: integer;
     function GetItems(AIndex: Integer): TPropertyItem;
   public
-    constructor Create;
+    constructor Create(AOwner:TXSDComplexType);
     destructor Destroy; override;
     procedure Clear;
     procedure UpdatePascalNames;
@@ -87,8 +97,9 @@ type
     FMainRoot: boolean;
     FPropertys: TPropertyItems;
     FTypeName: string;
+    FOwner: TXSDComplexTypes;
   public
-    constructor Create;
+    constructor Create(AOwner:TXSDComplexTypes);
     destructor Destroy; override;
     procedure UpdatePascalNames;
     property TypeName:string read FTypeName write FTypeName;
@@ -102,10 +113,11 @@ type
   TXSDComplexTypes = class
   private
     FList:TFPList;
+    FOwner: TXSDModule;
     function GetCount: integer;
     function GetItems(AIndex: Integer): TXSDComplexType;
   public
-    constructor Create;
+    constructor Create(AOwner:TXSDModule);
     destructor Destroy; override;
     procedure Clear;
     procedure UpdatePascalNames;
@@ -139,7 +151,9 @@ type
     FPasBaseName: string;
     FPasTypeName: string;
     FTypeName: string;
+    FOwner: TXSDModule;
   public
+    constructor Create(AOwner:TXSDModule);
     procedure UpdatePascalNames;
     property TypeName:string read FTypeName write FTypeName;
     property BaseName:string read FBaseName write FBaseName;
@@ -155,14 +169,16 @@ type
   TXSDSimpleTypes = class
   private
     FList:TFPList;
+    FOwner: TXSDModule;
     function GetCount: integer;
     function GetItems(AIndex: Integer): TXSDSimpleType;
   public
-    constructor Create;
+    constructor Create(AOwner:TXSDModule);
     destructor Destroy; override;
     procedure Clear;
     function GetEnumerator: TXSDSimpleTypesEnumerator;
     function Add(ATypeName:string):TXSDSimpleType;
+    function FindType(const ATypeName:string):TXSDSimpleType;
     property Count:integer read GetCount;
     procedure UpdatePascalNames;
     property Items[AIndex:Integer]:TXSDSimpleType read GetItems; default;
@@ -198,26 +214,54 @@ type
 
 implementation
 
+uses xsdutils;
+
 { TPropertyItem }
+
+constructor TPropertyItem.Create(AOwner: TXSDComplexType);
+begin
+  inherited Create;
+  FOwner:=AOwner;
+end;
+
+function TPropertyItem.PascalBaseType: string;
+begin
+  if Assigned(FXSDSimpleType) then
+    Result:=FXSDSimpleType.PasTypeName
+  else
+  begin
+    Result:=GetSimpleType(FBaseType);
+    if Result= '' then
+      Result:=FBaseType;
+  end;
+end;
 
 procedure TPropertyItem.UpdatePascalNames;
 begin
-
+  if not IsSimpleType(FBaseType) then
+    FXSDSimpleType:=FOwner.FOwner.FOwner.SimpleTypes.FindType(FBaseType);
 end;
 
 { TXSDSimpleType }
 
+constructor TXSDSimpleType.Create(AOwner: TXSDModule);
+begin
+  inherited Create;
+  FOwner:=AOwner;
+end;
+
 procedure TXSDSimpleType.UpdatePascalNames;
 begin
-
+  FPasTypeName:='T'+FTypeName;
 end;
 
 { TXSDComplexType }
 
-constructor TXSDComplexType.Create;
+constructor TXSDComplexType.Create(AOwner: TXSDComplexTypes);
 begin
   inherited Create;
-  FPropertys:=TPropertyItems.Create;
+  FOwner:=AOwner;
+  FPropertys:=TPropertyItems.Create(Self);
 end;
 
 destructor TXSDComplexType.Destroy;
@@ -264,9 +308,10 @@ begin
   Result:=TPropertyItem(FList[AIndex]);
 end;
 
-constructor TPropertyItems.Create;
+constructor TPropertyItems.Create(AOwner: TXSDComplexType);
 begin
   inherited Create;
+  FOwner:=AOwner;
   FList:=TFPList.Create;
 end;
 
@@ -298,7 +343,7 @@ end;
 
 function TPropertyItems.Add(AItemType: TPropertyItemType): TPropertyItem;
 begin
-  Result:=TPropertyItem.Create;
+  Result:=TPropertyItem.Create(FOwner);
   Result.ItemType:=AItemType;
   FList.Add(Result);
 end;
@@ -334,9 +379,10 @@ begin
   Result:=TXSDSimpleType(FList[AIndex]);
 end;
 
-constructor TXSDSimpleTypes.Create;
+constructor TXSDSimpleTypes.Create(AOwner: TXSDModule);
 begin
   inherited Create;
+  FOwner:=AOwner;
   FList:=TFPList.Create;
 end;
 
@@ -363,9 +409,19 @@ end;
 
 function TXSDSimpleTypes.Add(ATypeName: string): TXSDSimpleType;
 begin
-  Result:=TXSDSimpleType.Create;
+  Result:=TXSDSimpleType.Create(FOwner);
   Result.TypeName:=ATypeName;
   FList.Add(Result);
+end;
+
+function TXSDSimpleTypes.FindType(const ATypeName: string): TXSDSimpleType;
+var
+  ST: TXSDSimpleType;
+begin
+  Result:=nil;
+  for ST in Self do
+    if ST.TypeName = ATypeName then
+      Exit(ST);
 end;
 
 procedure TXSDSimpleTypes.UpdatePascalNames;
@@ -399,8 +455,8 @@ end;
 constructor TXSDModule.Create;
 begin
   inherited Create;
-  FComplexTypes:=TXSDComplexTypes.Create;
-  FSimpleTypes:=TXSDSimpleTypes.Create;
+  FComplexTypes:=TXSDComplexTypes.Create(Self);
+  FSimpleTypes:=TXSDSimpleTypes.Create(Self);
 end;
 
 destructor TXSDModule.Destroy;
@@ -435,10 +491,11 @@ begin
   Result:=TXSDComplexType(FList[AIndex]);
 end;
 
-constructor TXSDComplexTypes.Create;
+constructor TXSDComplexTypes.Create(AOwner: TXSDModule);
 begin
   inherited Create;
   FList:=TFPList.Create;
+  FOwner:=AOwner;
 end;
 
 destructor TXSDComplexTypes.Destroy;
@@ -471,7 +528,7 @@ end;
 
 function TXSDComplexTypes.Add(ATypeName: string): TXSDComplexType;
 begin
-  Result:=TXSDComplexType.Create;
+  Result:=TXSDComplexType.Create(Self);
   FList.Add(Result);
   Result.FTypeName:=ATypeName;
 end;

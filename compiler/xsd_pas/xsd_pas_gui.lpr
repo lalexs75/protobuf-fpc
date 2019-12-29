@@ -29,7 +29,7 @@ uses
   XsdElementTypesUnit,
   XsdPasCodegenUnit,
   XsdProcessorUnit,
-  rxlogging;
+  rxlogging, xsdutils;
 
 {$R *.res}
 

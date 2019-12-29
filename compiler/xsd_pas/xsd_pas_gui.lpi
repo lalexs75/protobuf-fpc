@@ -62,6 +62,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdProcessorUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="xsdutils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -53,40 +53,7 @@ type
   end;
 
 implementation
-uses XMLRead;
-function IsSimpleType(ATypeName:string):Boolean;
-begin
-  Result:=
-    (ATypeName = 'xs:string') or
-    (ATypeName = 'xs:decimal') or
-    (ATypeName = 'xs:integer') or
-    (ATypeName = 'xs:boolean') or
-    (ATypeName = 'xs:date') or
-    (ATypeName = 'xs:time');
-end;
-
-function GetSimpleType(ATypeName:string):string;
-begin
-  if (ATypeName = 'xs:string') then
-    Result:='String'
-  else
-  if (ATypeName = 'xs:decimal') then
-    Result:='Double'
-  else
-  if (ATypeName = 'xs:integer') then
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:boolean') then
-    Result:='Boolean'
-  else
-  if  (ATypeName = 'xs:date') then
-    Result:='TTime'
-  else
-  if (ATypeName = 'xs:time') then
-    Result:='TDate'
-  else
-    Result:='';
-end;
+uses XMLRead, xsdutils;
 
 { TXSDProcessor }
 

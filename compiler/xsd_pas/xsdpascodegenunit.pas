@@ -92,11 +92,11 @@ begin
 
     Result:=Result + '  T' + CT.TypeName + ' = class(TXmlSerializationObject)'+LineEnding + '  private' + LineEnding;
     for PT in CT.Propertys do
-      Result:=Result + '    F' + PT.Name + ':' + PT.BaseType + ';'+LineEnding;
+      Result:=Result + '    F' + PT.Name + ':' + PT.PascalBaseType + ';'+LineEnding;
 
     for PT in CT.Propertys do
       if PT.ItemType in [pitAttribute, pitSimpleType] then
-        Result:=Result + '    procedure Set' + PT.Name + '( AValue:' + PT.BaseType + ');'+LineEnding;
+        Result:=Result + '    procedure Set' + PT.Name + '( AValue:' + PT.PascalBaseType + ');'+LineEnding;
 
     Result:=Result+
     '  protected'+LineEnding+
@@ -114,7 +114,7 @@ begin
     for PT in CT.Propertys do
     begin
       //if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
-      Result:=Result + '    property '+PT.Name + ':'+PT.BaseType + ' read F'+PT.Name;
+      Result:=Result + '    property '+PT.Name + ':'+PT.PascalBaseType + ' read F'+PT.Name;
       if PT.ItemType in [pitAttribute, pitSimpleType] then
         Result:=Result + ' write Set' + PT.Name;
 
@@ -208,7 +208,7 @@ begin
   begin
     if (cgdoDescribeTypes in FDescribeOptions) and (ST.Description <> '') then
        Result:=Result + '{'+ST.Description+ '}' + LineEnding;
-    Result:=Result + '  T' + ST.TypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
+    Result:=Result + '  ' + ST.PasTypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
   end;
   if Result <> '' then
     Result:='type' + LineEnding + Result;
