@@ -39,7 +39,8 @@ type
     FDescription: string;
     FItemType: TPropertyItemType;
     FName: string;
-  published
+  public
+    procedure UpdatePascalNames;
     property Name:string read FName write FName;
     property BaseType:string read FBaseType write FBaseType;
     property ItemType:TPropertyItemType read FItemType write FItemType;
@@ -57,6 +58,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure UpdatePascalNames;
     function GetEnumerator: TPropertyItemsEnumerator;
     function Add(AItemType:TPropertyItemType):TPropertyItem;
     property Count:integer read GetCount;
@@ -88,6 +90,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+    procedure UpdatePascalNames;
     property TypeName:string read FTypeName write FTypeName;
     property Propertys:TPropertyItems read FPropertys;
     property MainRoot:boolean read FMainRoot write FMainRoot;
@@ -105,6 +108,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure UpdatePascalNames;
     function GetEnumerator: TXSDComplexTypesEnumerator;
     function Add(ATypeName:string):TXSDComplexType;
     property Count:integer read GetCount;
@@ -133,14 +137,17 @@ type
     FMaxLength: integer;
     FMinLength: integer;
     FPasBaseName: string;
+    FPasTypeName: string;
     FTypeName: string;
   public
+    procedure UpdatePascalNames;
     property TypeName:string read FTypeName write FTypeName;
     property BaseName:string read FBaseName write FBaseName;
-    property PasBaseName:string read FPasBaseName write FPasBaseName;
     property MaxLength:integer read FMaxLength write FMaxLength;
     property MinLength:integer read FMinLength write FMinLength;
     property Description:string read FDescription write FDescription;
+    property PasBaseName:string read FPasBaseName write FPasBaseName;
+    property PasTypeName:string read FPasTypeName write FPasTypeName;
   end;
 
   { TXSDSimpleTypes }
@@ -157,6 +164,7 @@ type
     function GetEnumerator: TXSDSimpleTypesEnumerator;
     function Add(ATypeName:string):TXSDSimpleType;
     property Count:integer read GetCount;
+    procedure UpdatePascalNames;
     property Items[AIndex:Integer]:TXSDSimpleType read GetItems; default;
   end;
 
@@ -183,11 +191,26 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    procedure UpdatePascalNames;
     property ComplexTypes:TXSDComplexTypes read FComplexTypes;
     property SimpleTypes:TXSDSimpleTypes read FSimpleTypes;
   end;
 
 implementation
+
+{ TPropertyItem }
+
+procedure TPropertyItem.UpdatePascalNames;
+begin
+
+end;
+
+{ TXSDSimpleType }
+
+procedure TXSDSimpleType.UpdatePascalNames;
+begin
+
+end;
 
 { TXSDComplexType }
 
@@ -201,6 +224,13 @@ destructor TXSDComplexType.Destroy;
 begin
   FreeAndNil(FPropertys);
   inherited Destroy;
+end;
+
+procedure TXSDComplexType.UpdatePascalNames;
+var
+  P: TPropertyItem;
+begin
+  for P in Propertys do P.UpdatePascalNames;
 end;
 
 { TPropertyItemsEnumerator }
@@ -254,6 +284,11 @@ begin
   for i:=0 to FList.Count-1 do
     TPropertyItem(FList[i]).Free;
   FList.Clear;
+end;
+
+procedure TPropertyItems.UpdatePascalNames;
+begin
+
 end;
 
 function TPropertyItems.GetEnumerator: TPropertyItemsEnumerator;
@@ -333,6 +368,13 @@ begin
   FList.Add(Result);
 end;
 
+procedure TXSDSimpleTypes.UpdatePascalNames;
+var
+  ST: TXSDSimpleType;
+begin
+  for ST in Self do ST.UpdatePascalNames;
+end;
+
 { TXSDComplexTypesEnumerator }
 
 constructor TXSDComplexTypesEnumerator.Create(AList: TXSDComplexTypes);
@@ -375,6 +417,12 @@ begin
   FSimpleTypes.Clear;
 end;
 
+procedure TXSDModule.UpdatePascalNames;
+begin
+  SimpleTypes.UpdatePascalNames;
+  ComplexTypes.UpdatePascalNames;
+end;
+
 { TXSDComplexTypes }
 
 function TXSDComplexTypes.GetCount: integer;
@@ -407,6 +455,13 @@ begin
   for i:=0 to FList.Count-1 do
     TXSDComplexType(FList[i]).Free;
   FList.Clear;
+end;
+
+procedure TXSDComplexTypes.UpdatePascalNames;
+var
+  CT: TXSDComplexType;
+begin
+  for CT in Self do CT.UpdatePascalNames;
 end;
 
 function TXSDComplexTypes.GetEnumerator: TXSDComplexTypesEnumerator;

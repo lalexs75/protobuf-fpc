@@ -57,7 +57,7 @@ type
 
     procedure ProcessNode(Sender:TXSDProcessor; ANodeName:string; AMessage:string);
   public
-    //procedure WriteLog(S:string);
+    //
   end;
 
 var

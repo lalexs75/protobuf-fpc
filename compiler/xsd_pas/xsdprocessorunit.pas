@@ -318,6 +318,7 @@ begin
       if S = 'xs:schema' then
         ProcessSchema(FDoc.ChildNodes[i]);
     end;
+    FXSDModule.UpdatePascalNames;
   end;
   Result:=FXSDModule;
 end;
