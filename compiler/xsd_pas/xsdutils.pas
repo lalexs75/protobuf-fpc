@@ -36,16 +36,20 @@ begin
     (ATypeName = 'xs:integer') or
     (ATypeName = 'xs:boolean') or
     (ATypeName = 'xs:date') or
-    (ATypeName = 'xs:time');
+    (ATypeName = 'xs:time') or
+    (ATypeName = 'xs:token') or
+    (ATypeName = 'xs:dateTime') or
+    (ATypeName = 'xs:base64Binary');
 end;
 
 function GetSimpleType(ATypeName:string):string;
 begin
-  if (ATypeName = 'xs:string') then
+  if (ATypeName = 'xs:string') or (ATypeName = 'xs:token') then
     Result:='String'
   else
   if (ATypeName = 'xs:decimal') then
-    Result:='Double'
+    Result:='String'
+    //Result:='Double'
   else
   if (ATypeName = 'xs:integer') then
     Result:='Integer'
@@ -54,10 +58,19 @@ begin
     Result:='Boolean'
   else
   if  (ATypeName = 'xs:date') then
-    Result:='TTime'
+    //Result:='TTime'
+    Result:='String'
   else
   if (ATypeName = 'xs:time') then
-    Result:='TDate'
+    //Result:='TDate'
+    Result:='String'
+  else
+  if (ATypeName = 'xs:dateTime') then
+    //Result:='TDateTime'
+    Result:='String'
+  else
+  if (ATypeName = 'xs:base64Binary') then
+    Result:='String'
   else
     Result:='';
 end;

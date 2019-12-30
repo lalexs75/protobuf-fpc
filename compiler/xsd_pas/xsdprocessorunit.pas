@@ -77,7 +77,9 @@ begin
     S:=N.NodeName;
     DoProcessNodeMsg(S, N.NodeValue);
     if (S = 'xs:element')  then
+    begin
       ProcessElement(N)
+    end
     else
     if (S = 'xs:complexType') then
     begin
@@ -160,6 +162,8 @@ begin
             //Prop.BaseType:=R1.Attributes.GetNamedItem('base');
           end
         end
+        else
+          Prop.BaseType:='String'; //GetSimpleType(Prop.BaseType);
       end;
     end
   end;
@@ -190,6 +194,7 @@ begin
           Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
         end
         else
+        //xs:extension
         begin
           S1:=FA.Attributes.GetNamedItem('name').NodeValue;
           R:=FA.Attributes.GetNamedItem('type');
@@ -204,6 +209,7 @@ begin
             begin
               Prop:=AComplexType.Propertys.Add(pitClass);
               Prop.BaseType:=R.NodeValue;
+              Prop.IsArray:= RAll.NodeName = 'xs:sequence';
             end;
             Prop.Name:=S1;
             Prop.Description:=GetAnnotation(FA);

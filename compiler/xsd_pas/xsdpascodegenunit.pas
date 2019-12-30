@@ -78,25 +78,25 @@ var
 begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
-  begin
-    Result:=Result + '  T' + CT.TypeName + ' = class;'+LineEnding;
-  end;
+    Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
+  for CT in FXSDModule.ComplexTypes do
+    Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
   Result:=Result + LineEnding;
 
   for CT in FXSDModule.ComplexTypes do
   begin
-    Result:=Result + '  {  T' + CT.TypeName + '  }'+LineEnding;
+    Result:=Result + '  {  ' + CT.PascalTypeName + '  }'+LineEnding;
 
     if (cgdoDescribeClasses in FDescribeOptions)  and (CT.Description <> '') then
       Result:=Result + '  {  ' + TrimRight(CT.Description) + '  }'+LineEnding;
 
-    Result:=Result + '  T' + CT.TypeName + ' = class(TXmlSerializationObject)'+LineEnding + '  private' + LineEnding;
+    Result:=Result + '  ' + CT.PascalTypeName + ' = class(' + CT.InheritedTypeName + ')'+LineEnding + '  private' + LineEnding;
     for PT in CT.Propertys do
-      Result:=Result + '    F' + PT.Name + ':' + PT.PascalBaseType + ';'+LineEnding;
+      Result:=Result + '    F' + PT.PascalName + ':' + PT.PascalBaseType + ';'+LineEnding;
 
     for PT in CT.Propertys do
       if PT.ItemType in [pitAttribute, pitSimpleType] then
-        Result:=Result + '    procedure Set' + PT.Name + '( AValue:' + PT.PascalBaseType + ');'+LineEnding;
+        Result:=Result + '    procedure Set' + PT.PascalName + '( AValue:' + PT.PascalBaseType + ');'+LineEnding;
 
     Result:=Result+
     '  protected'+LineEnding+
@@ -114,17 +114,15 @@ begin
     for PT in CT.Propertys do
     begin
       //if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
-      Result:=Result + '    property '+PT.Name + ':'+PT.PascalBaseType + ' read F'+PT.Name;
+      Result:=Result + '    property '+PT.PascalName + ':'+PT.PascalBaseType + ' read F'+PT.PascalName;
       if PT.ItemType in [pitAttribute, pitSimpleType] then
-        Result:=Result + ' write Set' + PT.Name;
+        Result:=Result + ' write Set' + PT.PascalName;
 
       if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}';
 
       Result:=Result+ ';'+LineEnding;
     end;
-    Result:=Result +
-    '  end;'+LineEnding+
-    '  T' + CT.TypeName +'s = specialize GXMLSerializationObjectList<T'+CT.TypeName+'>;' + LineEnding + LineEnding;
+    Result:=Result + '  end;'+LineEnding;
   end;
 end;
 
@@ -137,24 +135,24 @@ begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
   begin
-     Result:=Result + '  {  T'+CT.TypeName + '  }'+LineEnding;
+     Result:=Result + '  {  '+CT.PascalTypeName + '  }'+LineEnding;
 
      for PT in CT.Propertys do
      begin
        if PT.ItemType in [pitAttribute, pitSimpleType] then
        begin
          Result:=Result +
-          'procedure T'+CT.TypeName+'.Set'+PT.Name+'(AValue: '+PT.BaseType+');'+LineEnding +
+          'procedure '+CT.PascalTypeName+'.Set'+PT.PascalName+'(AValue: '+PT.PascalBaseType+');'+LineEnding +
           'begin'+LineEnding+
-          '  if F'+PT.Name+'=AValue then Exit;'+LineEnding+
-          '  F'+PT.Name+':=AValue;'+LineEnding+
-          '  ModifiedProperty('''+PT.Name+''');'+LineEnding+
+          '  if F'+PT.PascalName+'=AValue then Exit;'+LineEnding+
+          '  F'+PT.PascalName+':=AValue;'+LineEnding+
+          '  ModifiedProperty('''+PT.PascalName+''');'+LineEnding+
           'end;'+LineEnding+LineEnding;
        end;
      end;
 
      Result:=Result +
-      'procedure T'+CT.TypeName+'.InternalRegisterPropertys;'+LineEnding +
+      'procedure '+CT.PascalTypeName+'.InternalRegisterPropertys;'+LineEnding +
       'begin'+LineEnding;
      for PT in CT.Propertys do
      begin
@@ -165,34 +163,34 @@ begin
        //xsaRequared
 
        Result:=Result +
-        '  RegisterProperty('''+PT.Name+''', '''+PT.Name+''', ['+SAttr+'], '''', 0, 250);'+LineEnding;
+        '  RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+SAttr+'], '''', 0, 250);'+LineEnding;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
 
      Result:=Result +
-      'procedure T'+CT.TypeName+'.InternalInitChilds;'+LineEnding +
+      'procedure '+CT.PascalTypeName+'.InternalInitChilds;'+LineEnding +
       'begin'+LineEnding;
      for PT in CT.Propertys do
      begin
        if PT.ItemType = pitClass then
         Result:=Result +
-         '  F'+PT.Name+':=T'+PT.Name+'.Create;'+LineEnding;
+         '  F'+PT.PascalName+':='+PT.PascalBaseType + '.Create;'+LineEnding;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
 
      Result:=Result +
-      'destructor T'+CT.TypeName+'.Destroy;'+LineEnding +
+      'destructor '+CT.PascalTypeName+'.Destroy;'+LineEnding +
       'begin'+LineEnding;
      for PT in CT.Propertys do
      begin
        if PT.ItemType = pitClass then
         Result:=Result +
-         '  F'+PT.Name+'.Free;'+LineEnding;
+         '  F'+PT.PascalName+'.Free;'+LineEnding;
      end;
      Result:=Result + '  inherited Destroy;'+LineEnding+'end;'+LineEnding+LineEnding;
 
     if CT.MainRoot then
-      Result:=Result+'function T'+CT.TypeName+'.RootNodeName:string;'+LineEnding+
+      Result:=Result+'function '+CT.PascalTypeName+'.RootNodeName:string;'+LineEnding+
       'begin'+LineEnding+
       '  Result:='''+CT.TypeName+''';'+LineEnding+
       'end;'+LineEnding+LineEnding;

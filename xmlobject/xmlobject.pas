@@ -496,6 +496,7 @@ var
   FInst: TObject;
   R: TXmlSerializationObject;
   S2: DOMString;
+  S3: String;
 begin
   for i:=0 to AElement.ChildNodes.Count-1 do
   begin
@@ -512,6 +513,7 @@ begin
         raise Exception.CreateFmt(sPropertyNotFound1, [P.FPropertyName]);
 
       K:=FProp^.PropType^.Kind;
+      S3:=FProp^.PropType^.Name;
       if (xsaSimpleObject in P.Attribs) and (K <> tkClass) then
       begin
         S2:=FNode.TextContent;
@@ -521,6 +523,7 @@ begin
           tkWString,
           tkSString,
           tkLString   : SetStrProp(Self, FProp, S2);
+          tkInteger : SetInt64Prop(Self, FProp, StrToInt64(S2));
         else
           raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
         end;

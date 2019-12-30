@@ -41,19 +41,24 @@ type
   private
     FBaseType: string;
     FDescription: string;
+    FIsArray: boolean;
     FItemType: TPropertyItemType;
     FName: string;
+    FPascalName: string;
     FXSDSimpleType: TXSDSimpleType;
+    FXSDComplexType: TXSDComplexType;
     FOwner: TXSDComplexType;
   public
     constructor Create(AOwner:TXSDComplexType);
     function PascalBaseType:string;
     procedure UpdatePascalNames;
     property Name:string read FName write FName;
+    property PascalName:string read FPascalName write FPascalName;
     property BaseType:string read FBaseType write FBaseType;
     property ItemType:TPropertyItemType read FItemType write FItemType;
     property Description:string read FDescription write FDescription;
     property XSDSimpleType:TXSDSimpleType read FXSDSimpleType;
+    property IsArray:boolean read FIsArray write FIsArray;
   end;
 
   { TPropertyItems }
@@ -71,6 +76,7 @@ type
     procedure UpdatePascalNames;
     function GetEnumerator: TPropertyItemsEnumerator;
     function Add(AItemType:TPropertyItemType):TPropertyItem;
+    function FindProperty(AItemName:string):TPropertyItem;
     property Count:integer read GetCount;
     property Items[AIndex:Integer]:TPropertyItem read GetItems; default;
   end;
@@ -95,6 +101,7 @@ type
   private
     FDescription: string;
     FMainRoot: boolean;
+    FPascalTypeName: string;
     FPropertys: TPropertyItems;
     FTypeName: string;
     FOwner: TXSDComplexTypes;
@@ -102,7 +109,9 @@ type
     constructor Create(AOwner:TXSDComplexTypes);
     destructor Destroy; override;
     procedure UpdatePascalNames;
+    function InheritedTypeName:string;
     property TypeName:string read FTypeName write FTypeName;
+    property PascalTypeName:string read FPascalTypeName write FPascalTypeName;
     property Propertys:TPropertyItems read FPropertys;
     property MainRoot:boolean read FMainRoot write FMainRoot;
     property Description:string read FDescription write FDescription;
@@ -123,6 +132,7 @@ type
     procedure UpdatePascalNames;
     function GetEnumerator: TXSDComplexTypesEnumerator;
     function Add(ATypeName:string):TXSDComplexType;
+    function FindType(const ATypeName:string):TXSDComplexType;
     property Count:integer read GetCount;
     property Items[AIndex:Integer]:TXSDComplexType read GetItems; default;
   end;
@@ -229,6 +239,13 @@ begin
   if Assigned(FXSDSimpleType) then
     Result:=FXSDSimpleType.PasTypeName
   else
+  if Assigned(FXSDComplexType) then
+  begin
+    Result:=FXSDComplexType.PascalTypeName;
+    if IsArray then
+      Result:=Result + 'List';
+  end
+  else
   begin
     Result:=GetSimpleType(FBaseType);
     if Result= '' then
@@ -237,9 +254,33 @@ begin
 end;
 
 procedure TPropertyItem.UpdatePascalNames;
+var
+  S: String;
 begin
   if not IsSimpleType(FBaseType) then
+  begin
     FXSDSimpleType:=FOwner.FOwner.FOwner.SimpleTypes.FindType(FBaseType);
+    if not Assigned(FXSDSimpleType) then
+       FXSDComplexType:=FOwner.FOwner.FOwner.ComplexTypes.FindType(FBaseType);
+  end;
+
+  PascalName:=Name;
+  S:=UpperCase(Name);
+  if (S = 'FUNCTION') or
+     (S = 'PROCEDURE') or
+     (S = 'UNIT') or
+     (S = 'OR') or
+     (S = 'AND') or
+     (S = 'NOT') or
+     (S = 'ON') or
+     (S = 'IF') or
+     (S = 'THEN') or
+     (S = 'ELSE') or
+     (S = 'STRING') or
+     (S = 'CLASS') or
+     (S = 'OBJECT') { or }
+  then
+    PascalName:=PascalName + '01';
 end;
 
 { TXSDSimpleType }
@@ -275,6 +316,12 @@ var
   P: TPropertyItem;
 begin
   for P in Propertys do P.UpdatePascalNames;
+  PascalTypeName:='T'+TypeName;
+end;
+
+function TXSDComplexType.InheritedTypeName: string;
+begin
+  Result:='TXmlSerializationObject';
 end;
 
 { TPropertyItemsEnumerator }
@@ -346,6 +393,13 @@ begin
   Result:=TPropertyItem.Create(FOwner);
   Result.ItemType:=AItemType;
   FList.Add(Result);
+end;
+
+function TPropertyItems.FindProperty(AItemName: string): TPropertyItem;
+begin
+  Result:=nil;
+  //AI
+  //for P in Self ;
 end;
 
 { TXSDSimpleTypesEnumerator }
@@ -531,6 +585,16 @@ begin
   Result:=TXSDComplexType.Create(Self);
   FList.Add(Result);
   Result.FTypeName:=ATypeName;
+end;
+
+function TXSDComplexTypes.FindType(const ATypeName: string): TXSDComplexType;
+var
+  CT: TXSDComplexType;
+begin
+  Result:=nil;
+  for CT in Self do
+    if CT.TypeName = ATypeName then
+      Exit(CT);
 end;
 
 end.
