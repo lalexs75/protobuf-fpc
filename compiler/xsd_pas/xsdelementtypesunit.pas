@@ -100,11 +100,13 @@ type
   TXSDComplexType = class
   private
     FDescription: string;
+    FInheritedType: string;
     FMainRoot: boolean;
     FPascalTypeName: string;
     FPropertys: TPropertyItems;
     FTypeName: string;
     FOwner: TXSDComplexTypes;
+    FInheritedXSDComplexType:TXSDComplexType;
   public
     constructor Create(AOwner:TXSDComplexTypes);
     destructor Destroy; override;
@@ -115,6 +117,7 @@ type
     property Propertys:TPropertyItems read FPropertys;
     property MainRoot:boolean read FMainRoot write FMainRoot;
     property Description:string read FDescription write FDescription;
+    property InheritedType:string read FInheritedType write FInheritedType;
   end;
 
   { TXSDComplexTypes }
@@ -317,11 +320,17 @@ var
 begin
   for P in Propertys do P.UpdatePascalNames;
   PascalTypeName:='T'+TypeName;
+
+  if InheritedType <> '' then
+    FInheritedXSDComplexType:=FOwner.FindType(InheritedType);
 end;
 
 function TXSDComplexType.InheritedTypeName: string;
 begin
-  Result:='TXmlSerializationObject';
+  if Assigned(FInheritedXSDComplexType) then
+    Result:=FInheritedXSDComplexType.PascalTypeName
+  else
+    Result:='TXmlSerializationObject';
 end;
 
 { TPropertyItemsEnumerator }

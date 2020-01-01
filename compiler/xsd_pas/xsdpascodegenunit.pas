@@ -122,7 +122,7 @@ begin
 
       Result:=Result+ ';'+LineEnding;
     end;
-    Result:=Result + '  end;'+LineEnding;
+    Result:=Result + '  end;'+LineEnding+LineEnding;
   end;
 end;
 

@@ -124,12 +124,97 @@ end;
 
 procedure TXSDProcessor.ProcessComplexElement(ANode, AContext: TDOMNode;
   AComplexType: TXSDComplexType);
+
+procedure ProcessAttribute(FA:TDOMNode);
 var
-  RAll, FA, R, FC, R1: TDOMNode;
-  i: Integer;
-  S, S1, ST1: String;
   Prop: TPropertyItem;
-  FComplexType, FComplexType1: TXSDComplexType;
+  R, R1: TDOMNode;
+begin
+  Prop:=AComplexType.Propertys.Add(pitAttribute);
+  Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+  Prop.Description:=GetAnnotation(FA);
+
+  R:=FA.Attributes.GetNamedItem('type');
+  if Assigned(R) then
+    Prop.BaseType:=R.NodeValue
+  else
+  begin
+    R:=FA.FindNode('xs:simpleType');
+    if Assigned(R) then
+    begin
+      R1:=R.FindNode('xs:restriction');
+      if Assigned(R1) then
+      begin
+        Prop.BaseType:=R1.Attributes.GetNamedItem('base').NodeValue;
+        if IsSimpleType(Prop.BaseType) then
+          Prop.BaseType:=GetSimpleType(Prop.BaseType);
+          //Prop.BaseType:=R1.Attributes.GetNamedItem('base');
+      end
+    end
+    else
+      Prop.BaseType:='String'; //GetSimpleType(Prop.BaseType);
+  end;
+end;
+
+procedure ProcessAS(RAll:TDOMNode);
+
+function DoComplexType(FA, FC: TDOMNode):TXSDComplexType;
+var
+  S:string;
+  Prop: TPropertyItem;
+begin
+  S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
+  Result:=FXSDModule.ComplexTypes.Add(S);
+  ProcessComplexElement(FC, FC, Result);
+
+  Prop:=AComplexType.Propertys.Add(pitClass);
+  Prop.BaseType:=S;
+  Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+end;
+
+var
+  i: Integer;
+  FA, FC, R: TDOMNode;
+  S1: DOMString;
+  CT: TXSDComplexType;
+  Prop: TPropertyItem;
+begin
+  for i:=0 to RAll.ChildNodes.Count-1 do
+  begin
+    FA:=RAll.ChildNodes[i];
+    if FA.NodeName = 'xs:element' then
+    begin
+      FC:=FA.FindNode('xs:complexType');
+      if Assigned(FC) then
+        DoComplexType(FA, FC)
+      else
+      begin
+        S1:=FA.Attributes.GetNamedItem('name').NodeValue;
+        R:=FA.Attributes.GetNamedItem('type');
+        if Assigned(R) then
+        begin
+          if IsSimpleType(R.NodeValue) then
+          begin
+            Prop:=AComplexType.Propertys.Add(pitSimpleType);
+            Prop.BaseType:=GetSimpleType(R.NodeValue);
+          end
+          else
+          begin
+            Prop:=AComplexType.Propertys.Add(pitClass);
+            Prop.BaseType:=R.NodeValue;
+            Prop.IsArray:= RAll.NodeName = 'xs:sequence';
+          end;
+          Prop.Name:=S1;
+          Prop.Description:=GetAnnotation(FA);
+        end;
+      end;
+    end;
+  end;
+end;
+
+var
+  FA , FC1: TDOMNode;
+  i : Integer;
 begin
   DoProcessNodeMsg(ANode.NodeName, ANode.NodeValue);
   AComplexType.Description:=GetAnnotation(AContext);
@@ -137,84 +222,22 @@ begin
   for i:=0 to AContext.ChildNodes.Count-1 do
   begin
     FA:=AContext.ChildNodes[i];
-    S:=FA.NodeName;
-    if S = 'xs:attribute' then
-    begin
-      Prop:=AComplexType.Propertys.Add(pitAttribute);
-      S1:=FA.Attributes.GetNamedItem('name').NodeValue;
-      Prop.Name:=S1;
-      Prop.Description:=GetAnnotation(FA);
-
-      R:=FA.Attributes.GetNamedItem('type');
-      if Assigned(R) then
-        Prop.BaseType:=R.NodeValue
-      else
+    if FA.NodeName = 'xs:attribute' then
+      ProcessAttribute(FA)
+    else
+    if FA.NodeName = 'xs:sequence' then
+      ProcessAS(FA)
+    else
+    if FA.NodeName = 'xs:all' then
+      ProcessAS(FA)
+    else
+    if FA.NodeName = 'xs:complexContent' then
+    begin;
+      FC1:=FA.FindNode('xs:extension');
+      if Assigned(FC1) then
       begin
-        R:=FA.FindNode('xs:simpleType');
-        if Assigned(R) then
-        begin
-          R1:=R.FindNode('xs:restriction');
-          if Assigned(R1) then
-          begin
-            Prop.BaseType:=R1.Attributes.GetNamedItem('base').NodeValue;
-            if IsSimpleType(Prop.BaseType) then
-              Prop.BaseType:=GetSimpleType(Prop.BaseType);
-            //Prop.BaseType:=R1.Attributes.GetNamedItem('base');
-          end
-        end
-        else
-          Prop.BaseType:='String'; //GetSimpleType(Prop.BaseType);
-      end;
-    end
-  end;
-
-
-  RAll:=AContext.FindNode('xs:sequence');
-  if not Assigned(RAll) then
-    RAll:=AContext.FindNode('xs:all');
-
-  if Assigned(RAll) then
-  begin
-    for i:=0 to RAll.ChildNodes.Count-1 do
-    begin
-      FA:=RAll.ChildNodes[i];
-      S:=FA.NodeName;
-      if S = 'xs:element' then
-      begin
-        FC:=FA.FindNode('xs:complexType');
-        if Assigned(FC) then
-        begin
-
-          ST1:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
-          FComplexType1:=FXSDModule.ComplexTypes.Add(ST1);
-          ProcessComplexElement(FC, FC, FComplexType1);
-
-          Prop:=AComplexType.Propertys.Add(pitClass);
-          Prop.BaseType:=ST1;
-          Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
-        end
-        else
-        //xs:extension
-        begin
-          S1:=FA.Attributes.GetNamedItem('name').NodeValue;
-          R:=FA.Attributes.GetNamedItem('type');
-          if Assigned(R) then
-          begin
-            if IsSimpleType(R.NodeValue) then
-            begin
-              Prop:=AComplexType.Propertys.Add(pitSimpleType);
-              Prop.BaseType:=GetSimpleType(R.NodeValue);
-            end
-            else
-            begin
-              Prop:=AComplexType.Propertys.Add(pitClass);
-              Prop.BaseType:=R.NodeValue;
-              Prop.IsArray:= RAll.NodeName = 'xs:sequence';
-            end;
-            Prop.Name:=S1;
-            Prop.Description:=GetAnnotation(FA);
-          end;
-        end;
+        AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
+        ProcessComplexElement(ANode, FC1, AComplexType);
       end;
     end;
   end;
