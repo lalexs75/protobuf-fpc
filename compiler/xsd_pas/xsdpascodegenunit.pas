@@ -18,7 +18,7 @@
 unit XsdPasCodegenUnit;
 
 {$mode objfpc}{$H+}
-
+{$DEFINE XSD_FORWARD_DECLARE}
 interface
 
 uses
@@ -77,10 +77,12 @@ var
   PT: TPropertyItem;
 begin
   Result:='';
-{  for CT in FXSDModule.ComplexTypes do
+  {$IFDEF XSD_FORWARD_DECLARE}
+  for CT in FXSDModule.ComplexTypes do
     Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
   for CT in FXSDModule.ComplexTypes do
-    Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;}
+    Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
+  {$ENDIF}
   Result:=Result + LineEnding;
 
   for CT in FXSDModule.ComplexTypes do
@@ -122,10 +124,11 @@ begin
 
       Result:=Result+ ';'+LineEnding;
     end;
-    Result:=Result + '  end;'+LineEnding; //+LineEnding;
-//    for CT in FXSDModule.ComplexTypes do
-      Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
-    Result:=Result + LineEnding;
+    Result:=Result + '  end;'+ LineEnding
+    {$IFNDEF XSD_FORWARD_DECLARE}
+      + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding
+    {$ENDIF}
+      + LineEnding;
   end;
 end;
 

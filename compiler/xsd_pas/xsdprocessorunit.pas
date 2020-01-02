@@ -36,6 +36,7 @@ type
     FSchema: TDOMNode;
     FOnProcessNodeEvent: TOnProcessNodeEvent;
     FXSDModule: TXSDModule;
+    function FindSchemaElent(AName:string):TDOMNode;
   protected
     procedure DoProcessNodeMsg(ANodeName:string; AMessage:string);
 
@@ -57,6 +58,30 @@ implementation
 uses XMLRead, xsdutils;
 
 { TXSDProcessor }
+
+function TXSDProcessor.FindSchemaElent(AName: string): TDOMNode;
+var
+  N, R: TDOMNode;
+  I: Integer;
+  S: DOMString;
+begin
+  Result:=nil;
+
+  for I:=0 to FSchema.ChildNodes.Count-1 do
+  begin
+    N:=FSchema.ChildNodes[i];
+    S:=N.NodeName;
+    if (S = 'xs:element') or (S = 'xs:attribute') then
+      R:=N.Attributes.GetNamedItem('name')
+    else
+      R:=nil;
+
+    if Assigned(R) and (R.NodeValue = AName) then
+      Exit(N);
+  end;
+
+  raise Exception.CreateFmt('Not find element "%s" in schema', [AName]);
+end;
 
 procedure TXSDProcessor.DoProcessNodeMsg(ANodeName: string; AMessage: string);
 begin
@@ -131,9 +156,9 @@ var
   Prop: TPropertyItem;
   R, R1, FC: TDOMNode;
 begin
-  R:=FA.FindNode('ref'); //ref=QName
+  R:=FA.Attributes.GetNamedItem('ref'); //ref=QName
   if Assigned(R) then
-    FC:=FSchema.FindNode(R.NodeValue)
+    FC:=FindSchemaElent(R.NodeValue)
   else
     FC:=FA;
 
@@ -197,6 +222,18 @@ begin
     end;
     Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
     Prop.Description:=GetAnnotation(FA);
+  end
+  else
+  begin
+    R:=FA.FindNode('xs:complexType');
+    if Assigned(R) then
+    begin
+      Prop:=AComplexType.Propertys.Add(pitClass);
+      Prop.BaseType:=FA.Attributes.GetNamedItem('name').NodeValue;
+      Prop.IsArray:= RAll.NodeName = 'xs:sequence';
+      Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+      Prop.Description:=GetAnnotation(FA);
+    end;
   end;
 end;
 
@@ -224,10 +261,10 @@ begin
     FA:=RAll.ChildNodes[i];
     if FA.NodeName = 'xs:element' then
     begin
-      FC:=FA.FindNode('xs:ref');
+      FC:=FA.Attributes.GetNamedItem('ref');
       if Assigned(FC) then
       begin
-        FA:=FSchema.FindNode(FC.NodeValue);
+        FA:=FindSchemaElent(FC.NodeValue);
         DoAttributeProp(FA)
       end
       else
@@ -238,25 +275,7 @@ begin
         else
         begin
           DoAttributeProp(FA)
-          (*R:=FA.Attributes.GetNamedItem('type');
-          if Assigned(R) then
-          begin
-            if IsSimpleType(R.NodeValue) then
-            begin
-              Prop:=AComplexType.Propertys.Add(pitSimpleType);
-              Prop.BaseType:=GetSimpleType(R.NodeValue);
-            end
-            else
-            begin
-              Prop:=AComplexType.Propertys.Add(pitClass);
-              Prop.BaseType:=R.NodeValue;
-              Prop.IsArray:= RAll.NodeName = 'xs:sequence';
-            end;
-            Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
-            Prop.Description:=GetAnnotation(FA);
-          end;*)
         end;
-
       end;
     end;
   end;
@@ -284,6 +303,9 @@ begin
     if FA.NodeName = 'xs:all' then
       ProcessAS(FA)
     else
+    if FA.NodeName = 'xs:choice' then
+      ProcessAS(FA)
+    else
     if FA.NodeName = 'xs:complexContent' then
     begin;
       FC1:=FA.FindNode('xs:extension');
@@ -292,7 +314,10 @@ begin
         AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
         ProcessComplexElement(ANode, FC1, AComplexType);
       end;
-    end;
+    end
+    else
+    if FA.NodeName <> 'xs:annotation' then
+      raise Exception.CreateFmt('Uknow element type - %s', [FA.NodeName]);
   end;
 end;
 
