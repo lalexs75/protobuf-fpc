@@ -42,23 +42,31 @@ type
     FBaseType: string;
     FDescription: string;
     FIsArray: boolean;
+    FIsRequired: boolean;
     FItemType: TPropertyItemType;
     FName: string;
     FPascalName: string;
     FXSDSimpleType: TXSDSimpleType;
     FXSDComplexType: TXSDComplexType;
     FOwner: TXSDComplexType;
+    FMinLength:Integer;
+    FMaxLength:Integer;
   public
     constructor Create(AOwner:TXSDComplexType);
     function PascalBaseType:string;
+
+    function PascalMinLength:string;
+    function PascalMaxLength:string;
+    function PascalName:string;
+
     procedure UpdatePascalNames;
     property Name:string read FName write FName;
-    property PascalName:string read FPascalName write FPascalName;
     property BaseType:string read FBaseType write FBaseType;
     property ItemType:TPropertyItemType read FItemType write FItemType;
     property Description:string read FDescription write FDescription;
     property XSDSimpleType:TXSDSimpleType read FXSDSimpleType;
     property IsArray:boolean read FIsArray write FIsArray;
+    property IsRequired:boolean read FIsRequired write FIsRequired;
   end;
 
   { TPropertyItems }
@@ -107,6 +115,7 @@ type
     FTypeName: string;
     FOwner: TXSDComplexTypes;
     FInheritedXSDComplexType:TXSDComplexType;
+  private
   public
     constructor Create(AOwner:TXSDComplexTypes);
     destructor Destroy; override;
@@ -128,6 +137,8 @@ type
     FOwner: TXSDModule;
     function GetCount: integer;
     function GetItems(AIndex: Integer): TXSDComplexType;
+  private
+    procedure SortInheritedList;
   public
     constructor Create(AOwner:TXSDModule);
     destructor Destroy; override;
@@ -235,6 +246,8 @@ constructor TPropertyItem.Create(AOwner: TXSDComplexType);
 begin
   inherited Create;
   FOwner:=AOwner;
+  FMinLength:=-1;
+  FMaxLength:=-1;
 end;
 
 function TPropertyItem.PascalBaseType: string;
@@ -256,6 +269,27 @@ begin
   end;
 end;
 
+function TPropertyItem.PascalMinLength: string;
+begin
+  if Assigned(FXSDSimpleType) then
+    Result:=IntToStr(FXSDSimpleType.FMinLength)
+  else
+    Result:=IntToStr(FMinLength)
+end;
+
+function TPropertyItem.PascalMaxLength: string;
+begin
+  if Assigned(FXSDSimpleType) then
+    Result:=IntToStr(FXSDSimpleType.FMaxLength)
+  else
+    Result:=IntToStr(FMaxLength)
+end;
+
+function TPropertyItem.PascalName: string;
+begin
+  Result:=FPascalName;
+end;
+
 procedure TPropertyItem.UpdatePascalNames;
 var
   S: String;
@@ -267,7 +301,7 @@ begin
        FXSDComplexType:=FOwner.FOwner.FOwner.ComplexTypes.FindType(FBaseType);
   end;
 
-  PascalName:=Name;
+  FPascalName:=Name;
   S:=UpperCase(Name);
   if (S = 'FUNCTION') or
      (S = 'PROCEDURE') or
@@ -283,7 +317,7 @@ begin
      (S = 'CLASS') or
      (S = 'OBJECT') { or }
   then
-    PascalName:=PascalName + '01';
+    FPascalName:=PascalName + '01';
 end;
 
 { TXSDSimpleType }
@@ -292,6 +326,8 @@ constructor TXSDSimpleType.Create(AOwner: TXSDModule);
 begin
   inherited Create;
   FOwner:=AOwner;
+  FMinLength:=-1;
+  FMinLength:=-1;
 end;
 
 procedure TXSDSimpleType.UpdatePascalNames;
@@ -554,6 +590,67 @@ begin
   Result:=TXSDComplexType(FList[AIndex]);
 end;
 
+procedure TXSDComplexTypes.SortInheritedList;
+var
+  CP, CP1: TXSDComplexType;
+  i, J: Integer;
+  Prop: TPropertyItem;
+begin
+  for i:=0 to FList.Count-2 do
+  begin
+    CP:=TXSDComplexType(FList[i]);
+    for J:=i+1 to FList.Count-1 do
+    begin
+      CP1:=TXSDComplexType(FList[j]);
+      for Prop in CP.Propertys do
+      begin
+        if Prop.FXSDComplexType = CP1 then
+        begin
+          FList[i]:=FList[j];
+          FList[j]:=CP;
+          CP:=TXSDComplexType(FList[i]);
+          Break;
+        end;
+      end;
+    end;
+  end;
+
+  for i:=0 to FList.Count-2 do
+  begin
+    CP:=TXSDComplexType(FList[i]);
+    for J:=i+1 to FList.Count-1 do
+    begin
+      CP1:=TXSDComplexType(FList[j]);
+      if CP.FInheritedXSDComplexType = CP1  then
+      begin
+        FList[i]:=FList[j];
+        FList[j]:=CP;
+        CP:=TXSDComplexType(FList[i]);
+        Continue;
+      end;
+    end;
+  end;
+
+  for i:=0 to FList.Count-2 do
+  begin
+    CP:=TXSDComplexType(FList[i]);
+    for J:=i+1 to FList.Count-1 do
+    begin
+      CP1:=TXSDComplexType(FList[j]);
+      for Prop in CP.Propertys do
+      begin
+        if Prop.FXSDComplexType = CP1 then
+        begin
+          FList[i]:=FList[j];
+          FList[j]:=CP;
+          CP:=TXSDComplexType(FList[i]);
+          Break;
+        end;
+      end;
+    end;
+  end;
+end;
+
 constructor TXSDComplexTypes.Create(AOwner: TXSDModule);
 begin
   inherited Create;
@@ -582,6 +679,7 @@ var
   CT: TXSDComplexType;
 begin
   for CT in Self do CT.UpdatePascalNames;
+  SortInheritedList;
 end;
 
 function TXSDComplexTypes.GetEnumerator: TXSDComplexTypesEnumerator;

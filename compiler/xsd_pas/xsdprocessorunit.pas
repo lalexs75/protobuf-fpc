@@ -154,6 +154,19 @@ begin
     else
       Prop.BaseType:='String'; //GetSimpleType(Prop.BaseType);
   end;
+
+  R:=FA.Attributes.GetNamedItem('use'); //use=optional | prohibited | required
+  if Assigned(R) then
+    Prop.IsRequired:=R.NodeValue = 'required';
+
+   //default=строка
+   //fixed=строка
+   //form=qualified | unqualified
+   //id=идентификатор
+   //name=NCName
+   //ref=QName
+   //type=QName
+
 end;
 
 procedure ProcessAS(RAll:TDOMNode);
@@ -254,12 +267,31 @@ begin
   begin
     ASimpleType.BaseName:=R.Attributes.GetNamedItem('base').NodeValue;
     ASimpleType.PasBaseName:=GetSimpleType(ASimpleType.BaseName);
-    M:=R.FindNode('xs:minLength');
+    M:=R.FindNode('xs:length');
     if Assigned(M) then
+    begin
       ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
-    M:=R.FindNode('xs:maxLength');
-    if Assigned(M) then
-      ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+      ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+    end
+    else
+    begin
+      M:=R.FindNode('xs:minLength');
+      if Assigned(M) then
+        ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+      M:=R.FindNode('xs:maxLength');
+      if Assigned(M) then
+        ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+    end;
+    //minExclusive
+    //minInclusive
+    //maxExclusive
+    //maxInclusive
+    //totalDigits
+    //fractionDigits
+    //length
+    //enumeration
+    //whiteSpace
+    //pattern
   end;
 end;
 

@@ -77,10 +77,10 @@ var
   PT: TPropertyItem;
 begin
   Result:='';
-  for CT in FXSDModule.ComplexTypes do
+{  for CT in FXSDModule.ComplexTypes do
     Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
   for CT in FXSDModule.ComplexTypes do
-    Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
+    Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;}
   Result:=Result + LineEnding;
 
   for CT in FXSDModule.ComplexTypes do
@@ -122,7 +122,10 @@ begin
 
       Result:=Result+ ';'+LineEnding;
     end;
-    Result:=Result + '  end;'+LineEnding+LineEnding;
+    Result:=Result + '  end;'+LineEnding; //+LineEnding;
+//    for CT in FXSDModule.ComplexTypes do
+      Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
+    Result:=Result + LineEnding;
   end;
 end;
 
@@ -159,11 +162,13 @@ begin
 
        SAttr:='';
        if PT.ItemType = pitSimpleType then
-         SAttr:='xsaSimpleObject';
-       //xsaRequared
+         SAttr:='xsaSimpleObject, ';
+
+       if PT.IsRequired then
+         SAttr:=SAttr + 'xsaRequared, ';
 
        Result:=Result +
-        '  RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+SAttr+'], '''', 0, 250);'+LineEnding;
+        '  RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+Copy(SAttr, 1, Length(SAttr)-2)+'], '''', '+PT.PascalMinLength+', '+PT.PascalMaxLength+');'+LineEnding;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
 
