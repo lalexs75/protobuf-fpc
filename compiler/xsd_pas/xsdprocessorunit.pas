@@ -129,18 +129,24 @@ procedure TXSDProcessor.ProcessComplexElement(ANode, AContext: TDOMNode;
 procedure ProcessAttribute(FA:TDOMNode);
 var
   Prop: TPropertyItem;
-  R, R1: TDOMNode;
+  R, R1, FC: TDOMNode;
 begin
-  Prop:=AComplexType.Propertys.Add(pitAttribute);
-  Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
-  Prop.Description:=GetAnnotation(FA);
+  R:=FA.FindNode('ref'); //ref=QName
+  if Assigned(R) then
+    FC:=FSchema.FindNode(R.NodeValue)
+  else
+    FC:=FA;
 
-  R:=FA.Attributes.GetNamedItem('type');
+  Prop:=AComplexType.Propertys.Add(pitAttribute);
+  Prop.Name:=FC.Attributes.GetNamedItem('name').NodeValue;
+  Prop.Description:=GetAnnotation(FC);
+
+  R:=FC.Attributes.GetNamedItem('type');
   if Assigned(R) then
     Prop.BaseType:=R.NodeValue
   else
   begin
-    R:=FA.FindNode('xs:simpleType');
+    R:=FC.FindNode('xs:simpleType');
     if Assigned(R) then
     begin
       R1:=R.FindNode('xs:restriction');
@@ -156,21 +162,43 @@ begin
       Prop.BaseType:='String'; //GetSimpleType(Prop.BaseType);
   end;
 
+
+     //default=строка
+     //fixed=строка
+     //form=qualified | unqualified
+     //id=идентификатор
+     //name=NCName
+     //type=QName
   R:=FA.Attributes.GetNamedItem('use'); //use=optional | prohibited | required
   if Assigned(R) then
     Prop.IsRequired:=R.NodeValue = 'required';
-
-   //default=строка
-   //fixed=строка
-   //form=qualified | unqualified
-   //id=идентификатор
-   //name=NCName
-   //ref=QName
-   //type=QName
-
 end;
 
 procedure ProcessAS(RAll:TDOMNode);
+
+function DoAttributeProp(FA: TDOMNode):TXSDComplexType;
+var
+  R: TDOMNode;
+  Prop: TPropertyItem;
+begin
+  R:=FA.Attributes.GetNamedItem('type');
+  if Assigned(R) then
+  begin
+    if IsSimpleType(R.NodeValue) then
+    begin
+      Prop:=AComplexType.Propertys.Add(pitSimpleType);
+      Prop.BaseType:=GetSimpleType(R.NodeValue);
+    end
+    else
+    begin
+      Prop:=AComplexType.Propertys.Add(pitClass);
+      Prop.BaseType:=R.NodeValue;
+      Prop.IsArray:= RAll.NodeName = 'xs:sequence';
+    end;
+    Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+    Prop.Description:=GetAnnotation(FA);
+  end;
+end;
 
 function DoComplexType(FA, FC: TDOMNode):TXSDComplexType;
 var
@@ -189,8 +217,6 @@ end;
 var
   i: Integer;
   FA, FC, R: TDOMNode;
-  S1: DOMString;
-  CT: TXSDComplexType;
   Prop: TPropertyItem;
 begin
   for i:=0 to RAll.ChildNodes.Count-1 do
@@ -201,7 +227,8 @@ begin
       FC:=FA.FindNode('xs:ref');
       if Assigned(FC) then
       begin
-        ;
+        FA:=FSchema.FindNode(FC.NodeValue);
+        DoAttributeProp(FA)
       end
       else
       begin
@@ -210,8 +237,8 @@ begin
           DoComplexType(FA, FC)
         else
         begin
-          S1:=FA.Attributes.GetNamedItem('name').NodeValue;
-          R:=FA.Attributes.GetNamedItem('type');
+          DoAttributeProp(FA)
+          (*R:=FA.Attributes.GetNamedItem('type');
           if Assigned(R) then
           begin
             if IsSimpleType(R.NodeValue) then
@@ -225,9 +252,9 @@ begin
               Prop.BaseType:=R.NodeValue;
               Prop.IsArray:= RAll.NodeName = 'xs:sequence';
             end;
-            Prop.Name:=S1;
+            Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
             Prop.Description:=GetAnnotation(FA);
-          end;
+          end;*)
         end;
 
       end;
@@ -237,7 +264,8 @@ end;
 
 var
   FA , FC1: TDOMNode;
-  i : Integer;
+  i: Integer;
+  S, S1: DOMString;
 begin
   DoProcessNodeMsg(ANode.NodeName, ANode.NodeValue);
   AComplexType.Description:=GetAnnotation(AContext);
@@ -245,6 +273,8 @@ begin
   for i:=0 to AContext.ChildNodes.Count-1 do
   begin
     FA:=AContext.ChildNodes[i];
+    S:=FA.NodeValue;
+    S1:=FA.NodeName;
     if FA.NodeName = 'xs:attribute' then
       ProcessAttribute(FA)
     else

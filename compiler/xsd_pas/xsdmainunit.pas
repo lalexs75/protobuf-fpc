@@ -22,7 +22,7 @@ unit XSDMainUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, DOM, EditBtn,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, EditBtn,
   ComCtrls, ExtCtrls, XsdElementTypesUnit, SynEdit, SynHighlighterPas,
   RxIniPropStorage, XsdProcessorUnit;
 
@@ -64,7 +64,7 @@ var
   XSDMainForm: TXSDMainForm;
 
 implementation
-uses rxlogging, XMLRead, xmliconv, XsdPasCodegenUnit, LazFileUtils;
+uses rxlogging, xmliconv, XsdPasCodegenUnit, LazFileUtils;
 
 {$R *.lfm}
 
