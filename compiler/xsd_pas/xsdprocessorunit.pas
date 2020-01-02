@@ -33,6 +33,7 @@ type
   TXSDProcessor = class
   private
     FDoc: TXMLDocument;
+    FSchema: TDOMNode;
     FOnProcessNodeEvent: TOnProcessNodeEvent;
     FXSDModule: TXSDModule;
   protected
@@ -197,29 +198,38 @@ begin
     FA:=RAll.ChildNodes[i];
     if FA.NodeName = 'xs:element' then
     begin
-      FC:=FA.FindNode('xs:complexType');
+      FC:=FA.FindNode('xs:ref');
       if Assigned(FC) then
-        DoComplexType(FA, FC)
+      begin
+        ;
+      end
       else
       begin
-        S1:=FA.Attributes.GetNamedItem('name').NodeValue;
-        R:=FA.Attributes.GetNamedItem('type');
-        if Assigned(R) then
+        FC:=FA.FindNode('xs:complexType');
+        if Assigned(FC) then
+          DoComplexType(FA, FC)
+        else
         begin
-          if IsSimpleType(R.NodeValue) then
+          S1:=FA.Attributes.GetNamedItem('name').NodeValue;
+          R:=FA.Attributes.GetNamedItem('type');
+          if Assigned(R) then
           begin
-            Prop:=AComplexType.Propertys.Add(pitSimpleType);
-            Prop.BaseType:=GetSimpleType(R.NodeValue);
-          end
-          else
-          begin
-            Prop:=AComplexType.Propertys.Add(pitClass);
-            Prop.BaseType:=R.NodeValue;
-            Prop.IsArray:= RAll.NodeName = 'xs:sequence';
+            if IsSimpleType(R.NodeValue) then
+            begin
+              Prop:=AComplexType.Propertys.Add(pitSimpleType);
+              Prop.BaseType:=GetSimpleType(R.NodeValue);
+            end
+            else
+            begin
+              Prop:=AComplexType.Propertys.Add(pitClass);
+              Prop.BaseType:=R.NodeValue;
+              Prop.IsArray:= RAll.NodeName = 'xs:sequence';
+            end;
+            Prop.Name:=S1;
+            Prop.Description:=GetAnnotation(FA);
           end;
-          Prop.Name:=S1;
-          Prop.Description:=GetAnnotation(FA);
         end;
+
       end;
     end;
   end;
@@ -320,6 +330,7 @@ end;
 
 procedure TXSDProcessor.Clear;
 begin
+  FSchema:=nil;
   if Assigned(FDoc) then
     FreeAndNil(FDoc);
 end;
@@ -331,22 +342,19 @@ begin
 end;
 
 function TXSDProcessor.ExecuteProcessor: TXSDModule;
-var
-  i: Integer;
-  S: DOMString;
 begin
   FXSDModule:=nil;
   if Assigned(FDoc) then
   begin
     FXSDModule:=TXSDModule.Create;
-    for i:=0 to FDoc.ChildNodes.Count-1 do
+    FSchema:=FDoc.FindNode('xs:schema');
+    if Assigned(FSchema) then
     begin
-      S:=FDoc.ChildNodes[i].NodeName;
-      DoProcessNodeMsg(S, FDoc.ChildNodes[i].NodeValue);
-      if S = 'xs:schema' then
-        ProcessSchema(FDoc.ChildNodes[i]);
-    end;
-    FXSDModule.UpdatePascalNames;
+      ProcessSchema(FSchema);
+      FXSDModule.UpdatePascalNames;
+    end
+    else
+      raise Exception.Create('Not find schema in document');
   end;
   Result:=FXSDModule;
 end;
