@@ -424,7 +424,17 @@ begin
 //      tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
 
       tkInt64 ,
-      tkInteger : if P.Modified then SetAtribute(AElement, P.XMLName, IntToStr( GetInt64Prop(Self, P.PropertyName)), P); //  P.FMaxSize);
+      tkInteger :
+        if P.Modified then
+        begin
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E:=CreateElement(FXML, AElement, P.XMLName);
+            E.TextContent:=IntToStr( GetInt64Prop(Self, P.PropertyName));
+          end
+          else
+            SetAtribute(AElement, P.XMLName, IntToStr( GetInt64Prop(Self, P.PropertyName)), P); //  P.FMaxSize);
+        end;
       tkClass: InternalWriteChild(FXML, TObject(PtrInt( GetOrdProp(Self, FProp))), AElement, P);
     else
       raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
@@ -514,7 +524,7 @@ begin
 
       K:=FProp^.PropType^.Kind;
       S3:=FProp^.PropType^.Name;
-      if (xsaSimpleObject in P.Attribs) and (K <> tkClass) then
+      if (xsaSimpleObject in P.Attribs) or (K <> tkClass) then
       begin
         S2:=FNode.TextContent;
         case FProp^.PropType^.Kind of
