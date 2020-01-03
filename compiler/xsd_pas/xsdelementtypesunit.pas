@@ -298,8 +298,18 @@ begin
   begin
     FXSDSimpleType:=FOwner.FOwner.FOwner.SimpleTypes.FindType(FBaseType);
     if not Assigned(FXSDSimpleType) then
-       FXSDComplexType:=FOwner.FOwner.FOwner.ComplexTypes.FindType(FBaseType);
-  end;
+    begin
+      FXSDComplexType:=FOwner.FOwner.FOwner.ComplexTypes.FindType(FBaseType);
+      if Assigned(FXSDComplexType) then
+        ItemType:=pitClass
+      else
+        ItemType:=pitAttribute;
+    end
+    else
+      ItemType:=pitAttribute;
+  end
+  else
+    ItemType:=pitSimpleType;
 
   FPascalName:=Name;
   S:=UpperCase(Name);
@@ -596,7 +606,7 @@ var
   i, J: Integer;
   Prop: TPropertyItem;
 begin
-  for i:=0 to FList.Count-2 do
+(*  for i:=0 to FList.Count-2 do
   begin
     CP:=TXSDComplexType(FList[i]);
     for J:=i+1 to FList.Count-1 do
@@ -614,7 +624,7 @@ begin
       end;
     end;
   end;
-
+*)
   for i:=0 to FList.Count-2 do
   begin
     CP:=TXSDComplexType(FList[i]);
@@ -630,7 +640,7 @@ begin
       end;
     end;
   end;
-
+(*
   for i:=0 to FList.Count-2 do
   begin
     CP:=TXSDComplexType(FList[i]);
@@ -649,6 +659,7 @@ begin
       end;
     end;
   end;
+*)
 end;
 
 constructor TXSDComplexTypes.Create(AOwner: TXSDModule);

@@ -97,29 +97,50 @@ var
   CT: TXSDComplexType;
 begin
   if not Assigned(ANode) then Exit;
+  //load simple type list
   for i:=0 to ANode.ChildNodes.Count - 1 do
   begin
     N:=ANode.ChildNodes[i];
     S:=N.NodeName;
-    DoProcessNodeMsg(S, N.NodeValue);
-    if (S = 'xs:element')  then
-    begin
-      ProcessElement(N)
-    end
-    else
-    if (S = 'xs:complexType') then
-    begin
-      R:=N.Attributes.GetNamedItem('name');
-      DoProcessNodeMsg(R.NodeName, R.NodeValue);
-      CT:=FXSDModule.ComplexTypes.Add(R.NodeValue);
-      ProcessComplexElement( N, N, CT);
-    end
-    else
     if (S = 'xs:simpleType') then
     begin
       R:=N.Attributes.GetNamedItem('name');
       DoProcessNodeMsg(R.NodeName, R.NodeValue);
       ProcessSimpleType(N, FXSDModule.SimpleTypes.Add(R.NodeValue));
+    end;
+  end;
+
+  //load clases
+  for i:=0 to ANode.ChildNodes.Count - 1 do
+  begin
+    N:=ANode.ChildNodes[i];
+    S:=N.NodeName;
+    if (S <> 'xs:simpleType') then
+    begin
+      DoProcessNodeMsg(S, N.NodeValue);
+      if (S = 'xs:element')  then
+      begin
+        ProcessElement(N)
+      end
+      else
+      if (S = 'xs:complexType') then
+      begin
+        R:=N.Attributes.GetNamedItem('name');
+        DoProcessNodeMsg(R.NodeName, R.NodeValue);
+        CT:=FXSDModule.ComplexTypes.Add(R.NodeValue);
+        ProcessComplexElement( N, N, CT);
+      end
+(*      else
+      if (S = 'xs:simpleType') then
+      begin
+        R:=N.Attributes.GetNamedItem('name');
+        if R.NodeValue = 'string255' then
+        begin
+          CT:=nil;
+        end;
+        DoProcessNodeMsg(R.NodeName, R.NodeValue);
+        ProcessSimpleType(N, FXSDModule.SimpleTypes.Add(R.NodeValue));
+      end; *)
     end;
   end;
 end;
