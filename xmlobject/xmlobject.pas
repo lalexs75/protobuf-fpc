@@ -456,8 +456,7 @@ begin
     A:=AElement.Attributes.Item[I];
     S1:=A.NodeName;
     S2:=A.NodeValue;
-    //if (S1<>'xmlns:xsi') and (S1<>'xsi:noNamespaceSchemaLocation') then
-    if (Copy(S1, 1, 6) <>'xmlns:') then
+    if (Copy(S1, 1, 6) <>'xmlns:') and (Copy(S1, 1, 4) <> 'xsi:') then
     begin
       P:=FPropertyList.PropertyByXMLName(S1);
       if not Assigned(P) then
