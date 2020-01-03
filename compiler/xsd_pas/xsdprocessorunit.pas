@@ -129,18 +129,7 @@ begin
         DoProcessNodeMsg(R.NodeName, R.NodeValue);
         CT:=FXSDModule.ComplexTypes.Add(R.NodeValue);
         ProcessComplexElement( N, N, CT);
-      end
-(*      else
-      if (S = 'xs:simpleType') then
-      begin
-        R:=N.Attributes.GetNamedItem('name');
-        if R.NodeValue = 'string255' then
-        begin
-          CT:=nil;
-        end;
-        DoProcessNodeMsg(R.NodeName, R.NodeValue);
-        ProcessSimpleType(N, FXSDModule.SimpleTypes.Add(R.NodeValue));
-      end; *)
+      end;
     end;
   end;
 end;
@@ -222,82 +211,116 @@ end;
 
 procedure ProcessAS(RAll:TDOMNode);
 
-function DoAttributeProp(FA: TDOMNode):TXSDComplexType;
+function DoAttributeProp(FA: TDOMNode):TPropertyItem;
 var
   R: TDOMNode;
-  Prop: TPropertyItem;
 begin
   R:=FA.Attributes.GetNamedItem('type');
   if Assigned(R) then
   begin
     if IsSimpleType(R.NodeValue) then
     begin
-      Prop:=AComplexType.Propertys.Add(pitSimpleType);
-      Prop.BaseType:=GetSimpleType(R.NodeValue);
+      Result:=AComplexType.Propertys.Add(pitSimpleType);
+      Result.BaseType:=GetSimpleType(R.NodeValue);
     end
     else
     begin
-      Prop:=AComplexType.Propertys.Add(pitClass);
-      Prop.BaseType:=R.NodeValue;
-      Prop.IsArray:= RAll.NodeName = 'xs:sequence';
+      Result:=AComplexType.Propertys.Add(pitClass);
+      Result.BaseType:=R.NodeValue;
+      //Result.IsArray:= RAll.NodeName = 'xs:sequence';
     end;
-    Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
-    Prop.Description:=GetAnnotation(FA);
+    Result.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+    Result.Description:=GetAnnotation(FA);
   end
   else
   begin
     R:=FA.FindNode('xs:complexType');
     if Assigned(R) then
     begin
-      Prop:=AComplexType.Propertys.Add(pitClass);
-      Prop.BaseType:=FA.Attributes.GetNamedItem('name').NodeValue;
-      Prop.IsArray:= RAll.NodeName = 'xs:sequence';
-      Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
-      Prop.Description:=GetAnnotation(FA);
+      Result:=AComplexType.Propertys.Add(pitClass);
+      Result.BaseType:=FA.Attributes.GetNamedItem('name').NodeValue;
+      //Result.IsArray:= RAll.NodeName = 'xs:sequence';
+      Result.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+      Result.Description:=GetAnnotation(FA);
     end;
   end;
 end;
 
-function DoComplexType(FA, FC: TDOMNode):TXSDComplexType;
+function DoComplexType(FA, FC: TDOMNode):TPropertyItem; //TXSDComplexType;
 var
   S:string;
   Prop: TPropertyItem;
+  CT:TXSDComplexType;
 begin
   S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
-  Result:=FXSDModule.ComplexTypes.Add(S);
-  ProcessComplexElement(FC, FC, Result);
+  CT:=FXSDModule.ComplexTypes.Add(S);
+  ProcessComplexElement(FC, FC, CT);
 
-  Prop:=AComplexType.Propertys.Add(pitClass);
-  Prop.BaseType:=S;
-  Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+  Result:=AComplexType.Propertys.Add(pitClass);
+  Result.BaseType:=S;
+  Result.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
 end;
 
 var
-  i: Integer;
-  FA, FC, R: TDOMNode;
+  i, FMaxOccurs, FMinOccurs: Integer;
+  FA, FC, R, RMinOccurs, RMaxOccurs: TDOMNode;
   Prop: TPropertyItem;
 begin
   for i:=0 to RAll.ChildNodes.Count-1 do
   begin
+    Prop:=nil;
     FA:=RAll.ChildNodes[i];
     if FA.NodeName = 'xs:element' then
     begin
+      RMaxOccurs:=FA.Attributes.GetNamedItem('maxOccurs');
+      if Assigned(RMaxOccurs) then
+      begin
+        if RMaxOccurs.NodeValue = 'unbounded' then
+          FMaxOccurs:=-1
+        else
+          FMaxOccurs:=StrToIntDef(RMaxOccurs.NodeValue, 1);
+      end
+      else
+        FMaxOccurs:=1;
+
+      RMinOccurs:=FA.Attributes.GetNamedItem('minOccurs');
+      if Assigned(RMinOccurs) then
+        FMinOccurs:=StrToIntDef(RMinOccurs.NodeValue, 1)
+      else
+        FMinOccurs:=1;
+
       FC:=FA.Attributes.GetNamedItem('ref');
       if Assigned(FC) then
       begin
         FA:=FindSchemaElent(FC.NodeValue);
-        DoAttributeProp(FA)
+        Prop:=DoAttributeProp(FA)
       end
       else
       begin
         FC:=FA.FindNode('xs:complexType');
         if Assigned(FC) then
-          DoComplexType(FA, FC)
+          Prop:=DoComplexType(FA, FC)
         else
         begin
-          DoAttributeProp(FA)
+          Prop:=DoAttributeProp(FA);
+          Prop.ItemType:=pitSimpleType;
         end;
       end;
+
+      if Assigned(Prop) then
+      begin
+        Prop.MaxOccurs:=FMaxOccurs;
+        Prop.MinOccurs:=FMinOccurs;
+      end;
+       //id=идентификатор
+       //substitutionGroup=QName
+       //default=string
+       //fixed=string
+       //form=qualified | unqualified
+       //nillable=true|false
+       //abstract=true|false
+       //block=(#all | список (extension|restriction))
+       //final=(#all | список (extension|restriction))
     end;
   end;
 end;

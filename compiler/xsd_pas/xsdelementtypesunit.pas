@@ -41,7 +41,6 @@ type
   private
     FBaseType: string;
     FDescription: string;
-    FIsArray: boolean;
     FIsRequired: boolean;
     FItemType: TPropertyItemType;
     FName: string;
@@ -51,6 +50,8 @@ type
     FOwner: TXSDComplexType;
     FMinLength:Integer;
     FMaxLength:Integer;
+    FMinOccurs:Integer;
+    FMaxOccurs:Integer;
   public
     constructor Create(AOwner:TXSDComplexType);
     function PascalBaseType:string;
@@ -65,7 +66,8 @@ type
     property ItemType:TPropertyItemType read FItemType write FItemType;
     property Description:string read FDescription write FDescription;
     property XSDSimpleType:TXSDSimpleType read FXSDSimpleType;
-    property IsArray:boolean read FIsArray write FIsArray;
+    property MinOccurs:Integer read FMinOccurs write FMinOccurs;
+    property MaxOccurs:Integer read FMaxOccurs write FMaxOccurs;
     property IsRequired:boolean read FIsRequired write FIsRequired;
   end;
 
@@ -258,7 +260,7 @@ begin
   if Assigned(FXSDComplexType) then
   begin
     Result:=FXSDComplexType.PascalTypeName;
-    if IsArray then
+    if (MaxOccurs>1) or (MaxOccurs<0) then
       Result:=Result + 'List';
   end
   else
@@ -302,15 +304,13 @@ begin
     begin
       FXSDComplexType:=FOwner.FOwner.FOwner.ComplexTypes.FindType(FBaseType);
       if Assigned(FXSDComplexType) then
-        ItemType:=pitClass
-      else
-        ItemType:=pitAttribute;
+        ItemType:=pitClass;
+{      else
+        ItemType:=pitAttribute;}
     end
-    else
-      ItemType:=pitAttribute;
-  end
-  else
-    ItemType:=pitSimpleType;
+{    else
+      ItemType:=pitAttribute;}
+  end;
 
   FPascalName:=Name;
   I:=0;
