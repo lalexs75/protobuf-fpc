@@ -145,7 +145,14 @@ begin
 
   R:=ANode.Attributes.GetNamedItem('type');
   if Assigned(R) then
-    DoProcessNodeMsg(R.NodeName, R.NodeValue)
+  begin
+    DoProcessNodeMsg(R.NodeName, R.NodeValue);
+
+    FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
+    FComplexType.MainRoot:=true;
+    FComplexType.InheritedType:=R.NodeValue;
+    //ProcessComplexElement(ANode, R, FComplexType)
+  end
   else
   begin
     R:=ANode.FindNode('xs:complexType');
@@ -302,7 +309,21 @@ begin
           Prop:=DoComplexType(FA, FC)
         else
         begin
-          Prop:=DoAttributeProp(FA);
+          FC:=FA.FindNode('xs:simpleType');
+          if Assigned(FC) then
+          begin
+            ProcessSimpleType(FC, FXSDModule.SimpleTypes.Add(FA.Attributes.GetNamedItem('name').NodeValue));
+
+            Prop:=AComplexType.Propertys.Add(pitSimpleType);
+            Prop.BaseType:=FA.Attributes.GetNamedItem('name').NodeValue;
+            Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
+            Prop.Description:=GetAnnotation(FC);
+
+          end
+          else
+          begin
+            Prop:=DoAttributeProp(FA);
+          end;
           Prop.ItemType:=pitSimpleType;
         end;
       end;

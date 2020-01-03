@@ -159,7 +159,8 @@ begin
 
      Result:=Result +
       'procedure '+CT.PascalTypeName+'.InternalRegisterPropertys;'+LineEnding +
-      'begin'+LineEnding;
+      'begin'+LineEnding +
+      '  inherited InternalRegisterPropertys;' + LineEnding;
      for PT in CT.Propertys do
      begin
 
@@ -177,7 +178,8 @@ begin
 
      Result:=Result +
       'procedure '+CT.PascalTypeName+'.InternalInitChilds;'+LineEnding +
-      'begin'+LineEnding;
+      'begin'+LineEnding+
+      '  inherited InternalInitChilds;'+LineEnding;
      for PT in CT.Propertys do
      begin
        if PT.ItemType = pitClass then
