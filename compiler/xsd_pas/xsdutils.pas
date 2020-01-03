@@ -26,7 +26,69 @@ uses
 
 function IsSimpleType(ATypeName:string):Boolean;
 function GetSimpleType(ATypeName:string):string;
+function IsKeyword(const AKeyword: string): boolean;
 implementation
+const
+  RESERVED_WORDS_TP: array [1..54] of String = (
+    'absolute', 'and', 'array', 'asm',
+    'begin',
+    'case', 'const', 'constructor',
+    'destructor', 'div', 'do', 'downto',
+    'else', 'end',
+    'file', 'for', 'function',
+    'goto',
+    'if', 'implementation', 'in', 'inherited', 'inline', 'interface',
+    'label',
+    'mod',
+    'nil', 'not',
+    'object', 'of', 'on', 'operator', 'or',
+    'packed', 'procedure', 'program',
+    'record', 'reintroduce', 'repeat',
+    'self', 'set', 'shl', 'shr', 'string',
+    'then', 'to', 'type',
+    'unit', 'until', 'uses',
+    'var',
+    'while', 'with',
+    'xor'
+  );
+
+  RESERVED_WORDS_DELPHI: array [1..15] of String = (
+    'as',
+    'class',
+    'except', 'exports',
+    'finalization', 'finally',
+    'initialization', 'is',
+    'library',
+    'on', 'out',
+    'property',
+    'raise',
+    'threadvar',
+    'try'
+  );
+
+  RESERVED_WORDS_FPC: array [1..5] of String = (
+    'dispose', 'exit', 'false', 'new', 'true'
+  );
+var
+  KeywordsList: TStringList;
+
+function IsKeyword(const AKeyword: string): boolean;
+var
+  i: integer;
+begin
+  if not Assigned(KeywordsList) then
+  begin
+    KeywordsList := TStringList.Create;
+    for i := 1 to High(RESERVED_WORDS_TP) do
+      KeywordsList.Add(RESERVED_WORDS_TP[i]);
+    for i := 1 to High(RESERVED_WORDS_DELPHI) do
+      KeywordsList.Add(RESERVED_WORDS_DELPHI[i]);
+    for i := 1 to High(RESERVED_WORDS_FPC) do
+      KeywordsList.Add(RESERVED_WORDS_FPC[i]);
+    KeywordsList.Sorted := true;
+  end;
+  Result := KeywordsList.Find(LowerCase(AKeyword), i);
+end;
 
 function IsSimpleType(ATypeName:string):Boolean;
 begin
@@ -75,5 +137,7 @@ begin
     Result:='';
 end;
 
+finalization
+  FreeAndNil(KeywordsList);
 end.
 

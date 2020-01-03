@@ -4,7 +4,7 @@ targetNamespace="http://msiter.ru" xmlns="http://msiter.ru" elementFormDefault="
    <xs:element name="note">
       <xs:complexType>
          <xs:sequence>
-            <xs:element name="to1" type="xs:string"/>
+            <xs:element name="to" type="xs:string"/>
             <xs:element name="from" type="xs:string"/>
             <xs:element name="heading" type="xs:string"/>
             <xs:element name="body" type="xs:string"/>

@@ -293,6 +293,7 @@ end;
 procedure TPropertyItem.UpdatePascalNames;
 var
   S: String;
+  I: Integer;
 begin
   if not IsSimpleType(FBaseType) then
   begin
@@ -312,22 +313,12 @@ begin
     ItemType:=pitSimpleType;
 
   FPascalName:=Name;
-  S:=UpperCase(Name);
-  if (S = 'FUNCTION') or
-     (S = 'PROCEDURE') or
-     (S = 'UNIT') or
-     (S = 'OR') or
-     (S = 'AND') or
-     (S = 'NOT') or
-     (S = 'ON') or
-     (S = 'IF') or
-     (S = 'THEN') or
-     (S = 'ELSE') or
-     (S = 'STRING') or
-     (S = 'CLASS') or
-     (S = 'OBJECT') { or }
-  then
-    FPascalName:=PascalName + '01';
+  I:=0;
+  while IsKeyword(FPascalName) or (Assigned(FOwner.Propertys.FindProperty(FPascalName))) do
+  begin
+    Inc(I);
+    FPascalName:=Name+IntToStr(i);
+  end;
 end;
 
 { TXSDSimpleType }

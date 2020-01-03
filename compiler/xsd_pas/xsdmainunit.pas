@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, EditBtn,
   ComCtrls, ExtCtrls, XsdElementTypesUnit, SynEdit, SynHighlighterPas,
-  RxIniPropStorage, XsdProcessorUnit;
+  SynHighlighterXML, RxIniPropStorage, XsdProcessorUnit;
 
 type
 
@@ -45,9 +45,12 @@ type
     Panel1: TPanel;
     RxIniPropStorage1: TRxIniPropStorage;
     SynEdit1: TSynEdit;
+    SynEdit2: TSynEdit;
     SynFreePascalSyn1: TSynFreePascalSyn;
-    TabSheet1: TTabSheet;
+    SynXMLSyn1: TSynXMLSyn;
+    tabLogs: TTabSheet;
     tabEditor: TTabSheet;
+    tabSource: TTabSheet;
     TabSheet3: TTabSheet;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -115,6 +118,8 @@ end;
 procedure TXSDMainForm.FileNameEdit1Change(Sender: TObject);
 begin
   FileNameEdit2.FileName:=ExtractFileNameWithoutExt(FileNameEdit1.FileName)+'.pas';
+  if FileExistsUTF8(FileNameEdit1.FileName) then
+    SynEdit2.Lines.LoadFromFile(FileNameEdit1.FileName);
 end;
 
 procedure TXSDMainForm.FormCreate(Sender: TObject);
