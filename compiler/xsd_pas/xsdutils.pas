@@ -93,29 +93,45 @@ end;
 function IsSimpleType(ATypeName:string):Boolean;
 begin
   Result:=
-    (ATypeName = 'xs:string') or
-    (ATypeName = 'xs:decimal') or
-    (ATypeName = 'xs:integer') or
     (ATypeName = 'xs:boolean') or
     (ATypeName = 'xs:date') or
     (ATypeName = 'xs:time') or
-    (ATypeName = 'xs:token') or
     (ATypeName = 'xs:dateTime') or
-    (ATypeName = 'xs:base64Binary');
+    (ATypeName = 'xs:base64Binary') or
+
+    (ATypeName = 'xs:ENTITIES') or
+    (ATypeName = 'xs:ENTITY') or
+    (ATypeName = 'xs:ID') or //	Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы)
+    (ATypeName = 'xs:IDREF') or //	Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
+    (ATypeName = 'xs:IDREFS') or //
+    (ATypeName = 'xs:language') or //	Строка, содержащая корректный идентификатор языка
+    (ATypeName = 'xs:Name') or //	Строка, содержащая корректное XML имя
+    (ATypeName = 'xs:NCName') or //
+    (ATypeName = 'xs:NMTOKEN') or //	Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
+    (ATypeName = 'xs:NMTOKENS') or //
+    (ATypeName = 'xs:normalizedString') or //	Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
+    (ATypeName = 'xs:QName') or //
+    (ATypeName = 'xs:string') or //	Любая строка
+    (ATypeName = 'xs:token') or //	Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
+
+    (ATypeName = 'xs:byte') or //	8-битное целочисленное значение со знаком
+    (ATypeName = 'xs:decimal') or //	Десятичное значение
+    (ATypeName = 'xs:int') or //	32-битное целочисленное значение со знаком
+    (ATypeName = 'xs:integer') or //	Целочисленное значение
+    (ATypeName = 'xs:long') or //	64-битное целочисленное значение со знаком
+    (ATypeName = 'xs:negativeInteger') or //	Целочисленное, содержащее только отрицательные значения (..,-2,-1)
+    (ATypeName = 'xs:nonNegativeInteger') or //	Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
+    (ATypeName = 'xs:nonPositiveInteger') or //	Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
+    (ATypeName = 'xs:positiveInteger') or //	Целочисленное, содержащее только положительные значения (1,2,..)
+    (ATypeName = 'xs:short') or //	16-битное целочисленное значение со знаком
+    (ATypeName = 'xs:unsignedLong') or //	64-битное целочисленное значение без знака
+    (ATypeName = 'xs:unsignedInt') or //	32-битное целочисленное значение без знака
+    (ATypeName = 'xs:unsignedShort') or //	16-битное целочисленное значение без знака
+    (ATypeName = 'xs:unsignedByte') //	8-битное целочисленное значение без знака    ;
 end;
 
 function GetSimpleType(ATypeName:string):string;
 begin
-  if (ATypeName = 'xs:string') or (ATypeName = 'xs:token') then
-    Result:='String'
-  else
-  if (ATypeName = 'xs:decimal') then
-    Result:='String'
-    //Result:='Double'
-  else
-  if (ATypeName = 'xs:integer') then
-    Result:='Integer'
-  else
   if (ATypeName = 'xs:boolean') then
     Result:='Boolean'
   else
@@ -133,6 +149,92 @@ begin
   else
   if (ATypeName = 'xs:base64Binary') then
     Result:='String'
+  else
+
+  if (ATypeName = 'xs:ENTITIES') then
+    Result:='String'
+  else
+  if (ATypeName = 'xs:ENTITY') then
+    Result:='String'
+  else
+  if (ATypeName = 'xs:ID') then                 // Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы)
+    Result:='String'
+  else
+  if (ATypeName = 'xs:IDREF') then              // Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
+    Result:='String'
+  else
+  if (ATypeName = 'xs:IDREFS') then             //
+    Result:='String'
+  else
+  if (ATypeName = 'xs:language') then           // Строка, содержащая корректный идентификатор языка
+    Result:='String'
+  else
+  if (ATypeName = 'xs:Name') then               // Строка, содержащая корректное XML имя
+    Result:='String'
+  else
+  if (ATypeName = 'xs:NCName') then             //
+    Result:='String'
+  else
+  if (ATypeName = 'xs:NMTOKEN') then            // Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
+    Result:='String'
+  else
+  if (ATypeName = 'xs:NMTOKENS') then           //
+    Result:='String'
+  else
+  if (ATypeName = 'xs:normalizedString') then   // Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
+    Result:='String'
+  else
+  if (ATypeName = 'xs:QName') then    //
+    Result:='String'
+  else
+  if (ATypeName = 'xs:string') then   // Любая строка
+    Result:='String'
+  else
+  if (ATypeName = 'xs:token') then    // Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
+    Result:='String'
+  else
+
+  if (ATypeName = 'xs:byte') then //	8-битное целочисленное значение со знаком
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:decimal') then //	Десятичное значение
+    Result:='Double'
+  else
+  if (ATypeName = 'xs:int') then//	32-битное целочисленное значение со знаком
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:integer') then//	Целочисленное значение
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:long') then//	64-битное целочисленное значение со знаком
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:negativeInteger') then//	Целочисленное, содержащее только отрицательные значения (..,-2,-1)
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:nonNegativeInteger') then//	Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:nonPositiveInteger') then//	Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:positiveInteger') then//	Целочисленное, содержащее только положительные значения (1,2,..)
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:short') then//	16-битное целочисленное значение со знаком
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:unsignedLong') then//	64-битное целочисленное значение без знака
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:unsignedInt') then//	32-битное целочисленное значение без знака
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:unsignedShort') then//	16-битное целочисленное значение без знака
+    Result:='Integer'
+  else
+  if (ATypeName = 'xs:unsignedByte') then//	8-битное целочисленное значение без знака    ;
+    Result:='Byte'
   else
     Result:='';
 end;
