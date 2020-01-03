@@ -11,30 +11,31 @@
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
+    <Description Value="XML files to Pascal objects"/>
     <License Value="LGPL3"/>
-    <Version Major="2" Release="1" Build="1"/>
-    <Files Count="2">
-      <Item1>
+    <Version Major="2" Release="2" Build="2"/>
+    <Files>
+      <Item>
         <Filename Value="xmlobject/xmlobject.pas"/>
         <UnitName Value="xmlobject"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Filename Value="xmlobject/xmlobject_resource.pas"/>
         <UnitName Value="xmlobject_resource"/>
-      </Item2>
+      </Item>
     </Files>
     <LazDoc Paths="docs"/>
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="languages"/>
     </i18n>
-    <RequiredPkgs Count="2">
-      <Item1>
+    <RequiredPkgs>
+      <Item>
         <PackageName Value="LazUtils"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <PackageName Value="FCL"/>
-      </Item2>
+      </Item>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>

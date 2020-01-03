@@ -43,7 +43,6 @@ uses
 
 type
   EExchangeDefinitionError = class(Exception);
-//  TXSTypes = (xstString, xstDecimal, xstInteger, xstBoolean, xstDate, xstTime);
   TXSAttrib = (xsaSimpleObject, xsaRequared);
   TXSAttribs = set of TXSAttrib;
 
@@ -52,14 +51,11 @@ type
   TPropertyDef = class
   private
     FAttribs: TXSAttribs;
-//    FRequaredAttribs:string;
     FCaption: string;
     FMaxSize: integer;
     FMinSize: integer;
     FModified: boolean;
     FPropertyName: string;
-//    FRequared: boolean;
-//    FSimpleObject: Boolean;
     FXMLName: string;
     FAliases:string;
   public
@@ -67,10 +63,8 @@ type
     property Caption:string read FCaption;
     property XMLName:string read FXMLName;
     property Modified:boolean read FModified;
-    //property Requared:boolean read FRequared;
     property MinSize:integer read FMinSize;
     property MaxSize:integer read FMaxSize;
-    //property SimpleObject:Boolean read SimpleObject;
     property Attribs:TXSAttribs read FAttribs write FAttribs;
   end;
 
@@ -210,7 +204,6 @@ end;
 constructor GXMLSerializationObjectList.Create;
 begin
   inherited Create(GObjType);
-  //FDataClass:=GObjType;
 end;
 
 function GXMLSerializationObjectList.GetEnumerator: TSerializationObjectListEnumerator;
@@ -350,20 +343,12 @@ begin
   Result:=TPropertyDef.Create;
   FList.Add(Result);
   Result.FAttribs:=AAttribs;
-//  Result.FRequaredAttribs:=ARequaredAttribs;
   Result.FPropertyName:=APropertyName;
   Result.FCaption:=ACaption;
   Result.FXMLName:=AXMLName;
-(*
-  if UTF8Pos('О', ARequaredAttribs) > 0 then
-    Result.FAttribs:=Result.FAttribs + [xsaRequared];
-*)
+
   Result.FMaxSize:=AMaxSize;
   Result.FMinSize:=AMinSize;
-(*
-  if UTF8Pos('П', ARequaredAttribs) > 0 then
-    Result.FAttribs:=Result.FAttribs + [xsaSimpleObject]
-*)
 end;
 
 procedure TPropertyList.Clear;
@@ -383,8 +368,6 @@ begin
 
   DoLoadAtributes(AElement);
   DoLoadChild(AElement);
-
-  //FPropertyList.ClearModified;
 end;
 
 procedure TXmlSerializationObject.InternalWrite(FXML: TXMLDocument;
@@ -394,6 +377,8 @@ var
   P: TPropertyDef;
   FProp: PPropInfo;
   E: TDOMElement;
+  S:string;
+  K: TTypeKind;
 begin
   for i:=0 to FPropertyList.Count-1 do
   begin
@@ -403,6 +388,7 @@ begin
     if not Assigned(FProp) then
       raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
 
+    K:=FProp^.PropType^.Kind;
     case FProp^.PropType^.Kind of
       tkChar,
       tkAString,
@@ -433,7 +419,18 @@ begin
             E.TextContent:=IntToStr( GetInt64Prop(Self, P.PropertyName));
           end
           else
-            SetAtribute(AElement, P.XMLName, IntToStr( GetInt64Prop(Self, P.PropertyName)), P); //  P.FMaxSize);
+            SetAtribute(AElement, P.XMLName, IntToStr( GetInt64Prop(Self, P.PropertyName)), P);
+        end;
+      tkFloat :
+        begin
+          Str(GetFloatProp(Self, P.PropertyName):10:4, S);
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E:=CreateElement(FXML, AElement, P.XMLName);
+            E.TextContent:=Trim(S)
+          end
+          else
+            SetAtribute(AElement, P.XMLName, Trim(S), P);
         end;
       tkClass: InternalWriteChild(FXML, TObject(PtrInt( GetOrdProp(Self, FProp))), AElement, P);
     else
@@ -444,11 +441,12 @@ end;
 
 procedure TXmlSerializationObject.DoLoadAtributes(AElement: TDOMNode);
 var
-  i: Integer;
+  i, C: Integer;
   A: TDOMNode;
   S1, S2:string;
   P: TPropertyDef;
   FProp: PPropInfo;
+  D:Extended;
 begin
   if not Assigned(AElement) then Exit;
   for i:=0 to AElement.Attributes.Length-1 do
@@ -479,12 +477,16 @@ begin
   *)
           tkInt64 : SetInt64Prop(Self, FProp, StrToInt64(S2));
           tkInteger : SetOrdProp(Self, FProp, StrToInt(S2));
-  (*
-          tkSet                       : SetSetProp(t,PropInfo,S);
-          tkFloat                     : SetFloatProp(t,PropInfo, Value);}
-          tkEnumeration : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsInteger));
-          tkDynArray:LoadBytes(FProp, P);
-          *)
+
+//          tkSet                       : SetSetProp(t,PropInfo,S);
+          tkFloat :
+            begin
+              Val(S2, D, C);
+              if C = 0 then
+                SetFloatProp(Self, FProp, D);
+            end
+//          tkEnumeration : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsInteger));
+//          tkDynArray:LoadBytes(FProp, P);
         else
           raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
         end;
@@ -497,7 +499,7 @@ end;
 
 procedure TXmlSerializationObject.DoLoadChild(AElement: TDOMNode);
 var
-  i: Integer;
+  i, C: Integer;
   FNode: TDOMNode;
   P: TPropertyDef;
   FProp: PPropInfo;
@@ -506,6 +508,7 @@ var
   R: TXmlSerializationObject;
   S2: DOMString;
   S3: String;
+  D:Extended;
 begin
   for i:=0 to AElement.ChildNodes.Count-1 do
   begin
@@ -533,6 +536,12 @@ begin
           tkSString,
           tkLString   : SetStrProp(Self, FProp, S2);
           tkInteger : SetInt64Prop(Self, FProp, StrToInt64(S2));
+          tkFloat :
+            begin
+              Val(S2, D, C);
+              if C = 0 then
+                SetFloatProp(Self, FProp, D);
+            end;
         else
           raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
         end;
@@ -667,7 +676,7 @@ end;
 
 function TXmlSerializationObject.RootNodeName: string;
 begin
-  Result:='Файл';
+  Result:=ClassName;
 end;
 
 function TXmlSerializationObject.RegisterProperty(APropertyName,
