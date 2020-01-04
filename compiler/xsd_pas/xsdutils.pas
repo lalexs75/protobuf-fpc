@@ -23,11 +23,21 @@ interface
 
 uses
   Classes, SysUtils;
+type
+  TXSDStdType = class
+    PascalName:string;
+  end;
 
 function IsSimpleType(ATypeName:string):Boolean;
 function GetSimpleType(ATypeName:string):string;
 function IsKeyword(const AKeyword: string): boolean;
 implementation
+type
+  TStdTypeDef = record
+    StdName:string;
+    PasName:string;
+  end;
+
 const
   RESERVED_WORDS_TP: array [1..54] of String = (
     'absolute', 'and', 'array', 'asm',
@@ -69,8 +79,66 @@ const
   RESERVED_WORDS_FPC: array [1..5] of String = (
     'dispose', 'exit', 'false', 'new', 'true'
   );
+
+  StdTypesArray : array [1..45] of TStdTypeDef = (
+    (StdName: 'xs:ENTITIES'; PasName:'String'),
+    (StdName: 'xs:ENTITY'; PasName:'String'),
+    (StdName: 'xs:ID'; PasName:'String'),                  // Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы
+    (StdName: 'xs:IDREF'; PasName:'String'),               // Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
+    (StdName: 'xs:IDREFS'; PasName:'String'),              //
+    (StdName: 'xs:language'; PasName:'String'),            // Строка, содержащая корректный идентификатор языка
+    (StdName: 'xs:Name'; PasName:'String'),                // Строка, содержащая корректное XML имя
+    (StdName: 'xs:NCName'; PasName:'String'),              //
+    (StdName: 'xs:NMTOKEN'; PasName:'String'),             // Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
+    (StdName: 'xs:NMTOKENS'; PasName:'String'),            //
+    (StdName: 'xs:normalizedString'; PasName:'String'),    //	Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
+    (StdName: 'xs:QName'; PasName:'String'),               //
+    (StdName: 'xs:string'; PasName:'String'),              // Любая строка
+    (StdName: 'xs:token'; PasName:'String'),               // Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
+
+    (StdName: 'xs:byte'; PasName:'Shortint'),                // 8-битное целочисленное значение со знаком
+    (StdName: 'xs:decimal'; PasName:'Double'),             // Десятичное значение
+    (StdName:'xs:int'; PasName:'Longint'),                 // 32-битное целочисленное значение со знаком
+    (StdName:'xs:integer'; PasName:'Longint'),             // Целочисленное значение
+    (StdName:'xs:long'; PasName:'Int64'),                // 64-битное целочисленное значение со знаком
+    (StdName:'xs:negativeInteger'; PasName:'integer'),     // Целочисленное, содержащее только отрицательные значения (..,-2,-1)
+    (StdName:'xs:nonNegativeInteger'; PasName:'integer'),  // Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
+    (StdName:'xs:nonPositiveInteger'; PasName:'integer'),  // Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
+    (StdName:'xs:positiveInteger'; PasName:'integer'),     // Целочисленное, содержащее только положительные значения (1,2,..)
+    (StdName:'xs:short'; PasName:'Smallint'),               // 16-битное целочисленное значение со знаком
+    (StdName:'xs:unsignedLong'; PasName:'QWord'),        // 64-битное целочисленное значение без знака
+    (StdName:'xs:unsignedInt'; PasName:'Longword'),         // 32-битное целочисленное значение без знака
+    (StdName:'xs:unsignedShort'; PasName:'Word'),       // 16-битное целочисленное значение без знака
+    (StdName:'xs:unsignedByte'; PasName:'Byte'),        // 8-битное целочисленное значение без знака    ;
+
+    (StdName:'xs:date'; PasName:'TDate'),                // Определяет дату
+    (StdName:'xs:time'; PasName:'TTime'),                // Определяет время
+    (StdName:'xs:dateTime'; PasName:'TDateTime'),            // Определяет дату и время
+    (StdName:'xs:duration'; PasName:'TDateTime'),            // Определяет интервал времени
+    (StdName:'xs:gDay'; PasName:'Byte'),                // Определяет часть даты - день (ДД)
+    (StdName:'xs:gMonth'; PasName:'Byte'),              // Определяет часть даты - месяц (MM)
+    (StdName:'xs:gMonthDay'; PasName:'Word'),           // Определяет часть даты — месяц и день (MM-ДД)      //TODO:add new type - record with fields MM DD
+    (StdName:'xs:gYear'; PasName:'Word'),               // Определяет часть даты - год (ГГГГ)
+    (StdName:'xs:gYearMonth'; PasName:'Longword'),          // Определяет часть даты — год и месяц (ГГГГ-MM) //TODO:add new type - record with fields YYYY MM
+
+    (StdName:'xs:boolean'; PasName:'Boolean'),             // Логический тип данных
+
+    (StdName:'xs:base64Binary'; PasName:'String'),        // бинарные данные в кодировке Base64
+    (StdName:'xs:hexBinary'; PasName:'String'),           // бинарные данные в шестнадцатеричной кодировке
+
+    (StdName:'anyURI'; PasName:'String'),                 // Тип данных anyURI используется для определения URI
+
+    (StdName:'float'; PasName:'Double'),                  //
+    (StdName:'double'; PasName:'Double'),                 //
+    (StdName:'Qname'; PasName:'String'),                  //
+    (StdName:'NOTATION'; PasName:'String')                  //
+    );
+
+
+
 var
-  KeywordsList: TStringList;
+  KeywordsList: TStringList = nil;
+  StdTypesList: TStringList = nil;
 
 function IsKeyword(const AKeyword: string): boolean;
 var
@@ -90,156 +158,56 @@ begin
   Result := KeywordsList.Find(LowerCase(AKeyword), i);
 end;
 
-function IsSimpleType(ATypeName:string):Boolean;
+procedure InitStdTypes;
+var
+  D: TXSDStdType;
+  R: TStdTypeDef;
 begin
-  Result:=
-    (ATypeName = 'xs:boolean') or
-    (ATypeName = 'xs:date') or
-    (ATypeName = 'xs:time') or
-    (ATypeName = 'xs:dateTime') or
-    (ATypeName = 'xs:base64Binary') or
+  if Assigned(StdTypesList) then Exit;
+  StdTypesList:=TStringList.Create;
+  for R in StdTypesArray do
+  begin
+    D:=TXSDStdType.Create;
+    D.PascalName:=R.PasName;
+    StdTypesList.AddObject(R.StdName, D);
+  end;
+  StdTypesList.Sorted:=true;
+end;
 
-    (ATypeName = 'xs:ENTITIES') or
-    (ATypeName = 'xs:ENTITY') or
-    (ATypeName = 'xs:ID') or //	Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы)
-    (ATypeName = 'xs:IDREF') or //	Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
-    (ATypeName = 'xs:IDREFS') or //
-    (ATypeName = 'xs:language') or //	Строка, содержащая корректный идентификатор языка
-    (ATypeName = 'xs:Name') or //	Строка, содержащая корректное XML имя
-    (ATypeName = 'xs:NCName') or //
-    (ATypeName = 'xs:NMTOKEN') or //	Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
-    (ATypeName = 'xs:NMTOKENS') or //
-    (ATypeName = 'xs:normalizedString') or //	Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
-    (ATypeName = 'xs:QName') or //
-    (ATypeName = 'xs:string') or //	Любая строка
-    (ATypeName = 'xs:token') or //	Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
+procedure DoneStdTypes;
+var
+  i: Integer;
+begin
+  if not Assigned(StdTypesList) then Exit;
+  for i:=0 to StdTypesList.Count-1 do
+    TXSDStdType(StdTypesList.Objects[i]).Free;
+  FreeAndNil(StdTypesList);
+end;
 
-    (ATypeName = 'xs:byte') or //	8-битное целочисленное значение со знаком
-    (ATypeName = 'xs:decimal') or //	Десятичное значение
-    (ATypeName = 'xs:int') or //	32-битное целочисленное значение со знаком
-    (ATypeName = 'xs:integer') or //	Целочисленное значение
-    (ATypeName = 'xs:long') or //	64-битное целочисленное значение со знаком
-    (ATypeName = 'xs:negativeInteger') or //	Целочисленное, содержащее только отрицательные значения (..,-2,-1)
-    (ATypeName = 'xs:nonNegativeInteger') or //	Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
-    (ATypeName = 'xs:nonPositiveInteger') or //	Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
-    (ATypeName = 'xs:positiveInteger') or //	Целочисленное, содержащее только положительные значения (1,2,..)
-    (ATypeName = 'xs:short') or //	16-битное целочисленное значение со знаком
-    (ATypeName = 'xs:unsignedLong') or //	64-битное целочисленное значение без знака
-    (ATypeName = 'xs:unsignedInt') or //	32-битное целочисленное значение без знака
-    (ATypeName = 'xs:unsignedShort') or //	16-битное целочисленное значение без знака
-    (ATypeName = 'xs:unsignedByte') //	8-битное целочисленное значение без знака    ;
+function IsSimpleType(ATypeName:string):Boolean;
+var
+  I: Integer;
+begin
+  if not Assigned(StdTypesList) then
+    InitStdTypes;
+
+  Result:=StdTypesList.Find(ATypeName, I);
 end;
 
 function GetSimpleType(ATypeName:string):string;
+var
+  I: Integer;
 begin
-  if (ATypeName = 'xs:boolean') then
-    Result:='Boolean'
-  else
-  if  (ATypeName = 'xs:date') then
-    //Result:='TTime'
-    Result:='String'
-  else
-  if (ATypeName = 'xs:time') then
-    //Result:='TDate'
-    Result:='String'
-  else
-  if (ATypeName = 'xs:dateTime') then
-    //Result:='TDateTime'
-    Result:='String'
-  else
-  if (ATypeName = 'xs:base64Binary') then
-    Result:='String'
-  else
-
-  if (ATypeName = 'xs:ENTITIES') then
-    Result:='String'
-  else
-  if (ATypeName = 'xs:ENTITY') then
-    Result:='String'
-  else
-  if (ATypeName = 'xs:ID') then                 // Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы)
-    Result:='String'
-  else
-  if (ATypeName = 'xs:IDREF') then              // Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
-    Result:='String'
-  else
-  if (ATypeName = 'xs:IDREFS') then             //
-    Result:='String'
-  else
-  if (ATypeName = 'xs:language') then           // Строка, содержащая корректный идентификатор языка
-    Result:='String'
-  else
-  if (ATypeName = 'xs:Name') then               // Строка, содержащая корректное XML имя
-    Result:='String'
-  else
-  if (ATypeName = 'xs:NCName') then             //
-    Result:='String'
-  else
-  if (ATypeName = 'xs:NMTOKEN') then            // Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
-    Result:='String'
-  else
-  if (ATypeName = 'xs:NMTOKENS') then           //
-    Result:='String'
-  else
-  if (ATypeName = 'xs:normalizedString') then   // Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
-    Result:='String'
-  else
-  if (ATypeName = 'xs:QName') then    //
-    Result:='String'
-  else
-  if (ATypeName = 'xs:string') then   // Любая строка
-    Result:='String'
-  else
-  if (ATypeName = 'xs:token') then    // Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
-    Result:='String'
-  else
-
-  if (ATypeName = 'xs:byte') then //	8-битное целочисленное значение со знаком
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:decimal') then //	Десятичное значение
-    Result:='Double'
-  else
-  if (ATypeName = 'xs:int') then//	32-битное целочисленное значение со знаком
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:integer') then//	Целочисленное значение
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:long') then//	64-битное целочисленное значение со знаком
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:negativeInteger') then//	Целочисленное, содержащее только отрицательные значения (..,-2,-1)
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:nonNegativeInteger') then//	Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:nonPositiveInteger') then//	Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:positiveInteger') then//	Целочисленное, содержащее только положительные значения (1,2,..)
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:short') then//	16-битное целочисленное значение со знаком
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:unsignedLong') then//	64-битное целочисленное значение без знака
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:unsignedInt') then//	32-битное целочисленное значение без знака
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:unsignedShort') then//	16-битное целочисленное значение без знака
-    Result:='Integer'
-  else
-  if (ATypeName = 'xs:unsignedByte') then//	8-битное целочисленное значение без знака    ;
-    Result:='Byte'
+  if StdTypesList.Find(ATypeName, I) then
+    Result:=TXSDStdType(StdTypesList.Objects[i]).PascalName
   else
     Result:='';
 end;
 
 finalization
-  FreeAndNil(KeywordsList);
+  if Assigned(KeywordsList) then
+    FreeAndNil(KeywordsList);
+  DoneStdTypes;
+
 end.
 

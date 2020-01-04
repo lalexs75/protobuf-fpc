@@ -377,8 +377,9 @@ var
   P: TPropertyDef;
   FProp: PPropInfo;
   E: TDOMElement;
-  S:string;
+  S, TN:string;
   K: TTypeKind;
+  D:TDateTime;
 begin
   for i:=0 to FPropertyList.Count-1 do
   begin
@@ -389,6 +390,7 @@ begin
       raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
 
     K:=FProp^.PropType^.Kind;
+    TN:=FProp^.PropType^.Name;
     case FProp^.PropType^.Kind of
       tkChar,
       tkAString,
@@ -423,7 +425,26 @@ begin
         end;
       tkFloat :
         begin
-          Str(GetFloatProp(Self, P.PropertyName):10:4, S);
+          if TN = 'TTime' then
+          begin
+            D:=GetFloatProp(Self, P.PropertyName);
+            S:=FormatDateTime('HH:NN:SS', D);
+          end
+          else
+          if TN = 'TDate' then
+          begin
+            D:=GetFloatProp(Self, P.PropertyName);
+            S:=FormatDateTime('YYYY-MM-DD', D);
+          end
+          else
+          if TN = 'TDateTime' then
+          begin
+            D:=GetFloatProp(Self, P.PropertyName);
+            S:=FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+          end
+          else
+            Str(GetFloatProp(Self, P.PropertyName):10:4, S);
+
           if xsaSimpleObject in P.Attribs then
           begin
             E:=CreateElement(FXML, AElement, P.XMLName);
@@ -443,17 +464,19 @@ procedure TXmlSerializationObject.DoLoadAtributes(AElement: TDOMNode);
 var
   i, C: Integer;
   A: TDOMNode;
-  S1, S2:string;
+  S1, NV, TN:string;
   P: TPropertyDef;
   FProp: PPropInfo;
   D:Extended;
+  K: TTypeKind;
+  DT: TDateTime;
 begin
   if not Assigned(AElement) then Exit;
   for i:=0 to AElement.Attributes.Length-1 do
   begin
     A:=AElement.Attributes.Item[I];
     S1:=A.NodeName;
-    S2:=A.NodeValue;
+    NV:=A.NodeValue;
     if (Copy(S1, 1, 6) <>'xmlns:') and (Copy(S1, 1, 4) <> 'xsi:') then
     begin
       P:=FPropertyList.PropertyByXMLName(S1);
@@ -465,25 +488,46 @@ begin
         FProp:=GetPropInfo(Self, P.FPropertyName);
         if not Assigned(FProp) then
           raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
-
-        case FProp^.PropType^.Kind of
+        K:=FProp^.PropType^.Kind;
+        TN:=FProp^.PropType^.Name;
+        case K of
           tkChar,
           tkAString,
           tkWString,
           tkSString,
-          tkLString : SetStrProp(Self, FProp, S2);
+          tkLString : SetStrProp(Self, FProp, NV);
   (*      tkBool : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsBoolean));
           tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
   *)
-          tkInt64 : SetInt64Prop(Self, FProp, StrToInt64(S2));
-          tkInteger : SetOrdProp(Self, FProp, StrToInt(S2));
+          tkInt64 : SetInt64Prop(Self, FProp, StrToInt64(NV));
+          tkInteger : SetOrdProp(Self, FProp, StrToInt(NV));
 
 //          tkSet                       : SetSetProp(t,PropInfo,S);
           tkFloat :
             begin
-              Val(S2, D, C);
-              if C = 0 then
-                SetFloatProp(Self, FProp, D);
+              if TN = 'TTime' then
+              begin
+                DT:=StrToTime(NV); //FormatDateTime('HH:NN:SS', D);
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              if TN = 'TDate' then
+              begin
+                DT:=StrToDate(NV); //FormatDateTime('YYYY-MM-DD', D);
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              if TN = 'TDateTime' then
+              begin
+                DT:=StrToDateTime(NV); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              begin
+                Val(NV, D, C);
+                if C = 0 then
+                  SetFloatProp(Self, FProp, D);
+              end;
             end
 //          tkEnumeration : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsInteger));
 //          tkDynArray:LoadBytes(FProp, P);
@@ -506,9 +550,10 @@ var
   K: TTypeKind;
   FInst: TObject;
   R: TXmlSerializationObject;
-  S2: DOMString;
-  S3: String;
+  TN, NV, DS, TS: String;
   D:Extended;
+  DT:TDateTime;
+  FS: TFormatSettings;
 begin
   for i:=0 to AElement.ChildNodes.Count-1 do
   begin
@@ -525,22 +570,46 @@ begin
         raise Exception.CreateFmt(sPropertyNotFound1, [P.FPropertyName]);
 
       K:=FProp^.PropType^.Kind;
-      S3:=FProp^.PropType^.Name;
+      TN:=FProp^.PropType^.Name;
       if (xsaSimpleObject in P.Attribs) or (K <> tkClass) then
       begin
-        S2:=FNode.TextContent;
-        case FProp^.PropType^.Kind of
+        NV:=FNode.TextContent;
+        case K of
           tkChar,
           tkAString,
           tkWString,
           tkSString,
-          tkLString   : SetStrProp(Self, FProp, S2);
-          tkInteger : SetInt64Prop(Self, FProp, StrToInt64(S2));
+          tkLString   : SetStrProp(Self, FProp, NV);
+          tkInteger : SetInt64Prop(Self, FProp, StrToInt64(NV));
           tkFloat :
             begin
-              Val(S2, D, C);
-              if C = 0 then
-                SetFloatProp(Self, FProp, D);
+              if TN = 'TTime' then
+              begin
+                DT:=StrToTime(NV, {'HH:NN:SS',} ':');
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              if TN = 'TDate' then
+              begin
+                DT:=StrToDate(NV, 'YYYY-MM-DD', '-');
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              if TN = 'TDateTime' then
+              begin
+                C:=Pos('T', NV);
+                DS:=Copy(NV, 1, C-1);
+                TS:=Copy(NV, C+1, Length(NV));
+                DT:=StrToDate(DS, 'YYYY-MM-DD', '-') + StrToTime(TS, ':');
+                //DT:=StrToDateTime(NV, FS); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              begin
+                Val(NV, D, C);
+                if C = 0 then
+                  SetFloatProp(Self, FProp, D);
+              end;
             end;
         else
           raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
