@@ -32,6 +32,7 @@ uses
 
 begin
   RequireDerivedFormResource:=True;
+  Application.Title:='Proto to Pas';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TProtoParserForm, ProtoParserForm);

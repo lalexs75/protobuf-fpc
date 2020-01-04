@@ -103,7 +103,6 @@ begin
     Exit;
   end;
 
-  // /home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd
   InitParser;
   // parse parameters
   if HasOption('h', 'help') or (FFileName='') then

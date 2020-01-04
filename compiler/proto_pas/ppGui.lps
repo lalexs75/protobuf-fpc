@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <BuildModes Active="Default"/>
     <Units Count="7">
       <Unit0>
         <Filename Value="ppGui.lpr"/>
         <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="18" Y="10"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="ppmainunit.pas"/>
@@ -16,6 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ppMainUnit"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="194"/>
         <CursorPos X="3" Y="199"/>
         <UsageCount Value="20"/>
@@ -38,7 +42,6 @@
         <Filename Value="enumobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="229"/>
         <CursorPos X="7" Y="249"/>
@@ -62,47 +65,43 @@
         <Loaded Value="True"/>
       </Unit6>
     </Units>
-    <JumpHistory Count="9" HistoryIndex="8">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
         <Filename Value="ppmainunit.pas"/>
-        <Caret Line="17" Column="14" TopLine="127"/>
+        <Caret Line="74" Column="14" TopLine="56"/>
       </Position1>
       <Position2>
         <Filename Value="ppmainunit.pas"/>
-        <Caret Line="74" Column="14" TopLine="56"/>
+        <Caret Line="199" Column="3" TopLine="194"/>
       </Position2>
       <Position3>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="199" Column="3" TopLine="194"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="60" Column="14" TopLine="42"/>
       </Position3>
       <Position4>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="60" Column="14" TopLine="42"/>
+        <Caret Line="396" Column="3" TopLine="389"/>
       </Position4>
       <Position5>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="396" Column="3" TopLine="389"/>
+        <Caret Line="50" Column="15" TopLine="31"/>
       </Position5>
       <Position6>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="50" Column="15" TopLine="31"/>
+        <Caret Line="247" Column="3" TopLine="224"/>
       </Position6>
       <Position7>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="247" Column="3" TopLine="224"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="90" Column="26" TopLine="59"/>
       </Position7>
       <Position8>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="90" Column="26" TopLine="59"/>
-      </Position8>
-      <Position9>
-        <Filename Value="enumobject.pas"/>
         <Caret Line="255" TopLine="224"/>
-      </Position9>
+      </Position8>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0" ActiveMode=""/>
+      <Modes ActiveMode=""/>
     </RunParams>
   </ProjectSession>
 </CONFIG>
