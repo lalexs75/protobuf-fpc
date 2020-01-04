@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="7">
+      <Unit0>
+        <Filename Value="ppGui.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="ppmainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ProtoParserForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ppMainUnit"/>
+        <TopLine Value="194"/>
+        <CursorPos X="3" Y="199"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="protoparser.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ProtoParser"/>
+        <UsageCount Value="20"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="protoobjects.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ProtoObjects"/>
+        <UsageCount Value="20"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="enumobject.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EnumObject"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="229"/>
+        <CursorPos X="7" Y="249"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="controlobjects.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ControlObjects"/>
+        <UsageCount Value="20"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="pascodegen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PasCodegen"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="224"/>
+        <CursorPos X="3" Y="247"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit6>
+    </Units>
+    <JumpHistory Count="9" HistoryIndex="8">
+      <Position1>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="17" Column="14" TopLine="127"/>
+      </Position1>
+      <Position2>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="74" Column="14" TopLine="56"/>
+      </Position2>
+      <Position3>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="199" Column="3" TopLine="194"/>
+      </Position3>
+      <Position4>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="60" Column="14" TopLine="42"/>
+      </Position4>
+      <Position5>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="396" Column="3" TopLine="389"/>
+      </Position5>
+      <Position6>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="50" Column="15" TopLine="31"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="247" Column="3" TopLine="224"/>
+      </Position7>
+      <Position8>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="90" Column="26" TopLine="59"/>
+      </Position8>
+      <Position9>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="255" TopLine="224"/>
+      </Position9>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

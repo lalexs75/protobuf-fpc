@@ -1,0 +1,38 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: protoparser.sprotoparsererrorbracket
+msgid "Unexpected )"
+msgstr "Ожидается )"
+
+#: protoparser.sprotoparserexpected
+msgid "Expected : "
+msgstr "Ожидается : "
+
+#: protoparser.sprotoparseridentificator
+msgid "identificator"
+msgstr ""
+
+#: protoparser.sprotoparsernumber
+msgid "number"
+msgstr ""
+
+#: protoparser.sprotoparserstring
+msgid "string"
+msgstr ""
+
+#: protoparser.sprotoparserunknowcommand
+#, object-pascal-format
+msgid "Unknow command: %s"
+msgstr "Неизвестная команда: %s"
+
+#: proto_pas.sincludefolder
+#, object-pascal-format
+msgid "Include folder : %s"
+msgstr "Папка включений : %s"
+
+#: proto_pas.soutputdirectory
+#, object-pascal-format
+msgid "Output directory : %s"
+msgstr "Результирующая папка : %s"
+
