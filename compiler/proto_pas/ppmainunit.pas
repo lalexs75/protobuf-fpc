@@ -100,6 +100,7 @@ end;
 
 procedure TProtoParserForm.FormCreate(Sender: TObject);
 begin
+  PageControl1.ActivePageIndex:=0;
   UpdateListBox1Ctrls;
   RadioButton1Change(nil);
 end;
@@ -141,8 +142,9 @@ begin
   else
   begin
     WriteLog(PParser.ErrorMessage);
-    AMemo.SetFocus;
-    AMemo.CaretXY:=PParser.ErrorPosition;
+    SourceEditor.Enabled:=true;
+    SourceEditor.SetFocus;
+    SourceEditor.CaretXY:=PParser.ErrorPosition;
   end;
 end;
 
@@ -163,6 +165,7 @@ begin
   else
   begin
     WriteLog('Error: '+ PParser.ErrorMessage);
+    SourceEditor.Enabled:=true;
     SourceEditor.SetFocus;
     SourceEditor.CaretXY:=PParser.ErrorPosition;
   end;

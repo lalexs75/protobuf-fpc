@@ -377,7 +377,7 @@ var
     TType12, TType13, TType14, TType15, TType16, TPacked1,
     TPacked2, TPacked21, TPacked22, TDefault1, TDefault2,
     TDefault3, TDefault4, TType16_1, TReserv, TReserv1, TReserv2,
-    TReserv3, TReserv4, TEnum1, TMsg1: TProtoToken;
+    TReserv3, TReserv4, TEnum1, TMsg1, TDefault5, TDefault6: TProtoToken;
 begin
   //message SearchRequest {
   //  required string query = 1;
@@ -410,7 +410,7 @@ begin
   //  }
   //  repeated Result result = 1;
   //}
-  FStart:=AddToken(stKeyword, nil, 'message', [toHeaderStart, toHeaderEnd]);
+  FStart:=AddToken(stIdentificator, nil, 'message', [toHeaderStart, toHeaderEnd]);
   T:=AddToken(stIdentificator, FStart, '', [], 1);
   T1:=AddToken(stSymbol, T, '{', []);
     TOpt:=AddToken(stKeyword, T1, 'optional', [], 2);
@@ -451,8 +451,10 @@ begin
       TDefault2:=AddToken(stIdentificator, TDefault1, '', [], 12);
       TDefault3:=AddToken(stInteger, TDefault1, '', [], 12);
       TDefault4:=AddToken(stString, TDefault1, '', [], 12);
+      TDefault5:=AddToken(stKeyword, TDefault1, 'true', [], 12);
+      TDefault6:=AddToken(stKeyword, TDefault1, 'false', [], 12);
 
-      TPacked2:=AddToken(stSymbol, [TPacked21, TPacked22, TDefault2, TDefault3, TDefault4], ']', []);
+      TPacked2:=AddToken(stSymbol, [TPacked21, TPacked22, TDefault2, TDefault3, TDefault4, TDefault5, TDefault6], ']', []);
 
 
     TReserv:=AddToken(stKeyword, T1, 'reserved', []);
@@ -466,7 +468,7 @@ begin
         TReserv4.AddChildToken(TReserv3);
 
     TEnum1:=AddToken(stKeyword, T1, 'enum', [], 13);
-    TMsg1:=AddToken(stKeyword, T1, 'message', [], 14);
+    TMsg1:=AddToken(stIdentificator, T1, 'message', [], 14);
       TEnum1.AddChildToken([TOpt, TRec, TRep, TReserv, TEnum1, TMsg1]);
       TMsg1.AddChildToken([TOpt, TRec, TRep, TReserv, TEnum1, TMsg1]);
 

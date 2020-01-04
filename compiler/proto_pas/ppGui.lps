@@ -7,9 +7,9 @@
       <Unit0>
         <Filename Value="ppGui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="18" Y="10"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,9 +20,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ppMainUnit"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="194"/>
-        <CursorPos X="3" Y="199"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="100"/>
+        <CursorPos X="34" Y="103"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,78 +30,184 @@
         <Filename Value="protoparser.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoParser"/>
-        <UsageCount Value="20"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="1230"/>
+        <CursorPos Y="1259"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="protoobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
-        <UsageCount Value="20"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="503"/>
+        <CursorPos Y="506"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="enumobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="229"/>
         <CursorPos X="7" Y="249"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
       </Unit5>
       <Unit6>
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="224"/>
         <CursorPos X="3" Y="247"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit6>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="74" Column="14" TopLine="56"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1299" TopLine="1281"/>
       </Position1>
       <Position2>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="199" Column="3" TopLine="194"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1243" TopLine="1224"/>
       </Position2>
       <Position3>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="60" Column="14" TopLine="42"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1244" TopLine="1224"/>
       </Position3>
       <Position4>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="396" Column="3" TopLine="389"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1246" TopLine="1224"/>
       </Position4>
       <Position5>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="50" Column="15" TopLine="31"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1253" TopLine="1224"/>
       </Position5>
       <Position6>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="247" Column="3" TopLine="224"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1259" TopLine="1230"/>
       </Position6>
       <Position7>
-        <Filename Value="enumobject.pas"/>
-        <Caret Line="90" Column="26" TopLine="59"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1260" TopLine="1231"/>
       </Position7>
       <Position8>
-        <Filename Value="enumobject.pas"/>
-        <Caret Line="255" TopLine="224"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1298" TopLine="1280"/>
       </Position8>
+      <Position9>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1299" TopLine="1280"/>
+      </Position9>
+      <Position10>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1243" Column="5" TopLine="1224"/>
+      </Position10>
+      <Position11>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1246" TopLine="1224"/>
+      </Position11>
+      <Position12>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1253" TopLine="1224"/>
+      </Position12>
+      <Position13>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1259" TopLine="1230"/>
+      </Position13>
+      <Position14>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1260" TopLine="1231"/>
+      </Position14>
+      <Position15>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1298" TopLine="1280"/>
+      </Position15>
+      <Position16>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1299" TopLine="1280"/>
+      </Position16>
+      <Position17>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1243" TopLine="1224"/>
+      </Position17>
+      <Position18>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1244" TopLine="1224"/>
+      </Position18>
+      <Position19>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1246" TopLine="1224"/>
+      </Position19>
+      <Position20>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1253" TopLine="1224"/>
+      </Position20>
+      <Position21>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1259" TopLine="1230"/>
+      </Position21>
+      <Position22>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1260" TopLine="1231"/>
+      </Position22>
+      <Position23>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1298" TopLine="1280"/>
+      </Position23>
+      <Position24>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1299" TopLine="1280"/>
+      </Position24>
+      <Position25>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1243" TopLine="1224"/>
+      </Position25>
+      <Position26>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1244" TopLine="1224"/>
+      </Position26>
+      <Position27>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1246" TopLine="1224"/>
+      </Position27>
+      <Position28>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="1253" TopLine="1224"/>
+      </Position28>
+      <Position29>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="64" Column="11" TopLine="49"/>
+      </Position29>
+      <Position30>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="103" Column="34" TopLine="100"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>
     </RunParams>
   </ProjectSession>
+  <Debugging>
+    <Watches>
+      <Item>
+        <Expression Value="AWord"/>
+      </Item>
+      <Item>
+        <Expression Value="S"/>
+      </Item>
+    </Watches>
+  </Debugging>
 </CONFIG>
