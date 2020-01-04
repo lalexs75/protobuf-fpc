@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="XsdToPas.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="109"/>
+        <CursorPos X="43" Y="123"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="XsdPasCodegenUnit"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="248"/>
+        <CursorPos X="48" Y="271"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="xsdutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="98" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="99" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="107" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="109" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="123" TopLine="109"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="98" TopLine="82"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="99" TopLine="82"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="107" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="109" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="118" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="119" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="120" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="122" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="123" TopLine="101"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="124" TopLine="107"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="54" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="57" TopLine="67"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="58" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="54" Column="6" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="61" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="62" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="63" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="265" Column="29" TopLine="235"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="54" Column="93" TopLine="35"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="50" Column="53" TopLine="35"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="264" Column="19" TopLine="243"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="61" TopLine="35"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="60" Column="18" TopLine="56"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="124" Column="38" TopLine="110"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="54" TopLine="38"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default">
+        <Mode Name="default">
+          <local>
+            <CommandLineParams Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+          </local>
+        </Mode>
+      </Modes>
+    </RunParams>
+    <HistoryLists>
+      <List Name="WorkingDirectory" Type="File" Count="1"/>
+      <List Name="LaunchingApplication" Type="File" Count="3">
+        <Item1 Value="/usr/bin/xterm -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+        <Item2 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
+        <Item3 Value="/usr/bin/konsole -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </List>
+      <List Name="CommandLineParameters" Count="2">
+        <Item1 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+      </List>
+    </HistoryLists>
+  </ProjectSession>
+  <Debugging>
+    <Watches>
+      <Item>
+        <Expression Value="FOutDir"/>
+      </Item>
+    </Watches>
+  </Debugging>
+</CONFIG>

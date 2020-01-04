@@ -35,6 +35,7 @@ type
     FDescribeOptions: TCodeGenDescribeOptions;
     FPasUnitDescription: string;
     FPasUnitName: string;
+    FPasUnitOutputFolder: string;
     FXSDModule: TXSDModule;
     function DoGenUnitHeader:string;
     function DoGenInterfaceUses:string;
@@ -46,12 +47,17 @@ type
     constructor Create(AXSDModule:TXSDModule);
     destructor Destroy; override;
     function GeneratePasCode:string;
+    procedure GeneratePasCodeToFile(AFileName:string);
+
+    property XSDModule:TXSDModule read FXSDModule write FXSDModule;
     property PasUnitName:string read FPasUnitName write FPasUnitName;
+    property PasUnitOutputFolder:string read FPasUnitOutputFolder write FPasUnitOutputFolder;
     property PasUnitDescription:string read FPasUnitDescription write FPasUnitDescription;
     property DescribeOptions:TCodeGenDescribeOptions read FDescribeOptions write FDescribeOptions;
   end;
 
 implementation
+uses LazFileUtils;
 
 { TXsdPasCodegen }
 
@@ -247,6 +253,27 @@ begin
   Result:=Result + DoGenSimpleTypes +
     S +
     DoGenImplementationUses + DoGenClasseImplementation + 'end.';
+end;
+
+procedure TXsdPasCodegen.GeneratePasCodeToFile(AFileName: string);
+var
+  F: TFileStream;
+  S: String;
+begin
+  if AFileName = '' then
+  begin
+    if FPasUnitOutputFolder<>'' then
+      AFileName:=AppendPathDelim(FPasUnitOutputFolder);
+    AFileName:=AFileName + PasUnitName + '.pas';
+  end;
+  F:=TFileStream.Create(AFileName, fmCreate);
+  try
+    S:=GeneratePasCode;
+    if S<>'' then
+      F.Write(S[1], Length(S));
+  finally
+    F.Free;
+  end;
 end;
 
 end.
