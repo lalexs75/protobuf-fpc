@@ -56,9 +56,12 @@ type
     FMinSize: integer;
     FModified: boolean;
     FPropertyName: string;
+    FValidList: TStringList;
     FXMLName: string;
     FAliases:string;
   public
+    constructor Create;
+    destructor Destroy; override;
     property PropertyName:string read FPropertyName;
     property Caption:string read FCaption;
     property XMLName:string read FXMLName;
@@ -66,6 +69,7 @@ type
     property MinSize:integer read FMinSize;
     property MaxSize:integer read FMaxSize;
     property Attribs:TXSAttribs read FAttribs write FAttribs;
+    property ValidList:TStringList read FValidList;
   end;
 
   { TPropertyList }
@@ -174,6 +178,20 @@ type
 
 implementation
 uses XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, TypInfo, LazUTF8, xmlobject_resource;
+
+{ TPropertyDef }
+
+constructor TPropertyDef.Create;
+begin
+  inherited Create;
+  FValidList:=TStringList.Create;
+end;
+
+destructor TPropertyDef.Destroy;
+begin
+  FreeAndNil(FValidList);
+  inherited Destroy;
+end;
 
 { GXMLSerializationObjectListEnumerator }
 
@@ -424,6 +442,7 @@ begin
             SetAtribute(AElement, P.XMLName, IntToStr( GetInt64Prop(Self, P.PropertyName)), P);
         end;
       tkFloat :
+        if P.Modified then
         begin
           if TN = 'TTime' then
           begin
