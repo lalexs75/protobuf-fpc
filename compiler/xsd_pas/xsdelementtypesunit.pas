@@ -22,7 +22,7 @@ unit XsdElementTypesUnit;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, xsd_generator;
 
 type
   TXSDSimpleType = class;
@@ -40,6 +40,7 @@ type
   TPropertyItem = class
   private
     FBaseType: string;
+    FDefaultValue: string;
     FDescription: string;
     FIsRequired: boolean;
     FItemType: TPropertyItemType;
@@ -72,6 +73,7 @@ type
     property MaxOccurs:Integer read FMaxOccurs write FMaxOccurs;
     property IsRequired:boolean read FIsRequired write FIsRequired;
     property ValuesList:TStringList read FValuesList;
+    property DefaultValue:string read FDefaultValue write FDefaultValue;
   end;
 
   { TPropertyItems }

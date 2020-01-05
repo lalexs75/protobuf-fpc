@@ -171,7 +171,8 @@ procedure TXSDProcessor.ProcessComplexElement(ANode, AContext: TDOMNode;
 procedure ProcessAttribute(FA:TDOMNode);
 var
   Prop: TPropertyItem;
-  R, R1, FC: TDOMNode;
+  R, R1, FC, M: TDOMNode;
+  i: Integer;
 begin
   R:=FA.Attributes.GetNamedItem('ref'); //ref=QName
   if Assigned(R) then
@@ -198,6 +199,33 @@ begin
         if IsSimpleType(Prop.BaseType) then
           Prop.BaseType:=GetSimpleType(Prop.BaseType);
           //Prop.BaseType:=R1.Attributes.GetNamedItem('base');
+        for i:=0 to R1.ChildNodes.Count-1 do
+        begin
+          M:=R1.ChildNodes[i];
+          if M.NodeName = 'xs:enumeration' then
+            Prop.ValuesList.Add(M.Attributes.GetNamedItem('value').NodeValue)
+(*          else
+          if M.NodeName = 'xs:length' then
+          begin
+            ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+            ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+          end
+          else
+          if M.NodeName = 'xs:minLength' then
+            ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+          else
+          if M.NodeName = 'xs:maxLength' then
+            ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+          else
+          if M.NodeName = 'xs:pattern' then
+            ASimpleType.ValuePattern:=M.Attributes.GetNamedItem('value').NodeValue
+          else
+          if M.NodeName = 'xs:totalDigits' then
+            ASimpleType.TotalDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+          else
+          if M.NodeName = 'xs:fractionDigits' then
+            ASimpleType.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1) *)
+        end;
       end
     end
     else
@@ -214,6 +242,11 @@ begin
   R:=FA.Attributes.GetNamedItem('use'); //use=optional | prohibited | required
   if Assigned(R) then
     Prop.IsRequired:=R.NodeValue = 'required';
+
+  R:=FA.Attributes.GetNamedItem('default');
+  if Assigned(R) then
+    Prop.DefaultValue:=R.NodeValue;
+
 end;
 
 procedure ProcessAS(RAll:TDOMNode);

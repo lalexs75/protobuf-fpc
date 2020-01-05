@@ -188,6 +188,19 @@ begin
              Result:=Result +
                '    P.ValidList.Add('+QuotedStr(S)+');' + LineEnding;
        end;
+
+       if PT.ItemType in [pitAttribute, pitSimpleType] then
+       begin
+         if not Assigned(PT.XSDSimpleType) then
+         begin
+           if PT.ValuesList.Count > 0 then
+             for S in PT.ValuesList do
+               Result:=Result +
+                 '    P.ValidList.Add('+QuotedStr(S)+');' + LineEnding;
+         end;
+         if PT.DefaultValue <> '' then
+           Result:=Result + '    P.DefaultValue:='+QuotedStr(PT.DefaultValue)+';'+LineEnding;
+       end;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
 
