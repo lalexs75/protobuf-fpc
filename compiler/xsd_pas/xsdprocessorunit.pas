@@ -470,12 +470,20 @@ end;
 
 function TXSDProcessor.GetAnnotation(AContext: TDOMNode): string;
 var
-  R: TDOMNode;
+  R, R1: TDOMNode;
+  i: Integer;
 begin
   Result:='';
   R:=AContext.FindNode('xs:annotation');
   if Assigned(R) then
-    R:=R.FindNode('xs:documentation');
+  begin
+    for i:=0 to R.ChildNodes.Count-1 do
+    begin
+      R1:=R.ChildNodes[i];
+      if (R1.NodeName = 'xs:documentation') or (R1.NodeName = 'xs:appinfo') then
+        Result:=Result + R.TextContent + LineEnding;
+    end;
+  end;
   if Assigned(R) then
     Result:=R.TextContent;
 end;
@@ -505,10 +513,13 @@ begin
 end;
 
 function TXSDProcessor.ExecuteProcessor: TXSDModule;
+var
+  S: DOMString;
 begin
   FXSDModule:=nil;
   if Assigned(FDoc) then
   begin
+    S:=FDoc.NamespaceURI;
     FXSDModule:=TXSDModule.Create;
     FSchema:=FDoc.FindNode('xs:schema');
     if Assigned(FSchema) then

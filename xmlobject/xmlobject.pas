@@ -46,6 +46,7 @@ type
   TXSAttrib = (xsaSimpleObject, xsaRequared);
   TXSAttribs = set of TXSAttrib;
   TPropertyListEnumerator = class;
+  TXmlSerializationObject = class;
 
   { TPropertyDef }
 
@@ -83,11 +84,12 @@ type
   TPropertyList = class
   private
     FList:TFPList;
+    FOwner:TXmlSerializationObject;
     function GetCount: integer;
     function GetItems(AIndex: integer): TPropertyDef;
     procedure ClearModified;
   public
-    constructor Create;
+    constructor Create(AOwner:TXmlSerializationObject);
     destructor Destroy; override;
 
     function PropertyByName(APropertyName:string):TPropertyDef;
@@ -134,9 +136,13 @@ type
     procedure ModifiedProperty(APropertyName:string);
     procedure InternalRegisterPropertys; virtual;
     procedure InternalInitChilds; virtual;
+    function RootNodeName:string; virtual;
+  protected
+
     procedure CheckLockupValue(APropertyName:string; AValue:string);
     procedure CheckLockupValue(APropertyName:string; AValue:Integer); inline;
-    function RootNodeName:string; virtual;
+    procedure CheckStrMinSize(APropertyName:string; AValue:string);
+    procedure CheckStrMaxSize(APropertyName:string; AValue:string);
   public
     constructor Create;
     destructor Destroy; override;
@@ -341,11 +347,11 @@ begin
     TPropertyDef(FList[I]).FModified:=false;
 end;
 
-constructor TPropertyList.Create;
+constructor TPropertyList.Create(AOwner: TXmlSerializationObject);
 begin
   inherited Create;
+  FOwner:=AOwner;
   FList:=TFPList.Create;
-
 end;
 
 destructor TPropertyList.Destroy;
@@ -368,6 +374,8 @@ begin
     if UpperCase(P.FPropertyName) = APropertyName then
       Exit(P);
   end;
+
+  raise Exception.CreateFmt('%s : property %s not found', [FOwner.ClassName, APropertyName]);
 end;
 
 function TPropertyList.PropertyByXMLName(AXMLName: string): TPropertyDef;
@@ -511,7 +519,12 @@ begin
             S:=FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
           end
           else
-            Str(GetFloatProp(Self, P.PropertyName):10:4, S);
+          begin
+            if P.TotalDigits > 0 then
+              Str(GetFloatProp(Self, P.PropertyName):P.TotalDigits:P.FractionDigits, S)
+            else
+              Str(GetFloatProp(Self, P.PropertyName):15:4, S);
+          end;
 
           if xsaSimpleObject in P.Attribs then
           begin
@@ -838,14 +851,34 @@ begin
       if not P.ValidList.Find(AValue, i) then
         raise Exception.CreateFmt('Property %s : value %s not in range', [APropertyName, AValue]);
   end
-  else
-    raise Exception.CreateFmt('Property %s not found', [APropertyName]);
 end;
 
 procedure TXmlSerializationObject.CheckLockupValue(APropertyName: string;
   AValue: Integer); inline;
 begin
   CheckLockupValue(APropertyName, IntToStr(AValue));
+end;
+
+procedure TXmlSerializationObject.CheckStrMinSize(APropertyName: string;
+  AValue: string);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) and (P.MinSize>-1) then
+    if Length(AValue) < P.MinSize then
+      raise Exception.CreateFmt('%s.%s : value %s shorter that %d', [ClassName, APropertyName, AValue, P.MinSize]);
+end;
+
+procedure TXmlSerializationObject.CheckStrMaxSize(APropertyName: string;
+  AValue: string);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) and (P.MaxSize>-1) then
+    if Length(AValue) > P.MaxSize then
+      raise Exception.CreateFmt('%s.%s : value %s greater than %d', [ClassName, APropertyName, AValue, P.MaxSize]);
 end;
 
 function TXmlSerializationObject.RootNodeName: string;
@@ -868,8 +901,6 @@ begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) then
     P.FModified:=true
-  else
-    raise Exception.CreateFmt(sPropertyNotFound1, [APropertyName]);
 end;
 
 procedure TXmlSerializationObject.InternalRegisterPropertys;
@@ -880,7 +911,7 @@ end;
 constructor TXmlSerializationObject.Create;
 begin
   inherited Create;
-  FPropertyList:=TPropertyList.Create;
+  FPropertyList:=TPropertyList.Create(Self);
 
   InternalInitChilds;
   InternalRegisterPropertys;

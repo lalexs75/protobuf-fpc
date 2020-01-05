@@ -7,7 +7,7 @@
       <Unit>
         <Filename Value="xsd_pas_gui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="45"/>
       </Unit>
       <Unit>
         <Filename Value="xsdmainunit.pas"/>
@@ -16,9 +16,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="XSDMainUnit"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="70"/>
         <CursorPos Y="82"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -27,20 +28,19 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdElementTypesUnit"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="389"/>
-        <CursorPos X="36" Y="393"/>
-        <UsageCount Value="40"/>
+        <TopLine Value="280"/>
+        <CursorPos X="16" Y="288"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="108"/>
-        <CursorPos X="148" Y="124"/>
-        <UsageCount Value="40"/>
+        <TopLine Value="181"/>
+        <CursorPos Y="181"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -48,9 +48,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdProcessorUnit"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="384"/>
-        <CursorPos Y="398"/>
-        <UsageCount Value="40"/>
+        <TopLine Value="55"/>
+        <CursorPos Y="57"/>
+        <UsageCount Value="45"/>
         <Bookmarks Count="1">
           <Item0 X="43" Y="264" ID="2"/>
         </Bookmarks>
@@ -59,17 +59,16 @@
       <Unit>
         <Filename Value="xsdutils.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="163"/>
         <CursorPos X="38" Y="177"/>
-        <UsageCount Value="40"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="45"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_ref.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="22" Y="19"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -78,15 +77,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos X="18" Y="343"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="demos/UniversalTransferDocument.xsd"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="1533"/>
-        <CursorPos X="60" Y="1556"/>
-        <FoldState Value=" T0R9R0A1412]4111]3O1F1a"/>
-        <UsageCount Value="19"/>
+        <FoldState Value=" T0R9R0A17141111]3O1F1 p0$Z54011313]K[R7[C4[EB5]4H"/>
+        <UsageCount Value="22"/>
         <Bookmarks Count="1">
           <Item0 X="60" Y="1553" ID="1"/>
         </Bookmarks>
@@ -99,14 +96,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2802"/>
         <CursorPos Y="2821"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="206"/>
         <CursorPos Y="231"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../../synedit/synhighlighterpas.pp"/>
@@ -114,13 +111,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="672"/>
         <CursorPos Y="688"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="demos/note.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="134" Y="2"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -128,14 +125,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="41"/>
         <CursorPos X="40" Y="63"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_simpletype.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="23" Y="18"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="14"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -143,7 +140,7 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="31"/>
         <FoldState Value=" T0315011A1."/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -151,49 +148,49 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="125"/>
         <CursorPos Y="150"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/sysutilh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos X="13" Y="331"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/sysutils.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="154"/>
         <CursorPos X="9" Y="158"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/stringl.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1946"/>
         <CursorPos Y="1961"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="../../../lazutils/lazfileutils.pas"/>
         <UnitName Value="LazFileUtils"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="10"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos X="10" Y="108"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="664"/>
         <CursorPos Y="666"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fpindexer/src/fpmasks.pp"/>
@@ -201,7 +198,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="251"/>
         <CursorPos X="3" Y="266"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-base/src/maskutils.pp"/>
@@ -209,7 +206,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="153"/>
         <CursorPos X="68" Y="120"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../../lazutils/masks.pas"/>
@@ -217,7 +214,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="416"/>
         <CursorPos X="3" Y="420"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-db/src/export/fpxmlxsdexport.pp"/>
@@ -225,158 +222,156 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="308"/>
         <CursorPos Y="309"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-sdo/src/base/xsd_generator.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="106"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/utils/unicode/cldrxml.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="78"/>
         <CursorPos X="13" Y="101"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/utils/unicode/unicodeset.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="365"/>
         <CursorPos X="3" Y="368"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
         <UnitName Value="StrUtils"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2254"/>
         <CursorPos X="29" Y="2277"/>
+        <UsageCount Value="12"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/6/ON_NSCHFDOPPR_1_997_01_05_01_01.xsd"/>
+        <EditorIndex Value="-1"/>
+        <FoldState Value=" T033E p0(b2}u]8m92R0A1a17191I1E1A1E]AJ1D121212[44]dsS2802[J9x"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="28">
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="795" Column="115" TopLine="772"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="65" Column="30" TopLine="65"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="919" Column="6" TopLine="896"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="326" Column="38" TopLine="313"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1221" Column="41" TopLine="1198"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1236" Column="5" TopLine="1213"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
+        <Caret Line="1434" TopLine="1421"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1261" Column="21" TopLine="1239"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="326" Column="32" TopLine="313"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1278" Column="39" TopLine="1256"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="206" TopLine="195"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1291" Column="39" TopLine="1269"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="378" Column="3" TopLine="374"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1489" Column="59" TopLine="1466"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="522" TopLine="508"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1491" Column="53" TopLine="1468"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="46" Column="14" TopLine="40"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1576" Column="23" TopLine="1553"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="450" Column="21" TopLine="436"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1580" Column="18" TopLine="1557"/>
+        <Filename Value="xsdprocessorunit.pas"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1581" Column="98" TopLine="1558"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="211" Column="27" TopLine="190"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1583" Column="96" TopLine="1560"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="217" Column="40" TopLine="196"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1616" Column="38" TopLine="1593"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="218" Column="27" TopLine="197"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1667" Column="38" TopLine="1644"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="443" Column="30" TopLine="420"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1711" Column="22" TopLine="1688"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="449" Column="36" TopLine="427"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1747" Column="34" TopLine="1725"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="450" Column="30" TopLine="428"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1803" Column="20" TopLine="1780"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="46" Column="15" TopLine="32"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="1950" Column="22" TopLine="1927"/>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="428" Column="3" TopLine="422"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2126" Column="29" TopLine="2103"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="206" Column="17" TopLine="193"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2130" Column="33" TopLine="2107"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="382" TopLine="374"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2146" Column="29" TopLine="2123"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="206" Column="17" TopLine="193"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2150" Column="33" TopLine="2127"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="61" TopLine="43"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2169" Column="29" TopLine="2146"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
+        <Caret Line="1559" TopLine="1476"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2174" Column="35" TopLine="2151"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2209" Column="35" TopLine="2186"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
+        <Caret Line="579" Column="57" TopLine="552"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2230" Column="35" TopLine="2207"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
+        <Caret Line="1081" Column="43" TopLine="1054"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2250" Column="16" TopLine="2227"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2274" Column="33" TopLine="2251"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <Caret Line="2277" Column="29" TopLine="2254"/>
+        <Filename Value="demos/UniversalTransferDocument.xsd"/>
+        <Caret Line="1093" Column="43" TopLine="1079"/>
       </Position>
     </JumpHistory>
     <RunParams>

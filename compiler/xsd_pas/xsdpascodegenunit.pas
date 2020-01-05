@@ -162,6 +162,12 @@ begin
          if PT.PascalValuesListCount > 0 then
            Result:=Result +
              '  CheckLockupValue('''+PT.PascalName+''', AValue);'+LineEnding;
+         if PT.PascalMinLength > -1 then
+           Result:=Result +
+             '  CheckStrMinSize('''+PT.PascalName+''', AValue);'+LineEnding;
+         if PT.PascalMaxLength > -1 then
+           Result:=Result +
+             '  CheckStrMaxSize('''+PT.PascalName+''', AValue);'+LineEnding;
          Result:=Result +
           '  ModifiedProperty('''+PT.PascalName+''');'+LineEnding+
           'end;'+LineEnding+LineEnding;
@@ -185,7 +191,7 @@ begin
          SAttr:=SAttr + 'xsaRequared, ';
 
        Result:=Result +
-        '  P:=RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+Copy(SAttr, 1, Length(SAttr)-2)+'], '''', '+PT.PascalMinLength+', '+PT.PascalMaxLength+');'+LineEnding;
+        '  P:=RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+Copy(SAttr, 1, Length(SAttr)-2)+'], '''', '+ IntToStr(PT.PascalMinLength)+', '+IntToStr(PT.PascalMaxLength)+');'+LineEnding;
        if Assigned(PT.XSDSimpleType) then
        begin
          if PT.XSDSimpleType.ValuesList.Count > 0 then

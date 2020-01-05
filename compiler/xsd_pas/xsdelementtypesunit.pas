@@ -62,8 +62,8 @@ type
     destructor Destroy; override;
     function PascalBaseType:string;
 
-    function PascalMinLength:string;
-    function PascalMaxLength:string;
+    function PascalMinLength:Integer;
+    function PascalMaxLength:Integer;
     function PascalName:string;
     function PascalValuesListCount:Integer;
 
@@ -312,20 +312,20 @@ begin
   end;
 end;
 
-function TPropertyItem.PascalMinLength: string;
+function TPropertyItem.PascalMinLength: Integer;
 begin
   if Assigned(FXSDSimpleType) then
-    Result:=IntToStr(FXSDSimpleType.FMinLength)
+    Result:=FXSDSimpleType.FMinLength
   else
-    Result:=IntToStr(FMinLength)
+    Result:=FMinLength
 end;
 
-function TPropertyItem.PascalMaxLength: string;
+function TPropertyItem.PascalMaxLength: Integer;
 begin
   if Assigned(FXSDSimpleType) then
-    Result:=IntToStr(FXSDSimpleType.FMaxLength)
+    Result:=FXSDSimpleType.FMaxLength
   else
-    Result:=IntToStr(FMaxLength)
+    Result:=FMaxLength
 end;
 
 function TPropertyItem.PascalName: string;
@@ -378,7 +378,7 @@ begin
   FValuesList:=TStringList.Create;
   FOwner:=AOwner;
   FMinLength:=-1;
-  FMinLength:=-1;
+  FMaxLength:=-1;
 end;
 
 destructor TXSDSimpleType.Destroy;
