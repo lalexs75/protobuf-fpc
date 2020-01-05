@@ -142,7 +142,7 @@ function TXsdPasCodegen.DoGenClasseImplementation: string;
 var
   CT: TXSDComplexType;
   PT: TPropertyItem;
-  SAttr: String;
+  SAttr, S: String;
 begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
@@ -165,6 +165,8 @@ begin
 
      Result:=Result +
       'procedure '+CT.PascalTypeName+'.InternalRegisterPropertys;'+LineEnding +
+      'var'+LineEnding +
+      '  P: TPropertyDef;'+LineEnding +
       'begin'+LineEnding +
       '  inherited InternalRegisterPropertys;' + LineEnding;
      for PT in CT.Propertys do
@@ -178,7 +180,14 @@ begin
          SAttr:=SAttr + 'xsaRequared, ';
 
        Result:=Result +
-        '  RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+Copy(SAttr, 1, Length(SAttr)-2)+'], '''', '+PT.PascalMinLength+', '+PT.PascalMaxLength+');'+LineEnding;
+        '  P:=RegisterProperty('''+PT.PascalName+''', '''+PT.Name+''', ['+Copy(SAttr, 1, Length(SAttr)-2)+'], '''', '+PT.PascalMinLength+', '+PT.PascalMaxLength+');'+LineEnding;
+       if Assigned(PT.XSDSimpleType) then
+       begin
+         if PT.XSDSimpleType.ValuesList.Count > 0 then
+           for S in PT.XSDSimpleType.ValuesList do
+             Result:=Result +
+               '    P.ValidList.Add('+QuotedStr(S)+');' + LineEnding;
+       end;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
 

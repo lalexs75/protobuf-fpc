@@ -390,6 +390,7 @@ procedure TXSDProcessor.ProcessSimpleType(AContext: TDOMNode;
   ASimpleType: TXSDSimpleType);
 var
   R, M: TDOMNode;
+  i: Integer;
 begin
   ASimpleType.Description:=GetAnnotation(AContext);
   R:=AContext.FindNode('xs:restriction');
@@ -397,20 +398,32 @@ begin
   begin
     ASimpleType.BaseName:=R.Attributes.GetNamedItem('base').NodeValue;
     ASimpleType.PasBaseName:=GetSimpleType(ASimpleType.BaseName);
-    M:=R.FindNode('xs:length');
-    if Assigned(M) then
+    for i:=0 to R.ChildNodes.Count-1 do
     begin
-      ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
-      ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
-    end
-    else
-    begin
-      M:=R.FindNode('xs:minLength');
-      if Assigned(M) then
+      M:=R.ChildNodes[i];
+      if M.NodeName = 'xs:enumeration' then
+        ASimpleType.ValuesList.Add(M.Attributes.GetNamedItem('value').NodeValue)
+      else
+      if M.NodeName = 'xs:length' then
+      begin
         ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
-      M:=R.FindNode('xs:maxLength');
-      if Assigned(M) then
         ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+      end
+      else
+      if M.NodeName = 'xs:minLength' then
+        ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+      else
+      if M.NodeName = 'xs:maxLength' then
+        ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+      else
+      if M.NodeName = 'xs:pattern' then
+        ASimpleType.ValuePattern:=M.Attributes.GetNamedItem('value').NodeValue
+      else
+      if M.NodeName = 'xs:totalDigits' then
+        ASimpleType.TotalDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+      else
+      if M.NodeName = 'xs:fractionDigits' then
+        ASimpleType.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
     end;
     //minExclusive
     //minInclusive
@@ -418,10 +431,7 @@ begin
     //maxInclusive
     //totalDigits
     //fractionDigits
-    //length
-    //enumeration
     //whiteSpace
-    //pattern
   end;
 end;
 

@@ -175,12 +175,15 @@ type
   private
     FBaseName: string;
     FDescription: string;
+    FFractionDigits: Integer;
     FMaxLength: integer;
     FMinLength: integer;
     FPasBaseName: string;
     FPasTypeName: string;
+    FTotalDigits: Integer;
     FTypeName: string;
     FOwner: TXSDModule;
+    FValuePattern: string;
     FValuesList: TStringList;
   public
     constructor Create(AOwner:TXSDModule);
@@ -195,6 +198,13 @@ type
     property PasTypeName:string read FPasTypeName write FPasTypeName;
     property ValuesList:TStringList read FValuesList;
     property ValuePattern:string read FValuePattern write FValuePattern;
+    property FractionDigits:Integer read FFractionDigits write FFractionDigits;
+    property TotalDigits:Integer read FTotalDigits write FTotalDigits;
+    //whiteSpace
+    //minExclusive
+    //minInclusive
+    //maxExclusive
+    //maxInclusive
   end;
 
   { TXSDSimpleTypes }
