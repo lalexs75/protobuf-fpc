@@ -52,6 +52,7 @@ type
   private
     FAttribs: TXSAttribs;
     FCaption: string;
+    FDefaultValue: string;
     FMaxSize: integer;
     FMinSize: integer;
     FModified: boolean;
@@ -70,6 +71,7 @@ type
     property MaxSize:integer read FMaxSize;
     property Attribs:TXSAttribs read FAttribs write FAttribs;
     property ValidList:TStringList read FValidList;
+    property DefaultValue:string read FDefaultValue write FDefaultValue;
   end;
 
   { TPropertyList }
