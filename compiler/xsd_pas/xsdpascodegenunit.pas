@@ -157,7 +157,12 @@ begin
           'procedure '+CT.PascalTypeName+'.Set'+PT.PascalName+'(AValue: '+PT.PascalBaseType+');'+LineEnding +
           'begin'+LineEnding+
           '  if F'+PT.PascalName+'=AValue then Exit;'+LineEnding+
-          '  F'+PT.PascalName+':=AValue;'+LineEnding+
+          '  F'+PT.PascalName+':=AValue;'+LineEnding;
+
+         if PT.PascalValuesListCount > 0 then
+           Result:=Result +
+             '  CheckLockupValue('''+PT.PascalName+''', AValue);'+LineEnding;
+         Result:=Result +
           '  ModifiedProperty('''+PT.PascalName+''');'+LineEnding+
           'end;'+LineEnding+LineEnding;
        end;

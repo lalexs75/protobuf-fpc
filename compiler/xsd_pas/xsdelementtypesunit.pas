@@ -65,6 +65,7 @@ type
     function PascalMinLength:string;
     function PascalMaxLength:string;
     function PascalName:string;
+    function PascalValuesListCount:Integer;
 
     procedure UpdatePascalNames;
     property Name:string read FName write FName;
@@ -330,6 +331,14 @@ end;
 function TPropertyItem.PascalName: string;
 begin
   Result:=FPascalName;
+end;
+
+function TPropertyItem.PascalValuesListCount: Integer;
+begin
+  if Assigned(FXSDSimpleType) then
+    Result:=FXSDSimpleType.ValuesList.Count
+  else
+    Result:=ValuesList.Count;
 end;
 
 procedure TPropertyItem.UpdatePascalNames;
