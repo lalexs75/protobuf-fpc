@@ -45,6 +45,7 @@ type
   EExchangeDefinitionError = class(Exception);
   TXSAttrib = (xsaSimpleObject, xsaRequared);
   TXSAttribs = set of TXSAttrib;
+  TPropertyListEnumerator = class;
 
   { TPropertyDef }
 
@@ -94,9 +95,24 @@ type
     function PropertyByAlias(AAliasName:string):TPropertyDef;
     function Add(const APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer):TPropertyDef;
     procedure Clear;
+    function GetEnumerator: TPropertyListEnumerator;
     property Count:integer read GetCount;
     property Items[AIndex:integer]:TPropertyDef read GetItems; default;
   end;
+
+  { TPropertyListEnumerator }
+
+  TPropertyListEnumerator = class
+  private
+    FList: TPropertyList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPropertyList);
+    function GetCurrent: TPropertyDef;
+    function MoveNext: Boolean;
+    property Current: TPropertyDef read GetCurrent;
+  end;
+
 
   { TXmlSerializationObject }
 
@@ -113,10 +129,13 @@ type
     function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string):TDOMElement;
   protected
     function IsEmpty:Boolean;
+    procedure ValidateRequared;
     function RegisterProperty(APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = ''):TPropertyDef;
     procedure ModifiedProperty(APropertyName:string);
     procedure InternalRegisterPropertys; virtual;
     procedure InternalInitChilds; virtual;
+    procedure CheckLockupValue(APropertyName:string; AValue:string);
+    procedure CheckLockupValue(APropertyName:string; AValue:Integer); inline;
     function RootNodeName:string; virtual;
   public
     constructor Create;
@@ -184,12 +203,32 @@ type
 implementation
 uses XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, TypInfo, LazUTF8, xmlobject_resource;
 
+{ TPropertyListEnumerator }
+
+constructor TPropertyListEnumerator.Create(AList: TPropertyList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPropertyListEnumerator.GetCurrent: TPropertyDef;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPropertyListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
 { TPropertyDef }
 
 constructor TPropertyDef.Create;
 begin
   inherited Create;
   FValidList:=TStringList.Create;
+  FValidList.Sorted:=true;
 end;
 
 destructor TPropertyDef.Destroy;
@@ -383,6 +422,11 @@ begin
   FList.Clear;
 end;
 
+function TPropertyList.GetEnumerator: TPropertyListEnumerator;
+begin
+  Result:=TPropertyListEnumerator.Create(Self);
+end;
+
 { TXmlSerializationObject }
 
 procedure TXmlSerializationObject.InternalRead(AElement: TDOMNode);
@@ -396,7 +440,6 @@ end;
 procedure TXmlSerializationObject.InternalWrite(FXML: TXMLDocument;
   AElement: TDOMElement);
 var
-  i: Integer;
   P: TPropertyDef;
   FProp: PPropInfo;
   E: TDOMElement;
@@ -404,9 +447,10 @@ var
   K: TTypeKind;
   D:TDateTime;
 begin
-  for i:=0 to FPropertyList.Count-1 do
+  ValidateRequared;
+
+  for P in FPropertyList do
   begin
-    P:=FPropertyList[i];
 
     FProp:=GetPropInfo(Self, P.FPropertyName);
     if not Assigned(FProp) then
@@ -757,14 +801,51 @@ begin
         raise Exception.CreateFmt('Object %s property %s not assigned', [ClassName, P.PropertyName]);
     end
     else
-    if FPropertyList[i].Modified then
+    if P.Modified then
       Exit(false);
+  end;
+end;
+
+procedure TXmlSerializationObject.ValidateRequared;
+var
+  P: TPropertyDef;
+  FProp: PPropInfo;
+begin
+  for P in FPropertyList do
+  begin
+    FProp:=GetPropInfo(Self, P.FPropertyName);
+    if Assigned(FProp) and (FProp^.PropType^.Kind <> tkClass) then
+      if (not P.Modified) and (xsaRequared in P.Attribs) then
+        raise Exception.CreateFmt('%s: property %s requared value', [ClassName, P.PropertyName]);
   end;
 end;
 
 procedure TXmlSerializationObject.InternalInitChilds;
 begin
 
+end;
+
+procedure TXmlSerializationObject.CheckLockupValue(APropertyName: string;
+  AValue: string);
+var
+  P: TPropertyDef;
+  i: Integer;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+  begin
+    if P.ValidList.Count>0 then
+      if not P.ValidList.Find(AValue, i) then
+        raise Exception.CreateFmt('Property %s : value %s not in range', [APropertyName, AValue]);
+  end
+  else
+    raise Exception.CreateFmt('Property %s not found', [APropertyName]);
+end;
+
+procedure TXmlSerializationObject.CheckLockupValue(APropertyName: string;
+  AValue: Integer); inline;
+begin
+  CheckLockupValue(APropertyName, IntToStr(AValue));
 end;
 
 function TXmlSerializationObject.RootNodeName: string;
