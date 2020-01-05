@@ -57,6 +57,7 @@ type
     FMinSize: integer;
     FModified: boolean;
     FPropertyName: string;
+    FTotalDigits: integer;
     FValidList: TStringList;
     FXMLName: string;
     FAliases:string;
@@ -72,6 +73,8 @@ type
     property Attribs:TXSAttribs read FAttribs write FAttribs;
     property ValidList:TStringList read FValidList;
     property DefaultValue:string read FDefaultValue write FDefaultValue;
+    property TotalDigits:integer read FTotalDigits write FTotalDigits;
+    property FractionDigits:integer read FTotalDigits write FTotalDigits;
   end;
 
   { TPropertyList }
