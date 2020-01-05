@@ -42,10 +42,13 @@ type
     FBaseType: string;
     FDefaultValue: string;
     FDescription: string;
+    FFractionDigits: Integer;
     FIsRequired: boolean;
     FItemType: TPropertyItemType;
     FName: string;
     FPascalName: string;
+    FTotalDigits: Integer;
+    FValuePattern: string;
     FValuesList: TStringList;
     FXSDSimpleType: TXSDSimpleType;
     FXSDComplexType: TXSDComplexType;
@@ -72,8 +75,19 @@ type
     property MinOccurs:Integer read FMinOccurs write FMinOccurs;
     property MaxOccurs:Integer read FMaxOccurs write FMaxOccurs;
     property IsRequired:boolean read FIsRequired write FIsRequired;
+
     property ValuesList:TStringList read FValuesList;
     property DefaultValue:string read FDefaultValue write FDefaultValue;
+    property ValuePattern:string read FValuePattern write FValuePattern;
+    property MaxLength:integer read FMaxLength write FMaxLength;
+    property MinLength:integer read FMinLength write FMinLength;
+    property FractionDigits:Integer read FFractionDigits write FFractionDigits;
+    property TotalDigits:Integer read FTotalDigits write FTotalDigits;
+    //whiteSpace
+    //minExclusive
+    //minInclusive
+    //maxExclusive
+    //maxInclusive
   end;
 
   { TPropertyItems }

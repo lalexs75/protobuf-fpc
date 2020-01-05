@@ -187,6 +187,12 @@ begin
            for S in PT.XSDSimpleType.ValuesList do
              Result:=Result +
                '    P.ValidList.Add('+QuotedStr(S)+');' + LineEnding;
+         if PT.XSDSimpleType.TotalDigits > 0 then
+         begin
+           Result:=Result +
+           '    P.TotalDigits := '+IntToStr(PT.XSDSimpleType.TotalDigits)+';' + LineEnding +
+           '    P.FractionDigits := '+IntToStr(PT.XSDSimpleType.FractionDigits)+';' + LineEnding;
+         end;
        end;
 
        if PT.ItemType in [pitAttribute, pitSimpleType] then
@@ -197,6 +203,10 @@ begin
              for S in PT.ValuesList do
                Result:=Result +
                  '    P.ValidList.Add('+QuotedStr(S)+');' + LineEnding;
+           if PT.TotalDigits > 0 then
+             Result:=Result +
+             '    P.TotalDigits := '+IntToStr(PT.TotalDigits)+';' + LineEnding +
+             '    P.FractionDigits := '+IntToStr(PT.FractionDigits)+';' + LineEnding;
          end;
          if PT.DefaultValue <> '' then
            Result:=Result + '    P.DefaultValue:='+QuotedStr(PT.DefaultValue)+';'+LineEnding;

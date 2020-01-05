@@ -204,27 +204,27 @@ begin
           M:=R1.ChildNodes[i];
           if M.NodeName = 'xs:enumeration' then
             Prop.ValuesList.Add(M.Attributes.GetNamedItem('value').NodeValue)
-(*          else
+          else
           if M.NodeName = 'xs:length' then
           begin
-            ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
-            ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+            Prop.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
+            Prop.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
           end
           else
           if M.NodeName = 'xs:minLength' then
-            ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+            Prop.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
           else
           if M.NodeName = 'xs:maxLength' then
-            ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+            Prop.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
           else
           if M.NodeName = 'xs:pattern' then
-            ASimpleType.ValuePattern:=M.Attributes.GetNamedItem('value').NodeValue
+            Prop.ValuePattern:=M.Attributes.GetNamedItem('value').NodeValue
           else
           if M.NodeName = 'xs:totalDigits' then
-            ASimpleType.TotalDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+            Prop.TotalDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
           else
           if M.NodeName = 'xs:fractionDigits' then
-            ASimpleType.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1) *)
+            Prop.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
         end;
       end
     end
