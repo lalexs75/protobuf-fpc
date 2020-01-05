@@ -57,7 +57,7 @@ type
   end;
 
 implementation
-uses LazFileUtils;
+uses LazFileUtils, xsdutils;
 
 { TXsdPasCodegen }
 
@@ -96,7 +96,7 @@ begin
     Result:=Result + '  {  ' + CT.PascalTypeName + '  }'+LineEnding;
 
     if (cgdoDescribeClasses in FDescribeOptions)  and (CT.Description <> '') then
-      Result:=Result + '  {  ' + TrimRight(CT.Description) + '  }'+LineEnding;
+      Result:=Result + GenerateTypeDescription(CT.Description) {'  {  ' + TrimRight(CT.Description) + '  }'+LineEnding};
 
     Result:=Result + '  ' + CT.PascalTypeName + ' = class(' + CT.InheritedTypeName + ')'+LineEnding + '  private' + LineEnding;
     for PT in CT.Propertys do
@@ -121,12 +121,12 @@ begin
 
     for PT in CT.Propertys do
     begin
-      //if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}' + LineEnding;
+      if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + GenerateTypeDescription(PT.Description, 4);
       Result:=Result + '    property '+PT.PascalName + ':'+PT.PascalBaseType + ' read F'+PT.PascalName;
       if PT.ItemType in [pitAttribute, pitSimpleType] then
         Result:=Result + ' write Set' + PT.PascalName;
 
-      if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}';
+//      if (cgdoDescribeClassProperty in FDescribeOptions) and (PT.Description <> '') then Result:=Result + '    {' + TrimRight(PT.Description) + '}';
 
       Result:=Result+ ';'+LineEnding;
     end;
@@ -258,7 +258,7 @@ begin
   for ST in FXSDModule.SimpleTypes do
   begin
     if (cgdoDescribeTypes in FDescribeOptions) and (ST.Description <> '') then
-       Result:=Result + '{'+ST.Description+ '}' + LineEnding;
+       Result:=Result + GenerateTypeDescription(ST.Description) {'{'+ST.Description+ '}' + LineEnding};
     Result:=Result + '  ' + ST.PasTypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
   end;
   if Result <> '' then

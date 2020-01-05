@@ -389,7 +389,10 @@ end;
 
 procedure TXSDSimpleType.UpdatePascalNames;
 begin
-  FPasTypeName:='T'+FTypeName;
+  if (FTypeName = 'date') or (FTypeName = 'time') or (FTypeName = 'datetime') then
+    FPasTypeName:='T'+FTypeName+'1'
+  else
+    FPasTypeName:='T'+FTypeName;
 end;
 
 { TXSDComplexType }

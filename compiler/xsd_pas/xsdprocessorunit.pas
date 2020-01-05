@@ -55,7 +55,7 @@ type
   end;
 
 implementation
-uses XMLRead, xsdutils;
+uses StrUtils, XMLRead, xsdutils;
 
 { TXSDProcessor }
 

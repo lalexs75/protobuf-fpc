@@ -31,7 +31,11 @@ type
 function IsSimpleType(ATypeName:string):Boolean;
 function GetSimpleType(ATypeName:string):string;
 function IsKeyword(const AKeyword: string): boolean;
+
+function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
 implementation
+uses StrUtils;
+
 type
   TStdTypeDef = record
     StdName:string;
@@ -156,6 +160,22 @@ begin
     KeywordsList.Sorted := true;
   end;
   Result := KeywordsList.Find(LowerCase(AKeyword), i);
+end;
+
+function GenerateTypeDescription(ADescription: string; ASpacing:integer = 2): string;
+var
+  ST: TStringList;
+  S: String;
+begin
+  Result:='';
+  if Trim(ADescription) = '' then Exit;
+
+  ST:=TStringList.Create;
+  ST.Text:=ADescription;
+  for S in ST do
+    if Trim(S)<>'' then
+      Result:=Result + DupeString(' ', ASpacing) + '//'+Trim(S) + LineEnding;
+  ST.Free;
 end;
 
 procedure InitStdTypes;
