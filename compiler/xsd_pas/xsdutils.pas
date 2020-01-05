@@ -198,6 +198,9 @@ function GetSimpleType(ATypeName:string):string;
 var
   I: Integer;
 begin
+  if not Assigned(StdTypesList) then
+    InitStdTypes;
+
   if StdTypesList.Find(ATypeName, I) then
     Result:=TXSDStdType(StdTypesList.Objects[i]).PascalName
   else
