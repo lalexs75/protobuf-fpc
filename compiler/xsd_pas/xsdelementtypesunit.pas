@@ -45,6 +45,7 @@ type
     FItemType: TPropertyItemType;
     FName: string;
     FPascalName: string;
+    FValuesList: TStringList;
     FXSDSimpleType: TXSDSimpleType;
     FXSDComplexType: TXSDComplexType;
     FOwner: TXSDComplexType;
@@ -54,6 +55,7 @@ type
     FMaxOccurs:Integer;
   public
     constructor Create(AOwner:TXSDComplexType);
+    destructor Destroy; override;
     function PascalBaseType:string;
 
     function PascalMinLength:string;
@@ -69,6 +71,7 @@ type
     property MinOccurs:Integer read FMinOccurs write FMinOccurs;
     property MaxOccurs:Integer read FMaxOccurs write FMaxOccurs;
     property IsRequired:boolean read FIsRequired write FIsRequired;
+    property ValuesList:TStringList read FValuesList;
   end;
 
   { TPropertyItems }
@@ -178,8 +181,10 @@ type
     FPasTypeName: string;
     FTypeName: string;
     FOwner: TXSDModule;
+    FValuesList: TStringList;
   public
     constructor Create(AOwner:TXSDModule);
+    destructor Destroy; override;
     procedure UpdatePascalNames;
     property TypeName:string read FTypeName write FTypeName;
     property BaseName:string read FBaseName write FBaseName;
@@ -188,6 +193,8 @@ type
     property Description:string read FDescription write FDescription;
     property PasBaseName:string read FPasBaseName write FPasBaseName;
     property PasTypeName:string read FPasTypeName write FPasTypeName;
+    property ValuesList:TStringList read FValuesList;
+    property ValuePattern:string read FValuePattern write FValuePattern;
   end;
 
   { TXSDSimpleTypes }
@@ -247,9 +254,16 @@ uses xsdutils;
 constructor TPropertyItem.Create(AOwner: TXSDComplexType);
 begin
   inherited Create;
+  FValuesList:=TStringList.Create;
   FOwner:=AOwner;
   FMinLength:=-1;
   FMaxLength:=-1;
+end;
+
+destructor TPropertyItem.Destroy;
+begin
+  FreeAndNil(FValuesList);
+  inherited Destroy;
 end;
 
 function TPropertyItem.PascalBaseType: string;
@@ -326,9 +340,16 @@ end;
 constructor TXSDSimpleType.Create(AOwner: TXSDModule);
 begin
   inherited Create;
+  FValuesList:=TStringList.Create;
   FOwner:=AOwner;
   FMinLength:=-1;
   FMinLength:=-1;
+end;
+
+destructor TXSDSimpleType.Destroy;
+begin
+  FValuesList.Free;
+  inherited Destroy;
 end;
 
 procedure TXSDSimpleType.UpdatePascalNames;
