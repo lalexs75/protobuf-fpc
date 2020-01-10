@@ -7,11 +7,10 @@
       <Unit>
         <Filename Value="xsd_pas_gui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="14"/>
         <CursorPos Y="37"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -23,7 +22,7 @@
         <UnitName Value="XSDMainUnit"/>
         <TopLine Value="85"/>
         <CursorPos X="53" Y="102"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -34,17 +33,18 @@
         <EditorIndex Value="3"/>
         <TopLine Value="280"/>
         <CursorPos X="16" Y="288"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="53"/>
-        <CursorPos X="3" Y="70"/>
-        <UsageCount Value="46"/>
+        <TopLine Value="160"/>
+        <CursorPos X="29" Y="173"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -54,7 +54,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="55"/>
         <CursorPos Y="57"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="47"/>
         <Bookmarks Count="1">
           <Item0 X="43" Y="264" ID="2"/>
         </Bookmarks>
@@ -66,7 +66,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="163"/>
         <CursorPos X="38" Y="177"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="47"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_ref.xsd"/>
@@ -281,7 +281,7 @@
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="26">
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="xsdelementtypesunit.pas"/>
         <Caret Line="61" TopLine="43"/>
@@ -387,6 +387,18 @@
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
         <Caret Line="70" Column="3" TopLine="53"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="43" Column="5" TopLine="40"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="82" Column="3" TopLine="78"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="45" Column="14" TopLine="28"/>
       </Position>
     </JumpHistory>
     <RunParams>

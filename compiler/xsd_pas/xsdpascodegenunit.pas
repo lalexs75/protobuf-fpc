@@ -162,7 +162,7 @@ begin
          Result:=Result +
           'procedure '+CT.PascalTypeName+'.Set'+PT.PascalName+'(AValue: '+PT.PascalBaseType+');'+LineEnding +
           'begin'+LineEnding+
-          '  if F'+PT.PascalName+'=AValue then Exit;'+LineEnding+
+          //'  if F'+PT.PascalName+'=AValue then Exit;'+LineEnding+
           '  F'+PT.PascalName+':=AValue;'+LineEnding;
 
          if PT.PascalValuesListCount > 0 then
