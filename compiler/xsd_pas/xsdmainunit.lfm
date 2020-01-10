@@ -8,7 +8,7 @@ object XSDMainForm: TXSDMainForm
   ClientWidth = 786
   OnCreate = FormCreate
   Position = poScreenCenter
-  SessionProperties = 'FileNameEdit1.FileName;CheckBox1.Checked;CheckBox2.Checked;CheckBox3.Checked'
+  SessionProperties = 'CheckBox1.Checked;CheckBox2.Checked;CheckBox3.Checked;FileNameEdit1.FileName;CheckBox4.Checked;FileNameEdit3.Text'
   LCLVersion = '2.1.0.0'
   object Label1: TLabel
     AnchorSideLeft.Control = Owner
@@ -69,9 +69,9 @@ object XSDMainForm: TXSDMainForm
     Height = 580
     Top = 68
     Width = 786
-    ActivePage = tabSource
+    ActivePage = TabSheet3
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 2
     object tabSource: TTabSheet
       Caption = 'Source XSD file'
@@ -1186,6 +1186,37 @@ object XSDMainForm: TXSDMainForm
         Caption = 'Describe types'
         TabOrder = 2
       end
+      object CheckBox4: TCheckBox
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = CheckBox3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 23
+        Top = 93
+        Width = 205
+        BorderSpacing.Around = 6
+        Caption = 'Use license header - file name'
+        TabOrder = 3
+      end
+      object FileNameEdit3: TFileNameEdit
+        AnchorSideLeft.Control = CheckBox4
+        AnchorSideTop.Control = CheckBox4
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 33
+        Top = 122
+        Width = 758
+        FilterIndex = 0
+        HideDirectories = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxLength = 0
+        TabOrder = 4
+      end
     end
   end
   object SynFreePascalSyn1: TSynFreePascalSyn
@@ -1204,6 +1235,7 @@ object XSDMainForm: TXSDMainForm
   end
   object SynXMLSyn1: TSynXMLSyn
     DefaultFilter = 'Документ XML (*.xml,*.xsd,*.xsl,*.xslt,*.dtd)|*.xml;*.xsd;*.xsl;*.xslt;*.dtd'
+    Enabled = False
     WantBracesParsed = False
     Left = 158
     Top = 248

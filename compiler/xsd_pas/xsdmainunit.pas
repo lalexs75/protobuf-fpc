@@ -36,8 +36,10 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     FileNameEdit1: TFileNameEdit;
     FileNameEdit2: TFileNameEdit;
+    FileNameEdit3: TFileNameEdit;
     Label1: TLabel;
     Label2: TLabel;
     Memo1: TMemo;
@@ -100,6 +102,8 @@ begin
     FCodegen:=TXsdPasCodegen.Create(FXSDModule);
     FCodegen.PasUnitName:=ExtractFileNameOnly(FileNameEdit1.FileName);
     FCodegen.DescribeOptions:=FDO;
+    if CheckBox4.Checked then
+      FCodegen.LicenseHeader:=FileNameEdit3.FileName;
 
     SynEdit1.Lines.Text:=FCodegen.GeneratePasCode;
     FCodegen.Free;

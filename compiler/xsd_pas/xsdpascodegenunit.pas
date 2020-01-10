@@ -33,6 +33,7 @@ type
   TXsdPasCodegen = class
   private
     FDescribeOptions: TCodeGenDescribeOptions;
+    FLicenseHeader: string;
     FPasUnitDescription: string;
     FPasUnitName: string;
     FPasUnitOutputFolder: string;
@@ -54,16 +55,21 @@ type
     property PasUnitOutputFolder:string read FPasUnitOutputFolder write FPasUnitOutputFolder;
     property PasUnitDescription:string read FPasUnitDescription write FPasUnitDescription;
     property DescribeOptions:TCodeGenDescribeOptions read FDescribeOptions write FDescribeOptions;
+    property LicenseHeader:string read FLicenseHeader write FLicenseHeader;
   end;
 
 implementation
-uses LazFileUtils, xsdutils;
+uses LazFileUtils, xsdutils, rxstrutils;
 
 { TXsdPasCodegen }
 
 function TXsdPasCodegen.DoGenUnitHeader: string;
+var
+  S: String;
 begin
-  Result:='unit '+PasUnitName + ';'+LineEnding+LineEnding+'{$mode objfpc}{$H+}'+LineEnding+LineEnding + 'interface'+LineEnding+LineEnding;
+  S:=FileToString(FLicenseHeader);
+  if S<>'' then S:=S + LineEnding;
+  Result:=S + 'unit '+PasUnitName + ';'+LineEnding+LineEnding+'{$mode objfpc}{$H+}'+LineEnding+LineEnding + 'interface'+LineEnding+LineEnding;
 end;
 
 function TXsdPasCodegen.DoGenInterfaceUses: string;

@@ -9,6 +9,12 @@ uses
   Classes,
   SysUtils,
   CustApp,
+  {$IFNDEF WINDOWS}
+  xmliconv,
+  {$ELSE}
+  xmliconv_windows,
+  {$ENDIF}
+
   LazFileUtils,
   XsdElementTypesUnit,
   XsdProcessorUnit,
@@ -48,14 +54,14 @@ begin
   IncArr:=GetOptionValues('i','include');
   for S in IncArr do
     FCodeGen.IncludeFileFolders.Add(S);
-
-  FCodeGen.CopyrightInfoFile:=GetOptionValue('c','copyrightinfo');
 *)
+  FCodeGen.LicenseHeader:=GetOptionValue('c','copyrightinfo');
+
   FOutDir:=GetOptionValue('o','out');
 
 
   ST:=TStringList.Create;
-  GetNonOptions('h:o:' {i:c:'}, ['help','out'{, 'include', 'copyrightinfo'}], ST);
+  GetNonOptions('h:o:c:' {i:'}, ['help','out'{, 'include'}, 'copyrightinfo'], ST);
   if (ST.Count>0) then
   begin
     FFileName:=ST[0];
@@ -95,7 +101,7 @@ var
   FXSDModule: TXSDModule;
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('ho' {'hoic'}, ['help','out'{, 'include', 'copyrightinfo'}]);
+  ErrorMsg:=CheckOptions('hoc' {'hoi'}, ['help','out'{, 'include'}, 'copyrightinfo']);
   if ErrorMsg<>'' then
   begin
     ShowException(Exception.Create(ErrorMsg));
@@ -157,13 +163,16 @@ begin
   writeln('-o, --out'#9'out folder');
 //  writeln('-i, --include'#9'include files folder');
   writeln('Codegeneration options:');
-//  writeln('-c, --copyrightinfo'#9'copyright info for file header');
+  writeln('-c, --copyrightinfo'#9'copyright info for file header');
   writeln('Other options:');
   writeln('-h, --help'#9'show help');
 end;
 
 var
   Application: TXsdToPasCompiler;
+
+{$R *.res}
+
 begin
   Application:=TXsdToPasCompiler.Create(nil);
   Application.Title:='XSD to PAS';

@@ -8,8 +8,8 @@
         <Filename Value="XsdToPas.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="63"/>
-        <CursorPos Y="106"/>
+        <TopLine Value="43"/>
+        <CursorPos Y="58"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
@@ -27,8 +27,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="248"/>
-        <CursorPos X="48" Y="271"/>
+        <TopLine Value="47"/>
+        <CursorPos X="89" Y="70"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
@@ -50,24 +50,20 @@
         <CursorPos X="-1" Y="-1"/>
         <UsageCount Value="20"/>
       </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/packages/fcl-xml/src/xmliconv.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/packages/fcl-xml/src/xmliconv_windows.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="33"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="98" TopLine="92"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="99" TopLine="92"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="107" TopLine="92"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="109" TopLine="92"/>
-      </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
         <Caret Line="123" TopLine="109"/>
@@ -115,10 +111,6 @@
       <Position>
         <Filename Value="XsdToPas.lpr"/>
         <Caret Line="54" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="57" TopLine="67"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
@@ -172,30 +164,59 @@
         <Filename Value="XsdToPas.lpr"/>
         <Caret Line="54" TopLine="38"/>
       </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="42" TopLine="22"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="166" TopLine="152"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="70" Column="89" TopLine="47"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="57" Column="3" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="58" Column="12" TopLine="43"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default">
         <Mode Name="default">
           <local>
-            <CommandLineParams Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+            <CommandLineParams Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
           </local>
         </Mode>
       </Modes>
     </RunParams>
     <HistoryLists>
-      <List Name="WorkingDirectory" Type="File" Count="1"/>
       <List Name="LaunchingApplication" Type="File" Count="3">
         <Item1 Value="/usr/bin/xterm -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
         <Item2 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
         <Item3 Value="/usr/bin/konsole -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </List>
       <List Name="CommandLineParameters" Count="2">
-        <Item1 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+        <Item1 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
+        <Item2 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
       </List>
     </HistoryLists>
   </ProjectSession>
   <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="XsdToPas.lpr"/>
+        <Line Value="58"/>
+      </Item>
+    </BreakPoints>
     <Watches>
       <Item>
         <Expression Value="FOutDir"/>
