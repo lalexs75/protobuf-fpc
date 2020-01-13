@@ -8,9 +8,9 @@
         <Filename Value="XsdToPas.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="43"/>
-        <CursorPos Y="58"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="86"/>
+        <CursorPos Y="100"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -20,16 +20,16 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
       </Unit>
       <Unit>
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="47"/>
-        <CursorPos X="89" Y="70"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="13"/>
+        <CursorPos X="94" Y="28"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -39,7 +39,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
       </Unit>
       <Unit>
         <Filename Value="xsdutils.pas"/>
@@ -48,7 +48,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/packages/fcl-xml/src/xmliconv.pas"/>
@@ -62,127 +62,23 @@
         <TopLine Value="33"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/packages/fcl-base/src/custapp.pp"/>
+        <UnitName Value="CustApp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="579"/>
+        <CursorPos Y="594"/>
+        <UsageCount Value="11"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="1">
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="123" TopLine="109"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="98" TopLine="82"/>
+        <Caret Line="73" TopLine="86"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="99" TopLine="82"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="107" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="109" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="118" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="119" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="120" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="122" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="123" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="124" TopLine="107"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="54" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="58" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="54" Column="6" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="61" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="62" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="63" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="265" Column="29" TopLine="235"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="54" Column="93" TopLine="35"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="50" Column="53" TopLine="35"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="264" Column="19" TopLine="243"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="61" TopLine="35"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="60" Column="18" TopLine="56"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="124" Column="38" TopLine="110"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="54" TopLine="38"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="42" TopLine="22"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="166" TopLine="152"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="70" Column="89" TopLine="47"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="57" Column="3" TopLine="41"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="58" Column="12" TopLine="43"/>
+        <Caret Line="95" TopLine="86"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -190,7 +86,7 @@
       <Modes ActiveMode="default">
         <Mode Name="default">
           <local>
-            <CommandLineParams Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
+            <CommandLineParams Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
           </local>
         </Mode>
       </Modes>
@@ -201,10 +97,16 @@
         <Item2 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
         <Item3 Value="/usr/bin/konsole -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </List>
-      <List Name="CommandLineParameters" Count="2">
-        <Item1 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
-        <Item2 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+      <List Name="CommandLineParameters" Count="7">
+        <Item1 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
+        <Item2 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d:1 -d:2 -d:3"/>
+        <Item3 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d=1 -d=2 -d=3"/>
+        <Item4 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d1 -d2 -d3"/>
+        <Item5 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd"/>
+        <Item6 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
+        <Item7 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
       </List>
+      <List Name="WorkingDirectory" Type="File" Count="1"/>
     </HistoryLists>
   </ProjectSession>
   <Debugging>
@@ -216,10 +118,24 @@
         <Source Value="XsdToPas.lpr"/>
         <Line Value="58"/>
       </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="XsdToPas.lpr"/>
+        <Line Value="95"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="XsdToPas.lpr"/>
+        <Line Value="100"/>
+      </Item>
     </BreakPoints>
     <Watches>
       <Item>
-        <Expression Value="FOutDir"/>
+        <Expression Value="O"/>
       </Item>
     </Watches>
   </Debugging>

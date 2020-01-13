@@ -56,12 +56,10 @@ begin
     FCodeGen.IncludeFileFolders.Add(S);
 *)
   FCodeGen.LicenseHeader:=GetOptionValue('c','copyrightinfo');
-
   FOutDir:=GetOptionValue('o','out');
 
-
   ST:=TStringList.Create;
-  GetNonOptions('h:o:c:' {i:'}, ['help','out'{, 'include'}, 'copyrightinfo'], ST);
+  GetNonOptions('h:o:c:tsp' , ['help','out'{, 'include'}, 'copyrightinfo', 'describe_types', 'describe_classes', 'describe_class_prop'], ST);
   if (ST.Count>0) then
   begin
     FFileName:=ST[0];
@@ -71,22 +69,15 @@ begin
   ST.Free;
 
   WriteLn('Compiling '+FFileName);
-  (*
-  for S in FCodeGen.IncludeFileFolders do
-    WriteLn(Format(sIncludeFolder, [S]));
-
-  if FOutDir<>'' then
-    writeln(Format(sOutputDirectory, [FOutDir]));
-*)
 
   FCodeGenDescribeOptions:=[];
-(*if CheckBox1.Checked then
-  FDO:=FDO + [cgdoDescribeClasses];
-if CheckBox2.Checked then
-  FDO:=FDO + [cgdoDescribeClassProperty];
-if CheckBox3.Checked then
-  FDO:=FDO + [cgdoDescribeTypes];
-*)
+
+  if HasOption('t', 'describe_types') then
+    FCodeGenDescribeOptions:=FCodeGenDescribeOptions + [cgdoDescribeTypes];
+  if HasOption('s', 'describe_classes') then
+    FCodeGenDescribeOptions:=FCodeGenDescribeOptions + [cgdoDescribeClasses];
+  if HasOption('p', 'describe_class_prop') then
+    FCodeGenDescribeOptions:=FCodeGenDescribeOptions + [cgdoDescribeClassProperty];
 end;
 
 procedure TXsdToPasCompiler.ProcessNode(Sender: TXSDProcessor;
@@ -101,7 +92,7 @@ var
   FXSDModule: TXSDModule;
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('hoc' {'hoi'}, ['help','out'{, 'include'}, 'copyrightinfo']);
+  ErrorMsg:=CheckOptions('hoctsp', ['help', 'out', 'copyrightinfo', 'describe_types', 'describe_classes', 'describe_class_prop']);
   if ErrorMsg<>'' then
   begin
     ShowException(Exception.Create(ErrorMsg));
@@ -161,7 +152,9 @@ begin
   writeln('Usage: ', ExeName, ' -h -o --help --out <proto_file.proto>');
   writeln('Main options:');
   writeln('-o, --out'#9'out folder');
-//  writeln('-i, --include'#9'include files folder');
+  writeln('-t, --describe_types'#9'Describe types');
+  writeln('-s, --describe_classes'#9'Describe classes');
+  writeln('-p, --describe_class_prop'#9'Describe class propertys');
   writeln('Codegeneration options:');
   writeln('-c, --copyrightinfo'#9'copyright info for file header');
   writeln('Other options:');

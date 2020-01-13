@@ -90,8 +90,11 @@ var
 begin
   Result:='';
   {$IFDEF XSD_FORWARD_DECLARE}
+  Result:=Result + LineEnding + '  {  Forward declarations  }' + LineEnding;
   for CT in FXSDModule.ComplexTypes do
     Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
+
+  Result:=Result + LineEnding + '  {  Generic classes for collections  }' + LineEnding;
   for CT in FXSDModule.ComplexTypes do
     Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
   {$ENDIF}

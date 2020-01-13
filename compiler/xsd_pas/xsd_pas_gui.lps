@@ -7,11 +7,10 @@
       <Unit>
         <Filename Value="xsd_pas_gui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="14"/>
         <CursorPos Y="37"/>
         <UsageCount Value="47"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="xsdmainunit.pas"/>
@@ -21,7 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="XSDMainUnit"/>
         <TopLine Value="85"/>
-        <CursorPos X="53" Y="102"/>
+        <CursorPos X="22" Y="96"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -42,8 +41,8 @@
         <UnitName Value="XsdPasCodegenUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="160"/>
-        <CursorPos X="29" Y="173"/>
+        <TopLine Value="86"/>
+        <CursorPos X="72" Y="100"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit>
@@ -177,11 +176,10 @@
       <Unit>
         <Filename Value="../../../lazutils/lazfileutils.pas"/>
         <UnitName Value="LazFileUtils"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="157"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="109"/>
         <CursorPos X="10" Y="109"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
@@ -266,37 +264,20 @@
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="642"/>
         <CursorPos X="15" Y="657"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="220"/>
         <CursorPos X="10" Y="235"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="61" TopLine="43"/>
-      </Position>
-      <Position>
-        <Filename Value="demos/UniversalTransferDocument.xsd"/>
-        <Caret Line="1559" TopLine="1476"/>
-      </Position>
-      <Position>
-        <Filename Value="demos/UniversalTransferDocument.xsd"/>
-      </Position>
-      <Position>
-        <Filename Value="demos/UniversalTransferDocument.xsd"/>
-        <Caret Line="579" Column="57" TopLine="552"/>
-      </Position>
+    <JumpHistory HistoryIndex="22">
       <Position>
         <Filename Value="demos/UniversalTransferDocument.xsd"/>
         <Caret Line="1081" Column="43" TopLine="1054"/>
@@ -349,36 +330,8 @@
         <Caret Line="73" Column="28" TopLine="66"/>
       </Position>
       <Position>
-        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <Caret Line="809" Column="25" TopLine="786"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <Caret Line="738" Column="24" TopLine="723"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <Caret Line="742" Column="15" TopLine="727"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <Caret Line="679" Column="15" TopLine="663"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
-        <Caret Line="657" Column="15" TopLine="642"/>
-      </Position>
-      <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
         <Caret Line="73" Column="45" TopLine="66"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="235" Column="29" TopLine="214"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="1138" Column="3" TopLine="1134"/>
       </Position>
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
@@ -399,6 +352,22 @@
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
         <Caret Line="45" Column="14" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="173" Column="29" TopLine="160"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="42" Column="14" TopLine="29"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="77" Column="3" TopLine="75"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="44" Column="14" TopLine="27"/>
       </Position>
     </JumpHistory>
     <RunParams>
