@@ -866,7 +866,7 @@ var
 begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) and (P.MinSize>-1) then
-    if Length(AValue) < P.MinSize then
+    if UTF8Length(AValue) < P.MinSize then
       raise Exception.CreateFmt('%s.%s : value %s shorter that %d', [ClassName, APropertyName, AValue, P.MinSize]);
 end;
 
@@ -877,7 +877,7 @@ var
 begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) and (P.MaxSize>-1) then
-    if Length(AValue) > P.MaxSize then
+    if UTF8Length(AValue) > P.MaxSize then
       raise Exception.CreateFmt('%s.%s : value %s greater than %d', [ClassName, APropertyName, AValue, P.MaxSize]);
 end;
 
