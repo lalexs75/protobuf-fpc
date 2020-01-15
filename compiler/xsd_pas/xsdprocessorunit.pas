@@ -33,6 +33,7 @@ type
   TXSDProcessor = class
   private
     FDoc: TXMLDocument;
+    FIncludeFolders: TStrings;
     FSchema: TDOMNode;
     FOnProcessNodeEvent: TOnProcessNodeEvent;
     FXSDModule: TXSDModule;
@@ -51,6 +52,7 @@ type
     procedure Clear;
     procedure LoadFromFile(AFileName:string);
     function ExecuteProcessor:TXSDModule;
+    property IncludeFolders:TStrings read FIncludeFolders;
     property OnProcessNodeEvent:TOnProcessNodeEvent read FOnProcessNodeEvent write FOnProcessNodeEvent;
   end;
 
@@ -107,6 +109,10 @@ begin
       R:=N.Attributes.GetNamedItem('name');
       DoProcessNodeMsg(R.NodeName, R.NodeValue);
       ProcessSimpleType(N, FXSDModule.SimpleTypes.Add(R.NodeValue));
+    end
+    else
+    if (S = 'xs:include') then
+    begin
     end;
   end;
 
@@ -491,11 +497,13 @@ end;
 constructor TXSDProcessor.Create;
 begin
   inherited Create;
+  FIncludeFolders:=TStringList.Create;
 end;
 
 destructor TXSDProcessor.Destroy;
 begin
   Clear;
+  FreeAndNil(FIncludeFolders);
   inherited Destroy;
 end;
 

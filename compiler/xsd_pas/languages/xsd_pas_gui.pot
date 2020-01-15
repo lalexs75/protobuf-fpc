@@ -1,79 +1,17 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: txsdmainform.bitbtn1.caption
-msgid "BitBtn1"
-msgstr ""
-
-#: txsdmainform.bitbtn2.caption
-msgid "BitBtn2"
-msgstr ""
-
-#: txsdmainform.button1.caption
+#: xsd_gui_consts_unit.sconvert
+msgctxt "xsd_gui_consts_unit.sconvert"
 msgid "Convert"
-msgstr ""
-
-#: txsdmainform.button2.caption
-msgid "Save to file"
-msgstr ""
-
-#: txsdmainform.caption
-msgid "XSD to PAS compiler"
-msgstr ""
-
-#: txsdmainform.checkbox1.caption
-msgid "Describe classes"
-msgstr ""
-
-#: txsdmainform.checkbox2.caption
-msgid "Describe propertys"
-msgstr ""
-
-#: txsdmainform.checkbox3.caption
-msgid "Describe types"
-msgstr ""
-
-#: txsdmainform.checkbox4.caption
-msgid "Use license header - file name"
-msgstr ""
-
-#: txsdmainform.incfadd.caption
-msgid "Add folder"
-msgstr ""
-
-#: txsdmainform.incfdel.caption
-msgid "Remove"
-msgstr ""
-
-#: txsdmainform.label1.caption
-msgid "XSD file"
-msgstr ""
-
-#: txsdmainform.label2.caption
-msgid "Output file name"
-msgstr ""
-
-#: txsdmainform.label3.caption
-msgid "Include file folders"
-msgstr ""
-
-#: txsdmainform.tabeditor.caption
-msgid "Result file"
-msgstr ""
-
-#: txsdmainform.tablogs.caption
-msgid "Log"
-msgstr ""
-
-#: txsdmainform.tabsheet3.caption
-msgid "Options"
-msgstr ""
-
-#: txsdmainform.tabsource.caption
-msgid "Source XSD file"
 msgstr ""
 
 #: xsd_gui_consts_unit.serroronparsexds
 msgid "Error on parse XDS module"
+msgstr ""
+
+#: xsd_gui_consts_unit.sxsdfile
+msgctxt "xsd_gui_consts_unit.sxsdfile"
+msgid "XSD file"
 msgstr ""
 

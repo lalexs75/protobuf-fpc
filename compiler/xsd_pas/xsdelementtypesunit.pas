@@ -137,7 +137,7 @@ type
     FTypeName: string;
     FOwner: TXSDComplexTypes;
     FInheritedXSDComplexType:TXSDComplexType;
-  private
+    FInludedType: Boolean;
   public
     constructor Create(AOwner:TXSDComplexTypes);
     destructor Destroy; override;
@@ -149,6 +149,7 @@ type
     property MainRoot:boolean read FMainRoot write FMainRoot;
     property Description:string read FDescription write FDescription;
     property InheritedType:string read FInheritedType write FInheritedType;
+    property InludedType:Boolean read FInludedType write FInludedType;
   end;
 
   { TXSDComplexTypes }
@@ -193,6 +194,7 @@ type
     FBaseName: string;
     FDescription: string;
     FFractionDigits: Integer;
+    FInludedType: Boolean;
     FMaxLength: integer;
     FMinLength: integer;
     FPasBaseName: string;
@@ -222,6 +224,7 @@ type
     //minInclusive
     //maxExclusive
     //maxInclusive
+    property InludedType:Boolean read FInludedType write FInludedType;
   end;
 
   { TXSDSimpleTypes }

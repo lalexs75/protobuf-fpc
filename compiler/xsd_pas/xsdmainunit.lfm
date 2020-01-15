@@ -19,6 +19,7 @@ object XSDMainForm: TXSDMainForm
     Width = 48
     BorderSpacing.Around = 6
     Caption = 'XSD file'
+    FocusControl = FileNameEdit1
     ParentColor = False
   end
   object FileNameEdit1: TFileNameEdit

@@ -271,11 +271,12 @@ var
 begin
   Result:='';
   for ST in FXSDModule.SimpleTypes do
-  begin
-    if (cgdoDescribeTypes in FDescribeOptions) and (ST.Description <> '') then
-       Result:=Result + GenerateTypeDescription(ST.Description) {'{'+ST.Description+ '}' + LineEnding};
-    Result:=Result + '  ' + ST.PasTypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
-  end;
+    if not ST.InludedType then
+    begin
+      if (cgdoDescribeTypes in FDescribeOptions) and (ST.Description <> '') then
+         Result:=Result + GenerateTypeDescription(ST.Description);
+      Result:=Result + '  ' + ST.PasTypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
+    end;
   if Result <> '' then
     Result:='type' + LineEnding + Result;
 end;

@@ -25,7 +25,10 @@ uses
   Classes, SysUtils;
 
 resourcestring
+
   sErrorOnParseXDS = 'Error on parse XDS module';
+  sXSDFile         = 'XSD file';
+  sConvert         = 'Convert';
 
 implementation
 

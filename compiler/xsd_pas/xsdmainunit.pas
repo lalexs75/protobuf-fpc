@@ -137,6 +137,7 @@ end;
 
 procedure TXSDMainForm.FormCreate(Sender: TObject);
 begin
+  Localize;
   PageControl1.ActivePage:=tabEditor;
 end;
 
@@ -149,7 +150,8 @@ end;
 
 procedure TXSDMainForm.Localize;
 begin
-
+  Label1.Caption:=sXSDFile;
+  Button1.Caption:=sConvert;
 end;
 
 end.
