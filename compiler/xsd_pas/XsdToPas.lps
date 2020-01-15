@@ -8,8 +8,8 @@
         <Filename Value="XsdToPas.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="86"/>
-        <CursorPos Y="100"/>
+        <TopLine Value="54"/>
+        <CursorPos Y="81"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit>
@@ -68,17 +68,65 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="579"/>
         <CursorPos Y="594"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory HistoryIndex="13">
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="73" TopLine="86"/>
+        <Caret Line="95" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="100" TopLine="86"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
         <Caret Line="95" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="96" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="95" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="58" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="59" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="61" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="58" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="63" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="65" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="75" TopLine="56"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="77" TopLine="56"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="79" TopLine="56"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -86,7 +134,7 @@
       <Modes ActiveMode="default">
         <Mode Name="default">
           <local>
-            <CommandLineParams Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
+            <CommandLineParams Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -t -s -p"/>
           </local>
         </Mode>
       </Modes>
@@ -97,14 +145,15 @@
         <Item2 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
         <Item3 Value="/usr/bin/konsole -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </List>
-      <List Name="CommandLineParameters" Count="7">
-        <Item1 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
-        <Item2 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d:1 -d:2 -d:3"/>
-        <Item3 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d=1 -d=2 -d=3"/>
-        <Item4 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d1 -d2 -d3"/>
-        <Item5 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd"/>
-        <Item6 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
-        <Item7 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+      <List Name="CommandLineParameters" Count="8">
+        <Item1 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -t -s -p"/>
+        <Item2 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
+        <Item3 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d:1 -d:2 -d:3"/>
+        <Item4 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d=1 -d=2 -d=3"/>
+        <Item5 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d1 -d2 -d3"/>
+        <Item6 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd"/>
+        <Item7 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
+        <Item8 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
       </List>
       <List Name="WorkingDirectory" Type="File" Count="1"/>
     </HistoryLists>
@@ -116,21 +165,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="XsdToPas.lpr"/>
-        <Line Value="58"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="XsdToPas.lpr"/>
-        <Line Value="95"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="XsdToPas.lpr"/>
-        <Line Value="100"/>
+        <Line Value="75"/>
       </Item>
     </BreakPoints>
     <Watches>

@@ -1,6 +1,6 @@
 { XSD files compiler to FPC class
 
-  Copyright (C) 2019 Lagunov Aleksey alexs@yandex.ru
+  Copyright (C) 2019-2020 Lagunov Aleksey alexs@yandex.ru
 
   This source is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
   License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later
@@ -29,7 +29,7 @@ uses
   XsdElementTypesUnit,
   XsdPasCodegenUnit,
   XsdProcessorUnit,
-  rxlogging, xsdutils;
+  rxlogging, xsdutils, xsd_gui_consts_unit;
 
 {$R *.res}
 

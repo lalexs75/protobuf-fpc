@@ -23,14 +23,19 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, EditBtn,
-  ComCtrls, ExtCtrls, XsdElementTypesUnit, SynEdit, SynHighlighterPas,
-  SynHighlighterXML, RxIniPropStorage, XsdProcessorUnit;
+  ComCtrls, ExtCtrls, Buttons, Menus, ActnList, XsdElementTypesUnit, SynEdit,
+  SynHighlighterPas, SynHighlighterXML, RxIniPropStorage, XsdProcessorUnit;
 
 type
 
   { TXSDMainForm }
 
   TXSDMainForm = class(TForm)
+    incfAdd: TAction;
+    incfDel: TAction;
+    ActionList1: TActionList;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     Button1: TButton;
     Button2: TButton;
     CheckBox1: TCheckBox;
@@ -40,8 +45,11 @@ type
     FileNameEdit1: TFileNameEdit;
     FileNameEdit2: TFileNameEdit;
     FileNameEdit3: TFileNameEdit;
+    ImageList1: TImageList;
     Label1: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
+    ListBox1: TListBox;
     Memo1: TMemo;
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -61,6 +69,7 @@ type
   private
 
     procedure ProcessNode(Sender:TXSDProcessor; ANodeName:string; AMessage:string);
+    procedure Localize;
   public
     //
   end;
@@ -69,7 +78,7 @@ var
   XSDMainForm: TXSDMainForm;
 
 implementation
-uses rxlogging, xmliconv, XsdPasCodegenUnit, LazFileUtils;
+uses rxlogging, xmliconv, XsdPasCodegenUnit, xsd_gui_consts_unit, LazFileUtils;
 
 {$R *.lfm}
 
@@ -109,7 +118,7 @@ begin
     FCodegen.Free;
   end
   else
-    ShowMessage('Error on parse XDS module');
+    ShowMessage(sErrorOnParseXDS);
   FXSDModule.Free;
   FProcessor.Free;
 end;
@@ -136,6 +145,11 @@ procedure TXSDMainForm.ProcessNode(Sender: TXSDProcessor; ANodeName: string;
 begin
   Memo1.Lines.Add(ANodeName + ' : '+AMessage);
   RxWriteLog(etDebug, ANodeName + ' : '+AMessage);
+end;
+
+procedure TXSDMainForm.Localize;
+begin
+
 end;
 
 end.
