@@ -53,6 +53,7 @@
       <Unit>
         <Filename Value="xsdmainunit.pas"/>
         <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
         <ComponentName Value="XSDMainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
