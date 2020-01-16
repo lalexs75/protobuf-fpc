@@ -78,7 +78,7 @@ var
   XSDMainForm: TXSDMainForm;
 
 implementation
-uses rxlogging, xmliconv, XsdPasCodegenUnit, xsd_gui_consts_unit, LazFileUtils;
+uses rxlogging, xmliconv, XsdPasCodegenUnit, xsd_gui_consts_unit, LazFileUtils, LazUTF8, rxAppUtils;
 
 {$R *.lfm}
 
@@ -91,6 +91,11 @@ var
   FXSDModule: TXSDModule;
   FDO : TCodeGenDescribeOptions;
 begin
+  if not FileExistsUTF8(FileNameEdit1.FileName) then
+  begin
+    ErrorBox(sFileNotFound, [FileNameEdit1.FileName]);
+    Exit;
+  end;
   SynEdit1.Lines.Clear;
   FProcessor:=TXSDProcessor.Create;
 
