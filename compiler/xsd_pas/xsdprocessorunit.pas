@@ -414,6 +414,7 @@ begin
       begin
         Prop.MaxOccurs:=FMaxOccurs;
         Prop.MinOccurs:=FMinOccurs;
+        Prop.Description:=GetAnnotation(FA);
       end;
        //id=идентификатор
        //substitutionGroup=QName
