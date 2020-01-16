@@ -193,6 +193,7 @@ begin
 
     FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue + '_element');
     FComplexType.MainRoot:=true;
+    FComplexType.MainRootName:=RName.NodeValue;
     FComplexType.InheritedType:=R.NodeValue;
     //ProcessComplexElement(ANode, R, FComplexType)
   end

@@ -133,6 +133,7 @@ type
     FDescription: string;
     FInheritedType: string;
     FMainRoot: boolean;
+    FMainRootName: string;
     FPascalTypeName: string;
     FPropertys: TPropertyItems;
     FTypeName: string;
@@ -148,6 +149,7 @@ type
     property PascalTypeName:string read FPascalTypeName write FPascalTypeName;
     property Propertys:TPropertyItems read FPropertys;
     property MainRoot:boolean read FMainRoot write FMainRoot;
+    property MainRootName:string read FMainRootName write FMainRootName;
     property Description:string read FDescription write FDescription;
     property InheritedType:string read FInheritedType write FInheritedType;
     property InludedType:Boolean read FInludedType write FInludedType;

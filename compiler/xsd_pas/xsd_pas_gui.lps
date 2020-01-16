@@ -29,8 +29,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdElementTypesUnit"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="69"/>
-        <CursorPos X="19" Y="82"/>
+        <TopLine Value="136"/>
+        <CursorPos X="60" Y="152"/>
         <UsageCount Value="56"/>
         <Loaded Value="True"/>
       </Unit>
@@ -40,8 +40,8 @@
         <UnitName Value="XsdPasCodegenUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="228"/>
-        <CursorPos X="75" Y="244"/>
+        <TopLine Value="255"/>
+        <CursorPos X="37" Y="275"/>
         <UsageCount Value="56"/>
         <Loaded Value="True"/>
       </Unit>
@@ -50,11 +50,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdProcessorUnit"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="270"/>
-        <CursorPos Y="295"/>
+        <TopLine Value="180"/>
+        <CursorPos X="47" Y="196"/>
         <UsageCount Value="56"/>
         <Bookmarks Count="1">
-          <Item0 X="43" Y="309" ID="2"/>
+          <Item0 X="43" Y="310" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
@@ -315,44 +315,12 @@
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/Vvod.xsd"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="409" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="407" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="408" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="409" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="407" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="408" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="409" Column="13" TopLine="389"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="407" TopLine="389"/>
-      </Position>
       <Position>
         <Filename Value="xsdelementtypesunit.pas"/>
         <Caret Line="408" TopLine="389"/>
@@ -440,6 +408,38 @@
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
         <Caret Line="45" Column="14" TopLine="33"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="295" TopLine="270"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="56" Column="21" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="570" Column="3" TopLine="558"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="45" Column="15" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="125" Column="3" TopLine="149"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="46" Column="15" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="185" Column="3" TopLine="180"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="151" Column="70" TopLine="134"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -272,7 +272,7 @@ begin
     if CT.MainRoot then
       Result:=Result+'function '+CT.PascalTypeName+'.RootNodeName:string;'+LineEnding+
       'begin'+LineEnding+
-      '  Result:='''+CT.TypeName+''';'+LineEnding+
+      '  Result:='''+CT.MainRootName+''';'+LineEnding+
       'end;'+LineEnding+LineEnding;
   end;
 end;
