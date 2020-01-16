@@ -182,6 +182,10 @@ begin
          if PT.PascalMaxLength > -1 then
            Result:=Result +
              '  CheckStrMaxSize('''+PT.PascalName+''', AValue);'+LineEnding;
+
+         if PT.FixedValue <> '' then
+           Result:=Result +
+             '  CheckFixedValue('''+PT.PascalName+''', AValue);'+LineEnding;
          Result:=Result +
           '  ModifiedProperty('''+PT.PascalName+''');'+LineEnding+
           'end;'+LineEnding+LineEnding;
@@ -234,7 +238,10 @@ begin
              '    P.FractionDigits := '+IntToStr(PT.FractionDigits)+';' + LineEnding;
          end;
          if PT.DefaultValue <> '' then
-           Result:=Result + '    P.DefaultValue:='+QuotedStr(PT.DefaultValue)+';'+LineEnding;
+           Result:=Result + '    P.DefaultValue:='+QuotedStr(PT.DefaultValue)+';'+LineEnding
+         else
+         if PT.FixedValue <> '' then
+           Result:=Result + '    P.DefaultValue:='+QuotedStr(PT.FixedValue)+';'+LineEnding;
        end;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;

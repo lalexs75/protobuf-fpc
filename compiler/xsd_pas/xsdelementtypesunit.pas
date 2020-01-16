@@ -79,6 +79,7 @@ type
 
     property ValuesList:TStringList read FValuesList;
     property DefaultValue:string read FDefaultValue write FDefaultValue;
+    property FixedValue:string read FDefaultValue write FDefaultValue;
     property ValuePattern:string read FValuePattern write FValuePattern;
     property MaxLength:integer read FMaxLength write FMaxLength;
     property MinLength:integer read FMinLength write FMinLength;
@@ -207,6 +208,7 @@ type
   public
     constructor Create(AOwner:TXSDModule);
     destructor Destroy; override;
+    procedure UpdateUniqueName;
     procedure UpdatePascalNames;
     property TypeName:string read FTypeName write FTypeName;
     property BaseName:string read FBaseName write FBaseName;
@@ -390,6 +392,23 @@ destructor TXSDSimpleType.Destroy;
 begin
   FValuesList.Free;
   inherited Destroy;
+end;
+
+procedure TXSDSimpleType.UpdateUniqueName;
+var
+  i: Integer;
+  FN: String;
+  F: TXSDSimpleType;
+begin
+  FN:=FTypeName;
+  i:=0;
+  F:=FOwner.SimpleTypes.FindType(FN);
+  if F <> Self then
+  repeat
+    inc(i);
+    FN:=FTypeName + IntToStr(i);
+  until not Assigned(FOwner.SimpleTypes.FindType(FN));
+  FTypeName:=FN;
 end;
 
 procedure TXSDSimpleType.UpdatePascalNames;

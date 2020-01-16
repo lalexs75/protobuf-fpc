@@ -277,7 +277,6 @@ begin
 
 
      //default=строка
-     //fixed=строка
      //form=qualified | unqualified
      //id=идентификатор
      //name=NCName
@@ -290,6 +289,9 @@ begin
   if Assigned(R) then
     Prop.DefaultValue:=R.NodeValue;
 
+  R:=FA.Attributes.GetNamedItem('fixed');
+  if Assigned(R) then
+    Prop.FixedValue:=R.NodeValue;
 end;
 
 procedure ProcessAS(RAll:TDOMNode);
@@ -348,6 +350,7 @@ var
   i, FMaxOccurs, FMinOccurs: Integer;
   FA, FC, R, RMinOccurs, RMaxOccurs: TDOMNode;
   Prop: TPropertyItem;
+  ST: TXSDSimpleType;
 begin
   for i:=0 to RAll.ChildNodes.Count-1 do
   begin
@@ -388,10 +391,12 @@ begin
           FC:=FA.FindNode('xs:simpleType');
           if Assigned(FC) then
           begin
-            ProcessSimpleType(FC, FXSDModule.SimpleTypes.Add(FA.Attributes.GetNamedItem('name').NodeValue));
+            ST:=FXSDModule.SimpleTypes.Add(FA.Attributes.GetNamedItem('name').NodeValue);
+            ProcessSimpleType(FC, ST);
+            ST.UpdateUniqueName;
 
             Prop:=AComplexType.Propertys.Add(pitSimpleType);
-            Prop.BaseType:=FA.Attributes.GetNamedItem('name').NodeValue;
+            Prop.BaseType:=ST.TypeName;
             Prop.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
             Prop.Description:=GetAnnotation(FC);
 
