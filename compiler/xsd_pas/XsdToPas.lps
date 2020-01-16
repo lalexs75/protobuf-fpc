@@ -8,8 +8,8 @@
         <Filename Value="XsdToPas.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="54"/>
-        <CursorPos Y="81"/>
+        <TopLine Value="71"/>
+        <CursorPos Y="86"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit>
@@ -26,7 +26,7 @@
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="13"/>
         <CursorPos X="94" Y="28"/>
         <UsageCount Value="21"/>
@@ -70,63 +70,116 @@
         <CursorPos Y="594"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="698"/>
+        <CursorPos X="15" Y="711"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/stringl.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1069"/>
+        <CursorPos X="3" Y="1072"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/rtl/inc/except.inc"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="174"/>
+        <CursorPos Y="193"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/fina.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="43"/>
+        <CursorPos Y="67"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="13">
+    <JumpHistory HistoryIndex="19">
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="95" TopLine="86"/>
+        <Caret Line="78" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="100" TopLine="86"/>
+        <Caret Line="79" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="95" TopLine="86"/>
+        <Caret Line="80" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="96" TopLine="86"/>
+        <Caret Line="81" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="95" TopLine="86"/>
+        <Caret Line="82" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="58" TopLine="43"/>
+        <Caret Line="84" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="59" TopLine="43"/>
+        <Caret Line="85" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="61" TopLine="43"/>
+        <Caret Line="86" TopLine="63"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="58" TopLine="43"/>
+        <Caret Line="110" TopLine="104"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="63" TopLine="43"/>
+        <Caret Line="119" TopLine="104"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/install/source/fpcsrc/rtl/inc/except.inc"/>
+        <Caret Line="189" TopLine="174"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="65" TopLine="43"/>
+        <Caret Line="119" TopLine="70"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="75" TopLine="56"/>
+        <Caret Line="77" TopLine="71"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="77" TopLine="56"/>
+        <Caret Line="78" TopLine="71"/>
       </Position>
       <Position>
         <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="79" TopLine="56"/>
+        <Caret Line="79" TopLine="71"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="80" TopLine="71"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="81" TopLine="71"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="82" TopLine="71"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="84" TopLine="71"/>
+      </Position>
+      <Position>
+        <Filename Value="XsdToPas.lpr"/>
+        <Caret Line="85" TopLine="71"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -134,7 +187,7 @@
       <Modes ActiveMode="default">
         <Mode Name="default">
           <local>
-            <CommandLineParams Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -t -s -p"/>
+            <CommandLineParams Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/Ввод_товара_в_оборот_физ_лицо_(XSD-схема).xsd -t -s -p"/>
           </local>
         </Mode>
       </Modes>
@@ -145,15 +198,16 @@
         <Item2 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
         <Item3 Value="/usr/bin/konsole -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </List>
-      <List Name="CommandLineParameters" Count="8">
-        <Item1 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -t -s -p"/>
-        <Item2 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
-        <Item3 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d:1 -d:2 -d:3"/>
-        <Item4 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d=1 -d=2 -d=3"/>
-        <Item5 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d1 -d2 -d3"/>
-        <Item6 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd"/>
-        <Item7 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
-        <Item8 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
+      <List Name="CommandLineParameters" Count="9">
+        <Item1 Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/Ввод_товара_в_оборот_физ_лицо_(XSD-схема).xsd -t -s -p"/>
+        <Item2 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -t -s -p"/>
+        <Item3 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -tsp"/>
+        <Item4 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d:1 -d:2 -d:3"/>
+        <Item5 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d=1 -d=2 -d=3"/>
+        <Item6 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd -d1 -d2 -d3"/>
+        <Item7 Value="/home/alexs/1/5/ElectricityIndication_DEFAULT_pokaz_01_01.xsd"/>
+        <Item8 Value="/home/alexs/1/5/XmlTorg12_default_utd820_05_01_01_hyphen.xsd"/>
+        <Item9 Value="/home/work/lazarus/components/protobuf-fpc/compiler/xsd_pas/demos/company.xsd"/>
       </List>
       <List Name="WorkingDirectory" Type="File" Count="1"/>
     </HistoryLists>
@@ -165,7 +219,14 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="XsdToPas.lpr"/>
-        <Line Value="75"/>
+        <Line Value="77"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="XsdToPas.lpr"/>
+        <Line Value="84"/>
       </Item>
     </BreakPoints>
     <Watches>

@@ -265,6 +265,7 @@ type
   TXSDModule = class
   private
     FComplexTypes: TXSDComplexTypes;
+    FIncludeFiles: TStrings;
     FSimpleTypes: TXSDSimpleTypes;
   public
     constructor Create;
@@ -273,6 +274,7 @@ type
     procedure UpdatePascalNames;
     property ComplexTypes:TXSDComplexTypes read FComplexTypes;
     property SimpleTypes:TXSDSimpleTypes read FSimpleTypes;
+    property IncludeFiles:TStrings read FIncludeFiles;
   end;
 
 implementation
@@ -619,6 +621,7 @@ begin
   inherited Create;
   FComplexTypes:=TXSDComplexTypes.Create(Self);
   FSimpleTypes:=TXSDSimpleTypes.Create(Self);
+  FIncludeFiles:=TStringList.Create;
 end;
 
 destructor TXSDModule.Destroy;
@@ -626,6 +629,7 @@ begin
   Clear;
   FComplexTypes.Free;
   FSimpleTypes.Free;
+  FIncludeFiles.Free;
   inherited Destroy;
 end;
 
@@ -633,6 +637,7 @@ procedure TXSDModule.Clear;
 begin
   FComplexTypes.Clear;
   FSimpleTypes.Clear;
+  FIncludeFiles.Clear;
 end;
 
 procedure TXSDModule.UpdatePascalNames;

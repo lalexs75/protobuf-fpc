@@ -29,6 +29,7 @@ resourcestring
   sErrorOnParseXDS = 'Error on parse XDS module';
   sXSDFile         = 'XSD file';
   sConvert         = 'Convert';
+  sFileNotFound    = 'File "%s" not found.';
 
 implementation
 

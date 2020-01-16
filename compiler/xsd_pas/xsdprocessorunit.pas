@@ -32,18 +32,20 @@ type
 
   TXSDProcessor = class
   private
-    FDoc: TXMLDocument;
+    FMainDoc: TXMLDocument;
     FIncludeFolders: TStrings;
-    FSchema: TDOMNode;
+    FMainSchema: TDOMNode;
     FOnProcessNodeEvent: TOnProcessNodeEvent;
     FXSDModule: TXSDModule;
-    function FindSchemaElent(AName:string):TDOMNode;
+    function FindSchemaElent(AName: string; FSchema: TDOMNode): TDOMNode;
   protected
     procedure DoProcessNodeMsg(ANodeName:string; AMessage:string);
+    procedure DoLoadXMLIncludeDoc(AFileName:string);
 
     procedure ProcessSchema(ANode:TDOMNode);
-    procedure ProcessElement(ANode:TDOMNode);
-    procedure ProcessComplexElement(ANode, AContext:TDOMNode; AComplexType: TXSDComplexType);
+    procedure ProcessElement(ANode, FSchema:TDOMNode);
+    procedure ProcessComplexElement(ANode, AContext, FSchema: TDOMNode;
+      AComplexType: TXSDComplexType);
     procedure ProcessSimpleType(AContext: TDOMNode; ASimpleType: TXSDSimpleType);
     function GetAnnotation(AContext:TDOMNode):string;
   public
@@ -57,11 +59,11 @@ type
   end;
 
 implementation
-uses StrUtils, XMLRead, xsdutils;
+uses StrUtils, XMLRead, xsdutils, LazFileUtils;
 
 { TXSDProcessor }
 
-function TXSDProcessor.FindSchemaElent(AName: string): TDOMNode;
+function TXSDProcessor.FindSchemaElent(AName: string; FSchema:TDOMNode): TDOMNode;
 var
   N, R: TDOMNode;
   I: Integer;
@@ -91,12 +93,34 @@ begin
     FOnProcessNodeEvent(Self, ANodeName, AMessage);
 end;
 
+procedure TXSDProcessor.DoLoadXMLIncludeDoc(AFileName: string);
+var
+  FIncDoc: TXMLDocument;
+  FIncSchema: TDOMNode;
+begin
+  ReadXMLFile(FIncDoc, AFileName);
+  try
+    if Assigned(FIncDoc) then
+    begin
+      FIncSchema:=FIncDoc.FindNode('xs:schema');
+      if Assigned(FIncSchema) then
+        ProcessSchema(FIncSchema);
+    end
+    else
+      raise Exception.Create('Not find schema in document');
+  finally
+    FIncDoc.Free;
+  end;
+end;
+
 procedure TXSDProcessor.ProcessSchema(ANode: TDOMNode);
 var
-  i: Integer;
+  i, C: Integer;
   N, R: TDOMNode;
   S: DOMString;
+  S1 : string;
   CT: TXSDComplexType;
+  ST: TXSDSimpleType;
 begin
   if not Assigned(ANode) then Exit;
   //load simple type list
@@ -108,11 +132,23 @@ begin
     begin
       R:=N.Attributes.GetNamedItem('name');
       DoProcessNodeMsg(R.NodeName, R.NodeValue);
-      ProcessSimpleType(N, FXSDModule.SimpleTypes.Add(R.NodeValue));
+      ST:=FXSDModule.SimpleTypes.Add(R.NodeValue);
+      ST.InludedType:=ANode <>  FMainSchema;
+      ProcessSimpleType(N, ST);
     end
     else
     if (S = 'xs:include') then
     begin
+      R:=N.Attributes.GetNamedItem('schemaLocation');
+      C:=FIncludeFolders.Count;
+      S1:=ExpandXSDFileName(ExtractFileName(R.NodeValue), FIncludeFolders);
+      if S1<>'' then
+      begin
+        FXSDModule.IncludeFiles.Add(ExtractFileNameOnly(R.NodeValue));
+        DoLoadXMLIncludeDoc(S1)
+      end
+      else
+        raise Exception.CreateFmt('Not found include file name "%s"', [ExtractFileName(R.NodeValue)]);
     end;
   end;
 
@@ -126,7 +162,7 @@ begin
       DoProcessNodeMsg(S, N.NodeValue);
       if (S = 'xs:element')  then
       begin
-        ProcessElement(N)
+        ProcessElement(N, ANode)
       end
       else
       if (S = 'xs:complexType') then
@@ -134,13 +170,14 @@ begin
         R:=N.Attributes.GetNamedItem('name');
         DoProcessNodeMsg(R.NodeName, R.NodeValue);
         CT:=FXSDModule.ComplexTypes.Add(R.NodeValue);
-        ProcessComplexElement( N, N, CT);
+        CT.InludedType:=ANode <> FMainSchema;
+        ProcessComplexElement( N, N, ANode, CT);
       end;
     end;
   end;
 end;
 
-procedure TXSDProcessor.ProcessElement(ANode: TDOMNode);
+procedure TXSDProcessor.ProcessElement(ANode, FSchema: TDOMNode);
 var
   R, RName: TDOMNode;
   FComplexType: TXSDComplexType;
@@ -154,7 +191,7 @@ begin
   begin
     DoProcessNodeMsg(R.NodeName, R.NodeValue);
 
-    FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
+    FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue + '_element');
     FComplexType.MainRoot:=true;
     FComplexType.InheritedType:=R.NodeValue;
     //ProcessComplexElement(ANode, R, FComplexType)
@@ -166,12 +203,12 @@ begin
     begin
       FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
       FComplexType.MainRoot:=true;
-      ProcessComplexElement(ANode, R, FComplexType)
+      ProcessComplexElement(ANode, R, FSchema, FComplexType)
     end;
   end;
 end;
 
-procedure TXSDProcessor.ProcessComplexElement(ANode, AContext: TDOMNode;
+procedure TXSDProcessor.ProcessComplexElement(ANode, AContext, FSchema: TDOMNode;
   AComplexType: TXSDComplexType);
 
 procedure ProcessAttribute(FA:TDOMNode);
@@ -182,7 +219,7 @@ var
 begin
   R:=FA.Attributes.GetNamedItem('ref'); //ref=QName
   if Assigned(R) then
-    FC:=FindSchemaElent(R.NodeValue)
+    FC:=FindSchemaElent(R.NodeValue, FSchema)
   else
     FC:=FA;
 
@@ -300,7 +337,7 @@ var
 begin
   S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
   CT:=FXSDModule.ComplexTypes.Add(S);
-  ProcessComplexElement(FC, FC, CT);
+  ProcessComplexElement(FC, FC, FSchema, CT);
 
   Result:=AComplexType.Propertys.Add(pitClass);
   Result.BaseType:=S;
@@ -338,7 +375,7 @@ begin
       FC:=FA.Attributes.GetNamedItem('ref');
       if Assigned(FC) then
       begin
-        FA:=FindSchemaElent(FC.NodeValue);
+        FA:=FindSchemaElent(FC.NodeValue, FSchema);
         Prop:=DoAttributeProp(FA)
       end
       else
@@ -416,7 +453,7 @@ begin
       if Assigned(FC1) then
       begin
         AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
-        ProcessComplexElement(ANode, FC1, AComplexType);
+        ProcessComplexElement(ANode, FC1, FSchema, AComplexType);
       end;
     end
     else
@@ -509,15 +546,16 @@ end;
 
 procedure TXSDProcessor.Clear;
 begin
-  FSchema:=nil;
-  if Assigned(FDoc) then
-    FreeAndNil(FDoc);
+  FIncludeFolders.Clear;
+  FMainSchema:=nil;
+  if Assigned(FMainDoc) then
+    FreeAndNil(FMainDoc);
 end;
 
 procedure TXSDProcessor.LoadFromFile(AFileName: string);
 begin
   Clear;
-  ReadXMLFile(FDoc, AFileName);
+  ReadXMLFile(FMainDoc, AFileName);
 end;
 
 function TXSDProcessor.ExecuteProcessor: TXSDModule;
@@ -525,14 +563,14 @@ var
   S: DOMString;
 begin
   FXSDModule:=nil;
-  if Assigned(FDoc) then
+  if Assigned(FMainDoc) then
   begin
-    S:=FDoc.NamespaceURI;
+    S:=FMainDoc.NamespaceURI;
     FXSDModule:=TXSDModule.Create;
-    FSchema:=FDoc.FindNode('xs:schema');
-    if Assigned(FSchema) then
+    FMainSchema:=FMainDoc.FindNode('xs:schema');
+    if Assigned(FMainSchema) then
     begin
-      ProcessSchema(FSchema);
+      ProcessSchema(FMainSchema);
       FXSDModule.UpdatePascalNames;
     end
     else

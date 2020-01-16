@@ -73,8 +73,13 @@ begin
 end;
 
 function TXsdPasCodegen.DoGenInterfaceUses: string;
+var
+  S, SU: String;
 begin
-  Result:='uses'+LineEnding+'  Classes, SysUtils, xmlobject;'+LineEnding+LineEnding;
+  SU:='';
+  for S in FXSDModule.IncludeFiles do
+    SU:=SU + ', ' + S;
+  Result:='uses'+LineEnding+'  Classes, SysUtils, xmlobject'+SU+';'+LineEnding+LineEnding;
 end;
 
 function TXsdPasCodegen.DoGenImplementationUses: string;

@@ -33,8 +33,9 @@ function GetSimpleType(ATypeName:string):string;
 function IsKeyword(const AKeyword: string): boolean;
 
 function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
+function ExpandXSDFileName(AFileName:string; AIncludeFolders:TStrings):string;
 implementation
-uses StrUtils;
+uses StrUtils, LazFileUtils;
 
 type
   TStdTypeDef = record
@@ -176,6 +177,20 @@ begin
     if Trim(S)<>'' then
       Result:=Result + DupeString(' ', ASpacing) + '//'+Trim(S) + LineEnding;
   ST.Free;
+end;
+
+function ExpandXSDFileName(AFileName: string; AIncludeFolders: TStrings): string;
+var
+  S: String;
+begin
+  if FileExists(AFileName) then
+    Exit(AFileName)
+  else
+    Result:='';
+  if not Assigned(AIncludeFolders) then Exit;
+  for S in AIncludeFolders do
+    if FileExists(AppendPathDelim(S) + AFileName) then
+      Result:=AppendPathDelim(S) + AFileName;
 end;
 
 procedure InitStdTypes;

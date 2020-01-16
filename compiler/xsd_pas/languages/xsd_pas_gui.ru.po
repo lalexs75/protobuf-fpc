@@ -10,6 +10,11 @@ msgstr "Преобразовать"
 msgid "Error on parse XDS module"
 msgstr "Ошибка при разборе модуля XSD"
 
+#: xsd_gui_consts_unit.sfilenotfound
+#, object-pascal-format
+msgid "File \"%s\" not found."
+msgstr ""
+
 #: xsd_gui_consts_unit.sxsdfile
 msgctxt "xsd_gui_consts_unit.sxsdfile"
 msgid "XSD file"

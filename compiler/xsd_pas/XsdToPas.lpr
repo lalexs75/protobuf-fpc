@@ -47,14 +47,16 @@ type
 procedure TXsdToPasCompiler.InitParser;
 var
   ST: TStringList;
+  IncArr: TStringArray;
+  S: String;
 begin
   FFileName:='';
-(*
-  FCodeGen.IgnoreMissingUnitName:=true;
+
+  //FProcessor.IgnoreMissingUnitName:=true;
   IncArr:=GetOptionValues('i','include');
   for S in IncArr do
-    FCodeGen.IncludeFileFolders.Add(S);
-*)
+    FProcessor.IncludeFolders.Add(S);
+
   FCodeGen.LicenseHeader:=GetOptionValue('c','copyrightinfo');
   FOutDir:=GetOptionValue('o','out');
 
@@ -78,6 +80,9 @@ begin
     FCodeGenDescribeOptions:=FCodeGenDescribeOptions + [cgdoDescribeClasses];
   if HasOption('p', 'describe_class_prop') then
     FCodeGenDescribeOptions:=FCodeGenDescribeOptions + [cgdoDescribeClassProperty];
+
+  if ExtractFileDir(FFileName)<>'' then
+    FProcessor.IncludeFolders.Add(ExtractFileDir(FFileName));
 end;
 
 procedure TXsdToPasCompiler.ProcessNode(Sender: TXSDProcessor;
@@ -92,7 +97,7 @@ var
   FXSDModule: TXSDModule;
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('hoctsp', ['help', 'out', 'copyrightinfo', 'describe_types', 'describe_classes', 'describe_class_prop']);
+  ErrorMsg:=CheckOptions('hoctspi', ['help', 'out', 'copyrightinfo', 'describe_types', 'describe_classes', 'describe_class_prop', 'include']);
   if ErrorMsg<>'' then
   begin
     ShowException(Exception.Create(ErrorMsg));
@@ -149,12 +154,13 @@ end;
 procedure TXsdToPasCompiler.WriteHelp;
 begin
   //writeln('Usage: ', ExeName, ' -h -o -i --help --out --include <proto_file.proto>');
-  writeln('Usage: ', ExeName, ' -h -o --help --out <proto_file.proto>');
+  writeln('Usage: ', ExeName, ' -h -o -i -s -p -t --help --out --describe_types --describe_classes --describe_class_prop --include <proto_file.proto>');
   writeln('Main options:');
   writeln('-o, --out'#9'out folder');
   writeln('-t, --describe_types'#9'Describe types');
   writeln('-s, --describe_classes'#9'Describe classes');
   writeln('-p, --describe_class_prop'#9'Describe class propertys');
+  writeln('-i, --include'#9'Describe class propertys');
   writeln('Codegeneration options:');
   writeln('-c, --copyrightinfo'#9'copyright info for file header');
   writeln('Other options:');

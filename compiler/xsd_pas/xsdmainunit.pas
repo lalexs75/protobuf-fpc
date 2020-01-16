@@ -108,7 +108,13 @@ begin
     FDO:=FDO + [cgdoDescribeTypes];
 
   FProcessor.OnProcessNodeEvent:=@ProcessNode;
+  FProcessor.IncludeFolders.Assign(ListBox1.Items);
+
   FProcessor.LoadFromFile(FileNameEdit1.FileName);
+
+  if ExtractFileDir(FileNameEdit1.FileName) <>'' then
+    FProcessor.IncludeFolders.Append(ExtractFileDir(FileNameEdit1.FileName));
+
   FXSDModule:=FProcessor.ExecuteProcessor;
 
   if Assigned(FXSDModule) then
