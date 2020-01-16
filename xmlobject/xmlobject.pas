@@ -143,6 +143,8 @@ type
     procedure CheckLockupValue(APropertyName:string; AValue:Integer); inline;
     procedure CheckStrMinSize(APropertyName:string; AValue:string);
     procedure CheckStrMaxSize(APropertyName:string; AValue:string);
+    procedure CheckFixedValue(APropertyName:string; AValue:string);
+    procedure CheckFixedValue(APropertyName:string; AValue:Integer);
   public
     constructor Create;
     destructor Destroy; override;
@@ -879,6 +881,28 @@ begin
   if Assigned(P) and (P.MaxSize>-1) then
     if UTF8Length(AValue) > P.MaxSize then
       raise Exception.CreateFmt('%s.%s : value %s greater than %d', [ClassName, APropertyName, AValue, P.MaxSize]);
+end;
+
+procedure TXmlSerializationObject.CheckFixedValue(APropertyName: string;
+  AValue: string);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.DefaultValue <> AValue then
+      raise Exception.CreateFmt('Property %s : value %s not in equal to fixed value %s', [APropertyName, AValue, P.DefaultValue]);
+end;
+
+procedure TXmlSerializationObject.CheckFixedValue(APropertyName: string;
+  AValue: Integer);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if StrToInt(P.DefaultValue) <> AValue then
+      raise Exception.CreateFmt('Property %s : value %s not in equal to fixed value %s', [APropertyName, AValue, P.DefaultValue]);
 end;
 
 function TXmlSerializationObject.RootNodeName: string;
