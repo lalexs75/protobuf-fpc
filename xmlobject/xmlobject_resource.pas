@@ -58,6 +58,7 @@ resourcestring
   sValueGreaterThan             = '%s.%s : value %s greater than %d';
   sValueNotEqualToFixedValue    = 'Property %s : value %s not equal to fixed value %s';
   sValueNotEqualToFixedValueInt = 'Property %s : value %d not in equal to fixed value %s';
+  sValueNotEqualToFixedValueFloat  = 'Property %s : value %g not in equal to fixed value %s';
   sValueIsLoweredThatInt        = 'Property %s : value %d is lowered that %d';
   sValueIsGreatedInt            = 'Property %s : value %d is greated %d';
   sValueIsLoweredThatFloat      = 'Property %s : value %g is lowered that %g';

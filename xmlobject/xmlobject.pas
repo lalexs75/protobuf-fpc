@@ -163,6 +163,7 @@ type
     procedure CheckStrMaxSize(APropertyName:string; AValue:string);
     procedure CheckFixedValue(APropertyName:string; AValue:string);
     procedure CheckFixedValue(APropertyName:string; AValue:Int64);
+    procedure CheckFixedValue(APropertyName:string; AValue:Double);
 
     procedure CheckMinExclusiveValue(APropertyName:string; AValue:Int64);
     procedure CheckMaxExclusiveValue(APropertyName:string; AValue:Int64);
@@ -931,6 +932,22 @@ begin
   if Assigned(P) then
     if StrToInt(P.DefaultValue) <> AValue then
       raise Exception.CreateFmt(sValueNotEqualToFixedValueInt, [APropertyName, AValue, P.DefaultValue]);
+end;
+
+procedure TXmlSerializationObject.CheckFixedValue(APropertyName: string;
+  AValue: Double);
+var
+  V : Double;
+  P: TPropertyDef;
+  C: integer;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+  begin
+    Val(P.DefaultValue, V, C);
+    if V <> AValue then
+      raise Exception.CreateFmt(sValueNotEqualToFixedValueInt, [APropertyName, AValue, P.DefaultValue]);
+  end;
 end;
 
 procedure TXmlSerializationObject.CheckMinExclusiveValue(APropertyName: string;

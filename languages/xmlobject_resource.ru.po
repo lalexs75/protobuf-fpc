@@ -97,6 +97,11 @@ msgstr "Свойство %s : значение %d меньше чем %d"
 msgid "Property %s : value %s not equal to fixed value %s"
 msgstr "Свойство %s : Значение %s не равно фиксированному значнию %s"
 
+#: xmlobject_resource.svaluenotequaltofixedvaluefloat
+#, object-pascal-format
+msgid "Property %s : value %g not in equal to fixed value %s"
+msgstr ""
+
 #: xmlobject_resource.svaluenotequaltofixedvalueint
 #, object-pascal-format
 msgid "Property %s : value %d not in equal to fixed value %s"
@@ -108,7 +113,7 @@ msgid "%s.%s : value %s shorter that %d"
 msgstr "%s.%s : Значение %s короче чем %d"
 
 #: xmlobject_resource.svvaluenotinrange
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Property %s : value %s not in range"
 msgstr "Свойство %s: значение вне диапазона"
 
