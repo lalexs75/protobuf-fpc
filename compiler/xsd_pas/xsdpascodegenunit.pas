@@ -130,6 +130,7 @@ begin
 
     Result:=Result+
     '  public'+LineEnding+
+    '    constructor Create;'+LineEnding+
     '    destructor Destroy; override;'+LineEnding+
     '  published'+LineEnding;
 
@@ -186,6 +187,23 @@ begin
          if PT.FixedValue <> '' then
            Result:=Result +
              '  CheckFixedValue('''+PT.PascalName+''', AValue);'+LineEnding;
+
+         if Assigned(PT.XSDSimpleType) and Assigned(PT.XSDSimpleType.PasBaseTypeRec) and (PT.XSDSimpleType.PasBaseTypeRec.XSDDataType in [xsdtInteger, xsdtFloat]) then
+         begin
+{           if PT.XSDSimpleType.PasBaseTypeRec.XSDDataType = xsdtInteger then
+             S:='Int'
+           else
+             S:='Float';}
+           if PT.XSDSimpleType.minExclusive <> '' then
+             Result:=Result + '  CheckMinExclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+           if PT.XSDSimpleType.maxExclusive <> '' then
+             Result:=Result + '  CheckMaxExclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+           if PT.XSDSimpleType.minInclusive <> '' then
+             Result:=Result + '  CheckMinInclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+           if PT.XSDSimpleType.maxInclusive <> '' then
+             Result:=Result + '  CheckMaxInclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+         end;
+
          Result:=Result +
           '  ModifiedProperty('''+PT.PascalName+''');'+LineEnding+
           'end;'+LineEnding+LineEnding;
@@ -242,6 +260,24 @@ begin
          else
          if PT.FixedValue <> '' then
            Result:=Result + '    P.DefaultValue:='+QuotedStr(PT.FixedValue)+';'+LineEnding;
+
+         if Assigned(PT.XSDSimpleType) and Assigned(PT.XSDSimpleType.PasBaseTypeRec) and (PT.XSDSimpleType.PasBaseTypeRec.XSDDataType in [xsdtInteger, xsdtFloat]) then
+         begin
+           if PT.XSDSimpleType.PasBaseTypeRec.XSDDataType = xsdtInteger then
+             S:='Int'
+           else
+             S:='Float';
+
+           if PT.XSDSimpleType.minExclusive <> '' then
+             Result:=Result + '    P.minExclusive'+S+':='+PT.XSDSimpleType.minExclusive+';'+LineEnding;
+           if PT.XSDSimpleType.maxExclusive <> '' then
+             Result:=Result + '    P.maxExclusive'+S+':='+PT.XSDSimpleType.maxExclusive+';'+LineEnding;
+           if PT.XSDSimpleType.minInclusive <> '' then
+             Result:=Result + '    P.minInclusive'+S+':='+PT.XSDSimpleType.minInclusive+';'+LineEnding;
+           if PT.XSDSimpleType.maxInclusive <> '' then
+             Result:=Result + '    P.maxInclusive'+S+':='+PT.XSDSimpleType.maxInclusive+';'+LineEnding;
+
+         end;
        end;
      end;
      Result:=Result + 'end;'+LineEnding+LineEnding;
@@ -274,6 +310,18 @@ begin
       'begin'+LineEnding+
       '  Result:='''+CT.MainRootName+''';'+LineEnding+
       'end;'+LineEnding+LineEnding;
+
+    Result:=Result+'constructor '+CT.PascalTypeName+'.Create;'+LineEnding+
+    'begin'+LineEnding+
+    '  inherited Create;'+LineEnding;
+
+    for PT in CT.Propertys do
+    begin
+      if PT.PascalDefaultValue <> '' then
+       Result:=Result + '  '+PT.PascalName+':='+PT.PascalDefaultValue+';' + LineEnding;
+    end;
+
+    Result:=Result+'end;'+LineEnding+LineEnding;
   end;
 end;
 

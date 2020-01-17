@@ -4,111 +4,111 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 #: xmlobject_resource.sclasspropertynotinit
 #, object-pascal-format
 msgid "Class property not init %s"
-msgstr ""
+msgstr "Сложное свойство не инициализировано %s"
 
 #: xmlobject_resource.snotassignedxmlfile
 msgid "Not assigned XML file"
-msgstr ""
+msgstr "Не указан XML файл"
 
 #: xmlobject_resource.snotfoundpropertyforfield
 #, object-pascal-format
 msgid "Not found property in %s for data field %s"
-msgstr ""
+msgstr "Не найдено свойство в %s для поля %s"
 
 #: xmlobject_resource.sobjectpropertynotassigned
 #, object-pascal-format
 msgid "Object %s. Property %s not assigned"
-msgstr ""
+msgstr "Класс %s. Свойство %s не инициализированно"
 
 #: xmlobject_resource.spropertyisnotclasstype
 #, object-pascal-format
 msgid "Property is not class type %s"
-msgstr ""
+msgstr "Свойство %s не типа класс"
 
 #: xmlobject_resource.spropertynotfound
 #, object-pascal-format
 msgid "Not fond property %s.%s(%s)"
-msgstr ""
+msgstr "Не найдено свойство %s.%s(%s)"
 
 #: xmlobject_resource.spropertynotfound1
 #, object-pascal-format
 msgctxt "xmlobject_resource.spropertynotfound1"
 msgid "%s : property %s not found"
-msgstr ""
+msgstr "%s : свойство %s не найдено"
 
 #: xmlobject_resource.spropertynotfound2
 #, object-pascal-format
 msgctxt "xmlobject_resource.spropertynotfound2"
 msgid "Not fond property %s"
-msgstr ""
+msgstr "Не найдно свойство %s"
 
 #: xmlobject_resource.spropertyrequaredvalue
 #, object-pascal-format
 msgid "%s: property %s requared value"
-msgstr ""
+msgstr "%s: Свойство %s требует значения"
 
 #: xmlobject_resource.suknowpropertytype
 #, object-pascal-format
 msgid "Uknow property type %s"
-msgstr ""
+msgstr "Не известный тип поля %s"
 
 #: xmlobject_resource.sunknowclassproperty
 #, object-pascal-format
 msgid "Unknow class property %s.%s"
-msgstr ""
+msgstr "Не известное свйоство класса %s.%s"
 
 #: xmlobject_resource.sunknowobject
 #, object-pascal-format
 msgid "Unknow object - %s"
-msgstr ""
+msgstr "Не известный объект - %s"
 
 #: xmlobject_resource.svalueexpectedrange
 #, object-pascal-format
 msgid "%s.%s - Attribs value is grated (%s - %d)"
-msgstr ""
+msgstr "%s.%s - Значение атрибуте больше чем (%s - %d)"
 
 #: xmlobject_resource.svaluegreaterthan
 #, object-pascal-format
 msgid "%s.%s : value %s greater than %d"
-msgstr ""
+msgstr "%s.%s : значение %s больше чем %d"
 
 #: xmlobject_resource.svalueisgreatedfloat
 #, object-pascal-format
 msgid "Property %s : value %g is greated %g"
-msgstr ""
+msgstr "Свойство %s : значение %g больше чем %g"
 
 #: xmlobject_resource.svalueisgreatedint
 #, object-pascal-format
 msgid "Property %s : value %d is greated %d"
-msgstr ""
+msgstr "Свойство %s : значение %d больше чем %d"
 
 #: xmlobject_resource.svalueisloweredthatfloat
 #, object-pascal-format
 msgid "Property %s : value %g is lowered that %g"
-msgstr ""
+msgstr "Свойство %s : значение %g меньше чем %g"
 
 #: xmlobject_resource.svalueisloweredthatint
 #, object-pascal-format
 msgid "Property %s : value %d is lowered that %d"
-msgstr ""
+msgstr "Свойство %s : значение %d меньше чем %d"
 
 #: xmlobject_resource.svaluenotequaltofixedvalue
 #, object-pascal-format
 msgid "Property %s : value %s not equal to fixed value %s"
-msgstr ""
+msgstr "Свойство %s : Значение %s не равно фиксированному значнию %s"
 
 #: xmlobject_resource.svaluenotequaltofixedvalueint
 #, object-pascal-format
 msgid "Property %s : value %d not in equal to fixed value %s"
-msgstr ""
+msgstr "Свойство %s : значение %d не равно фиксированному значению %s"
 
 #: xmlobject_resource.svalueshorterthat
 #, object-pascal-format
 msgid "%s.%s : value %s shorter that %d"
-msgstr ""
+msgstr "%s.%s : Значение %s короче чем %d"
 
 #: xmlobject_resource.svvaluenotinrange
 #, object-pascal-format
 msgid "Property %s : value %s not in range"
-msgstr ""
+msgstr "Свойство %s: значение вне диапазона"
 

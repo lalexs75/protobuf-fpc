@@ -44,12 +44,26 @@ uses
 resourcestring
   sNotFoundPropertyForField     = 'Not found property in %s for data field %s';
   sPropertyNotFound             = 'Not fond property %s.%s(%s)';
-  sPropertyNotFound1            = 'Not fond property %s';
+  sPropertyNotFound1            = '%s : property %s not found';
+  sUnknowObject                 = 'Unknow object - %s';
+  sPropertyNotFound2            = 'Not fond property %s';
   sUknowPropertyType            = 'Uknow property type %s';
   sPropertyIsNotClassType       = 'Property is not class type %s';
   sClassPropertyNotInit         = 'Class property not init %s';
   sUnknowClassProperty          = 'Unknow class property %s.%s';
-  sValueExpectedRange           = '%s.%s - Значение атрибута слишком велико (%s - %d)';
+  sNotAssignedXMLFile           = 'Not assigned XML file';
+  sValueExpectedRange           = '%s.%s - Attribs value is grated (%s - %d)';
+  sVvalueNotInRange             = 'Property %s : value %s not in range';
+  sValueShorterThat             = '%s.%s : value %s shorter that %d';
+  sValueGreaterThan             = '%s.%s : value %s greater than %d';
+  sValueNotEqualToFixedValue    = 'Property %s : value %s not equal to fixed value %s';
+  sValueNotEqualToFixedValueInt = 'Property %s : value %d not in equal to fixed value %s';
+  sValueIsLoweredThatInt        = 'Property %s : value %d is lowered that %d';
+  sValueIsGreatedInt            = 'Property %s : value %d is greated %d';
+  sValueIsLoweredThatFloat      = 'Property %s : value %g is lowered that %g';
+  sValueIsGreatedFloat          = 'Property %s : value %g is greated %g';
+  sPropertyRequaredValue        = '%s: property %s requared value';
+  sObjectPropertyNotAssigned    = 'Object %s. Property %s not assigned';
 
 implementation
 

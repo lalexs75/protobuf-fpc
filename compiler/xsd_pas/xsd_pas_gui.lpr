@@ -29,7 +29,9 @@ uses
   XsdElementTypesUnit,
   XsdPasCodegenUnit,
   XsdProcessorUnit,
-  rxlogging, xsdutils, xsd_gui_consts_unit;
+  rxlogging,
+  xsdutils,
+  xsd_gui_consts_unit;
 
 {$R *.res}
 

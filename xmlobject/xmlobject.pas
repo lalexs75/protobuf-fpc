@@ -55,7 +55,15 @@ type
     FAttribs: TXSAttribs;
     FCaption: string;
     FDefaultValue: string;
+    FmaxExclusiveFloat: Double;
+    FmaxExclusiveInt: Int64;
+    FmaxInclusiveFloat: Double;
+    FmaxInclusiveInt: Int64;
     FMaxSize: integer;
+    FminExclusiveFloat: Double;
+    FminExclusiveInt: Int64;
+    FminInclusiveFloat: Double;
+    FminInclusiveInt: Int64;
     FMinSize: integer;
     FModified: boolean;
     FPropertyName: string;
@@ -77,6 +85,16 @@ type
     property DefaultValue:string read FDefaultValue write FDefaultValue;
     property TotalDigits:integer read FTotalDigits write FTotalDigits;
     property FractionDigits:integer read FTotalDigits write FTotalDigits;
+
+    property minExclusiveInt:Int64 read FminExclusiveInt write FminExclusiveInt;
+    property maxExclusiveInt:Int64 read FmaxExclusiveInt write FmaxExclusiveInt;
+    property minInclusiveInt:Int64 read FminInclusiveInt write FminInclusiveInt;
+    property maxInclusiveInt:Int64 read FmaxInclusiveInt write FmaxInclusiveInt;
+
+    property minExclusiveFloat:Double read FminExclusiveFloat write FminExclusiveFloat;
+    property maxExclusiveFloat:Double read FmaxExclusiveFloat write FmaxExclusiveFloat;
+    property minInclusiveFloat:Double read FminInclusiveFloat write FminInclusiveFloat;
+    property maxInclusiveFloat:Double read FmaxInclusiveFloat write FmaxInclusiveFloat;
   end;
 
   { TPropertyList }
@@ -144,7 +162,17 @@ type
     procedure CheckStrMinSize(APropertyName:string; AValue:string);
     procedure CheckStrMaxSize(APropertyName:string; AValue:string);
     procedure CheckFixedValue(APropertyName:string; AValue:string);
-    procedure CheckFixedValue(APropertyName:string; AValue:Integer);
+    procedure CheckFixedValue(APropertyName:string; AValue:Int64);
+
+    procedure CheckMinExclusiveValue(APropertyName:string; AValue:Int64);
+    procedure CheckMaxExclusiveValue(APropertyName:string; AValue:Int64);
+    procedure CheckMinInclusiveValue(APropertyName:string; AValue:Int64);
+    procedure CheckMaxInclusiveValue(APropertyName:string; AValue:Int64);
+
+    procedure CheckMinExclusiveValue(APropertyName:string; AValue:Double);
+    procedure CheckMaxExclusiveValue(APropertyName:string; AValue:Double);
+    procedure CheckMinInclusiveValue(APropertyName:string; AValue:Double);
+    procedure CheckMaxInclusiveValue(APropertyName:string; AValue:Double);
   public
     constructor Create;
     destructor Destroy; override;
@@ -377,7 +405,7 @@ begin
       Exit(P);
   end;
 
-  raise Exception.CreateFmt('%s : property %s not found', [FOwner.ClassName, APropertyName]);
+  raise Exception.CreateFmt(sPropertyNotFound1, [FOwner.ClassName, APropertyName]);
 end;
 
 function TPropertyList.PropertyByXMLName(AXMLName: string): TPropertyDef;
@@ -650,7 +678,7 @@ begin
     begin
       FProp:=GetPropInfo(Self, P.FPropertyName); //Retreive property informations
       if not Assigned(FProp) then
-        raise Exception.CreateFmt(sPropertyNotFound1, [P.FPropertyName]);
+        raise Exception.CreateFmt(sPropertyNotFound2, [P.FPropertyName]);
 
       K:=FProp^.PropType^.Kind;
       TN:=FProp^.PropType^.Name;
@@ -774,7 +802,7 @@ begin
     end;
   end
   else
-    raise Exception.CreateFmt('Unknow object - %s', [AChild.ClassName]);
+    raise Exception.CreateFmt(sUnknowObject, [AChild.ClassName]);
 end;
 
 function TXmlSerializationObject.IsEmpty: Boolean;
@@ -791,7 +819,7 @@ begin
 
     FProp:=GetPropInfo(Self, P.FPropertyName);
     if not Assigned(FProp) then
-      raise Exception.CreateFmt('Not fond property %s.%s(%s)', [ClassName, P.PropertyName, P.Caption]);
+      raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
 
     if FProp^.PropType^.Kind = tkClass then
     begin
@@ -810,10 +838,10 @@ begin
             Exit(false);
         end
         else
-          raise Exception.CreateFmt('Unknow property type %s', [P.PropertyName]);
+          raise Exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
       end
       else
-        raise Exception.CreateFmt('Object %s property %s not assigned', [ClassName, P.PropertyName]);
+        raise Exception.CreateFmt(sObjectPropertyNotAssigned, [ClassName, P.PropertyName]);
     end
     else
     if P.Modified then
@@ -831,7 +859,7 @@ begin
     FProp:=GetPropInfo(Self, P.FPropertyName);
     if Assigned(FProp) and (FProp^.PropType^.Kind <> tkClass) then
       if (not P.Modified) and (xsaRequared in P.Attribs) then
-        raise Exception.CreateFmt('%s: property %s requared value', [ClassName, P.PropertyName]);
+        raise Exception.CreateFmt(sPropertyRequaredValue, [ClassName, P.PropertyName]);
   end;
 end;
 
@@ -851,7 +879,7 @@ begin
   begin
     if P.ValidList.Count>0 then
       if not P.ValidList.Find(AValue, i) then
-        raise Exception.CreateFmt('Property %s : value %s not in range', [APropertyName, AValue]);
+        raise Exception.CreateFmt(sVvalueNotInRange, [APropertyName, AValue]);
   end
 end;
 
@@ -869,7 +897,7 @@ begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) and (P.MinSize>-1) then
     if UTF8Length(AValue) < P.MinSize then
-      raise Exception.CreateFmt('%s.%s : value %s shorter that %d', [ClassName, APropertyName, AValue, P.MinSize]);
+      raise Exception.CreateFmt(sValueShorterThat, [ClassName, APropertyName, AValue, P.MinSize]);
 end;
 
 procedure TXmlSerializationObject.CheckStrMaxSize(APropertyName: string;
@@ -880,7 +908,7 @@ begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) and (P.MaxSize>-1) then
     if UTF8Length(AValue) > P.MaxSize then
-      raise Exception.CreateFmt('%s.%s : value %s greater than %d', [ClassName, APropertyName, AValue, P.MaxSize]);
+      raise Exception.CreateFmt(sValueGreaterThan, [ClassName, APropertyName, AValue, P.MaxSize]);
 end;
 
 procedure TXmlSerializationObject.CheckFixedValue(APropertyName: string;
@@ -891,18 +919,106 @@ begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) then
     if P.DefaultValue <> AValue then
-      raise Exception.CreateFmt('Property %s : value %s not in equal to fixed value %s', [APropertyName, AValue, P.DefaultValue]);
+      raise Exception.CreateFmt(sValueNotEqualToFixedValue, [APropertyName, AValue, P.DefaultValue]);
 end;
 
 procedure TXmlSerializationObject.CheckFixedValue(APropertyName: string;
-  AValue: Integer);
+  AValue: Int64);
 var
   P: TPropertyDef;
 begin
   P:=FPropertyList.PropertyByName(APropertyName);
   if Assigned(P) then
     if StrToInt(P.DefaultValue) <> AValue then
-      raise Exception.CreateFmt('Property %s : value %s not in equal to fixed value %s', [APropertyName, AValue, P.DefaultValue]);
+      raise Exception.CreateFmt(sValueNotEqualToFixedValueInt, [APropertyName, AValue, P.DefaultValue]);
+end;
+
+procedure TXmlSerializationObject.CheckMinExclusiveValue(APropertyName: string;
+  AValue: Int64);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.minExclusiveInt >= AValue then
+      raise Exception.CreateFmt(sValueIsLoweredThatInt, [APropertyName, AValue, P.minExclusiveInt]);
+end;
+
+procedure TXmlSerializationObject.CheckMaxExclusiveValue(APropertyName: string;
+  AValue: Int64);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.maxExclusiveInt <= AValue then
+      raise Exception.CreateFmt(sValueIsGreatedInt, [APropertyName, AValue, P.maxExclusiveInt]);
+end;
+
+procedure TXmlSerializationObject.CheckMinInclusiveValue(APropertyName: string;
+  AValue: Int64);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.minInclusiveInt > AValue then
+      raise Exception.CreateFmt(sValueIsLoweredThatInt, [APropertyName, AValue, P.minInclusiveInt]);
+end;
+
+procedure TXmlSerializationObject.CheckMaxInclusiveValue(APropertyName: string;
+  AValue: Int64);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.maxInclusiveInt < AValue then
+      raise Exception.CreateFmt(sValueIsGreatedInt, [APropertyName, AValue, P.maxInclusiveInt]);
+end;
+
+procedure TXmlSerializationObject.CheckMinExclusiveValue(APropertyName: string;
+  AValue: Double);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.minExclusiveFloat >= AValue then
+      raise Exception.CreateFmt(sValueIsLoweredThatFloat, [APropertyName, AValue, P.minExclusiveFloat]);
+end;
+
+procedure TXmlSerializationObject.CheckMaxExclusiveValue(APropertyName: string;
+  AValue: Double);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.maxExclusiveFloat <= AValue then
+      raise Exception.CreateFmt(sValueIsGreatedFloat, [APropertyName, AValue, P.maxExclusiveFloat]);
+end;
+
+procedure TXmlSerializationObject.CheckMinInclusiveValue(APropertyName: string;
+  AValue: Double);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.minInclusiveFloat > AValue then
+      raise Exception.CreateFmt(sValueIsLoweredThatFloat, [APropertyName, AValue, P.minInclusiveFloat]);
+end;
+
+procedure TXmlSerializationObject.CheckMaxInclusiveValue(APropertyName: string;
+  AValue: Double);
+var
+  P: TPropertyDef;
+begin
+  P:=FPropertyList.PropertyByName(APropertyName);
+  if Assigned(P) then
+    if P.maxInclusiveFloat < AValue then
+      raise Exception.CreateFmt(sValueIsGreatedFloat, [APropertyName, AValue, P.maxInclusiveFloat]);
 end;
 
 function TXmlSerializationObject.RootNodeName: string;
@@ -1021,7 +1137,7 @@ begin
   if Assigned(XML) then
     InternalRead(XML.DocumentElement)
   else
-    raise Exception.Create('Not assigned XML file');
+    raise Exception.Create(sNotAssignedXMLFile);
 end;
 
 end.

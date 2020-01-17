@@ -13,7 +13,7 @@
     </CompilerOptions>
     <Description Value="XML files to Pascal objects"/>
     <License Value="LGPL3"/>
-    <Version Major="2" Release="2" Build="2"/>
+    <Version Major="2" Release="3" Build="4"/>
     <Files>
       <Item>
         <Filename Value="xmlobject/xmlobject.pas"/>

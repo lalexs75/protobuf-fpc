@@ -507,11 +507,19 @@ begin
       else
       if M.NodeName = 'xs:fractionDigits' then
         ASimpleType.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
+      else
+      if M.NodeName = 'xs:minExclusive' then
+        ASimpleType.minExclusive:=M.Attributes.GetNamedItem('value').NodeValue
+      else
+      if M.NodeName = 'xs:minInclusive' then
+        ASimpleType.minInclusive:=M.Attributes.GetNamedItem('value').NodeValue
+      else
+      if M.NodeName = 'xs:maxExclusive' then
+        ASimpleType.maxExclusive:=M.Attributes.GetNamedItem('value').NodeValue
+      else
+      if M.NodeName = 'xs:maxInclusive' then
+        ASimpleType.maxInclusive:=M.Attributes.GetNamedItem('value').NodeValue
     end;
-    //minExclusive
-    //minInclusive
-    //maxExclusive
-    //maxInclusive
     //totalDigits
     //fractionDigits
     //whiteSpace

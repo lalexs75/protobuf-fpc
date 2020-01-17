@@ -22,7 +22,7 @@ unit XsdElementTypesUnit;
 interface
 
 uses
-  Classes, SysUtils, xsd_generator;
+  Classes, SysUtils, xsd_generator, xsdutils;
 
 type
   TXSDSimpleType = class;
@@ -66,6 +66,7 @@ type
     function PascalMaxLength:Integer;
     function PascalName:string;
     function PascalValuesListCount:Integer;
+    function PascalDefaultValue:string;
 
     procedure UpdatePascalNames;
     property Name:string read FName write FName;
@@ -198,36 +199,46 @@ type
     FDescription: string;
     FFractionDigits: Integer;
     FInludedType: Boolean;
+    FmaxExclusive: string;
+    FmaxInclusive: string;
     FMaxLength: integer;
+    FminExclusive: string;
+    FminInclusive: string;
     FMinLength: integer;
     FPasBaseName: string;
+    FPasBaseTypeRec: TXSDStdType;
     FPasTypeName: string;
     FTotalDigits: Integer;
     FTypeName: string;
     FOwner: TXSDModule;
     FValuePattern: string;
     FValuesList: TStringList;
+    procedure SetPasBaseName(AValue: string);
   public
     constructor Create(AOwner:TXSDModule);
     destructor Destroy; override;
     procedure UpdateUniqueName;
     procedure UpdatePascalNames;
+
     property TypeName:string read FTypeName write FTypeName;
     property BaseName:string read FBaseName write FBaseName;
+    property PasBaseTypeRec : TXSDStdType read FPasBaseTypeRec;
+
     property MaxLength:integer read FMaxLength write FMaxLength;
     property MinLength:integer read FMinLength write FMinLength;
     property Description:string read FDescription write FDescription;
-    property PasBaseName:string read FPasBaseName write FPasBaseName;
+    property PasBaseName:string read FPasBaseName write SetPasBaseName;
     property PasTypeName:string read FPasTypeName write FPasTypeName;
     property ValuesList:TStringList read FValuesList;
     property ValuePattern:string read FValuePattern write FValuePattern;
     property FractionDigits:Integer read FFractionDigits write FFractionDigits;
     property TotalDigits:Integer read FTotalDigits write FTotalDigits;
     //whiteSpace
-    //minExclusive
-    //minInclusive
-    //maxExclusive
-    //maxInclusive
+
+    property minExclusive:string read FminExclusive write FminExclusive;
+    property minInclusive:string read FminInclusive write FminInclusive;
+    property maxExclusive:string read FmaxExclusive write FmaxExclusive;
+    property maxInclusive:string read FmaxInclusive write FmaxInclusive;
     property InludedType:Boolean read FInludedType write FInludedType;
   end;
 
@@ -282,8 +293,6 @@ type
   end;
 
 implementation
-
-uses xsdutils;
 
 { TPropertyItem }
 
@@ -350,6 +359,19 @@ begin
     Result:=ValuesList.Count;
 end;
 
+function TPropertyItem.PascalDefaultValue: string;
+begin
+  if IsSimpleType(FBaseType) then
+  begin
+    if IsTypeQuotedStr(FBaseType) then
+      Result:=QuotedStr(FDefaultValue)
+    else
+      Result:=FDefaultValue;
+  end
+  else
+    Result:=FDefaultValue;
+end;
+
 procedure TPropertyItem.UpdatePascalNames;
 var
   S: String;
@@ -380,6 +402,13 @@ begin
 end;
 
 { TXSDSimpleType }
+
+procedure TXSDSimpleType.SetPasBaseName(AValue: string);
+begin
+  if FPasBaseName=AValue then Exit;
+  FPasBaseName:=AValue;
+  FPasBaseTypeRec := FindPasTypeRec(FBaseName);
+end;
 
 constructor TXSDSimpleType.Create(AOwner: TXSDModule);
 begin

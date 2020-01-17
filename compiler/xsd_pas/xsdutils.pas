@@ -24,15 +24,19 @@ interface
 uses
   Classes, SysUtils;
 type
+  TXSDDataType = (xsdtString, xsdtDateTime, xsdtInteger, xsdtFloat, xsdtBoolean);
+
   TXSDStdType = class
     PascalName:string;
     QuotedStr:Boolean;
+    XSDDataType:TXSDDataType;
   end;
 
 function IsSimpleType(ATypeName:string):Boolean;
 function IsTypeQuotedStr(ATypeName:string):Boolean;
 function GetSimpleType(ATypeName:string):string;
 function IsKeyword(const AKeyword: string): boolean;
+function FindPasTypeRec(ATypeName:string):TXSDStdType;
 
 function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
 function ExpandXSDFileName(AFileName:string; AIncludeFolders:TStrings):string;
@@ -44,6 +48,7 @@ type
     StdName:string;
     PasName:string;
     QuotedStr:Boolean;
+    XSDDataType:TXSDDataType;
   end;
 
 const
@@ -89,57 +94,57 @@ const
   );
 
   StdTypesArray : array [1..45] of TStdTypeDef = (
-    (StdName: 'xs:ENTITIES'; PasName:'String'; QuotedStr:true),
-    (StdName: 'xs:ENTITY'; PasName:'String'; QuotedStr:true),
-    (StdName: 'xs:ID'; PasName:'String'; QuotedStr:true),                   // Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы
-    (StdName: 'xs:IDREF'; PasName:'String'; QuotedStr:true),                // Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
-    (StdName: 'xs:IDREFS'; PasName:'String'; QuotedStr:true),               //
-    (StdName: 'xs:language'; PasName:'String'; QuotedStr:true),             // Строка, содержащая корректный идентификатор языка
-    (StdName: 'xs:Name'; PasName:'String'; QuotedStr:true),                 // Строка, содержащая корректное XML имя
-    (StdName: 'xs:NCName'; PasName:'String'; QuotedStr:true),               //
-    (StdName: 'xs:NMTOKEN'; PasName:'String'; QuotedStr:true),              // Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
-    (StdName: 'xs:NMTOKENS'; PasName:'String'; QuotedStr:true),             //
-    (StdName: 'xs:normalizedString'; PasName:'String'; QuotedStr:true),     //	Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
-    (StdName: 'xs:QName'; PasName:'String'; QuotedStr:true),                //
-    (StdName: 'xs:string'; PasName:'String'; QuotedStr:true),               // Любая строка
-    (StdName: 'xs:token'; PasName:'String'; QuotedStr:true),                // Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
+    (StdName: 'xs:ENTITIES'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),
+    (StdName: 'xs:ENTITY'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),
+    (StdName: 'xs:ID'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                   // Строка, представляющая идентификационный атрибут (используется только с атрибутами схемы
+    (StdName: 'xs:IDREF'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                // Строка, представляющая IDREF атрибут (используется только с атрибутами схемы)
+    (StdName: 'xs:IDREFS'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),               //
+    (StdName: 'xs:language'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),             // Строка, содержащая корректный идентификатор языка
+    (StdName: 'xs:Name'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                 // Строка, содержащая корректное XML имя
+    (StdName: 'xs:NCName'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),               //
+    (StdName: 'xs:NMTOKEN'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),              // Строка, представляющая NMTOKEN атрибут (используется только с атрибутами схемы)
+    (StdName: 'xs:NMTOKENS'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),             //
+    (StdName: 'xs:normalizedString'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),     //	Строка, которая не содержит символы перевода строки, переноса каретки или табуляции
+    (StdName: 'xs:QName'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                //
+    (StdName: 'xs:string'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),               // Любая строка
+    (StdName: 'xs:token'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                // Строка, которая не содержит символы перевода строки, переноса каретки, табуляции, начального и конечного пробелов или множественные пробелы
 
-    (StdName: 'xs:byte'; PasName:'Shortint'; QuotedStr:false),              // 8-битное целочисленное значение со знаком
-    (StdName: 'xs:decimal'; PasName:'Double'; QuotedStr:false),             // Десятичное значение
-    (StdName:'xs:int'; PasName:'Longint'; QuotedStr:false),                 // 32-битное целочисленное значение со знаком
-    (StdName:'xs:integer'; PasName:'Longint'; QuotedStr:false),             // Целочисленное значение
-    (StdName:'xs:long'; PasName:'Int64'; QuotedStr:false),                  // 64-битное целочисленное значение со знаком
-    (StdName:'xs:negativeInteger'; PasName:'integer'; QuotedStr:false),     // Целочисленное, содержащее только отрицательные значения (..,-2,-1)
-    (StdName:'xs:nonNegativeInteger'; PasName:'integer'; QuotedStr:false),  // Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
-    (StdName:'xs:nonPositiveInteger'; PasName:'integer'; QuotedStr:false),  // Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
-    (StdName:'xs:positiveInteger'; PasName:'integer'; QuotedStr:false),     // Целочисленное, содержащее только положительные значения (1,2,..)
-    (StdName:'xs:short'; PasName:'Smallint'; QuotedStr:false),              // 16-битное целочисленное значение со знаком
-    (StdName:'xs:unsignedLong'; PasName:'QWord'; QuotedStr:false),          // 64-битное целочисленное значение без знака
-    (StdName:'xs:unsignedInt'; PasName:'Longword'; QuotedStr:false),        // 32-битное целочисленное значение без знака
-    (StdName:'xs:unsignedShort'; PasName:'Word'; QuotedStr:false),          // 16-битное целочисленное значение без знака
-    (StdName:'xs:unsignedByte'; PasName:'Byte'; QuotedStr:false),           // 8-битное целочисленное значение без знака
+    (StdName: 'xs:byte'; PasName:'Shortint'; QuotedStr:false; XSDDataType:xsdtInteger),              // 8-битное целочисленное значение со знаком
+    (StdName: 'xs:decimal'; PasName:'Double'; QuotedStr:false; XSDDataType:xsdtFloat),             // Десятичное значение
+    (StdName:'xs:int'; PasName:'Longint'; QuotedStr:false; XSDDataType:xsdtInteger),                 // 32-битное целочисленное значение со знаком
+    (StdName:'xs:integer'; PasName:'Int64'; QuotedStr:false; XSDDataType:xsdtInteger),               // Целочисленное значение
+    (StdName:'xs:long'; PasName:'Int64'; QuotedStr:false; XSDDataType:xsdtInteger),                  // 64-битное целочисленное значение со знаком
+    (StdName:'xs:negativeInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),     // Целочисленное, содержащее только отрицательные значения (..,-2,-1)
+    (StdName:'xs:nonNegativeInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),  // Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
+    (StdName:'xs:nonPositiveInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),  // Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
+    (StdName:'xs:positiveInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),     // Целочисленное, содержащее только положительные значения (1,2,..)
+    (StdName:'xs:short'; PasName:'Smallint'; QuotedStr:false; XSDDataType:xsdtInteger),              // 16-битное целочисленное значение со знаком
+    (StdName:'xs:unsignedLong'; PasName:'QWord'; QuotedStr:false; XSDDataType:xsdtInteger),          // 64-битное целочисленное значение без знака
+    (StdName:'xs:unsignedInt'; PasName:'Longword'; QuotedStr:false; XSDDataType:xsdtInteger),        // 32-битное целочисленное значение без знака
+    (StdName:'xs:unsignedShort'; PasName:'Word'; QuotedStr:false; XSDDataType:xsdtInteger),          // 16-битное целочисленное значение без знака
+    (StdName:'xs:unsignedByte'; PasName:'Byte'; QuotedStr:false; XSDDataType:xsdtInteger),           // 8-битное целочисленное значение без знака
 
-    (StdName:'xs:date'; PasName:'TDate'; QuotedStr:true),                   // Определяет дату
-    (StdName:'xs:time'; PasName:'TTime'; QuotedStr:true),                   // Определяет время
-    (StdName:'xs:dateTime'; PasName:'TDateTime'; QuotedStr:true),           // Определяет дату и время
-    (StdName:'xs:duration'; PasName:'TDateTime'; QuotedStr:true),           // Определяет интервал времени
-    (StdName:'xs:gDay'; PasName:'Byte'; QuotedStr:false),                   // Определяет часть даты - день (ДД)
-    (StdName:'xs:gMonth'; PasName:'Byte'; QuotedStr:false),                 // Определяет часть даты - месяц (MM)
-    (StdName:'xs:gMonthDay'; PasName:'Word'; QuotedStr:false),              // Определяет часть даты — месяц и день (MM-ДД)      //TODO:add new type - record with fields MM DD
-    (StdName:'xs:gYear'; PasName:'Word'; QuotedStr:false),                  // Определяет часть даты - год (ГГГГ)
-    (StdName:'xs:gYearMonth'; PasName:'Longword'; QuotedStr:false),         // Определяет часть даты — год и месяц (ГГГГ-MM) //TODO:add new type - record with fields YYYY MM
+    (StdName:'xs:date'; PasName:'TDate'; QuotedStr:true; XSDDataType:xsdtDateTime),                   // Определяет дату
+    (StdName:'xs:time'; PasName:'TTime'; QuotedStr:true; XSDDataType:xsdtDateTime),                   // Определяет время
+    (StdName:'xs:dateTime'; PasName:'TDateTime'; QuotedStr:true; XSDDataType:xsdtDateTime),           // Определяет дату и время
+    (StdName:'xs:duration'; PasName:'TDateTime'; QuotedStr:true; XSDDataType:xsdtDateTime),           // Определяет интервал времени
+    (StdName:'xs:gDay'; PasName:'Byte'; QuotedStr:false; XSDDataType:xsdtInteger),                   // Определяет часть даты - день (ДД)
+    (StdName:'xs:gMonth'; PasName:'Byte'; QuotedStr:false; XSDDataType:xsdtInteger),                 // Определяет часть даты - месяц (MM)
+    (StdName:'xs:gMonthDay'; PasName:'Word'; QuotedStr:false; XSDDataType:xsdtInteger),              // Определяет часть даты — месяц и день (MM-ДД)      //TODO:add new type - record with fields MM DD
+    (StdName:'xs:gYear'; PasName:'Word'; QuotedStr:false; XSDDataType:xsdtInteger),                  // Определяет часть даты - год (ГГГГ)
+    (StdName:'xs:gYearMonth'; PasName:'Longword'; QuotedStr:false; XSDDataType:xsdtInteger),         // Определяет часть даты — год и месяц (ГГГГ-MM) //TODO:add new type - record with fields YYYY MM
 
-    (StdName:'xs:boolean'; PasName:'Boolean'; QuotedStr:false),             // Логический тип данных
+    (StdName:'xs:boolean'; PasName:'Boolean'; QuotedStr:false; XSDDataType:xsdtBoolean),             // Логический тип данных
 
-    (StdName:'xs:base64Binary'; PasName:'String'; QuotedStr:true),          // бинарные данные в кодировке Base64
-    (StdName:'xs:hexBinary'; PasName:'String'; QuotedStr:true),             // бинарные данные в шестнадцатеричной кодировке
+    (StdName:'xs:base64Binary'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),          // бинарные данные в кодировке Base64
+    (StdName:'xs:hexBinary'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),             // бинарные данные в шестнадцатеричной кодировке
 
-    (StdName:'anyURI'; PasName:'String'; QuotedStr:true),                   // Тип данных anyURI используется для определения URI
+    (StdName:'xs:anyURI'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                   // Тип данных anyURI используется для определения URI
 
-    (StdName:'float'; PasName:'Double'; QuotedStr:false),                   //
-    (StdName:'double'; PasName:'Double'; QuotedStr:false),                  //
-    (StdName:'Qname'; PasName:'String'; QuotedStr:true),                    //
-    (StdName:'NOTATION'; PasName:'String'; QuotedStr:true)                  //
+    (StdName:'xs:float'; PasName:'Double'; QuotedStr:false; XSDDataType:xsdtFloat),                   //
+    (StdName:'xs:double'; PasName:'Double'; QuotedStr:false; XSDDataType:xsdtFloat),                  //
+    (StdName:'xs:Qname'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString),                    //
+    (StdName:'xs:NOTATION'; PasName:'String'; QuotedStr:true; XSDDataType:xsdtString)                  //
     );
 
 
@@ -147,6 +152,34 @@ const
 var
   KeywordsList: TStringList = nil;
   StdTypesList: TStringList = nil;
+
+procedure InitStdTypes;
+var
+  D: TXSDStdType;
+  R: TStdTypeDef;
+begin
+  if Assigned(StdTypesList) then Exit;
+  StdTypesList:=TStringList.Create;
+  for R in StdTypesArray do
+  begin
+    D:=TXSDStdType.Create;
+    D.PascalName:=R.PasName;
+    D.QuotedStr:=R.QuotedStr;
+    D.XSDDataType:=R.XSDDataType;
+    StdTypesList.AddObject(R.StdName, D);
+  end;
+  StdTypesList.Sorted:=true;
+end;
+
+procedure DoneStdTypes;
+var
+  i: Integer;
+begin
+  if not Assigned(StdTypesList) then Exit;
+  for i:=0 to StdTypesList.Count-1 do
+    TXSDStdType(StdTypesList.Objects[i]).Free;
+  FreeAndNil(StdTypesList);
+end;
 
 function IsKeyword(const AKeyword: string): boolean;
 var
@@ -164,6 +197,19 @@ begin
     KeywordsList.Sorted := true;
   end;
   Result := KeywordsList.Find(LowerCase(AKeyword), i);
+end;
+
+function FindPasTypeRec(ATypeName: string): TXSDStdType;
+var
+  I: Integer;
+begin
+  if not Assigned(StdTypesList) then
+    InitStdTypes;
+
+  if StdTypesList.Find(ATypeName, I) then
+    Result:=TXSDStdType(StdTypesList.Objects[i])
+  else
+    Result:=nil;
 end;
 
 function GenerateTypeDescription(ADescription: string; ASpacing:integer = 2): string;
@@ -196,32 +242,6 @@ begin
       Result:=AppendPathDelim(S) + AFileName;
 end;
 
-procedure InitStdTypes;
-var
-  D: TXSDStdType;
-  R: TStdTypeDef;
-begin
-  if Assigned(StdTypesList) then Exit;
-  StdTypesList:=TStringList.Create;
-  for R in StdTypesArray do
-  begin
-    D:=TXSDStdType.Create;
-    D.PascalName:=R.PasName;
-    StdTypesList.AddObject(R.StdName, D);
-  end;
-  StdTypesList.Sorted:=true;
-end;
-
-procedure DoneStdTypes;
-var
-  i: Integer;
-begin
-  if not Assigned(StdTypesList) then Exit;
-  for i:=0 to StdTypesList.Count-1 do
-    TXSDStdType(StdTypesList.Objects[i]).Free;
-  FreeAndNil(StdTypesList);
-end;
-
 function IsSimpleType(ATypeName:string):Boolean;
 var
   I: Integer;
@@ -235,12 +255,16 @@ end;
 function IsTypeQuotedStr(ATypeName: string): Boolean;
 var
   I: Integer;
+  S: String;
 begin
   if not Assigned(StdTypesList) then
     InitStdTypes;
   Result:=false;
   if StdTypesList.Find(ATypeName, I) then
+  begin
+    S:=TXSDStdType(StdTypesList.Objects[i]).PascalName;
     Result:=TXSDStdType(StdTypesList.Objects[i]).QuotedStr
+  end
   else
     Result:=false;
 end;
