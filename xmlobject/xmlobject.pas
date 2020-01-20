@@ -483,7 +483,6 @@ var
   FProp: PPropInfo;
   E: TDOMElement;
   S, TN:string;
-  K: TTypeKind;
   D:TDateTime;
 begin
   ValidateRequared;
@@ -495,7 +494,7 @@ begin
     if not Assigned(FProp) then
       raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
 
-    K:=FProp^.PropType^.Kind;
+    //K:=FProp^.PropType^.Kind;
     TN:=FProp^.PropType^.Name;
     case FProp^.PropType^.Kind of
       tkChar,
@@ -514,7 +513,16 @@ begin
             SetAtribute(AElement, P.XMLName, GetStrProp(Self, P.PropertyName), P);
         end;
 //                  SetAtribute(P: TDOMElement; AttribName, AttribValue:string; AMaxLen:Integer);
-//      tkBool : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsBoolean));
+      tkBool :
+        begin
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E:=CreateElement(FXML, AElement, P.XMLName);
+            E.TextContent:=BoolToStr(GetOrdProp(Self, P.PropertyName) = 1, 'true', 'false');
+          end
+          else
+            SetAtribute(AElement, P.XMLName, BoolToStr(GetOrdProp(Self, P.PropertyName) = 1, 'true', 'false'), P);
+        end;
 //      tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
 
       tkInt64 ,
