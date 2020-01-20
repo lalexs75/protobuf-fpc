@@ -7,10 +7,10 @@
       <Unit>
         <Filename Value="xsd_pas_gui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="14"/>
         <CursorPos X="22" Y="34"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -21,9 +21,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="XSDMainUnit"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="111"/>
         <CursorPos Y="135"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -31,20 +32,20 @@
         <Filename Value="xsdelementtypesunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdElementTypesUnit"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="413"/>
         <CursorPos Y="410"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="255"/>
         <CursorPos X="56" Y="204"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -52,9 +53,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdProcessorUnit"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="468"/>
-        <CursorPos Y="483"/>
-        <UsageCount Value="70"/>
+        <TopLine Value="440"/>
+        <CursorPos X="3" Y="442"/>
+        <UsageCount Value="76"/>
         <Bookmarks Count="2">
           <Item0 X="43" Y="310" ID="2"/>
           <Item1 X="7" Y="362" ID="1"/>
@@ -64,11 +65,10 @@
       <Unit>
         <Filename Value="xsdutils.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="95"/>
         <CursorPos X="100" Y="115"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -77,13 +77,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="6"/>
         <CursorPos X="9" Y="15"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="49"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_ref.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="22" Y="19"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -92,12 +92,12 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos X="18" Y="343"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="demos/UniversalTransferDocument.xsd"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="19"/>
         <Bookmarks Count="1">
           <Item0 X="60" Y="1553" ID="1"/>
         </Bookmarks>
@@ -109,14 +109,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2802"/>
         <CursorPos Y="2821"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="291"/>
         <CursorPos Y="316"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../synedit/synhighlighterpas.pp"/>
@@ -124,13 +124,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="672"/>
         <CursorPos Y="688"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="demos/note.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="134" Y="2"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -138,14 +138,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="41"/>
         <CursorPos X="40" Y="63"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_simpletype.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="23" Y="18"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -153,7 +153,7 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="31"/>
         <FoldState Value=" T0315011A1."/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -161,21 +161,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="125"/>
         <CursorPos Y="150"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/sysutilh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos X="13" Y="331"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/sysutils.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="154"/>
         <CursorPos X="9" Y="158"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/stringl.inc"/>
@@ -190,21 +190,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="109"/>
         <CursorPos X="10" Y="109"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos X="10" Y="108"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="664"/>
         <CursorPos Y="666"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fpindexer/src/fpmasks.pp"/>
@@ -212,7 +212,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="251"/>
         <CursorPos X="3" Y="266"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-base/src/maskutils.pp"/>
@@ -220,7 +220,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="153"/>
         <CursorPos X="68" Y="120"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="../../../lazutils/masks.pas"/>
@@ -228,7 +228,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="416"/>
         <CursorPos X="3" Y="420"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-db/src/export/fpxmlxsdexport.pp"/>
@@ -236,27 +236,27 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="308"/>
         <CursorPos Y="309"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-sdo/src/base/xsd_generator.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="106"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/utils/unicode/cldrxml.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="78"/>
         <CursorPos X="13" Y="101"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/utils/unicode/unicodeset.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="365"/>
         <CursorPos X="3" Y="368"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
@@ -264,13 +264,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2254"/>
         <CursorPos X="29" Y="2277"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/6/ON_NSCHFDOPPR_1_997_01_05_01_01.xsd"/>
         <EditorIndex Value="-1"/>
         <FoldState Value=" T033E p0(b2}u]8m92R0A1a17191I1E1A1E]AJ1D121212[44]dsS2802[J9x"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -278,14 +278,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="837"/>
         <CursorPos X="14" Y="853"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="220"/>
         <CursorPos X="10" Y="235"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/packages/fcl-xml/src/xmlread.pp"/>
@@ -293,34 +293,34 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="11" Y="38"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/except.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="174"/>
         <CursorPos Y="189"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/fina.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="89"/>
         <CursorPos Y="110"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/objpas.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="322"/>
         <CursorPos Y="337"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/Vvod.xsd"/>
         <EditorIndex Value="-1"/>
         <FoldState Value=" T04320112121[664141u"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -332,123 +332,24 @@
       </Unit>
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/LP_base_types.xsd"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <CursorPos X="59" Y="212"/>
-        <FoldState Value=" T022702121[44[88E11]63[C4[84]AI"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="41"/>
+        <CursorPos X="54" Y="112"/>
+        <FoldState Value=" T063201111]3[7721611]4a"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="xsdutils.pas"/>
-        <Caret Line="39" Column="10" TopLine="24"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="410" Column="5" TopLine="395"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="216" Column="15" TopLine="203"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="199" TopLine="183"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="224" Column="49" TopLine="210"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="225" Column="48" TopLine="209"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="484" TopLine="468"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="230" Column="14" TopLine="215"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="216" Column="15" TopLine="216"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="410" TopLine="404"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="191" TopLine="183"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="410" TopLine="404"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="411" TopLine="404"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="483" TopLine="468"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdutils.pas"/>
-        <Caret Line="275" TopLine="260"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdutils.pas"/>
-        <Caret Line="276" TopLine="260"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdutils.pas"/>
-        <Caret Line="279" TopLine="260"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdutils.pas"/>
-        <Caret Line="280" TopLine="260"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdutils.pas"/>
-        <Caret Line="283" TopLine="260"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="410" TopLine="404"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="484" TopLine="468"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="230" Column="14" TopLine="216"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="216" Column="15" TopLine="216"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="410" Column="4" TopLine="395"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="483" TopLine="468"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="410" TopLine="395"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="193" TopLine="183"/>
-      </Position>
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
         <Caret Line="195" TopLine="183"/>
@@ -460,6 +361,113 @@
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>
         <Caret Line="198" TopLine="183"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="483" TopLine="468"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="45" Column="15" TopLine="35"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="47" Column="15" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="388" Column="16" TopLine="381"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="335" Column="10" TopLine="327"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="47" Column="15" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="437" Column="3" TopLine="435"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="363" Column="16" TopLine="335"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="47" Column="15" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="437" Column="3" TopLine="432"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="419" Column="40" TopLine="408"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="47" Column="15" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="102" Column="33" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="103" Column="30" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="105" Column="29" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="4" Column="55"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="6" Column="37"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="52" Column="29"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="56" Column="33"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="77" Column="33"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="101" Column="29" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="102" Column="33" TopLine="5"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="103" Column="30" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="105" Column="29" TopLine="10"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="106" Column="33" TopLine="11"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
+        <Caret Line="107" Column="30" TopLine="16"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -481,14 +489,14 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="xsdprocessorunit.pas"/>
-        <Line Value="518"/>
+        <Line Value="523"/>
       </Item>
       <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="xsdprocessorunit.pas"/>
-        <Line Value="512"/>
+        <Line Value="517"/>
       </Item>
     </BreakPoints>
     <Watches>

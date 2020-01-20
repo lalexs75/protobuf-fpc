@@ -425,6 +425,11 @@ begin
        //abstract=true|false
        //block=(#all | список (extension|restriction))
        //final=(#all | список (extension|restriction))
+    end
+    else
+    if FA.NodeName = 'xs:choice' then
+    begin
+      ProcessAS(FA)
     end;
   end;
 end;
