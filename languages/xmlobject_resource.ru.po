@@ -100,7 +100,7 @@ msgstr "Свойство %s : Значение %s не равно фиксиро
 #: xmlobject_resource.svaluenotequaltofixedvaluefloat
 #, object-pascal-format
 msgid "Property %s : value %g not in equal to fixed value %s"
-msgstr ""
+msgstr "Свойство %s : значние %g не равно фиксированному значению %s"
 
 #: xmlobject_resource.svaluenotequaltofixedvalueint
 #, object-pascal-format

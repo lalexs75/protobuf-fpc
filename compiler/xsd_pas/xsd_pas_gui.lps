@@ -10,7 +10,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="14"/>
         <CursorPos X="22" Y="34"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -22,9 +22,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="XSDMainUnit"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="111"/>
+        <TopLine Value="99"/>
         <CursorPos Y="135"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -35,7 +35,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="413"/>
         <CursorPos Y="410"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -45,7 +45,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="255"/>
         <CursorPos X="56" Y="204"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -55,7 +55,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="440"/>
         <CursorPos X="3" Y="442"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="82"/>
         <Bookmarks Count="2">
           <Item0 X="43" Y="310" ID="2"/>
           <Item1 X="7" Y="362" ID="1"/>
@@ -68,7 +68,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="95"/>
         <CursorPos X="100" Y="115"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -77,13 +77,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="6"/>
         <CursorPos X="9" Y="15"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="55"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_ref.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="22" Y="19"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -92,12 +92,12 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos X="18" Y="343"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="demos/UniversalTransferDocument.xsd"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="18"/>
         <Bookmarks Count="1">
           <Item0 X="60" Y="1553" ID="1"/>
         </Bookmarks>
@@ -109,14 +109,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2802"/>
         <CursorPos Y="2821"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="291"/>
         <CursorPos Y="316"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="../../../synedit/synhighlighterpas.pp"/>
@@ -124,13 +124,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="672"/>
         <CursorPos Y="688"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="demos/note.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="134" Y="2"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -138,14 +138,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="41"/>
         <CursorPos X="40" Y="63"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="demos/shiporder_simpletype.xsd"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="23" Y="18"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -153,7 +153,7 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="31"/>
         <FoldState Value=" T0315011A1."/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -161,28 +161,28 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="125"/>
         <CursorPos Y="150"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/sysutilh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos X="13" Y="331"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/sysutils.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="154"/>
         <CursorPos X="9" Y="158"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/classes/stringl.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1951"/>
         <CursorPos Y="1976"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit>
       <Unit>
         <Filename Value="../../../lazutils/lazfileutils.pas"/>
@@ -190,21 +190,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="109"/>
         <CursorPos X="10" Y="109"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos X="10" Y="108"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="664"/>
         <CursorPos Y="666"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fpindexer/src/fpmasks.pp"/>
@@ -212,7 +212,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="251"/>
         <CursorPos X="3" Y="266"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-base/src/maskutils.pp"/>
@@ -220,7 +220,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="153"/>
         <CursorPos X="68" Y="120"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="../../../lazutils/masks.pas"/>
@@ -228,7 +228,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="416"/>
         <CursorPos X="3" Y="420"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-db/src/export/fpxmlxsdexport.pp"/>
@@ -236,27 +236,27 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="308"/>
         <CursorPos Y="309"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-sdo/src/base/xsd_generator.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="106"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/utils/unicode/cldrxml.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="78"/>
         <CursorPos X="13" Y="101"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/utils/unicode/unicodeset.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="365"/>
         <CursorPos X="3" Y="368"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
@@ -264,13 +264,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2254"/>
         <CursorPos X="29" Y="2277"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/6/ON_NSCHFDOPPR_1_997_01_05_01_01.xsd"/>
         <EditorIndex Value="-1"/>
         <FoldState Value=" T033E p0(b2}u]8m92R0A1a17191I1E1A1E]AJ1D121212[44]dsS2802[J9x"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
@@ -278,14 +278,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="837"/>
         <CursorPos X="14" Y="853"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="220"/>
         <CursorPos X="10" Y="235"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/packages/fcl-xml/src/xmlread.pp"/>
@@ -293,58 +293,58 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="11" Y="38"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/except.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="174"/>
         <CursorPos Y="189"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/sysutils/fina.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="89"/>
         <CursorPos Y="110"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/objpas.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="322"/>
         <CursorPos Y="337"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/Vvod.xsd"/>
         <EditorIndex Value="-1"/>
         <FoldState Value=" T04320112121[664141u"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/Vvod_Imp.xsd"/>
         <EditorIndex Value="-1"/>
         <FoldState Value=" T05321\"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/LP_base_types.xsd"/>
         <EditorIndex Value="7"/>
         <CursorPos X="59" Y="212"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>
       <Unit>
         <Filename Value="/home/work/demos/Test_Trade/Demo_07_GS1/xsd/renamed/shipment_signs.xsd"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="41"/>
+        <TopLine Value="71"/>
         <CursorPos X="54" Y="112"/>
-        <FoldState Value=" T063201111]3[7721611]4a"/>
-        <UsageCount Value="10"/>
+        <FoldState Value=" T063201111]3[7721F1w"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit>

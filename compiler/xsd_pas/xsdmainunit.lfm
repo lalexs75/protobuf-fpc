@@ -70,9 +70,9 @@ object XSDMainForm: TXSDMainForm
     Height = 580
     Top = 68
     Width = 786
-    ActivePage = TabSheet3
+    ActivePage = tabEditor
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 3
+    TabIndex = 1
     TabOrder = 2
     object tabSource: TTabSheet
       Caption = 'Source XSD file'
