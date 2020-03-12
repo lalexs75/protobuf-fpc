@@ -616,9 +616,8 @@ begin
           tkWString,
           tkSString,
           tkLString : SetStrProp(Self, FProp, NV);
-  (*      tkBool : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsBoolean));
-          tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
-  *)
+          tkBool : SetOrdProp(Self, FProp, Ord(StrToBool(NV)));
+//          tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
           tkInt64 : SetInt64Prop(Self, FProp, StrToInt64(NV));
           tkInteger : SetOrdProp(Self, FProp, StrToInt(NV));
 
