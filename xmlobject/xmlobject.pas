@@ -484,6 +484,7 @@ var
   E: TDOMElement;
   S, TN:string;
   D:TDateTime;
+  i: Integer;
 begin
   ValidateRequared;
 
@@ -563,6 +564,13 @@ begin
               Str(GetFloatProp(Self, P.PropertyName):P.TotalDigits:P.FractionDigits, S)
             else
               Str(GetFloatProp(Self, P.PropertyName):15:4, S);
+
+            if (Length(S)>0) and (Pos('.', S) > 0) then
+            begin
+              i:=Length(S);
+              while (I>1) and (S[i] = '0') and (S[i-1]<>'.') do Dec(i);
+              S:=Copy(S, 1, i);
+            end;
           end;
 
           if xsaSimpleObject in P.Attribs then

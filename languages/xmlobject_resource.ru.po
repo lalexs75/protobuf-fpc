@@ -55,7 +55,7 @@ msgstr "Не известный тип поля %s"
 #: xmlobject_resource.sunknowclassproperty
 #, object-pascal-format
 msgid "Unknow class property %s.%s"
-msgstr "Не известное свйоство класса %s.%s"
+msgstr "Не известное свойство класса %s.%s"
 
 #: xmlobject_resource.sunknowobject
 #, object-pascal-format
