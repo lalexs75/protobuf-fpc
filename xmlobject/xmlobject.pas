@@ -961,7 +961,7 @@ begin
   begin
     Val(P.DefaultValue, V, C);
     if V <> AValue then
-      raise Exception.CreateFmt(sValueNotEqualToFixedValueInt, [APropertyName, AValue, P.DefaultValue]);
+      raise Exception.CreateFmt(sValueNotEqualToFixedValueFloat, [APropertyName, AValue, P.DefaultValue]);
   end;
 end;
 
