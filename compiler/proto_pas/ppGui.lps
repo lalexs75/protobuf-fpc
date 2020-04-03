@@ -7,10 +7,9 @@
       <Unit0>
         <Filename Value="ppGui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="10"/>
-        <UsageCount Value="21"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="28"/>
       </Unit0>
       <Unit1>
         <Filename Value="ppmainunit.pas"/>
@@ -19,10 +18,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ppMainUnit"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="100"/>
-        <CursorPos X="34" Y="103"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="151"/>
+        <CursorPos X="15" Y="158"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -31,9 +29,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoParser"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1230"/>
-        <CursorPos Y="1259"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="1165"/>
+        <CursorPos Y="1187"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -41,9 +39,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="503"/>
-        <CursorPos Y="506"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="528"/>
+        <CursorPos Y="541"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -51,148 +49,149 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="229"/>
-        <CursorPos X="7" Y="249"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="64"/>
+        <CursorPos X="3" Y="78"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="28"/>
       </Unit5>
       <Unit6>
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="224"/>
-        <CursorPos X="3" Y="247"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="319"/>
+        <CursorPos X="3" Y="344"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit6>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1299" TopLine="1281"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="547" TopLine="525"/>
       </Position1>
       <Position2>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1243" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="548" TopLine="527"/>
       </Position2>
       <Position3>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1244" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="104" Column="37" TopLine="95"/>
       </Position3>
       <Position4>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1246" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="461" Column="3" TopLine="453"/>
       </Position4>
       <Position5>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1253" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="105" Column="15" TopLine="90"/>
       </Position5>
       <Position6>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1259" TopLine="1230"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="550" Column="3" TopLine="524"/>
       </Position6>
       <Position7>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1260" TopLine="1231"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="339" TopLine="330"/>
       </Position7>
       <Position8>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1298" TopLine="1280"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="541" TopLine="524"/>
       </Position8>
       <Position9>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1299" TopLine="1280"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="542" TopLine="524"/>
       </Position9>
       <Position10>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1243" Column="5" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="544" TopLine="524"/>
       </Position10>
       <Position11>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1246" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="545" TopLine="524"/>
       </Position11>
       <Position12>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1253" TopLine="1224"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="336" Column="22" TopLine="320"/>
       </Position12>
       <Position13>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1259" TopLine="1230"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="54" Column="15" TopLine="43"/>
       </Position13>
       <Position14>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1260" TopLine="1231"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="546" TopLine="547"/>
       </Position14>
       <Position15>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1298" TopLine="1280"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="92" Column="15" TopLine="85"/>
       </Position15>
       <Position16>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1299" TopLine="1280"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="298" Column="3" TopLine="296"/>
       </Position16>
       <Position17>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1243" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="70" Column="14" TopLine="70"/>
       </Position17>
       <Position18>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1244" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="311" Column="3" TopLine="307"/>
       </Position18>
       <Position19>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1246" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="51" Column="14" TopLine="38"/>
       </Position19>
       <Position20>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1253" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="242" Column="3" TopLine="239"/>
       </Position20>
       <Position21>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1259" TopLine="1230"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="50" Column="16" TopLine="38"/>
       </Position21>
       <Position22>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1260" TopLine="1231"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="237" Column="3" TopLine="234"/>
       </Position22>
       <Position23>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1298" TopLine="1280"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="52" Column="17" TopLine="37"/>
       </Position23>
       <Position24>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1299" TopLine="1280"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="249" Column="3" TopLine="246"/>
       </Position24>
       <Position25>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1243" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="50" Column="15" TopLine="39"/>
       </Position25>
       <Position26>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1244" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="237" Column="3" TopLine="234"/>
       </Position26>
       <Position27>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1246" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="52" Column="17" TopLine="37"/>
       </Position27>
       <Position28>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="1253" TopLine="1224"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="249" TopLine="246"/>
       </Position28>
       <Position29>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="64" Column="11" TopLine="49"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="339" TopLine="319"/>
       </Position29>
       <Position30>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="103" Column="34" TopLine="100"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="541" TopLine="528"/>
       </Position30>
     </JumpHistory>
     <RunParams>
@@ -201,12 +200,48 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="pascodegen.pas"/>
+        <Line Value="343"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="pascodegen.pas"/>
+        <Line Value="342"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="protoobjects.pas"/>
+        <Line Value="249"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="pascodegen.pas"/>
+        <Line Value="336"/>
+      </Item>
+    </BreakPoints>
     <Watches>
       <Item>
         <Expression Value="AWord"/>
       </Item>
       <Item>
-        <Expression Value="S"/>
+        <Expression Value="F.Caption"/>
+      </Item>
+      <Item>
+        <Expression Value="F.DataType"/>
+      </Item>
+      <Item>
+        <Expression Value="P.FCaption"/>
       </Item>
     </Watches>
   </Debugging>

@@ -724,9 +724,6 @@ end;
 function TProtoParser.GetNextWord: string;
 var
   Stop:boolean;
-  S, S1: String;
-  FC: TParserPosition;
-  ACS: TSysCharSet;
 begin
   Stop:=false;
   SkipSpace;

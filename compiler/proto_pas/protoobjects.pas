@@ -436,7 +436,7 @@ begin
         TType16_1.AddChildToken(TType16);
 
     T:=AddToken(stIdentificator, [TType1, TType2, TType3, TType4, TType5, TType6, TType7, TType8,
-      TType9, TType10, TType11, TType12, TType13, TType14, TType15, TType16], 'string', [], 6);
+      TType9, TType10, TType11, TType12, TType13, TType14, TType15, TType16], '', [], 6);
     T:=AddToken(stSymbol, T, '=', []);
     T:=AddToken(stInteger, T, '', [], 7);
 
@@ -558,11 +558,11 @@ var
 begin
   AModule.Add('T%s = class(TSerializationObject)', [Caption]);
 
-  if Fields.CountEnumDefs > 0 then
+{  if Fields.CountEnumDefs > 0 then
     for F in Fields do
       if (F.FieldType = mftEnumDefinition) and Assigned(F.ProtoObjDef) then
         F.FProtoObjDef.GenerateInterfaceSection(AModule);
-
+}
   AModule.Add('private');
   for F in Fields do
     if F.IsRealField then

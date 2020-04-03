@@ -239,10 +239,13 @@ var
   P: TProtoObject;
   S: String;
   S1:TStringList;
+  PM: TProtoMessage;
+  F: TMessageField;
 begin
   S1:=TStringList.Create;
   for P in FParser.ResultObjects do
-  if P is TEnum then
+  begin
+    if P is TEnum then
     begin
       FTempList.Clear;
       P.GenerateInterfaceSection(FTempList);
@@ -261,7 +264,28 @@ begin
           FResultCode.Add('  ' + S);
         FResultCode.Add('');
       end;
+    end
+    else
+    if P is TProtoMessage then
+    begin
+      PM:=P as TProtoMessage;
+      if PM.Fields.CountEnumDefs > 0 then
+      begin
+        for F in PM.Fields do
+          if (F.FieldType = mftEnumDefinition) and Assigned(F.ProtoObjDef) then
+          begin
+            FTempList.Clear;
+            F.ProtoObjDef.GenerateInterfaceSection(FTempList);
+
+            for S in FTempList do
+              FResultCode.Add('  ' + S);
+            FResultCode.Add('');
+          end;
+
+      end;
     end;
+  end;
+
   S1.Free;
 end;
 
@@ -278,29 +302,46 @@ end;
 procedure TPascalCodeGenerator.ProcessEnums(APS: TProtoParser);
 var
   P: TProtoObject;
+  F: TMessageField;
 begin
   for P in APS.ResultObjects do
+  begin
     if (P is TEnum) and (FEnumList.IndexOf(UpperCase(P.Caption)) < 0) then
-      FEnumList.Append(UpperCase(P.Caption));
+      FEnumList.Append(UpperCase(P.Caption))
+    else
+    if P is TProtoMessage then
+    begin
+      for F in TProtoMessage(P).Fields do
+        if F.FieldType = mftEnumDefinition then
+          FEnumList.Add(UpperCase(F.ProtoObjDef.Caption));
+    end;
+  end;
 end;
 
 procedure TPascalCodeGenerator.FixSimpleTypeEnum;
-var
-  FEL:TStringList;
+//var
+//  FEL:TStringList;
 
 procedure DoProcessMsgType(P: TProtoMessage);
 var
   F: TMessageField;
 begin
-  FEL.Clear;
-  for F in P.Fields do
-    if F.FieldType = mftEnumDefinition then
-      FEL.Add(UpperCase(F.ProtoObjDef.Caption));
+  //FEL.Clear;
+  //for F in P.Fields do
+  //  if F.FieldType = mftEnumDefinition then
+  //    FEL.Add(UpperCase(F.ProtoObjDef.Caption));
 
   for F in P.Fields do
+  begin
     if F.DataTypeFlag = pdtClass then
-      if (FEnumList.IndexOf(UpperCase(F.DataType))>-1) or (FEL.IndexOf(UpperCase(F.DataType))>-1) then
-        F.DataTypeFlag:=pdtEnum;
+    begin
+      if (FEnumList.IndexOf(UpperCase(F.DataType))>-1) {or (FEL.IndexOf(UpperCase(F.DataType))>-1)} then
+        F.DataTypeFlag:=pdtEnum
+    end
+    else
+    if (F.FieldType = mftMessageDefinition) and Assigned(F.ProtoObjDef) then
+      DoProcessMsgType(F.ProtoObjDef as TProtoMessage);
+  end;
 end;
 
 var
@@ -309,8 +350,8 @@ begin
   InternalStatus(nil, 'Process include files');
   FEnumList:=TStringList.Create;
   FEnumList.Sorted:=true;
-  FEL:=TStringList.Create;
-  FEL.Sorted:=true;
+  //FEL:=TStringList.Create;
+  //FEL.Sorted:=true;
 
   ProcessEnums(FParser);
 
@@ -321,7 +362,7 @@ begin
       DoProcessMsgType(P as TProtoMessage);
 
   FEnumList.Free;
-  FEL.Free;
+  //FEL.Free;
 end;
 
 procedure TPascalCodeGenerator.DoImportFiles;
