@@ -18,8 +18,9 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="1"/>
+      <MajorVersionNr Value="2"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="1"/>
       <Language Value="0419"/>
     </VersionInfo>
     <BuildModes Count="1">
@@ -32,7 +33,7 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="4">
       <Item1>
         <PackageName Value="protobuf"/>
       </Item1>
@@ -43,11 +44,8 @@
         <PackageName Value="SynEdit"/>
       </Item3>
       <Item4>
-        <PackageName Value="rxtools"/>
-      </Item4>
-      <Item5>
         <PackageName Value="LCL"/>
-      </Item5>
+      </Item4>
     </RequiredPackages>
     <Units Count="7">
       <Unit0>

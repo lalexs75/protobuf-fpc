@@ -249,7 +249,7 @@ var
 
 procedure RegisterProtoObject(AProtoObjectClass:TProtoObjectClass);
 implementation
-uses LazUTF8, rxstrutils, StrUtils;
+uses LazUTF8, StrUtils;
 
 resourcestring
   sProtoParserErrorBracket    = 'Unexpected )';
@@ -681,7 +681,7 @@ begin
   inherited InternalProcessChildToken(AParser, AToken, AWord);
   case AToken.Code of
     2:begin
-        Caption:=LowerCase(ExtractQuotedString(AWord, '"'));
+        Caption:=LowerCase(AnsiDequotedStr(AWord, '"'));
         if Caption = 'proto3' then
           FProtoSyntax:=psProto3
         else

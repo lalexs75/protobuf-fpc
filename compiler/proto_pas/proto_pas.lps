@@ -3,12 +3,11 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="20">
+    <Units Count="23">
       <Unit0>
         <Filename Value="proto_pas.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="127"/>
+        <TopLine Value="6"/>
         <CursorPos X="35" Y="143"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
@@ -17,7 +16,12 @@
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="89"/>
+        <CursorPos X="31" Y="103"/>
         <UsageCount Value="22"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="enumobject.pas"/>
@@ -29,7 +33,7 @@
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="47"/>
         <CursorPos X="14" Y="67"/>
         <UsageCount Value="22"/>
@@ -39,7 +43,7 @@
         <Filename Value="protoobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="49"/>
         <CursorPos Y="49"/>
         <UsageCount Value="22"/>
@@ -50,8 +54,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoParser"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="244"/>
-        <CursorPos X="15" Y="254"/>
+        <TopLine Value="670"/>
+        <CursorPos X="31" Y="684"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -85,11 +89,10 @@
       </Unit9>
       <Unit10>
         <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1116"/>
         <CursorPos X="23" Y="1132"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="../../rxnew/rxtools/rxlogging.pas"/>
@@ -149,127 +152,149 @@
         <CursorPos X="3" Y="429"/>
         <UsageCount Value="10"/>
       </Unit19>
+      <Unit20>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="633"/>
+        <CursorPos X="3" Y="644"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="97"/>
+        <CursorPos X="10" Y="111"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="708"/>
+        <CursorPos X="4" Y="716"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit22>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="123" Column="61" TopLine="108"/>
+        <Caret Line="51" Column="15" TopLine="23"/>
       </Position1>
       <Position2>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="71" Column="51" TopLine="48"/>
+        <Caret Line="68" Column="12" TopLine="53"/>
       </Position2>
       <Position3>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="51" Column="15" TopLine="23"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="67" Column="88" TopLine="48"/>
       </Position3>
       <Position4>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="68" Column="12" TopLine="53"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="61" Column="23" TopLine="47"/>
       </Position4>
       <Position5>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="67" Column="88" TopLine="48"/>
+        <Caret Line="398" Column="3" TopLine="392"/>
       </Position5>
       <Position6>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="23" TopLine="47"/>
+        <Caret Line="47" Column="15" TopLine="29"/>
       </Position6>
       <Position7>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="398" Column="3" TopLine="392"/>
+        <Caret Line="61" Column="19" TopLine="53"/>
       </Position7>
       <Position8>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="47" Column="15" TopLine="29"/>
+        <Caret Line="407" Column="3" TopLine="401"/>
       </Position8>
       <Position9>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="19" TopLine="53"/>
+        <Caret Line="47" Column="14" TopLine="25"/>
       </Position9>
       <Position10>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="407" Column="3" TopLine="401"/>
+        <Caret Line="134" Column="21" TopLine="116"/>
       </Position10>
       <Position11>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="47" Column="14" TopLine="25"/>
-      </Position11>
-      <Position12>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="1124" Column="14" TopLine="1096"/>
-      </Position12>
-      <Position13>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="235" Column="10" TopLine="216"/>
-      </Position13>
-      <Position14>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="235" Column="53" TopLine="216"/>
-      </Position14>
-      <Position15>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="1137" Column="10" TopLine="1105"/>
-      </Position15>
-      <Position16>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="1142" Column="37" TopLine="1116"/>
-      </Position16>
-      <Position17>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="1145" Column="28" TopLine="1116"/>
-      </Position17>
-      <Position18>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="1144" Column="36" TopLine="1116"/>
-      </Position18>
-      <Position19>
-        <Filename Value="../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="235" Column="10" TopLine="217"/>
-      </Position19>
-      <Position20>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="134" Column="21" TopLine="116"/>
-      </Position20>
-      <Position21>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="73" Column="69" TopLine="137"/>
-      </Position21>
-      <Position22>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="213" TopLine="183"/>
-      </Position22>
-      <Position23>
+      </Position11>
+      <Position12>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="49" Column="30" TopLine="18"/>
-      </Position23>
-      <Position24>
+      </Position12>
+      <Position13>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="182" Column="3" TopLine="180"/>
-      </Position24>
-      <Position25>
+      </Position13>
+      <Position14>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="203" Column="17" TopLine="183"/>
-      </Position25>
-      <Position26>
+      </Position14>
+      <Position15>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="52" Column="25" TopLine="33"/>
-      </Position26>
-      <Position27>
+      </Position15>
+      <Position16>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="208" Column="34" TopLine="189"/>
-      </Position27>
-      <Position28>
+      </Position16>
+      <Position17>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="157" Column="25" TopLine="135"/>
-      </Position28>
-      <Position29>
+      </Position17>
+      <Position18>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="45" Column="15" TopLine="28"/>
-      </Position29>
-      <Position30>
+      </Position18>
+      <Position19>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="143" Column="33" TopLine="121"/>
+      </Position19>
+      <Position20>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="252" Column="29" TopLine="244"/>
+      </Position20>
+      <Position21>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="684" Column="28" TopLine="670"/>
+      </Position21>
+      <Position22>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="252" Column="16" TopLine="241"/>
+      </Position22>
+      <Position23>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+        <Caret Line="157" Column="16" TopLine="142"/>
+      </Position23>
+      <Position24>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+      </Position24>
+      <Position25>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+        <Caret Line="170" Column="29" TopLine="147"/>
+      </Position25>
+      <Position26>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="683" Column="36" TopLine="670"/>
+      </Position26>
+      <Position27>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="684" Column="31" TopLine="670"/>
+      </Position27>
+      <Position28>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <Caret Line="1948" Column="3" TopLine="1945"/>
+      </Position28>
+      <Position29>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <Caret Line="716" Column="4" TopLine="708"/>
+      </Position29>
+      <Position30>
+        <Filename Value="controlobjects.pas"/>
+        <Caret Line="53" Column="14" TopLine="33"/>
       </Position30>
     </JumpHistory>
     <RunParams>
@@ -284,22 +309,22 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="1">
-      <Item1>
+    <BreakPoints>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="proto_pas.lpr"/>
         <Line Value="63"/>
-      </Item1>
+      </Item>
     </BreakPoints>
-    <Watches Count="2">
-      <Item1>
+    <Watches>
+      <Item>
         <Expression Value="S"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Expression Value="FFileName"/>
-      </Item2>
+      </Item>
     </Watches>
   </Debugging>
 </CONFIG>

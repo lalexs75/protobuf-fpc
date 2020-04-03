@@ -5,6 +5,7 @@
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
         <CompatibilityMode Value="True"/>
       </Flags>
@@ -20,9 +21,9 @@
     </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MajorVersionNr Value="1"/>
-      <RevisionNr Value="3"/>
-      <BuildNr Value="5"/>
+      <MajorVersionNr Value="2"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="10"/>
       <Language Value="0419"/>
     </VersionInfo>
     <BuildModes Count="1">
@@ -34,15 +35,11 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="2">
+    <RequiredPackages Count="1">
       <Item1>
-        <PackageName Value="rxtools"/>
-      </Item1>
-      <Item2>
         <PackageName Value="LCLBase"/>
-      </Item2>
+      </Item1>
     </RequiredPackages>
     <Units Count="6">
       <Unit0>

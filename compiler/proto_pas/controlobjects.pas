@@ -50,7 +50,7 @@ type
 
 
 implementation
-uses rxstrutils;
+uses StrUtils;
 
 
 { TPackage }
@@ -100,7 +100,7 @@ procedure TImport.InternalProcessChildToken(AParser: TProtoParser;
 begin
   inherited InternalProcessChildToken(AParser, AToken, AWord);
   case AToken.Code of
-    2:Caption:=ExtractQuotedString(AWord, '"');
+    2:Caption:=AnsiDequotedStr(AWord, '"');
   end;
 end;
 

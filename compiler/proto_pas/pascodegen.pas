@@ -70,7 +70,27 @@ type
 function PascalCodeGen(AParser:TProtoParser):string;
 
 implementation
-uses LazFileUtils, rxstrutils;
+uses LazFileUtils, LazStringUtils;
+
+function FileToString(const AFileName: string): string;
+var
+  F: TFileStream;
+begin
+  if FileExists(AFileName) then
+  begin;
+    F:=TFileStream.Create(AFileName, fmOpenRead);
+    if F.Size>0 then
+    begin
+      SetLength(Result, F.Size);
+      F.ReadBuffer(Result[1], F.Size);
+    end
+    else
+      Result:='';
+    F.Free;
+  end
+  else
+    Result:='';
+end;
 
 const
   sProtoExt = '.proto';
