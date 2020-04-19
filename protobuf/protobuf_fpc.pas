@@ -1002,7 +1002,8 @@ var
   Buf1: TSerializationBuffer;
   FProp: PPropInfo;
   K: TTypeKind;
-  SS, STypeName: String;
+  SS, STypeName, TN: String;
+  BB: Integer;
 begin
   Result:=false;
   while not ABuf.Eof do
@@ -1056,6 +1057,7 @@ begin
 
           //Необходимо совместить определения типа читаемых данных по признаку из файла и из данных RTTI
           K:=FProp^.PropType^.Kind;
+          TN:=FProp^.PropType^.Name;
           case FProp^.PropType^.Kind of
             tkChar,
             tkAString,
@@ -1089,7 +1091,17 @@ begin
             tkFloat                     : SetFloatProp(t,PropInfo, Value);}
             tkEnumeration : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsInteger));
             tkClass : LoadClassData(FProp, P);
-            tkDynArray:LoadBytes(FProp, P);
+            tkDynArray:
+              begin
+                if TN = 'TBytes' then
+                  LoadBytes(FProp, P)
+                else
+                begin
+                  { TODO : Необходимо обработать динамический массив }
+                  //raise Exception.CreateFmt('Property %s.%s. Unknow dyn array type - %s', [ClassName, P.PropName, TN]);
+                  BB:=ABuf.ReadVarInt;
+                end;
+              end
           else
             raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
           end;

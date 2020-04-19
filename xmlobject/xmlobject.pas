@@ -177,6 +177,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+    property RegistredPropertyList:TPropertyList read FPropertyList;
 
     procedure SaveToFile(AFileName:string); virtual;
     procedure LoadFromFile(AFileName:string);
