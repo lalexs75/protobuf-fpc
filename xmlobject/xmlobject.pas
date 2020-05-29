@@ -739,6 +739,12 @@ begin
                   SetFloatProp(Self, FProp, D);
               end;
             end;
+          tkClass:if TN = 'TStringList' then
+          begin
+            FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+            TStringList(FInst).Add(NV)
+          end
+
         else
           raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
         end;
