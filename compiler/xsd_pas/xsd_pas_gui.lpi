@@ -22,7 +22,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="3"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="4"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -80,6 +81,10 @@
       </Unit>
       <Unit>
         <Filename Value="xsd_gui_consts_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="xsdconsts.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

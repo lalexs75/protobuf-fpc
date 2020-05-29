@@ -31,7 +31,7 @@ uses
   XsdProcessorUnit,
   rxlogging,
   xsdutils,
-  xsd_gui_consts_unit;
+  xsd_gui_consts_unit, xsdconsts;
 
 {$R *.res}
 
