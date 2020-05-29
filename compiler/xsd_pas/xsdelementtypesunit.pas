@@ -61,12 +61,14 @@ type
     constructor Create(AOwner:TXSDComplexType);
     destructor Destroy; override;
     function PascalBaseType:string;
+    function PascalBaseTypeOwner:string;
 
     function PascalMinLength:Integer;
     function PascalMaxLength:Integer;
     function PascalName:string;
     function PascalValuesListCount:Integer;
     function PascalDefaultValue:string;
+    function IsOpenArray:Boolean;
 
     procedure UpdatePascalNames;
     property Name:string read FName write FName;
@@ -314,7 +316,37 @@ end;
 function TPropertyItem.PascalBaseType: string;
 begin
   if Assigned(FXSDSimpleType) then
-    Result:=FXSDSimpleType.PasTypeName
+  begin
+    if (MaxOccurs>1) or (MaxOccurs<0) then
+    begin
+      Result:='TXSD' + FXSDSimpleType.PasBaseName + 'Array'
+    end
+    else
+      Result:=FXSDSimpleType.PasTypeName;
+  end
+  else
+  if Assigned(FXSDComplexType) then
+  begin
+    Result:=FXSDComplexType.PascalTypeName;
+    if (MaxOccurs>1) or (MaxOccurs<0) then
+      Result:=Result + 'List';
+  end
+  else
+  begin
+    Result:=GetSimpleType(FBaseType);
+    if Result= '' then
+      Result:=FBaseType;
+    if (MaxOccurs>1) or (MaxOccurs<0) then
+      Result:='TXSD' + Result + 'Array';
+  end;
+end;
+
+function TPropertyItem.PascalBaseTypeOwner: string;
+begin
+  if Assigned(FXSDSimpleType) then
+  begin
+    Result:=FXSDSimpleType.PasTypeName;
+  end
   else
   if Assigned(FXSDComplexType) then
   begin
@@ -360,16 +392,27 @@ begin
 end;
 
 function TPropertyItem.PascalDefaultValue: string;
+var
+  D: TXSDStdType;
 begin
-  if IsSimpleType(FBaseType) then
+//  if IsSimpleType(FBaseType) then
   begin
-    if IsTypeQuotedStr(FBaseType) then
+    D:=FindStdTypeByPasName(FBaseType);
+    if Assigned(D) and D.QuotedStr then
       Result:=QuotedStr(FDefaultValue)
     else
       Result:=FDefaultValue;
   end
+//  else
+//    Result:=FDefaultValue;
+end;
+
+function TPropertyItem.IsOpenArray: Boolean;
+begin
+  if (MaxOccurs>1) or (MaxOccurs<0) then
+    Result:=Assigned(FXSDSimpleType) or not (Assigned(FXSDComplexType))
   else
-    Result:=FDefaultValue;
+    Result:=false;
 end;
 
 procedure TPropertyItem.UpdatePascalNames;

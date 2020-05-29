@@ -15,33 +15,21 @@
   Franklin Street - Fifth Floor, Boston, MA 02110-1335, USA.
 }
 
-program xsd_pas_gui;
+unit xsdconsts;
 
 {$mode objfpc}{$H+}
 
+interface
+
 uses
-  {$IFDEF UNIX}
-  cthreads,
-  {$ENDIF}
-  Interfaces, // this includes the LCL widgetset
-  Forms,
-  XSDMainUnit,
-  XsdElementTypesUnit,
-  XsdPasCodegenUnit,
-  XsdProcessorUnit,
-  rxlogging,
-  xsdutils,
-  xsd_gui_consts_unit,
-  xsdconsts;
+  Classes, SysUtils;
 
-{$R *.res}
+resourcestring
+  sNotFoundElementInSchema    = 'Not found element "%s" in schema';
+  sNotFoundSchemaInDocument   = 'Not found schema in document';
+  sNotFoundIncludeFile        = 'Not found include file name "%s"';
 
-begin
-  InitRxLogs;
-  RequireDerivedFormResource:=True;
-  Application.Scaled:=True;
-  Application.Initialize;
-  Application.CreateForm(TXSDMainForm, XSDMainForm);
-  Application.Run;
+implementation
+
 end.
 

@@ -157,7 +157,7 @@ function TXsdPasCodegen.DoGenClasseImplementation: string;
 var
   CT: TXSDComplexType;
   PT: TPropertyItem;
-  SAttr, S: String;
+  SAttr, S, SCF, FVarName: String;
 begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
@@ -169,24 +169,39 @@ begin
        if PT.ItemType in [pitAttribute, pitSimpleType] then
        begin
          Result:=Result +
-          'procedure '+CT.PascalTypeName+'.Set'+PT.PascalName+'(AValue: '+PT.PascalBaseType+');'+LineEnding +
-          'begin'+LineEnding+
-          //'  if F'+PT.PascalName+'=AValue then Exit;'+LineEnding+
-          '  F'+PT.PascalName+':=AValue;'+LineEnding;
+          'procedure '+CT.PascalTypeName+'.Set'+PT.PascalName+'(AValue: '+PT.PascalBaseType+');'+LineEnding;
+         if PT.IsOpenArray then
+           Result:=Result + 'var' + LineEnding +
+             '  V:' + PT.PascalBaseTypeOwner + ';' + LineEnding;
+         Result:=Result +
+          'begin'+LineEnding;
+
+         if PT.IsOpenArray then
+         begin
+           SCF:='  ';
+           FVarName:='V';
+           Result:=Result +
+             '  for V in AValue do'+LineEnding + '  begin' + LineEnding;
+         end
+         else
+         begin
+           SCF:='';
+           FVarName:='AValue';
+         end;
 
          if PT.PascalValuesListCount > 0 then
            Result:=Result +
-             '  CheckLockupValue('''+PT.PascalName+''', AValue);'+LineEnding;
+             SCF + '  CheckLockupValue('''+PT.PascalName+''', '+FVarName+');'+LineEnding;
          if PT.PascalMinLength > -1 then
            Result:=Result +
-             '  CheckStrMinSize('''+PT.PascalName+''', AValue);'+LineEnding;
+             SCF + '  CheckStrMinSize('''+PT.PascalName+''', '+FVarName+');'+LineEnding;
          if PT.PascalMaxLength > -1 then
            Result:=Result +
-             '  CheckStrMaxSize('''+PT.PascalName+''', AValue);'+LineEnding;
+             SCF + '  CheckStrMaxSize('''+PT.PascalName+''', '+FVarName+');'+LineEnding;
 
          if PT.FixedValue <> '' then
            Result:=Result +
-             '  CheckFixedValue('''+PT.PascalName+''', AValue);'+LineEnding;
+             SCF + '  CheckFixedValue('''+PT.PascalName+''', '+FVarName+');'+LineEnding;
 
          if Assigned(PT.XSDSimpleType) and Assigned(PT.XSDSimpleType.PasBaseTypeRec) and (PT.XSDSimpleType.PasBaseTypeRec.XSDDataType in [xsdtInteger, xsdtFloat]) then
          begin
@@ -195,15 +210,20 @@ begin
            else
              S:='Float';}
            if PT.XSDSimpleType.minExclusive <> '' then
-             Result:=Result + '  CheckMinExclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+             Result:=Result + SCF + '  CheckMinExclusiveValue('''+ PT.PascalName + ''', '+FVarName+');'+LineEnding;
            if PT.XSDSimpleType.maxExclusive <> '' then
-             Result:=Result + '  CheckMaxExclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+             Result:=Result + SCF + '  CheckMaxExclusiveValue('''+ PT.PascalName + ''', '+FVarName+');'+LineEnding;
            if PT.XSDSimpleType.minInclusive <> '' then
-             Result:=Result + '  CheckMinInclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+             Result:=Result + SCF + '  CheckMinInclusiveValue('''+ PT.PascalName + ''', '+FVarName+');'+LineEnding;
            if PT.XSDSimpleType.maxInclusive <> '' then
-             Result:=Result + '  CheckMaxInclusiveValue('''+ PT.PascalName + ''', AValue);'+LineEnding;
+             Result:=Result + SCF + '  CheckMaxInclusiveValue('''+ PT.PascalName + ''', '+FVarName+');'+LineEnding;
          end;
 
+         if PT.IsOpenArray then
+           Result:=Result +
+             '  end;' + LineEnding;
+
+         Result:=Result + '  F'+PT.PascalName+':=AValue;'+LineEnding;
          Result:=Result +
           '  ModifiedProperty('''+PT.PascalName+''');'+LineEnding+
           'end;'+LineEnding+LineEnding;
@@ -317,7 +337,7 @@ begin
 
     for PT in CT.Propertys do
     begin
-      if PT.PascalDefaultValue <> '' then
+      if PT.DefaultValue <> '' then
        Result:=Result + '  '+PT.PascalName+':='+PT.PascalDefaultValue+';' + LineEnding;
     end;
 

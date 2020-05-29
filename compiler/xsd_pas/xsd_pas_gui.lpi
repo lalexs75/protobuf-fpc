@@ -14,7 +14,7 @@
       <Icon Value="0"/>
     </General>
     <i18n>
-      <EnableI18N Value="True"/>
+      <EnableI18N Value="True" LFM="False"/>
       <OutDir Value="languages"/>
     </i18n>
     <VersionInfo>

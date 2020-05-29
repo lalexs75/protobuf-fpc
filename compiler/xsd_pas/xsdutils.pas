@@ -37,6 +37,7 @@ function IsTypeQuotedStr(ATypeName:string):Boolean;
 function GetSimpleType(ATypeName:string):string;
 function IsKeyword(const AKeyword: string): boolean;
 function FindPasTypeRec(ATypeName:string):TXSDStdType;
+function FindStdTypeByPasName(APasName:string):TXSDStdType;
 
 function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
 function ExpandXSDFileName(AFileName:string; AIncludeFolders:TStrings):string;
@@ -114,10 +115,10 @@ const
     (StdName:'xs:int'; PasName:'Longint'; QuotedStr:false; XSDDataType:xsdtInteger),                 // 32-битное целочисленное значение со знаком
     (StdName:'xs:integer'; PasName:'Int64'; QuotedStr:false; XSDDataType:xsdtInteger),               // Целочисленное значение
     (StdName:'xs:long'; PasName:'Int64'; QuotedStr:false; XSDDataType:xsdtInteger),                  // 64-битное целочисленное значение со знаком
-    (StdName:'xs:negativeInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),     // Целочисленное, содержащее только отрицательные значения (..,-2,-1)
-    (StdName:'xs:nonNegativeInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),  // Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
-    (StdName:'xs:nonPositiveInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),  // Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
-    (StdName:'xs:positiveInteger'; PasName:'integer'; QuotedStr:false; XSDDataType:xsdtInteger),     // Целочисленное, содержащее только положительные значения (1,2,..)
+    (StdName:'xs:negativeInteger'; PasName:'Integer'; QuotedStr:false; XSDDataType:xsdtInteger),     // Целочисленное, содержащее только отрицательные значения (..,-2,-1)
+    (StdName:'xs:nonNegativeInteger'; PasName:'Integer'; QuotedStr:false; XSDDataType:xsdtInteger),  // Целочисленное, содержащее только не-отрицательные значения (0,1,2,..)
+    (StdName:'xs:nonPositiveInteger'; PasName:'Integer'; QuotedStr:false; XSDDataType:xsdtInteger),  // Целочисленное, содержащее только не-положительные значения (..,-2,-1,0)
+    (StdName:'xs:positiveInteger'; PasName:'Integer'; QuotedStr:false; XSDDataType:xsdtInteger),     // Целочисленное, содержащее только положительные значения (1,2,..)
     (StdName:'xs:short'; PasName:'Smallint'; QuotedStr:false; XSDDataType:xsdtInteger),              // 16-битное целочисленное значение со знаком
     (StdName:'xs:unsignedLong'; PasName:'QWord'; QuotedStr:false; XSDDataType:xsdtInteger),          // 64-битное целочисленное значение без знака
     (StdName:'xs:unsignedInt'; PasName:'Longword'; QuotedStr:false; XSDDataType:xsdtInteger),        // 32-битное целочисленное значение без знака
@@ -169,6 +170,20 @@ begin
     StdTypesList.AddObject(R.StdName, D);
   end;
   StdTypesList.Sorted:=true;
+end;
+
+function FindStdTypeByPasName(APasName:string):TXSDStdType;
+var
+  i: Integer;
+  D: TXSDStdType;
+begin
+  for i:=0 to StdTypesList.Count-1 do
+  begin
+    D:=TXSDStdType(StdTypesList.Objects[i]);
+    if D.PascalName = APasName then
+      Exit(D);
+  end;
+  Result:=nil;
 end;
 
 procedure DoneStdTypes;

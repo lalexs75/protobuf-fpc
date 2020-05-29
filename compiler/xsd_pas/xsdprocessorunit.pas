@@ -59,7 +59,7 @@ type
   end;
 
 implementation
-uses StrUtils, XMLRead, xsdutils, LazFileUtils;
+uses StrUtils, XMLRead, xsdutils, xsdconsts, LazFileUtils;
 
 { TXSDProcessor }
 
@@ -84,7 +84,7 @@ begin
       Exit(N);
   end;
 
-  raise Exception.CreateFmt('Not find element "%s" in schema', [AName]);
+  raise Exception.CreateFmt(sNotFoundElementInSchema, [AName]);
 end;
 
 procedure TXSDProcessor.DoProcessNodeMsg(ANodeName: string; AMessage: string);
@@ -107,7 +107,7 @@ begin
         ProcessSchema(FIncSchema);
     end
     else
-      raise Exception.Create('Not find schema in document');
+      raise Exception.Create(sNotFoundSchemaInDocument);
   finally
     FIncDoc.Free;
   end;
@@ -148,7 +148,7 @@ begin
         DoLoadXMLIncludeDoc(S1)
       end
       else
-        raise Exception.CreateFmt('Not found include file name "%s"', [ExtractFileName(R.NodeValue)]);
+        raise Exception.CreateFmt(sNotFoundIncludeFile, [ExtractFileName(R.NodeValue)]);
     end;
   end;
 
@@ -204,6 +204,7 @@ begin
     begin
       FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
       FComplexType.MainRoot:=true;
+      FComplexType.MainRootName:=RName.NodeValue;
       ProcessComplexElement(ANode, R, FSchema, FComplexType)
     end;
   end;
@@ -217,6 +218,7 @@ var
   Prop: TPropertyItem;
   R, R1, FC, M: TDOMNode;
   i: Integer;
+  S: String;
 begin
   R:=FA.Attributes.GetNamedItem('ref'); //ref=QName
   if Assigned(R) then
@@ -226,6 +228,12 @@ begin
 
   Prop:=AComplexType.Propertys.Add(pitAttribute);
   Prop.Name:=FC.Attributes.GetNamedItem('name').NodeValue;
+
+  if Prop.Name = 'HyphenRevisionDate' then
+  begin
+    S:=Prop.Name;
+  end;
+
   Prop.Description:=GetAnnotation(FC);
 
   R:=FC.Attributes.GetNamedItem('type');
@@ -352,11 +360,13 @@ var
   FA, FC, R, RMinOccurs, RMaxOccurs: TDOMNode;
   Prop: TPropertyItem;
   ST: TXSDSimpleType;
+  S: DOMString;
 begin
   for i:=0 to RAll.ChildNodes.Count-1 do
   begin
     Prop:=nil;
     FA:=RAll.ChildNodes[i];
+    S:=FA.NodeName;
     if FA.NodeName = 'xs:element' then
     begin
       RMaxOccurs:=FA.Attributes.GetNamedItem('maxOccurs');
@@ -594,7 +604,7 @@ begin
       FXSDModule.UpdatePascalNames;
     end
     else
-      raise Exception.Create('Not find schema in document');
+      raise Exception.Create(sNotFoundSchemaInDocument);
   end;
   Result:=FXSDModule;
 end;
