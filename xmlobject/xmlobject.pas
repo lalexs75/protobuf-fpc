@@ -1,6 +1,6 @@
 { interface library for FPC and Lazarus
 
-  Copyright (C) 2019 Lagunov Aleksey alexs75@yandex.ru
+  Copyright (C) 2019-2020 Lagunov Aleksey alexs75@yandex.ru
 
   Генерация xml файлов для электронного документооборота
 
@@ -39,7 +39,10 @@ unit xmlobject;
 interface
 
 uses
-  Classes, SysUtils, DOM;
+  Classes, SysUtils, DOM, TypInfo;
+
+type
+  TSXDIntegerArray = array of Integer;
 
 type
   EExchangeDefinitionError = class(Exception);
@@ -147,6 +150,7 @@ type
     procedure InternalWriteChild(FXML: TXMLDocument; AChild:TObject; AElement: TDOMElement; P: TPropertyDef);
     procedure SetAtribute(P: TDOMElement; AttribName, AttribValue:DOMString; Prop:TPropertyDef);
     function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string):TDOMElement;
+    procedure InternalWriteDynArray(FXML: TXMLDocument; P: TDOMElement; AXmlProp:TPropertyDef; AProp:PPropInfo);
   protected
     function IsEmpty:Boolean;
     procedure ValidateRequared;
@@ -239,7 +243,7 @@ type
   end;
 
 implementation
-uses XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, TypInfo, LazUTF8, xmlobject_resource;
+uses XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, LazUTF8, xmlobject_resource;
 
 { TPropertyListEnumerator }
 
@@ -486,6 +490,8 @@ var
   S, TN:string;
   D:TDateTime;
   i: Integer;
+  K: TTypeKind;
+  PP: TObject;
 begin
   ValidateRequared;
 
@@ -496,7 +502,7 @@ begin
     if not Assigned(FProp) then
       raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
 
-    //K:=FProp^.PropType^.Kind;
+    K:=FProp^.PropType^.Kind;
     TN:=FProp^.PropType^.Name;
     case FProp^.PropType^.Kind of
       tkChar,
@@ -583,6 +589,15 @@ begin
             SetAtribute(AElement, P.XMLName, Trim(S), P);
         end;
       tkClass: InternalWriteChild(FXML, TObject(PtrInt( GetOrdProp(Self, FProp))), AElement, P);
+      tkDynArray:
+        begin
+          InternalWriteDynArray(FXML, AElement, P, FProp);
+          //PP:=GetObjectProp(Self, FProp);
+          //L:=DynArraySize(PP);
+          //PDT:=GetTypeData(Info^.PropType);
+
+          raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
+        end
     else
       raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
     end;
@@ -787,6 +802,19 @@ begin
   Result:=FXML.CreateElement(AName);
   if Assigned(AParent) then
     AParent.AppendChild(Result);
+end;
+
+procedure TXmlSerializationObject.InternalWriteDynArray(FXML: TXMLDocument;
+  P: TDOMElement; AXmlProp: TPropertyDef; AProp: PPropInfo);
+var
+  PP: TObject;
+  L: tdynarrayindex;
+  PDT: PTypeData;
+begin
+  PP:=GetObjectProp(Self, AProp);
+  L:=DynArraySize(PP);
+  PDT:=GetTypeData(AProp^.PropType);
+
 end;
 
 procedure TXmlSerializationObject.InternalWriteChild(FXML: TXMLDocument;
