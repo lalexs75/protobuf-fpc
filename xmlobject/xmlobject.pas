@@ -42,7 +42,8 @@ uses
   Classes, SysUtils, DOM, TypInfo;
 
 type
-  TSXDIntegerArray = array of Integer;
+  TXSDIntegerArray = array of Integer;
+  TXSDStringArray = array of String;
 
 type
   EExchangeDefinitionError = class(Exception);
@@ -151,6 +152,7 @@ type
     procedure SetAtribute(P: TDOMElement; AttribName, AttribValue:DOMString; Prop:TPropertyDef);
     function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string):TDOMElement;
     procedure InternalWriteDynArray(FXML: TXMLDocument; P: TDOMElement; AXmlProp:TPropertyDef; AProp:PPropInfo);
+    procedure InternalReadDynArray(AXmlProp:TPropertyDef; AProp:PPropInfo; ATextContent:string);
   protected
     function IsEmpty:Boolean;
     procedure ValidateRequared;
@@ -595,8 +597,6 @@ begin
           //PP:=GetObjectProp(Self, FProp);
           //L:=DynArraySize(PP);
           //PDT:=GetTypeData(Info^.PropType);
-
-          raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
         end
     else
       raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
@@ -758,8 +758,8 @@ begin
           begin
             FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
             TStringList(FInst).Add(NV)
-          end
-
+          end;
+          tkDynArray:InternalReadDynArray(P, FProp, NV);
         else
           raise exception.CreateFmt(sUknowPropertyType, [P.FPropertyName]);
         end;
@@ -807,14 +807,89 @@ end;
 procedure TXmlSerializationObject.InternalWriteDynArray(FXML: TXMLDocument;
   P: TDOMElement; AXmlProp: TPropertyDef; AProp: PPropInfo);
 var
-  PP: TObject;
+  vDinArray: Pointer;
   L: tdynarrayindex;
   PDT: PTypeData;
+  K: TTypeKind;
+  KN, sValue: String;
+  EL: PTypeInfo;
+  O: TOrdType;
+  i: Integer;
+  E: TDOMElement;
+//  EL: PTypeInfo;
 begin
-  PP:=GetObjectProp(Self, AProp);
-  L:=DynArraySize(PP);
+  vDinArray:=GetObjectProp(Self, AProp);
+  L:=DynArraySize(vDinArray);
   PDT:=GetTypeData(AProp^.PropType);
+  O:=PDT^.OrdType;
+  EL:=PDT^.ElType2;
+  K:=EL^.Kind;
+  KN:=EL^.Name;
+  if not (K in [tkInteger, tkString, tkAString]) then
+    raise exception.CreateFmt(sUknowPropertyType, [AXmlProp.PropertyName]);
 
+  for i:=0 to L-1 do
+  begin
+    case K of
+      tkInteger:
+      begin
+        case O of
+          //  otSByte,otUByte,otSWord,otUWord,
+            otSLong:sValue:=IntToStr(TXSDIntegerArray(vDinArray)[i]);
+            //otULong,otSQWord,otUQWor
+        else
+          raise exception.CreateFmt(sUknowPropertyType, [AXmlProp.PropertyName]);
+        end;
+      end;
+      tkAString,
+      tkString:sValue:=TXSDStringArray(vDinArray)[i];
+    else
+      raise exception.CreateFmt(sUknowPropertyType, [AXmlProp.PropertyName]);
+    end;
+    E:=CreateElement(FXML, P, AXmlProp.XMLName);
+    E.TextContent:=sValue;
+  end;
+end;
+
+procedure TXmlSerializationObject.InternalReadDynArray(AXmlProp: TPropertyDef;
+  AProp: PPropInfo; ATextContent: string);
+var
+  vDinArray: Pointer;
+  L: tdynarrayindex;
+  PDT: PTypeData;
+  O: TOrdType;
+  EL: PTypeInfo;
+  K: TTypeKind;
+  KN: String;
+begin
+  vDinArray:=GetObjectProp(Self, AProp);
+  L:=DynArraySize(vDinArray);
+  PDT:=GetTypeData(AProp^.PropType);
+  O:=PDT^.OrdType;
+  EL:=PDT^.ElType2;
+  K:=EL^.Kind;
+  KN:=EL^.Name;
+
+  L:=L+1;
+  DynArraySetLength(vDinArray, AProp^.PropType, 1, @L);
+
+  case K of
+    tkInteger:
+    begin
+      case O of
+        //  otSByte,otUByte,otSWord,otUWord,
+          otSLong:TXSDIntegerArray(vDinArray)[L-1]:=StrToInt(ATextContent);
+          //otULong,otSQWord,otUQWor
+      else
+        raise exception.CreateFmt(sUknowPropertyType, [AXmlProp.PropertyName]);
+      end;
+    end;
+    tkAString,
+    tkString:TXSDStringArray(vDinArray)[L-1]:=ATextContent;
+  else
+    raise exception.CreateFmt(sUknowPropertyType, [AXmlProp.PropertyName]);
+  end;
+  SetObjectProp(Self, AProp, TObject(vDinArray));
 end;
 
 procedure TXmlSerializationObject.InternalWriteChild(FXML: TXMLDocument;
