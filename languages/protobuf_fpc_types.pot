@@ -24,7 +24,7 @@ msgstr ""
 
 #: protobuf_fpc_types.sprotobufferpropnotfoundnum
 #, object-pascal-format
-msgid "ProtoBuffer: Property number %d not found"
+msgid "ProtoBuffer: %s.Property number %d not found"
 msgstr ""
 
 #: protobuf_fpc_types.sprotobufferpropvalueexpected

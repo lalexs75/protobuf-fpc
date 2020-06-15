@@ -32,4 +32,4 @@
 {$mode objfpc}{$H+}
 
 
-{$DEFINE DEBUG}
+{.$DEFINE DEBUG}

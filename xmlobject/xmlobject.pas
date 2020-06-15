@@ -608,7 +608,7 @@ procedure TXmlSerializationObject.DoLoadAtributes(AElement: TDOMNode);
 var
   i, C: Integer;
   A: TDOMNode;
-  S1, NV, TN:string;
+  S1, NV, TN, S:string;
   P: TPropertyDef;
   FProp: PPropInfo;
   D:Extended;
@@ -634,6 +634,12 @@ begin
           raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
         K:=FProp^.PropType^.Kind;
         TN:=FProp^.PropType^.Name;
+
+        if TN='Unit1' then
+        begin
+          S:=TN;
+        end;
+
         case K of
           tkChar,
           tkAString,
@@ -693,7 +699,7 @@ var
   K: TTypeKind;
   FInst: TObject;
   R: TXmlSerializationObject;
-  TN, NV, DS, TS: String;
+  TN, NV, DS, TS, S: String;
   D:Extended;
   DT:TDateTime;
   FS: TFormatSettings;
@@ -708,12 +714,24 @@ begin
 
     if Assigned(P) then
     begin
+      S:=UpperCase(P.FPropertyName);
+      if S = 'UNIT' then
+      begin
+        S:='';
+      end;
+
       FProp:=GetPropInfo(Self, P.FPropertyName); //Retreive property informations
       if not Assigned(FProp) then
         raise Exception.CreateFmt(sPropertyNotFound2, [P.FPropertyName]);
 
       K:=FProp^.PropType^.Kind;
       TN:=FProp^.PropType^.Name;
+
+      if TN='UNIT1' then
+      begin
+        S:=TN;
+      end;
+
       if (xsaSimpleObject in P.Attribs) or (K <> tkClass) then
       begin
         NV:=FNode.TextContent;
