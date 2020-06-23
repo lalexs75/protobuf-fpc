@@ -200,6 +200,7 @@ var
   CG: TPascalCodeGenerator;
 begin
   CG:=TPascalCodeGenerator.Create(AParser);
+  CG.PasUnitName:=ExtractFileNameOnly(FileNameEdit1.FileName);
   CG.IgnoreMissingUnitName:=true;
   CG.IncludeFileFolders.Assign(ListBox1.Items);
   CG.OnStatus:=@CodeGenStatus;

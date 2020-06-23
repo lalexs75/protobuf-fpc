@@ -9,7 +9,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="10"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
       </Unit0>
       <Unit1>
         <Filename Value="ppmainunit.pas"/>
@@ -18,8 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ppMainUnit"/>
-        <CursorPos X="15" Y="158"/>
-        <UsageCount Value="30"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="196"/>
+        <CursorPos Y="203"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,7 +32,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="251"/>
         <CursorPos X="15" Y="256"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -39,7 +41,7 @@
         <UnitName Value="ProtoObjects"/>
         <EditorIndex Value="2"/>
         <CursorPos Y="541"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -49,24 +51,23 @@
         <EditorIndex Value="4"/>
         <TopLine Value="75"/>
         <CursorPos X="3" Y="78"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
       </Unit5>
       <Unit6>
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="351"/>
-        <CursorPos Y="363"/>
-        <UsageCount Value="30"/>
+        <TopLine Value="462"/>
+        <CursorPos X="3" Y="467"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -90,128 +91,128 @@
         <EditorIndex Value="5"/>
         <TopLine Value="1133"/>
         <CursorPos Y="1153"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit9>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="54" Column="15" TopLine="43"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="249" TopLine="246"/>
       </Position1>
       <Position2>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="92" Column="15" TopLine="85"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="339" TopLine="319"/>
       </Position2>
       <Position3>
         <Filename Value="protoobjects.pas"/>
-        <Caret Line="298" Column="3" TopLine="296"/>
+        <Caret Line="541" TopLine="528"/>
       </Position3>
       <Position4>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="70" Column="14" TopLine="70"/>
-      </Position4>
-      <Position5>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="311" Column="3" TopLine="307"/>
-      </Position5>
-      <Position6>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="51" Column="14" TopLine="38"/>
-      </Position6>
-      <Position7>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="242" Column="3" TopLine="239"/>
-      </Position7>
-      <Position8>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="50" Column="16" TopLine="38"/>
-      </Position8>
-      <Position9>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="237" Column="3" TopLine="234"/>
-      </Position9>
-      <Position10>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="52" Column="17" TopLine="37"/>
-      </Position10>
-      <Position11>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="249" Column="3" TopLine="246"/>
-      </Position11>
-      <Position12>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="50" Column="15" TopLine="39"/>
-      </Position12>
-      <Position13>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="237" Column="3" TopLine="234"/>
-      </Position13>
-      <Position14>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="52" Column="17" TopLine="37"/>
-      </Position14>
-      <Position15>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="249" TopLine="246"/>
-      </Position15>
-      <Position16>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="339" TopLine="319"/>
-      </Position16>
-      <Position17>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="541" TopLine="528"/>
-      </Position17>
-      <Position18>
         <Filename Value="pascodegen.pas"/>
         <Caret Line="342" TopLine="319"/>
-      </Position18>
-      <Position19>
+      </Position4>
+      <Position5>
         <Filename Value="pascodegen.pas"/>
         <Caret Line="343" TopLine="320"/>
-      </Position19>
-      <Position20>
+      </Position5>
+      <Position6>
         <Filename Value="pascodegen.pas"/>
         <Caret Line="328" TopLine="320"/>
-      </Position20>
-      <Position21>
+      </Position6>
+      <Position7>
         <Filename Value="pascodegen.pas"/>
         <Caret Line="73" Column="19" TopLine="71"/>
+      </Position7>
+      <Position8>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+      </Position8>
+      <Position9>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="134" Column="21" TopLine="121"/>
+      </Position9>
+      <Position10>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+      </Position10>
+      <Position11>
+        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+        <Caret Line="235" Column="22" TopLine="212"/>
+      </Position11>
+      <Position12>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="133" Column="27" TopLine="121"/>
+      </Position12>
+      <Position13>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="75" TopLine="66"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="154" Column="33" TopLine="141"/>
+      </Position14>
+      <Position15>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="73" Column="34" TopLine="47"/>
+      </Position15>
+      <Position16>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="256" Column="15" TopLine="251"/>
+      </Position16>
+      <Position17>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="158" Column="15"/>
+      </Position17>
+      <Position18>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="95" Column="3" TopLine="93"/>
+      </Position18>
+      <Position19>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="70" Column="15" TopLine="53"/>
+      </Position19>
+      <Position20>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="135" Column="3" TopLine="132"/>
+      </Position20>
+      <Position21>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="74" Column="14" TopLine="57"/>
       </Position21>
       <Position22>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="202" Column="3" TopLine="197"/>
       </Position22>
       <Position23>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="134" Column="21" TopLine="121"/>
+        <Caret Line="61" Column="20" TopLine="42"/>
       </Position23>
       <Position24>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="202" Column="3" TopLine="197"/>
       </Position24>
       <Position25>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="235" Column="22" TopLine="212"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="95" Column="3" TopLine="93"/>
       </Position25>
       <Position26>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="133" Column="27" TopLine="121"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="71" Column="15" TopLine="54"/>
       </Position26>
       <Position27>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="75" TopLine="66"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="163" TopLine="150"/>
       </Position27>
       <Position28>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="154" Column="33" TopLine="141"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="74" Column="14" TopLine="57"/>
       </Position28>
       <Position29>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="73" Column="34" TopLine="47"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="203" TopLine="196"/>
       </Position29>
       <Position30>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="256" Column="15" TopLine="251"/>
+        <Filename Value="ppmainunit.pas"/>
+        <Caret Line="204" TopLine="196"/>
       </Position30>
     </JumpHistory>
     <RunParams>
