@@ -593,7 +593,6 @@ begin
     AModule.Add(S);
   end;
   AModule.Add('end;');
-  AModule.Add('T%ss = specialize GSerializationObjectList<T%s>;', [Caption, Caption]);
 end;
 
 procedure TProtoMessage.GenerateImplementationSection(AModule: TStrings);

@@ -315,7 +315,10 @@ var
 begin
   for P in FParser.ResultObjects do
     if P is TProtoMessage then
+    begin
       FResultCode.Add('  T%s = class;',[P.Caption]);
+      FResultCode.Add('  T%ss = specialize GSerializationObjectList<T%s>;', [P.Caption, P.Caption]);
+    end;
   FResultCode.Add('');
 end;
 
