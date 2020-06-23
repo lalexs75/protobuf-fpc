@@ -577,7 +577,8 @@ begin
             if (Length(S)>0) and (Pos('.', S) > 0) then
             begin
               i:=Length(S);
-              while (I>1) and (S[i] = '0') and (S[i-1]<>'.') do Dec(i);
+              while (I>0) and (S[i] = '0') { and (S[i-1]<>'.')} do Dec(i);
+              if (I>0) and (S[i]='.') then Dec(i);
               S:=Copy(S, 1, i);
             end;
           end;
