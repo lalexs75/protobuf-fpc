@@ -41,6 +41,11 @@ function FindStdTypeByPasName(APasName:string):TXSDStdType;
 
 function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
 function ExpandXSDFileName(AFileName:string; AIncludeFolders:TStrings):string;
+
+const
+  charAlpha = ['A'..'Z', 'a'..'z', '_'];
+  charAlphaNum = charAlpha + ['0'..'9'];
+
 implementation
 uses StrUtils, LazFileUtils;
 

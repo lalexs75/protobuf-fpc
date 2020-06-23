@@ -565,7 +565,7 @@ begin
           if TN = 'TDateTime' then
           begin
             D:=GetFloatProp(Self, P.PropertyName);
-            S:=FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+            S:=FormatDateTime('YYYY-MM-DD''T''HH:NN:SS''Z''', D);
           end
           else
           begin

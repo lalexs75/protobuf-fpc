@@ -486,11 +486,26 @@ begin
 end;
 
 procedure TXSDSimpleType.UpdatePascalNames;
+var
+  R: Boolean;
+  i: Integer;
 begin
   if (FTypeName = 'date') or (FTypeName = 'time') or (FTypeName = 'datetime') then
     FPasTypeName:='T'+FTypeName+'1'
   else
+  begin
     FPasTypeName:='T'+FTypeName;
+
+    for i:=1 to Length(FPasTypeName) do
+    begin
+      if i=1 then
+        R:=FPasTypeName[i] in charAlpha
+      else
+        R:=FPasTypeName[i] in charAlphaNum;
+      if not R then
+        FPasTypeName[i]:='_';
+    end;
+  end;
 end;
 
 { TXSDComplexType }
