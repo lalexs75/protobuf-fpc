@@ -397,7 +397,7 @@ var
 begin
 //  if IsSimpleType(FBaseType) then
   begin
-    D:=FindStdTypeByPasName(FBaseType);
+    D:=FindStdTypeByPasName(PascalBaseType); //FBaseType);
     if Assigned(D) and D.QuotedStr then
       Result:=QuotedStr(FDefaultValue)
     else
@@ -490,6 +490,8 @@ var
   R: Boolean;
   i: Integer;
 begin
+  FPasBaseName:=GetSimpleType(BaseName);
+
   if (FTypeName = 'date') or (FTypeName = 'time') or (FTypeName = 'datetime') then
     FPasTypeName:='T'+FTypeName+'1'
   else
@@ -697,10 +699,36 @@ begin
 end;
 
 procedure TXSDSimpleTypes.UpdatePascalNames;
+
+function DoFindBase(ABase:string):TXSDSimpleType;
 var
-  ST: TXSDSimpleType;
+  ST1: TXSDSimpleType;
+begin
+  ST1:=FindType(ABase);
+  if ST1.PasBaseName = '' then
+    Result:=DoFindBase(ST1.BaseName)
+  else
+    Result:=ST1;
+end;
+
+var
+  ST, ST1: TXSDSimpleType;
 begin
   for ST in Self do ST.UpdatePascalNames;
+
+  for ST in Self do
+  begin
+    if ST.PasBaseName = '' then
+    begin
+      //ST.FPasBaseName:=DoFindBase(ST.BaseName);
+      ST1:=DoFindBase(ST.BaseName);
+      if Assigned(ST1) then
+      begin
+        ST.FPasBaseName:=ST1.PasBaseName;
+        ST.FBaseName:=ST1.BaseName;
+      end;
+    end;
+  end;
 end;
 
 { TXSDComplexTypesEnumerator }

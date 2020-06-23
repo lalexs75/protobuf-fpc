@@ -495,7 +495,8 @@ begin
   if Assigned(R) then
   begin
     ASimpleType.BaseName:=R.Attributes.GetNamedItem('base').NodeValue;
-    ASimpleType.PasBaseName:=GetSimpleType(ASimpleType.BaseName);
+    //ASimpleType.PasBaseName:=GetSimpleType(ASimpleType.BaseName);
+    ASimpleType.PasBaseName:=ASimpleType.BaseName;
     for i:=0 to R.ChildNodes.Count-1 do
     begin
       M:=R.ChildNodes[i];

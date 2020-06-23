@@ -5,6 +5,7 @@
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
@@ -16,8 +17,9 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="1"/>
-      <BuildNr Value="4"/>
+      <MinorVersionNr Value="2"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="6"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
