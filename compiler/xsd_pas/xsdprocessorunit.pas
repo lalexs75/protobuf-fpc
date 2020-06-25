@@ -42,11 +42,10 @@ type
     procedure DoProcessNodeMsg(ANodeName:string; AMessage:string);
     procedure DoLoadXMLIncludeDoc(AFileName:string);
 
-    procedure ProcessSchema(ANode:TDOMNode);
-    procedure ProcessElement(ANode, FSchema:TDOMNode);
-    procedure ProcessComplexElement(ANode, AContext, FSchema: TDOMNode;
-      AComplexType: TXSDComplexType);
-    procedure ProcessSimpleType(AContext: TDOMNode; ASimpleType: TXSDSimpleType);
+    procedure ProcessSchema(ANode:TDOMNode; AInclude:boolean);
+    procedure ProcessElement(ANode, FSchema:TDOMNode; AInclude:boolean);
+    procedure ProcessComplexElement(ANode, AContext, FSchema: TDOMNode; AComplexType: TXSDComplexType; AInclude:boolean);
+    procedure ProcessSimpleType(AContext: TDOMNode; ASimpleType: TXSDSimpleType; AInclude:boolean);
     function GetAnnotation(AContext:TDOMNode):string;
   public
     constructor Create;
@@ -104,7 +103,7 @@ begin
     begin
       FIncSchema:=FIncDoc.FindNode('xs:schema');
       if Assigned(FIncSchema) then
-        ProcessSchema(FIncSchema);
+        ProcessSchema(FIncSchema, true);
     end
     else
       raise Exception.Create(sNotFoundSchemaInDocument);
@@ -113,7 +112,7 @@ begin
   end;
 end;
 
-procedure TXSDProcessor.ProcessSchema(ANode: TDOMNode);
+procedure TXSDProcessor.ProcessSchema(ANode: TDOMNode; AInclude: boolean);
 var
   i, C: Integer;
   N, R: TDOMNode;
@@ -133,8 +132,8 @@ begin
       R:=N.Attributes.GetNamedItem('name');
       DoProcessNodeMsg(R.NodeName, R.NodeValue);
       ST:=FXSDModule.SimpleTypes.Add(R.NodeValue);
-      ST.InludedType:=ANode <>  FMainSchema;
-      ProcessSimpleType(N, ST);
+      ST.IncludedType:=AInclude;
+      ProcessSimpleType(N, ST, AInclude);
     end
     else
     if (S = 'xs:include') then
@@ -162,7 +161,7 @@ begin
       DoProcessNodeMsg(S, N.NodeValue);
       if (S = 'xs:element')  then
       begin
-        ProcessElement(N, ANode)
+        ProcessElement(N, ANode, AInclude)
       end
       else
       if (S = 'xs:complexType') then
@@ -170,14 +169,15 @@ begin
         R:=N.Attributes.GetNamedItem('name');
         DoProcessNodeMsg(R.NodeName, R.NodeValue);
         CT:=FXSDModule.ComplexTypes.Add(R.NodeValue);
-        CT.InludedType:=ANode <> FMainSchema;
-        ProcessComplexElement( N, N, ANode, CT);
+        CT.IncludedType:=AInclude;
+        ProcessComplexElement( N, N, ANode, CT, AInclude);
       end;
     end;
   end;
 end;
 
-procedure TXSDProcessor.ProcessElement(ANode, FSchema: TDOMNode);
+procedure TXSDProcessor.ProcessElement(ANode, FSchema: TDOMNode;
+  AInclude: boolean);
 var
   R, RName: TDOMNode;
   FComplexType: TXSDComplexType;
@@ -192,9 +192,13 @@ begin
     DoProcessNodeMsg(R.NodeName, R.NodeValue);
 
     FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue + '_element');
-    FComplexType.MainRoot:=true;
-    FComplexType.MainRootName:=RName.NodeValue;
-    FComplexType.InheritedType:=R.NodeValue;
+    if not AInclude then
+    begin
+      FComplexType.MainRoot:=true;
+      FComplexType.MainRootName:=RName.NodeValue;
+      FComplexType.InheritedType:=R.NodeValue;
+    end;
+    FComplexType.IncludedType:=AInclude;
     //ProcessComplexElement(ANode, R, FComplexType)
   end
   else
@@ -203,15 +207,19 @@ begin
     if Assigned(R) then
     begin
       FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
-      FComplexType.MainRoot:=true;
-      FComplexType.MainRootName:=RName.NodeValue;
-      ProcessComplexElement(ANode, R, FSchema, FComplexType)
+      if not AInclude then
+      begin
+        FComplexType.MainRoot:=true;
+        FComplexType.MainRootName:=RName.NodeValue;
+      end;
+      FComplexType.IncludedType:=AInclude;
+      ProcessComplexElement(ANode, R, FSchema, FComplexType, AInclude)
     end;
   end;
 end;
 
-procedure TXSDProcessor.ProcessComplexElement(ANode, AContext, FSchema: TDOMNode;
-  AComplexType: TXSDComplexType);
+procedure TXSDProcessor.ProcessComplexElement(ANode, AContext,
+  FSchema: TDOMNode; AComplexType: TXSDComplexType; AInclude: boolean);
 
 procedure ProcessAttribute(FA:TDOMNode);
 var
@@ -348,8 +356,8 @@ var
 begin
   S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
   CT:=FXSDModule.ComplexTypes.Add(S);
-  ProcessComplexElement(FC, FC, FSchema, CT);
-
+  CT.IncludedType:=AInclude;
+  ProcessComplexElement(FC, FC, FSchema, CT, AInclude);
   Result:=AComplexType.Propertys.Add(pitClass);
   Result.BaseType:=S;
   Result.Name:=FA.Attributes.GetNamedItem('name').NodeValue;
@@ -403,7 +411,8 @@ begin
           if Assigned(FC) then
           begin
             ST:=FXSDModule.SimpleTypes.Add(FA.Attributes.GetNamedItem('name').NodeValue);
-            ProcessSimpleType(FC, ST);
+            ST.IncludedType:=AInclude;
+            ProcessSimpleType(FC, ST, AInclude);
             ST.UpdateUniqueName;
 
             Prop:=AComplexType.Propertys.Add(pitSimpleType);
@@ -475,7 +484,7 @@ begin
       if Assigned(FC1) then
       begin
         AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
-        ProcessComplexElement(ANode, FC1, FSchema, AComplexType);
+        ProcessComplexElement(ANode, FC1, FSchema, AComplexType, AInclude);
       end;
     end
     else
@@ -485,7 +494,7 @@ begin
 end;
 
 procedure TXSDProcessor.ProcessSimpleType(AContext: TDOMNode;
-  ASimpleType: TXSDSimpleType);
+  ASimpleType: TXSDSimpleType; AInclude: boolean);
 var
   R, M: TDOMNode;
   i: Integer;
@@ -601,7 +610,7 @@ begin
     FMainSchema:=FMainDoc.FindNode('xs:schema');
     if Assigned(FMainSchema) then
     begin
-      ProcessSchema(FMainSchema);
+      ProcessSchema(FMainSchema, false);
       FXSDModule.UpdatePascalNames;
     end
     else

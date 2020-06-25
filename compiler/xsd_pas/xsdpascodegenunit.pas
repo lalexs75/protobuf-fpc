@@ -97,15 +97,18 @@ begin
   {$IFDEF XSD_FORWARD_DECLARE}
   Result:=Result + LineEnding + '  {  Forward declarations  }' + LineEnding;
   for CT in FXSDModule.ComplexTypes do
-    Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
+    if not CT.IncludedType then
+      Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
 
   Result:=Result + LineEnding + '  {  Generic classes for collections  }' + LineEnding;
   for CT in FXSDModule.ComplexTypes do
-    Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
+    if not CT.IncludedType then
+      Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
   {$ENDIF}
   Result:=Result + LineEnding;
 
   for CT in FXSDModule.ComplexTypes do
+  if not CT.IncludedType then
   begin
     Result:=Result + '  {  ' + CT.PascalTypeName + '  }'+LineEnding;
 
@@ -161,6 +164,7 @@ var
 begin
   Result:='';
   for CT in FXSDModule.ComplexTypes do
+  if not CT.IncludedType then
   begin
      Result:=Result + '  {  '+CT.PascalTypeName + '  }'+LineEnding;
 
@@ -351,7 +355,7 @@ var
 begin
   Result:='';
   for ST in FXSDModule.SimpleTypes do
-    if not ST.InludedType then
+    if not ST.IncludedType then
     begin
       if (cgdoDescribeTypes in FDescribeOptions) and (ST.Description <> '') then
          Result:=Result + GenerateTypeDescription(ST.Description);
