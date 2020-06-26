@@ -187,6 +187,7 @@ type
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(AParser:TProtoParser; AToken:TProtoToken; AWord:string); override;
   public
+    procedure GenerateInterfaceSection(AModule:TStrings); override;
     property ProtoSyntax:TParserSyntax read FProtoSyntax write FProtoSyntax;
   end;
 
@@ -689,6 +690,15 @@ begin
           FProtoSyntax:=psProto2
       end;
   end;
+end;
+
+procedure TSyntax.GenerateInterfaceSection(AModule: TStrings);
+begin
+  case FProtoSyntax of
+    psProto2:AModule.Add('//syntax = "proto2"');
+    psProto3:AModule.Add('//syntax = "proto3"');
+  end;
+
 end;
 
 { TProtoParser }

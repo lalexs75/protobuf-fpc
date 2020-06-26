@@ -55,6 +55,7 @@ type
     procedure Assign(ASource:TEnumValueList);
     function GetEnumerator: TEnumValueListEnumerator;
     function Add(ACaption:string):TEnumValue;
+    function EnumByValue(AValue:Integer):TEnumValue;
     property Item[AIndex:integer]:TEnumValue read GetItem; default;
     property Count:integer read GetCount;
   end;
@@ -77,7 +78,9 @@ type
 
   TEnum = class(TProtoObject)
   private
+    FAllowAlias: Boolean;
     FCurField:TEnumValue;
+    FCurOption:string;
     FValues: TEnumValueList;
   protected
     procedure InitParserTree;override;
@@ -90,6 +93,7 @@ type
     procedure GenerateInterfaceSection(AModule:TStrings); override;
     procedure Assign(ASource:TProtoObject); override;
     property Values:TEnumValueList read FValues;
+    property AllowAlias:Boolean read FAllowAlias write FAllowAlias;
   end;
 
 implementation
@@ -146,6 +150,20 @@ begin
   Result:=TEnumValue.Create;
   Result.Caption:=ACaption;
   FList.Add(Result);
+end;
+
+function TEnumValueList.EnumByValue(AValue: Integer): TEnumValue;
+var
+  i: Integer;
+  V: TEnumValue;
+begin
+  Result:=nil;
+  for i:=0 to FList.Count-1 do
+  begin
+    V:=TEnumValue(FList[i]);
+    if V.FValue = AValue then
+      Exit(V);
+  end;
 end;
 
 { TEnumValueListEnumerator }
@@ -215,10 +233,10 @@ begin
   T:=AddToken(stSymbol, T, '{', []);
 
     TOpt:=AddToken(stKeyword, T, 'option', []);
-    TOpt1:=AddToken(stIdentificator, TOpt, '', []);
+    TOpt1:=AddToken(stIdentificator, TOpt, '', [], 5);
     TOpt1:=AddToken(stSymbol, TOpt1, '=', []);
-    TOpt1_1:=AddToken(stKeyword, TOpt1, 'true', []);
-    TOpt1_2:=AddToken(stKeyword, TOpt1, 'false', []);
+    TOpt1_1:=AddToken(stKeyword, TOpt1, 'true', [], 6);
+    TOpt1_2:=AddToken(stKeyword, TOpt1, 'false', [], 7);
 
     TN:=AddToken(stIdentificator, T, '', [], 2);
     TSymb:=AddToken(stSymbol, TN, '=', []);
@@ -230,12 +248,34 @@ end;
 
 procedure TEnum.InternalProcessChildToken(AParser: TProtoParser;
   AToken: TProtoToken; AWord: string);
+var
+  V: TEnumValue;
 begin
   inherited InternalProcessChildToken(AParser, AToken, AWord);
   case AToken.Code of
     2:FCurField:=FValues.Add(AWord);
-    3:if Assigned(FCurField) then FCurField.FValue:=StrToInt(AWord);
+    3:begin
+        if not AllowAlias then
+        begin
+          V:=FValues.EnumByValue(StrToInt(AWord));
+          if Assigned(V) and (V<>FCurField) then
+            raise Exception.CreateFmt('duplicate enum value : %s = %d',[FCurField.Caption, StrToInt(AWord)]);
+        end;
+        if Assigned(FCurField) then FCurField.FValue:=StrToInt(AWord);
+
+      end;
     4:FCurField:=nil;
+    5:FCurOption:=UpperCase( AWord);
+    6:begin
+        if FCurOption = 'ALLOW_ALIAS' then
+          FAllowAlias:=true;
+        FCurOption:='';
+      end;
+    7:begin
+        if FCurOption = 'ALLOW_ALIAS' then
+          FAllowAlias:=false;
+        FCurOption:='';
+      end;
   end;
 end;
 
@@ -273,6 +313,7 @@ procedure TEnum.Clear;
 begin
   if Assigned(FValues) then
     FValues.Clear;
+  FAllowAlias:=false;
   inherited Clear;
 end;
 

@@ -3,13 +3,13 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="10">
+    <Units Count="11">
       <Unit0>
         <Filename Value="ppGui.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="10"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="42"/>
       </Unit0>
       <Unit1>
         <Filename Value="ppmainunit.pas"/>
@@ -20,7 +20,7 @@
         <UnitName Value="ppMainUnit"/>
         <TopLine Value="196"/>
         <CursorPos Y="203"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -29,9 +29,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoParser"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1292"/>
-        <CursorPos X="48" Y="447"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="1302"/>
+        <CursorPos Y="1337"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -39,9 +39,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="405"/>
-        <CursorPos X="62" Y="433"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="15"/>
+        <CursorPos X="3" Y="99"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -50,25 +50,25 @@
         <UnitName Value="EnumObject"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="75"/>
-        <CursorPos X="3" Y="78"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="253"/>
+        <CursorPos Y="275"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="42"/>
       </Unit5>
       <Unit6>
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="291"/>
-        <CursorPos X="42" Y="320"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="131"/>
+        <CursorPos X="31" Y="153"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -77,7 +77,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="172"/>
         <CursorPos X="28" Y="199"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit7>
       <Unit8>
         <Filename Value="../../../lazutils/lazstringutils.pas"/>
@@ -85,136 +85,144 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="80"/>
         <CursorPos X="10" Y="107"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit8>
       <Unit9>
         <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1133"/>
         <CursorPos Y="1153"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit9>
+      <Unit10>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="956"/>
+        <CursorPos Y="977"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit10>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="95" Column="3" TopLine="93"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="235" Column="50" TopLine="222"/>
       </Position1>
       <Position2>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="70" Column="15" TopLine="53"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="86" Column="5" TopLine="67"/>
       </Position2>
       <Position3>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="135" Column="3" TopLine="132"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="271" Column="22" TopLine="239"/>
       </Position3>
       <Position4>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="74" Column="14" TopLine="57"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="92" Column="15" TopLine="69"/>
       </Position4>
       <Position5>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="202" Column="3" TopLine="197"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="315" Column="6" TopLine="266"/>
       </Position5>
       <Position6>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="20" TopLine="42"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="87" Column="20" TopLine="76"/>
       </Position6>
       <Position7>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="202" Column="3" TopLine="197"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="252" Column="3" TopLine="249"/>
       </Position7>
       <Position8>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="95" Column="3" TopLine="93"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="256" TopLine="249"/>
       </Position8>
       <Position9>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="71" Column="15" TopLine="54"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="257" TopLine="249"/>
       </Position9>
       <Position10>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="163" TopLine="150"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <Caret Line="974" TopLine="956"/>
       </Position10>
       <Position11>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="74" Column="14" TopLine="57"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <Caret Line="975" TopLine="956"/>
       </Position11>
       <Position12>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="203" TopLine="196"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <Caret Line="976" TopLine="956"/>
       </Position12>
       <Position13>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="204" TopLine="196"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
+        <Caret Line="977" TopLine="956"/>
       </Position13>
       <Position14>
-        <Filename Value="ppmainunit.pas"/>
-        <Caret Line="203" TopLine="196"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="159" TopLine="141"/>
       </Position14>
       <Position15>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="14" TopLine="44"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="160" TopLine="141"/>
       </Position15>
       <Position16>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="480" Column="19" TopLine="462"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="161" TopLine="141"/>
       </Position16>
       <Position17>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="49" Column="15" TopLine="31"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="163" TopLine="141"/>
       </Position17>
       <Position18>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="211" Column="3" TopLine="177"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="164" TopLine="141"/>
       </Position18>
       <Position19>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="146" Column="66" TopLine="119"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="165" TopLine="141"/>
       </Position19>
       <Position20>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="477" Column="14" TopLine="448"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="167" TopLine="141"/>
       </Position20>
       <Position21>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="48" Column="29" TopLine="39"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="260" Column="107" TopLine="240"/>
       </Position21>
       <Position22>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="229" Column="3" TopLine="253"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="262" Column="11" TopLine="240"/>
       </Position22>
       <Position23>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="201" Column="20" TopLine="177"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="258" TopLine="240"/>
       </Position23>
       <Position24>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="138" Column="15" TopLine="119"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="260" TopLine="240"/>
       </Position24>
       <Position25>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="449" Column="3" TopLine="447"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="261" TopLine="240"/>
       </Position25>
       <Position26>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="138" Column="39" TopLine="120"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="264" TopLine="240"/>
       </Position26>
       <Position27>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="48" Column="14" TopLine="30"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="258" TopLine="240"/>
       </Position27>
       <Position28>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="110" Column="39" TopLine="81"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="260" TopLine="240"/>
       </Position28>
       <Position29>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="201" Column="20" TopLine="177"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="261" TopLine="240"/>
       </Position29>
       <Position30>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="52" Column="15" TopLine="31"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="275" TopLine="253"/>
       </Position30>
     </JumpHistory>
     <RunParams>
