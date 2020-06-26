@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <PathDelim Value="\"/>
     <Name Value="protobuf"/>
     <Type Value="RunAndDesignTime"/>
@@ -14,7 +14,7 @@
       </SearchPaths>
     </CompilerOptions>
     <License Value="LGPL"/>
-    <Version Minor="1" Release="1" Build="1"/>
+    <Version Minor="2" Release="1" Build="3"/>
     <Files Count="3">
       <Item1>
         <Filename Value="protobuf\protobuf_fpc.pas"/>
@@ -29,6 +29,7 @@
         <Type Value="Include"/>
       </Item3>
     </Files>
+    <CompatibilityMode Value="True"/>
     <LazDoc Paths="docs"/>
     <i18n>
       <EnableI18N Value="True"/>

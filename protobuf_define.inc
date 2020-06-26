@@ -1,6 +1,6 @@
 { protobuf interface library for FPC and Lazarus
 
-  Copyright (C) 2018 Lagunov Aleksey alexs75@yandex.ru
+  Copyright (C) 2018-202 Lagunov Aleksey alexs75@yandex.ru
 
   base on docs from https://developers.google.com/protocol-buffers/docs/encoding
 
