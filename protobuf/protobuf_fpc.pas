@@ -1002,8 +1002,13 @@ var
   Buf1: TSerializationBuffer;
   FProp: PPropInfo;
   K: TTypeKind;
-  SS, STypeName, TN: String;
+  SS, STypeName, TN, KN: String;
   BB: Integer;
+  vDinArray: pointer;
+  L: tdynarrayindex;
+  PDT: PTypeData;
+  O: TOrdType;
+  EL: PTypeInfo;
 begin
   Result:=false;
   while not ABuf.Eof do
@@ -1099,7 +1104,38 @@ begin
                 begin
                   { TODO : Необходимо обработать динамический массив }
                   //raise Exception.CreateFmt('Property %s.%s. Unknow dyn array type - %s', [ClassName, P.PropName, TN]);
-                  BB:=ABuf.ReadVarInt;
+                  //BB:=ABuf.ReadVarInt;
+
+
+                  vDinArray:=GetObjectProp(Self, FProp);
+                  L:=DynArraySize(vDinArray);
+                  PDT:=GetTypeData(FProp^.PropType);
+                  O:=PDT^.OrdType;
+                  EL:=PDT^.ElType2;
+                  K:=EL^.Kind;
+                  KN:=EL^.Name;
+
+                  L:=L+1;
+                  DynArraySetLength(vDinArray, FProp^.PropType, 1, @L);
+
+                  case K of
+                    tkInteger:
+                    begin
+                      case O of
+                        //  otSByte,otUByte,otSWord,otUWord,
+                          otSLong:TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadVarInt;
+                          //otULong,otSQWord,otUQWor
+                      else
+                        raise exception.CreateFmt('sUknowPropertyType %s', [P.FPropName]);
+                      end;
+                    end;
+                    //tkAString,
+                    //tkString:TXSDStringArray(vDinArray)[L-1]:=ATextContent;
+                  else
+                    raise exception.CreateFmt('sUknowPropertyType %s', [P.PropName]);
+                  end;
+                  SetObjectProp(Self, FProp, TObject(vDinArray));
+
                 end;
               end
           else
