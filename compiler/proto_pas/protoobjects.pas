@@ -282,6 +282,9 @@ begin
   if (FDataTypeFlag = pdtClass) and (FFieldType = mftRepeated) then
     Result:='T' + FDataType + 's'
   else
+  if FFieldType = mftRepeated then
+    Result:='T' + FDataType + 'Array'
+  else
     Result:='T' + FDataType;
 end;
 

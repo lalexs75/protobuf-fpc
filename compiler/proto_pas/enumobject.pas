@@ -294,6 +294,7 @@ begin
     AModule.Add(S);
   end;
   AModule.Add(');');
+  AModule.Add('T'+Caption + 'Array = array of T'+Caption+';');
 end;
 
 constructor TEnum.Create;
