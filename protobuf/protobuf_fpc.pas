@@ -1255,6 +1255,7 @@ begin
                      for i:=0 to L-1 do
                      begin
                        case K of
+                         tkEnumeration,
                          tkInteger:
                            case O of
                             otSLong:ABuf.WriteAsInteger(P, TIntegerDynArray(vDinArray)[i]);
