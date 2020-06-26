@@ -9,7 +9,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="18" Y="10"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="45"/>
       </Unit0>
       <Unit1>
         <Filename Value="ppmainunit.pas"/>
@@ -20,7 +20,7 @@
         <UnitName Value="ppMainUnit"/>
         <TopLine Value="209"/>
         <CursorPos Y="203"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -31,35 +31,35 @@
         <EditorIndex Value="1"/>
         <TopLine Value="1302"/>
         <CursorPos Y="1337"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="protoobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="258"/>
-        <CursorPos X="38" Y="286"/>
-        <UsageCount Value="43"/>
+        <CursorPos Y="271"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="enumobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="75"/>
-        <CursorPos X="15" Y="93"/>
-        <UsageCount Value="43"/>
+        <TopLine Value="302"/>
+        <CursorPos X="28" Y="308"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="45"/>
       </Unit5>
       <Unit6>
         <Filename Value="pascodegen.pas"/>
@@ -68,7 +68,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="131"/>
         <CursorPos X="31" Y="153"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -77,7 +77,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="172"/>
         <CursorPos X="28" Y="199"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit7>
       <Unit8>
         <Filename Value="../../../lazutils/lazstringutils.pas"/>
@@ -85,14 +85,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="80"/>
         <CursorPos X="10" Y="107"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit8>
       <Unit9>
         <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1133"/>
         <CursorPos Y="1153"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit9>
       <Unit10>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
@@ -102,111 +102,127 @@
         <UsageCount Value="10"/>
       </Unit10>
     </Units>
-    <JumpHistory Count="26" HistoryIndex="25">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="315" Column="6" TopLine="266"/>
+        <Caret Line="87" Column="20" TopLine="76"/>
       </Position1>
       <Position2>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="87" Column="20" TopLine="76"/>
+        <Caret Line="252" Column="3" TopLine="249"/>
       </Position2>
       <Position3>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="252" Column="3" TopLine="249"/>
+        <Caret Line="256" TopLine="249"/>
       </Position3>
       <Position4>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="256" TopLine="249"/>
+        <Caret Line="257" TopLine="249"/>
       </Position4>
       <Position5>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="257" TopLine="249"/>
+        <Caret Line="159" TopLine="141"/>
       </Position5>
       <Position6>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="159" TopLine="141"/>
+        <Caret Line="160" TopLine="141"/>
       </Position6>
       <Position7>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="160" TopLine="141"/>
+        <Caret Line="161" TopLine="141"/>
       </Position7>
       <Position8>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="161" TopLine="141"/>
+        <Caret Line="163" TopLine="141"/>
       </Position8>
       <Position9>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="163" TopLine="141"/>
+        <Caret Line="164" TopLine="141"/>
       </Position9>
       <Position10>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="164" TopLine="141"/>
+        <Caret Line="165" TopLine="141"/>
       </Position10>
       <Position11>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="165" TopLine="141"/>
+        <Caret Line="167" TopLine="141"/>
       </Position11>
       <Position12>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="167" TopLine="141"/>
+        <Caret Line="260" Column="107" TopLine="240"/>
       </Position12>
       <Position13>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="260" Column="107" TopLine="240"/>
+        <Caret Line="262" Column="11" TopLine="240"/>
       </Position13>
       <Position14>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="262" Column="11" TopLine="240"/>
+        <Caret Line="258" TopLine="240"/>
       </Position14>
       <Position15>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="258" TopLine="240"/>
+        <Caret Line="260" TopLine="240"/>
       </Position15>
       <Position16>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="260" TopLine="240"/>
+        <Caret Line="261" TopLine="240"/>
       </Position16>
       <Position17>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="261" TopLine="240"/>
+        <Caret Line="264" TopLine="240"/>
       </Position17>
       <Position18>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="264" TopLine="240"/>
+        <Caret Line="258" TopLine="240"/>
       </Position18>
       <Position19>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="258" TopLine="240"/>
+        <Caret Line="260" TopLine="240"/>
       </Position19>
       <Position20>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="260" TopLine="240"/>
+        <Caret Line="261" TopLine="240"/>
       </Position20>
       <Position21>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="261" TopLine="240"/>
+        <Caret Line="275" TopLine="253"/>
       </Position21>
       <Position22>
         <Filename Value="enumobject.pas"/>
-        <Caret Line="275" TopLine="253"/>
+        <Caret Line="292" Column="38" TopLine="273"/>
       </Position22>
       <Position23>
-        <Filename Value="enumobject.pas"/>
-        <Caret Line="292" Column="38" TopLine="273"/>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="110" Column="32" TopLine="84"/>
       </Position23>
       <Position24>
         <Filename Value="protoobjects.pas"/>
-        <Caret Line="110" Column="32" TopLine="84"/>
+        <Caret Line="559" Column="3" TopLine="554"/>
       </Position24>
       <Position25>
         <Filename Value="protoobjects.pas"/>
-        <Caret Line="559" Column="3" TopLine="554"/>
+        <Caret Line="53" Column="14" TopLine="36"/>
       </Position25>
       <Position26>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="53" Column="14" TopLine="36"/>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="86" Column="15" TopLine="75"/>
       </Position26>
+      <Position27>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="260" Column="77" TopLine="229"/>
+      </Position27>
+      <Position28>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="245" Column="7" TopLine="227"/>
+      </Position28>
+      <Position29>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="243" Column="27" TopLine="234"/>
+      </Position29>
+      <Position30>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="93" Column="15" TopLine="68"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

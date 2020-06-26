@@ -208,7 +208,8 @@ end;
 
 procedure TEnum.InitParserTree;
 var
-  FStart, T, TN, TSymb, TV, TOpt, TOpt1, TOpt1_1, TOpt1_2: TProtoToken;
+  FStart, T, TN, TSymb, TV, TOpt, TOpt1, TOpt1_1, TOpt1_2, TRes,
+    TRes1, TRes2, TRes1_1, TRes1_2: TProtoToken;
 begin
   (*
   enum Corpus {
@@ -227,10 +228,29 @@ begin
     STARTED = 1;
     RUNNING = 1;
   }
+
+  enum Foo {
+    reserved 2, 15, 9 to 11, 40 to max;
+    reserved "FOO", "BAR";
+  }
   *)
   FStart:=AddToken(stKeyword, nil, 'enum', [toHeaderStart, toHeaderEnd]);
   T:=AddToken(stIdentificator, FStart, '', [], 1);
   T:=AddToken(stSymbol, T, '{', []);
+
+    TRes:=AddToken(stKeyword, T, 'reserved', []);
+      TRes1:=AddToken(stInteger, TRes, '', []);
+
+      TRes1_1:=AddToken(stKeyword, TRes1, 'TO', []);
+      TRes1_2:=AddToken(stKeyword, TRes1_1, 'max', []);
+      TRes1_1:=AddToken(stInteger, TRes1_1, '', []);
+
+      TSymb:=AddToken(stSymbol, [TRes1, TRes1_1, TRes1_2], ',', []);
+      TSymb.AddChildToken(TRes1);
+
+      TRes2:=AddToken(stString, TRes, '', []);
+      TSymb:=AddToken(stSymbol, [TRes2], ',', []);
+      TSymb.AddChildToken(TRes2);
 
     TOpt:=AddToken(stKeyword, T, 'option', []);
     TOpt1:=AddToken(stIdentificator, TOpt, '', [], 5);
@@ -241,8 +261,8 @@ begin
     TN:=AddToken(stIdentificator, T, '', [], 2);
     TSymb:=AddToken(stSymbol, TN, '=', []);
     TV:=AddToken(stInteger, TSymb, '', [], 3);
-    TSymb:=AddToken(stSymbol, [TV, TOpt1_1, TOpt1_2], ';', [], 4);
-    TSymb.AddChildToken([TN, TOpt]);
+    TSymb:=AddToken(stSymbol, [TV, TOpt1_1, TOpt1_2, TRes1, TRes1_1, TRes1_2, TRes2], ';', [], 4);
+    TSymb.AddChildToken([TN, TOpt, TRes]);
   T:=AddToken(stSymbol, TSymb, '}', [], -1);
 end;
 
@@ -285,6 +305,7 @@ var
   S: String;
   i: Integer;
 begin
+  if Values.Count = 0 then exit;
   AModule.Add('T'+Caption + ' = (');
   for i:=0 to Values.Count-1 do
   begin
