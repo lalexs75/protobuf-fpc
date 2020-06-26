@@ -282,7 +282,7 @@ function DecodeValue32(AValue: LongWord):Int32;
 function DecodeValue64(AValue: QWord):Int64;
 
 implementation
-uses TypInfo
+uses Types, TypInfo
 {$IFDEF DEBUG}
   , rxlogging
 {$ENDIF}
@@ -1187,8 +1187,12 @@ var
   FProp: PPropInfo;
   K: TTypeKind;
   PArr: Pointer;
-  L: Integer;
-  STypeName, PropValue: String;
+  L, i: Integer;
+  STypeName, PropValue, KN: String;
+  vDinArray: TObject;
+  PDT: PTypeData;
+  O: TOrdType;
+  EL: PTypeInfo;
 begin
   InternalCheckRequired;
   for P in FPropertys do
@@ -1230,9 +1234,38 @@ begin
         end;
       tkEnumeration : ABuf.WriteAsInteger(P, GetOrdProp(Self, FProp));
       tkDynArray:begin
-                   PArr:=GetDynArrayProp(Self, FProp);
-                   if Assigned(PArr) then
-                     ABuf.WriteAsBytes(P, TBytes(PArr));
+                   STypeName:=UpperCase(FProp^.PropType^.Name);
+
+                   if STypeName = 'TBYTES' then
+                   begin
+                     PArr:=GetDynArrayProp(Self, FProp);
+                     if Assigned(PArr) then
+                       ABuf.WriteAsBytes(P, TBytes(PArr));
+                   end
+                   else
+                   begin
+                     vDinArray:=GetObjectProp(Self, FProp);
+                     L:=DynArraySize(vDinArray);
+                     PDT:=GetTypeData(FProp^.PropType);
+                     O:=PDT^.OrdType;
+                     EL:=PDT^.ElType2;
+                     K:=EL^.Kind;
+                     KN:=EL^.Name;
+
+                     for i:=0 to L-1 do
+                     begin
+                       case K of
+                         tkInteger:
+                           case O of
+                            otSLong:ABuf.WriteAsInteger(P, TIntegerDynArray(vDinArray)[i]);
+                           else
+                             raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+                           end
+                       else
+                         raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+                       end;
+                     end;
+                   end;
                  end;
       tkClass : SaveClassData(FProp, P);
     else
