@@ -1002,7 +1002,7 @@ var
   Buf1: TSerializationBuffer;
   FProp: PPropInfo;
   K: TTypeKind;
-  SS, STypeName, TN, KN: String;
+  SS, TN, KN: String;
   BB: Integer;
   vDinArray: pointer;
   L: tdynarrayindex;
@@ -1062,7 +1062,7 @@ begin
 
           //Необходимо совместить определения типа читаемых данных по признаку из файла и из данных RTTI
           K:=FProp^.PropType^.Kind;
-          TN:=FProp^.PropType^.Name;
+          TN:=UpperCase(FProp^.PropType^.Name);
           case FProp^.PropType^.Kind of
             tkChar,
             tkAString,
@@ -1077,16 +1077,14 @@ begin
 
             tkInt64   :
                begin
-                 STypeName:=UpperCase(FProp^.PropType^.Name);
-                 if STypeName = 'SINT64' then
+                 if TN = 'SINT64' then
                    SetOrdProp(Self, FProp, ABuf.ReadAsIntegerZZ)
                  else
                    SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
                end;
             tkInteger :
                begin
-                 STypeName:=UpperCase(FProp^.PropType^.Name);
-                 if STypeName = 'SINT32' then
+                 if TN = 'SINT32' then
                    SetOrdProp(Self, FProp, ABuf.ReadAsIntegerZZ)
                  else
                    SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
@@ -1098,7 +1096,7 @@ begin
             tkClass : LoadClassData(FProp, P);
             tkDynArray:
               begin
-                if TN = 'TBytes' then
+                if TN = 'TBYTES' then
                   LoadBytes(FProp, P)
                 else
                 begin
@@ -1119,11 +1117,16 @@ begin
                   DynArraySetLength(vDinArray, FProp^.PropType, 1, @L);
 
                   case K of
-                    tkInteger:
+                    tkInteger,
+                    tkEnumeration:
                     begin
                       case O of
                         //  otSByte,otUByte,otSWord,otUWord,
-                          otSLong:TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadVarInt;
+                          otSLong:
+                            if (TN = 'SINT32') or (TN='SINT64') then
+                              TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadAsIntegerZZ
+                            else
+                              TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadVarInt;
                           //otULong,otSQWord,otUQWor
                       else
                         raise exception.CreateFmt('sUknowPropertyType %s', [P.FPropName]);
@@ -1132,7 +1135,7 @@ begin
                     //tkAString,
                     //tkString:TXSDStringArray(vDinArray)[L-1]:=ATextContent;
                   else
-                    raise exception.CreateFmt('sUknowPropertyType %s', [P.PropName]);
+                    raise exception.CreateFmt('sUknowPropertyType %s.%s', [ClassName, P.PropName]);
                   end;
                   SetObjectProp(Self, FProp, TObject(vDinArray));
 
