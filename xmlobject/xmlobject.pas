@@ -742,6 +742,7 @@ begin
           tkWString,
           tkSString,
           tkLString   : SetStrProp(Self, FProp, NV);
+          tkInt64,
           tkInteger : SetInt64Prop(Self, FProp, StrToInt64(NV));
           tkFloat :
             begin
