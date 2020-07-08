@@ -154,6 +154,7 @@ type
     procedure InternalWriteDynArray(FXML: TXMLDocument; P: TDOMElement; AXmlProp:TPropertyDef; AProp:PPropInfo);
     procedure InternalReadDynArray(AXmlProp:TPropertyDef; AProp:PPropInfo; ATextContent:string);
   protected
+    property PropertyList:TPropertyList read FPropertyList;
     function IsEmpty:Boolean;
     procedure ValidateRequared;
     function RegisterProperty(APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = ''):TPropertyDef;
@@ -186,13 +187,13 @@ type
     property RegistredPropertyList:TPropertyList read FPropertyList;
 
     procedure SaveToFile(AFileName:string); virtual;
-    procedure LoadFromFile(AFileName:string);
+    procedure LoadFromFile(AFileName:string); virtual;
 
-    procedure LoadFromStream(AStream:TStream);
-    procedure SaveToStream(AStream:TStream);
+    procedure LoadFromStream(AStream:TStream); virtual;
+    procedure SaveToStream(AStream:TStream); virtual;
 
-    procedure LoadFromStr(AStr:string);
-    function SaveToStr:string;
+    procedure LoadFromStr(AStr:string); virtual;
+    function SaveToStr:string; virtual;
 
     procedure SaveToXML(const XML: TXMLDocument);
     procedure LoadFromXML(const XML: TXMLDocument);
@@ -522,7 +523,6 @@ begin
           else
             SetAtribute(AElement, P.XMLName, GetStrProp(Self, P.PropertyName), P);
         end;
-//                  SetAtribute(P: TDOMElement; AttribName, AttribValue:string; AMaxLen:Integer);
       tkBool :
         begin
           if xsaSimpleObject in P.Attribs then
