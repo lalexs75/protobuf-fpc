@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unit1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <TopLine Value="36"/>
+        <CursorPos X="14" Y="56"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <UnitName Value="JSONObjects"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="70"/>
+        <CursorPos X="39" Y="98"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unit2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Unit2"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="16" Y="14"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <UnitName Value="AbstractSerializationObjects"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="387"/>
+        <CursorPos X="3" Y="407"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="137"/>
+        <CursorPos X="14" Y="155"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="161" Column="42" TopLine="141"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="150" Column="40" TopLine="138"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="1433" Column="3" TopLine="1427"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="89" Column="5" TopLine="95"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="678" Column="14" TopLine="662"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3426" Column="3" TopLine="3421"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="568" Column="14" TopLine="550"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3407" Column="3" TopLine="3405"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="568" Column="21" TopLine="547"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3407" Column="3" TopLine="3405"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="568" Column="14" TopLine="550"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3407" Column="3" TopLine="3405"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="634" Column="20" TopLine="607"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3127" Column="3" TopLine="3123"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="662" Column="14" TopLine="634"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3566" Column="3" TopLine="3552"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="653" Column="14" TopLine="636"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="3379" Column="3" TopLine="3376"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="90" Column="5" TopLine="68"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="89" Column="7" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="91" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="92" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="89" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="91" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Caret Line="155" Column="54" TopLine="143"/>
+      </Position>
+      <Position>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Caret Line="405" Column="19" TopLine="401"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
+        <Caret Line="704" Column="14" TopLine="673"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="98" Column="39" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Caret Line="155" Column="15" TopLine="137"/>
+      </Position>
+      <Position>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Caret Line="409" Column="5" TopLine="402"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../../json/jsonobjects.pas"/>
+        <Line Value="91"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Line Value="411"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>

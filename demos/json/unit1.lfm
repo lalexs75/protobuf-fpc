@@ -1,0 +1,38 @@
+object Form1: TForm1
+  Left = 364
+  Height = 476
+  Top = 134
+  Width = 320
+  Caption = 'Form1'
+  ClientHeight = 476
+  ClientWidth = 320
+  LCLVersion = '2.1.0.0'
+  object Button1: TButton
+    Left = 96
+    Height = 33
+    Top = 48
+    Width = 78
+    AutoSize = True
+    Caption = 'Save JSON'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 96
+    Height = 33
+    Top = 88
+    Width = 81
+    AutoSize = True
+    Caption = 'Load JSON'
+    OnClick = Button2Click
+    TabOrder = 1
+  end
+  object Memo1: TMemo
+    Left = 0
+    Height = 340
+    Top = 136
+    Width = 320
+    Align = alBottom
+    TabOrder = 2
+  end
+end
