@@ -47,8 +47,9 @@ type
     FJSONName: string;
     procedure SetJSONName(AValue: string);
 
-    procedure InternalReadJSON;
   protected
+    procedure InternalReadDoc; override;
+
     procedure InternalWriteString(P: TPropertyDef; AValue:string); override;
     procedure InternalWriteBoolean(P: TPropertyDef; AValue:Boolean); override;
     procedure InternalWriteInteger(P: TPropertyDef; AValue:Integer); override;
@@ -80,11 +81,15 @@ begin
   FJSONName:=AValue;
 end;
 
-procedure TJSONSerializationObject.InternalReadJSON;
+procedure TJSONSerializationObject.InternalReadDoc;
 var
   J: TJSONData;
   S: String;
   i: Integer;
+  P: TPropertyDef;
+  FProp: PPropInfo;
+  K: TTypeKind;
+  FInst: TObject;
 begin
   for i:=0 to FDoc.Count-1 do
   begin
@@ -93,6 +98,32 @@ begin
     if J is TJSONArray then
     else
     if J is TJSONObject then
+    begin
+      P:=PropertyList.PropertyByName(S);
+      if not Assigned(P) then Exit; //!!
+
+      FProp:=GetPropInfo(Self, P.PropertyName); //Retreive property informations
+      K:=FProp^.PropType^.Kind;
+
+
+      FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+      if not Assigned(FInst) then
+        raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
+
+      if FInst is TJSONSerializationObject then
+      begin
+        TJSONSerializationObject(FInst).FDoc:=J as TJSONObject;
+        TJSONSerializationObject(FInst).InternalReadDoc;
+        TJSONSerializationObject(FInst).FDoc:=nil;
+      end
+(*      else
+      if FInst is TXmlSerializationObjectList then
+      begin
+        R:=TXmlSerializationObjectListHack(FInst).InternalAddObject as TXmlSerializationObject;
+        R.InternalRead(FNode)
+      end;
+      *)
+    end
     else
     begin
       InternalReadString(S, J.AsString);
@@ -251,7 +282,7 @@ begin
   P:=TJSONParser.Create(AStream);
   try
     FDoc:=P.Parse as TJSONObject;
-    InternalReadJSON;
+    InternalReadDoc;
     FDoc.Free;
   finally
     P.Free;

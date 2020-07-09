@@ -150,8 +150,8 @@ type
     procedure ModifiedProperty(APropertyName:string);
 
     procedure InternalWriteDoc;
-    procedure InternalReadDoc;
   protected
+    procedure InternalReadDoc; virtual; abstract;
     procedure InternalReadString(AName, AValue:string);
 
     procedure InternalWriteString(P: TPropertyDef; AValue:string); virtual; abstract;
@@ -394,21 +394,72 @@ begin
   end;
 end;
 
-procedure TAbstractSerializationObject.InternalReadDoc;
-begin
-
-end;
-
 procedure TAbstractSerializationObject.InternalReadString(AName, AValue: string
   );
 var
   P: TPropertyDef;
+  FProp: PPropInfo;
+  K: TTypeKind;
+  TN: String;
+  DT: TDateTime;
+  D:Extended;
+  C:Integer;
 begin
   P:=PropertyList.PropertyByName(AName);
   if Assigned(P) then
   begin
+    FProp:=GetPropInfo(Self, P.PropertyName);
 
-  end;
+    if not Assigned(FProp) then
+      raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
+
+    K:=FProp^.PropType^.Kind;
+    TN:=FProp^.PropType^.Name;
+
+    case K of
+      tkChar,
+      tkAString,
+      tkWString,
+      tkSString,
+      tkLString : SetStrProp(Self, FProp, AValue);
+      tkBool : SetOrdProp(Self, FProp, Ord(StrToBool(AValue)));
+//          tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
+      tkInt64 : SetInt64Prop(Self, FProp, StrToInt64(AValue));
+      tkInteger : SetOrdProp(Self, FProp, StrToInt(AValue));
+
+//          tkSet                       : SetSetProp(t,PropInfo,S);
+      tkFloat :
+        begin
+          if TN = 'TTime' then
+          begin
+            DT:=StrToTime(AValue); //FormatDateTime('HH:NN:SS', D);
+            SetFloatProp(Self, FProp, DT);
+          end
+          else
+          if TN = 'TDate' then
+          begin
+            DT:=StrToDate(AValue); //FormatDateTime('YYYY-MM-DD', D);
+            SetFloatProp(Self, FProp, DT);
+          end
+          else
+          if TN = 'TDateTime' then
+          begin
+            DT:=StrToDateTime(AValue); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+            SetFloatProp(Self, FProp, DT);
+          end
+          else
+          begin
+            Val(AValue, D, C);
+            if C = 0 then
+              SetFloatProp(Self, FProp, D);
+          end;
+        end
+    else
+      raise exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
+    end;
+  end
+  else
+    raise exception.CreateFmt(sNotFoundPropertyForField, [ClassName, AName]);
 end;
 
 constructor TAbstractSerializationObject.Create;
