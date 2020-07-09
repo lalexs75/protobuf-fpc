@@ -2,10 +2,6 @@
 
   Copyright (C) 2019-2020 Lagunov Aleksey alexs75@yandex.ru
 
-  Генерация xml файлов для электронного документооборота
-
-  Структуры данных базируются на основании "Приказ ФНС РФ от 19.12.2018 N ММВ-7-15/820@"
-
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Library General Public License as published by
   the Free Software Foundation; either version 2 of the License, or (at your
@@ -39,15 +35,11 @@ unit xmlobject;
 interface
 
 uses
-  Classes, SysUtils, DOM, TypInfo;
-
-type
-  TXSDIntegerArray = array of Integer;
-  TXSDStringArray = array of String;
+  Classes, SysUtils, DOM, TypInfo, AbstractSerializationObjects;
 
 type
   EExchangeDefinitionError = class(Exception);
-  TXSAttrib = (xsaSimpleObject, xsaRequared);
+  TXSAttrib = (xsaSimpleObject, xsaRequared, xsaDefault);
   TXSAttribs = set of TXSAttrib;
   TPropertyListEnumerator = class;
   TXmlSerializationObject = class;
@@ -140,7 +132,7 @@ type
 
   { TXmlSerializationObject }
 
-  TXmlSerializationObject = class
+  TXmlSerializationObject = class(TAbstractSerializationObject)
   private
     FPropertyList:TPropertyList;
     procedure InternalRead(AElement: TDOMNode);

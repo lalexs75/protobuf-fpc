@@ -13,7 +13,7 @@
     </CompilerOptions>
     <Description Value="XML files to Pascal objects"/>
     <License Value="LGPL3"/>
-    <Version Major="2" Release="3" Build="4"/>
+    <Version Major="2" Release="4" Build="6"/>
     <Files>
       <Item>
         <Filename Value="xmlobject/xmlobject.pas"/>
@@ -22,6 +22,10 @@
       <Item>
         <Filename Value="xmlobject/xmlobject_resource.pas"/>
         <UnitName Value="xmlobject_resource"/>
+      </Item>
+      <Item>
+        <Filename Value="xmlobject/abstractserializationobjects.pas"/>
+        <UnitName Value="AbstractSerializationObjects"/>
       </Item>
     </Files>
     <LazDoc Paths="docs"/>
