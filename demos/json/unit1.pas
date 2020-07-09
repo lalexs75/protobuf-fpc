@@ -16,11 +16,16 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    Button7: TButton;
     Memo1: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     procedure WriteLog(S:string);
     procedure WriteLog(S:string; Args: array of const);
@@ -33,7 +38,7 @@ var
 
 implementation
 
-uses Unit2;
+uses Unit2, Unit3;
 
 {$R *.lfm}
 
@@ -86,6 +91,46 @@ begin
 
   WriteLog('W.Child.Code = %d', [W.Child.Code]);
   WriteLog('W.Child.Name = %s', [W.Child.Name]);
+  W.Free;
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+  //
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+var
+  W: TGoodsItems;
+  G:TGoodsItem;
+begin
+  W:=TGoodsItems.Create;
+  W.LoadFromFile('cis_list.json');
+
+  for G in W.Items do
+  begin
+    WriteLog('--------------');
+    WriteLog('G.CIS:%s', [G.CIS]);
+    WriteLog('G.GTIN:%s', [G.GTIN]);
+    WriteLog('G.ProducerName:%s', [G.ProducerName]);
+    WriteLog('G.Status:%s', [G.Status]);
+    WriteLog('G.EmissionDate:%U', [G.EmissionDate]);
+    WriteLog('G.ProducedDate:%U', [G.ProducedDate]);
+    WriteLog('G.PackageType:%s', [G.PackageType]);
+    WriteLog('G.OwnerName:%s', [G.OwnerName]);
+    WriteLog('G.OwnerInn:%s', [G.OwnerInn]);
+    WriteLog('G.ProductName:%s', [G.ProductName]);
+    WriteLog('G.Brand:%s', [G.Brand]);
+    //property prevCises":[],
+    //property nextCises":[],
+    WriteLog('G.StatusEx:%s', [G.StatusEx]);
+    WriteLog('G.CountChildren:%d', [G.CountChildren]);
+    WriteLog('G.LastDocId:%s', [G.LastDocId]);
+    WriteLog('G.IntroducedDate:%U', [G.IntroducedDate]);
+    WriteLog('G.AgentName:%s', [G.AgentName]);
+    WriteLog('G.LastStatusChangeDate:%s', [G.LastStatusChangeDate]);
+    WriteLog('G.ProductGroup:%s', [G.ProductGroup]);
+  end;
   W.Free;
 end;
 
