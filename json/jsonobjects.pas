@@ -47,6 +47,7 @@ type
     FJSONName: string;
     procedure SetJSONName(AValue: string);
 
+    function DefaultObjectList:TXmlSerializationObjectList;
   protected
     procedure InternalReadDoc; override;
 
@@ -73,6 +74,9 @@ type
 implementation
 uses xmlobject_resource, jsonparser;
 
+type
+  TXmlSerializationObjectListHack = class(TXmlSerializationObjectList);
+
 { TJSONSerializationObject }
 
 procedure TJSONSerializationObject.SetJSONName(AValue: string);
@@ -81,7 +85,41 @@ begin
   FJSONName:=AValue;
 end;
 
+function TJSONSerializationObject.DefaultObjectList: TXmlSerializationObjectList;
+var
+  P: TPropertyDef;
+  FInst: TObject;
+  FProp: PPropInfo;
+  K: TTypeKind;
+begin
+  Result:=nil;
+  for P in PropertyList do
+  begin
+    if xsaDefault in P.Attribs then
+    begin
+      FProp:=GetPropInfo(Self, P.PropertyName); //Retreive property informations
+      K:=FProp^.PropType^.Kind;
+      FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+      if FInst is TXmlSerializationObjectList then
+        Result:=TXmlSerializationObjectList(FInst);
+      Exit;
+    end;
+  end;
+end;
+
 procedure TJSONSerializationObject.InternalReadDoc;
+
+procedure DoInObject(AName:string; AList:TXmlSerializationObjectList; J:TJSONObject);
+var
+  R: TJSONSerializationObject;
+begin
+  R:=TXmlSerializationObjectListHack(AList).InternalAddObject as TJSONSerializationObject;
+  R.JSONName:=AName;
+  R.FDoc:=J;
+  R.InternalReadDoc;
+  R.FDoc:=nil;
+end;
+
 var
   J: TJSONData;
   S: String;
@@ -99,30 +137,30 @@ begin
     else
     if J is TJSONObject then
     begin
-      P:=PropertyList.PropertyByName(S);
-      if not Assigned(P) then Exit; //!!
-
-      FProp:=GetPropInfo(Self, P.PropertyName); //Retreive property informations
-      K:=FProp^.PropType^.Kind;
-
-
-      FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
-      if not Assigned(FInst) then
-        raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
-
-      if FInst is TJSONSerializationObject then
+      P:=PropertyList.PropertyByXMLName(S);
+      if Assigned(P) then
       begin
-        TJSONSerializationObject(FInst).FDoc:=J as TJSONObject;
-        TJSONSerializationObject(FInst).InternalReadDoc;
-        TJSONSerializationObject(FInst).FDoc:=nil;
+        FProp:=GetPropInfo(Self, P.PropertyName); //Retreive property informations
+        K:=FProp^.PropType^.Kind;
+
+        FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+        if not Assigned(FInst) then
+          raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
+        if FInst is TJSONSerializationObject then
+        begin
+          TJSONSerializationObject(FInst).FDoc:=J as TJSONObject;
+          TJSONSerializationObject(FInst).InternalReadDoc;
+          TJSONSerializationObject(FInst).FDoc:=nil;
+        end
+        else
+        if FInst is TXmlSerializationObjectList then
+          DoInObject('', TXmlSerializationObjectListHack(FInst), J as TJSONObject);
       end
-(*      else
-      if FInst is TXmlSerializationObjectList then
+      else
       begin
-        R:=TXmlSerializationObjectListHack(FInst).InternalAddObject as TXmlSerializationObject;
-        R.InternalRead(FNode)
-      end;
-      *)
+        if Assigned(DefaultObjectList) then
+          DoInObject(S, DefaultObjectList, J as TJSONObject);
+      end
     end
     else
     begin
@@ -237,9 +275,6 @@ begin
   TJSONSerializationObject(AObject).InternalWriteDoc;
   TJSONSerializationObject(AObject).FDoc:=Nil;
 end;
-
-type
-  TXmlSerializationObjectListHack = class(TXmlSerializationObjectList);
 
 procedure TJSONSerializationObject.InternalWriteClassCollection(
   P: TPropertyDef; AObjects: TXmlSerializationObjectList);
