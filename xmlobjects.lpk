@@ -7,13 +7,13 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <OtherUnitFiles Value="xmlobject"/>
+        <OtherUnitFiles Value="xmlobject;json"/>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Description Value="XML files to Pascal objects"/>
     <License Value="LGPL3"/>
-    <Version Major="2" Release="4" Build="6"/>
+    <Version Major="2" Release="4" Build="7"/>
     <Files>
       <Item>
         <Filename Value="xmlobject/xmlobject.pas"/>
@@ -26,6 +26,10 @@
       <Item>
         <Filename Value="xmlobject/abstractserializationobjects.pas"/>
         <UnitName Value="AbstractSerializationObjects"/>
+      </Item>
+      <Item>
+        <Filename Value="json/jsonobjects.pas"/>
+        <UnitName Value="JSONObjects"/>
       </Item>
     </Files>
     <LazDoc Paths="docs"/>

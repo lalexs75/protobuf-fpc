@@ -8,7 +8,7 @@ unit xmlobjects;
 interface
 
 uses
-  xmlobject, xmlobject_resource, AbstractSerializationObjects, 
+  xmlobject, xmlobject_resource, AbstractSerializationObjects, JSONObjects, 
   LazarusPackageIntf;
 
 implementation
