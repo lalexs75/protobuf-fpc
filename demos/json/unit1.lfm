@@ -11,9 +11,9 @@ object Form1: TForm1
     Left = 96
     Height = 33
     Top = 48
-    Width = 78
+    Width = 87
     AutoSize = True
-    Caption = 'Save JSON'
+    Caption = 'Save JSON 1'
     OnClick = Button1Click
     TabOrder = 0
   end
@@ -21,9 +21,9 @@ object Form1: TForm1
     Left = 96
     Height = 33
     Top = 88
-    Width = 81
+    Width = 90
     AutoSize = True
-    Caption = 'Load JSON'
+    Caption = 'Load JSON 1'
     OnClick = Button2Click
     TabOrder = 1
   end
@@ -34,5 +34,25 @@ object Form1: TForm1
     Width = 320
     Align = alBottom
     TabOrder = 2
+  end
+  object Button3: TButton
+    Left = 195
+    Height = 33
+    Top = 48
+    Width = 88
+    AutoSize = True
+    Caption = 'Save JSON 2'
+    OnClick = Button3Click
+    TabOrder = 3
+  end
+  object Button4: TButton
+    Left = 195
+    Height = 33
+    Top = 90
+    Width = 91
+    AutoSize = True
+    Caption = 'Load JSON 2'
+    OnClick = Button4Click
+    TabOrder = 4
   end
 end

@@ -25,7 +25,63 @@ type
     property Name:string read FName write SetName;
   end;
 
+
+  { TMainSONObj }
+
+  TMainSONObj = class(TJSONSerializationObject)
+  private
+    FAdress: string;
+    FChild: TChildJSONObj;
+    FVersion: Integer;
+    procedure SetAdress(AValue: string);
+    procedure SetVersion(AValue: Integer);
+  protected
+    procedure InternalRegisterPropertys; override;
+    procedure InternalInitChilds; override;
+  public
+    destructor Destroy; override;
+  published
+    property Version:Integer read FVersion write SetVersion;
+    property Adress:string read FAdress write SetAdress;
+    property Child:TChildJSONObj read FChild;
+  end;
+
 implementation
+
+{ TMainSONObj }
+
+procedure TMainSONObj.SetAdress(AValue: string);
+begin
+  if FAdress=AValue then Exit;
+  FAdress:=AValue;
+  ModifiedProperty('Adress');
+end;
+
+procedure TMainSONObj.SetVersion(AValue: Integer);
+begin
+  if FVersion=AValue then Exit;
+  FVersion:=AValue;
+  ModifiedProperty('Version');
+end;
+
+procedure TMainSONObj.InternalRegisterPropertys;
+begin
+  inherited InternalRegisterPropertys;
+  RegisterProperty('Version', 'Version', [], '', -1, -1);
+  RegisterProperty('Adress', 'Adress', [], '', -1, -1);
+  RegisterProperty('Child', 'Child', [], '', -1, -1);
+end;
+
+procedure TMainSONObj.InternalInitChilds;
+begin
+  FChild:=TChildJSONObj.Create;
+end;
+
+destructor TMainSONObj.Destroy;
+begin
+  FreeAndNil(FChild);
+  inherited Destroy;
+end;
 
 { TChildJSONObj }
 

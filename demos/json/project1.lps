@@ -11,178 +11,357 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <TopLine Value="36"/>
-        <CursorPos X="14" Y="56"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="58"/>
+        <CursorPos X="38" Y="86"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <UnitName Value="JSONObjects"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="70"/>
-        <CursorPos X="39" Y="98"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unit2.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Unit2"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="16" Y="14"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="40"/>
+        <CursorPos X="19" Y="55"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <UnitName Value="JSONObjects"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="82"/>
+        <CursorPos X="63" Y="115"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
         <UnitName Value="AbstractSerializationObjects"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="387"/>
-        <CursorPos X="3" Y="407"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="131"/>
+        <CursorPos X="15" Y="149"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="137"/>
         <CursorPos X="14" Y="155"/>
         <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="385"/>
+        <CursorPos Y="417"/>
+        <UsageCount Value="10"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../scancode_fpc/scancode_stock_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="61" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../scancode_fpc/scancode_document_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="25"/>
+        <CursorPos X="61" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../scancode_fpc/scancode_characteristics_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="25"/>
+        <CursorPos X="61" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/exchange/abstractexchangefileunit.pas"/>
+        <UnitName Value="AbstractExchangeFileUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="20"/>
+        <CursorPos X="66" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../scancode_fpc/scancode_tsd_order_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="29"/>
+        <CursorPos X="61" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/adressinfo.pas"/>
+        <UnitName Value="AdressInfo"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="28"/>
+        <CursorPos X="61" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/organizationinfo.pas"/>
+        <UnitName Value="OrganizationInfo"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="73" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/additionalinfo.pas"/>
+        <UnitName Value="AdditionalInfo"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="61" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/invoiceitem.pas"/>
+        <UnitName Value="InvoiceItem"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="77" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/transferinfo.pas"/>
+        <UnitName Value="TransferInfo"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="28"/>
+        <CursorPos X="95" Y="41"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/signer.pas"/>
+        <UnitName Value="Signer"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="79" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/invocedocument.pas"/>
+        <UnitName Value="InvoceDocument"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="53" Y="43"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/invoceexchangefile.pas"/>
+        <UnitName Value="InvoceExchangeFile"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="74" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/invoce/v5_2/invoceexchangefile_5_02.pas"/>
+        <UnitName Value="InvoceExchangeFile_5_02"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="123" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/exchange/exchangeinformation.pas"/>
+        <UnitName Value="ExchangeInformation"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="61" Y="41"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/exchange/treasuryinformation.pas"/>
+        <UnitName Value="TreasuryInformation"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="61" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/exchange/exchangesigner.pas"/>
+        <UnitName Value="ExchangeSigner"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="82" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/exchange/exchangedocument.pas"/>
+        <UnitName Value="ExchangeDocument"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="3" Y="43"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/exchange/clientexchangefile.pas"/>
+        <UnitName Value="ClientExchangeFile"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="28"/>
+        <CursorPos X="105" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/ImportGoodsAndIndirectTaxes/importgoodsandindirecttaxesdocument.pas"/>
+        <UnitName Value="ImportGoodsAndIndirectTaxesDocument"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="25"/>
+        <CursorPos X="61" Y="43"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/ImportGoodsAndIndirectTaxes/importgoodsandindirecttaxesexchangefile.pas"/>
+        <UnitName Value="ImportGoodsAndIndirectTaxesExchangeFile"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="3" Y="44"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/torg2/et_torg2.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="25"/>
+        <CursorPos X="87" Y="46"/>
+        <UsageCount Value="10"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="161" Column="42" TopLine="141"/>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <Caret Line="47" Column="15" TopLine="31"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="150" Column="40" TopLine="138"/>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <Caret Line="94" Column="3" TopLine="92"/>
       </Position>
       <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="1433" Column="3" TopLine="1427"/>
-      </Position>
-      <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="89" Column="5" TopLine="95"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="678" Column="14" TopLine="662"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3426" Column="3" TopLine="3421"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="568" Column="14" TopLine="550"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3407" Column="3" TopLine="3405"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="568" Column="21" TopLine="547"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3407" Column="3" TopLine="3405"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="568" Column="14" TopLine="550"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3407" Column="3" TopLine="3405"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="634" Column="20" TopLine="607"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3127" Column="3" TopLine="3123"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="662" Column="14" TopLine="634"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3566" Column="3" TopLine="3552"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="653" Column="14" TopLine="636"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="3379" Column="3" TopLine="3376"/>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <Caret Line="49" Column="15" TopLine="31"/>
       </Position>
       <Position>
         <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="90" Column="5" TopLine="68"/>
-      </Position>
-      <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="89" Column="7" TopLine="70"/>
-      </Position>
-      <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="91" TopLine="70"/>
-      </Position>
-      <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="92" TopLine="70"/>
-      </Position>
-      <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="89" TopLine="70"/>
-      </Position>
-      <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="91" TopLine="70"/>
+        <Caret Line="107" Column="9" TopLine="86"/>
       </Position>
       <Position>
         <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
-        <Caret Line="155" Column="54" TopLine="143"/>
-      </Position>
-      <Position>
-        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
-        <Caret Line="405" Column="19" TopLine="401"/>
-      </Position>
-      <Position>
-        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-json/src/fpjson.pp"/>
-        <Caret Line="704" Column="14" TopLine="673"/>
+        <Caret Line="397" TopLine="380"/>
       </Position>
       <Position>
         <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="98" Column="39" TopLine="70"/>
+        <Caret Line="101" Column="39" TopLine="83"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="31"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="44" Column="3" TopLine="26"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="37" TopLine="2"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="40" Column="46" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="36" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="60" Column="20" TopLine="26"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="45" Column="56" TopLine="26"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="39" TopLine="26"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="90" TopLine="65"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="36" Column="15"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="56" Column="14" TopLine="36"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="57" Column="14" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="59" Column="14" TopLine="39"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="79" Column="30" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="76" TopLine="56"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="89" TopLine="21"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="44" Column="3" TopLine="41"/>
       </Position>
       <Position>
         <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
-        <Caret Line="155" Column="15" TopLine="137"/>
+        <Caret Line="189" Column="22" TopLine="164"/>
       </Position>
       <Position>
         <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
-        <Caret Line="409" Column="5" TopLine="402"/>
+        <Caret Line="471" Column="3" TopLine="464"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="40" Column="44" TopLine="21"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="85" Column="30" TopLine="50"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="51" Column="26" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="127" Column="3" TopLine="93"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="109" Column="7" TopLine="91"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -190,22 +369,4 @@
       <Modes ActiveMode=""/>
     </RunParams>
   </ProjectSession>
-  <Debugging>
-    <BreakPoints>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../json/jsonobjects.pas"/>
-        <Line Value="91"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../xmlobject/abstractserializationobjects.pas"/>
-        <Line Value="411"/>
-      </Item>
-    </BreakPoints>
-  </Debugging>
 </CONFIG>
