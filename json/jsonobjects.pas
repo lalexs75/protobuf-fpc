@@ -121,19 +121,52 @@ begin
 end;
 
 var
-  J: TJSONData;
+  J, J1: TJSONData;
   S: String;
-  i: Integer;
+  i, n: Integer;
   P: TPropertyDef;
   FProp: PPropInfo;
   K: TTypeKind;
   FInst: TObject;
+  JA: TJSONArray;
 begin
   for i:=0 to FDoc.Count-1 do
   begin
     S:=FDoc.Names[i];
     J:=FDoc.Items[i];
     if J is TJSONArray then
+    begin
+      JA:=TJSONArray(J);
+      for n:=0 to JA.Count-1 do
+      begin
+        J1:=JA[n];
+        if J1 is TJSONObject then
+        begin
+          P:=PropertyList.PropertyByXMLName(S);
+          if Assigned(P) then
+          begin
+            FProp:=GetPropInfo(Self, P.PropertyName); //Retreive property informations
+            K:=FProp^.PropType^.Kind;
+
+            FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+            if not Assigned(FInst) then
+              raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName])
+            else
+            if FInst is TXmlSerializationObjectList then
+              DoInObject('', TXmlSerializationObjectListHack(FInst), J1 as TJSONObject)
+            else
+              raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
+          end
+        end
+        else
+        if J1 is TJSONArray then
+          raise Exception.Create('not implementation')
+        else
+        begin
+          InternalReadString(S, J1.AsString);
+        end;
+      end;
+    end
     else
     if J is TJSONObject then
     begin
@@ -314,6 +347,7 @@ procedure TJSONSerializationObject.LoadFromStream(AStream: TStream);
 var
   P: TJSONParser;
 begin
+  inherited LoadFromStream(AStream);
   P:=TJSONParser.Create(AStream);
   try
     FDoc:=P.Parse as TJSONObject;

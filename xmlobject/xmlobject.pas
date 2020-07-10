@@ -645,6 +645,7 @@ procedure TXmlSerializationObject.LoadFromStream(AStream: TStream);
 var
   FXML: TXMLDocument;
 begin
+  inherited LoadFromStream(AStream);
   ReadXMLFile(FXML, AStream);
   InternalRead(FXML.DocumentElement);
   FXML.Free;

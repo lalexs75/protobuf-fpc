@@ -150,6 +150,7 @@ type
     procedure ModifiedProperty(APropertyName:string);
 
     procedure InternalWriteDoc;
+    procedure InternalReadDynArrayElement(P:TPropertyDef; AProp:PPropInfo; AValue:string);
   protected
     procedure InternalReadDoc; virtual; abstract;
     procedure InternalReadString(AName, AValue:string);
@@ -188,6 +189,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+    procedure Clear;
 
     procedure SaveToFile(AFileName:string); virtual;
     procedure LoadFromFile(AFileName:string); virtual;
@@ -453,13 +455,54 @@ begin
             if C = 0 then
               SetFloatProp(Self, FProp, D);
           end;
-        end
+        end;
+      tkDynArray:InternalReadDynArrayElement(P, FProp, AValue);
     else
       raise exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
     end;
   end
   else
     raise exception.CreateFmt(sNotFoundPropertyForField, [ClassName, AName]);
+end;
+
+procedure TAbstractSerializationObject.InternalReadDynArrayElement(
+  P: TPropertyDef; AProp: PPropInfo; AValue: string);
+var
+  vDinArray: Pointer;
+  L: tdynarrayindex;
+  PDT: PTypeData;
+  O: TOrdType;
+  EL: PTypeInfo;
+  K: TTypeKind;
+begin
+  vDinArray:=GetObjectProp(Self, AProp);
+  L:=DynArraySize(vDinArray);
+  PDT:=GetTypeData(AProp^.PropType);
+  O:=PDT^.OrdType;
+  EL:=PDT^.ElType2;
+  K:=EL^.Kind;
+//  KN:=EL^.Name;
+
+  L:=L+1;
+  DynArraySetLength(vDinArray, AProp^.PropType, 1, @L);
+
+  case K of
+    tkInteger:
+    begin
+      case O of
+        //  otSByte,otUByte,otSWord,otUWord,
+          otSLong:TXSDIntegerArray(vDinArray)[L-1]:=StrToInt(AValue);
+          //otULong,otSQWord,otUQWor
+      else
+        raise exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
+      end;
+    end;
+    tkAString,
+    tkString:TXSDStringArray(vDinArray)[L-1]:=AValue;
+  else
+    raise exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
+  end;
+  SetObjectProp(Self, AProp, TObject(vDinArray));
 end;
 
 constructor TAbstractSerializationObject.Create;
@@ -475,6 +518,11 @@ destructor TAbstractSerializationObject.Destroy;
 begin
   FreeAndNil(FPropertyList);
   inherited Destroy;
+end;
+
+procedure TAbstractSerializationObject.Clear;
+begin
+  { TODO -oalexs : Необходимо реализовать метод очистки полей }
 end;
 
 procedure TAbstractSerializationObject.SaveToFile(AFileName: string);
@@ -497,7 +545,7 @@ end;
 
 procedure TAbstractSerializationObject.LoadFromStream(AStream: TStream);
 begin
-  //
+  Clear;
 end;
 
 procedure TAbstractSerializationObject.SaveToStream(AStream: TStream);
