@@ -20,9 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="98"/>
-        <CursorPos X="29" Y="118"/>
+        <TopLine Value="88"/>
+        <CursorPos X="35" Y="106"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -31,26 +30,38 @@
         <Filename Value="unit2.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Unit2"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="7"/>
         <CursorPos X="63" Y="8"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
+        <Filename Value="unit3.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Unit3"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="4"/>
+        <CursorPos X="67" Y="29"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
         <Filename Value="../../json/jsonobjects.pas"/>
         <UnitName Value="JSONObjects"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="144"/>
-        <CursorPos Y="161"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="131"/>
+        <CursorPos X="72" Y="156"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
         <UnitName Value="AbstractSerializationObjects"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="28"/>
-        <CursorPos X="56" Y="42"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="480"/>
+        <CursorPos X="64" Y="483"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit>
@@ -63,9 +74,7 @@
       </Unit>
       <Unit>
         <Filename Value="../../xmlobject/xmlobject.pas"/>
-        <EditorIndex Value="8"/>
-        <TopLine Value="385"/>
-        <CursorPos Y="417"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit>
@@ -241,159 +250,160 @@
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="unit3.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="Unit3"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="52"/>
-        <CursorPos Y="78"/>
-        <UsageCount Value="21"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/typinfo.pp"/>
         <UnitName Value="TypInfo"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
         <CursorPos X="8" Y="44"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/rttih.inc"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="22"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/objpas.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
         <CursorPos Y="52"/>
         <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../ETradeDocuments/crpt/crpt_cmp.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="demos/employees.json"/>
+        <EditorIndex Value="2"/>
+        <CursorPos Y="2"/>
+        <UsageCount Value="10"/>
         <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="115" TopLine="97"/>
+        <Caret Line="162" Column="23" TopLine="144"/>
       </Position>
       <Position>
         <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="116" TopLine="97"/>
+        <Caret Line="68" Column="15" TopLine="52"/>
       </Position>
       <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="117" TopLine="97"/>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <Caret Line="400" Column="24" TopLine="385"/>
       </Position>
       <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="118" TopLine="97"/>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <Caret Line="74" Column="15" TopLine="50"/>
       </Position>
       <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="119" TopLine="97"/>
+        <Filename Value="../../xmlobject/xmlobject.pas"/>
+        <Caret Line="649" TopLine="643"/>
       </Position>
       <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="132" TopLine="136"/>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Caret Line="500" Column="3" TopLine="482"/>
       </Position>
       <Position>
-        <Filename Value="../../json/jsonobjects.pas"/>
-        <Caret Line="134" TopLine="117"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="44" TopLine="40"/>
+        <Filename Value="../../xmlobject/abstractserializationobjects.pas"/>
+        <Caret Line="191" Column="15" TopLine="174"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="224" Column="70" TopLine="160"/>
+        <Caret Line="12" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="58" Column="27" TopLine="31"/>
+        <Caret Line="224" TopLine="190"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="147" Column="33" TopLine="142"/>
+        <Caret Line="35" Column="33" TopLine="3"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="71" Column="83" TopLine="43"/>
+        <Caret Line="27" Column="63" TopLine="11"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="163" Column="35" TopLine="158"/>
+        <Caret Line="52" Column="3" TopLine="50"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="234" Column="13" TopLine="227"/>
+        <Caret Line="21"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
+        <Caret Line="84" Column="19" TopLine="64"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="22" Column="20"/>
+        <Caret Line="39" TopLine="20"/>
       </Position>
       <Position>
         <Filename Value="unit3.pas"/>
-        <Caret Line="39" Column="32" TopLine="10"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="71" Column="82" TopLine="43"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="159" Column="39" TopLine="130"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="161" Column="21" TopLine="132"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="162" Column="18" TopLine="133"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="163" Column="35" TopLine="134"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="251" Column="31" TopLine="227"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="63" Column="76" TopLine="53"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="208" Column="33" TopLine="203"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="53" TopLine="46"/>
+        <Caret Line="86" TopLine="64"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="109" Column="12" TopLine="91"/>
-      </Position>
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="93" Column="14" TopLine="75"/>
+        <Caret Line="105" Column="5" TopLine="80"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="109" Column="16" TopLine="91"/>
+        <Caret Line="106" Column="5" TopLine="80"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="115" Column="29" TopLine="100"/>
+        <Caret Line="108" Column="10" TopLine="85"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="30" Column="37" TopLine="10"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="115" Column="15" TopLine="94"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="30" Column="19" TopLine="12"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="116" TopLine="94"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="110" Column="12" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="106" Column="35" TopLine="88"/>
+      </Position>
+      <Position>
+        <Filename Value="demos/employees.json"/>
+        <Caret Line="6" Column="2"/>
+      </Position>
+      <Position>
+        <Filename Value="demos/employees.json"/>
+        <Caret Line="2"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="158" Column="3" TopLine="131"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="153" Column="81" TopLine="137"/>
+      </Position>
+      <Position>
+        <Filename Value="../../json/jsonobjects.pas"/>
+        <Caret Line="156" Column="87" TopLine="140"/>
       </Position>
     </JumpHistory>
     <RunParams>

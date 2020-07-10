@@ -27,6 +27,7 @@ type
     procedure Button5Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
   private
+    function DemoFilesFolder:string;
     procedure WriteLog(S:string);
     procedure WriteLog(S:string; Args: array of const);
   public
@@ -38,7 +39,7 @@ var
 
 implementation
 
-uses Unit2, Unit3;
+uses LazFileUtils, Unit2, Unit3;
 
 {$R *.lfm}
 
@@ -100,38 +101,27 @@ begin
 end;
 
 procedure TForm1.Button7Click(Sender: TObject);
-var
-  W: TGoodsItems;
-  G:TGoodsItem;
+procedure DoDumpItem(E:TEmployee);
 begin
-  W:=TGoodsItems.Create;
-  W.LoadFromFile('cis_list.json');
+  WriteLog('-------------------');
+  WriteLog('E.FirstName = %s', [E.FirstName]);
+  WriteLog('E.LastName = %s', [E.LastName]);
+end;
 
-  for G in W.Items do
-  begin
-    WriteLog('--------------');
-    WriteLog('G.CIS:%s', [G.CIS]);
-    WriteLog('G.GTIN:%s', [G.GTIN]);
-    WriteLog('G.ProducerName:%s', [G.ProducerName]);
-    WriteLog('G.Status:%s', [G.Status]);
-    WriteLog('G.EmissionDate:%U', [G.EmissionDate]);
-    WriteLog('G.ProducedDate:%U', [G.ProducedDate]);
-    WriteLog('G.PackageType:%s', [G.PackageType]);
-    WriteLog('G.OwnerName:%s', [G.OwnerName]);
-    WriteLog('G.OwnerInn:%s', [G.OwnerInn]);
-    WriteLog('G.ProductName:%s', [G.ProductName]);
-    WriteLog('G.Brand:%s', [G.Brand]);
-    //property prevCises":[],
-    //property nextCises":[],
-    WriteLog('G.StatusEx:%s', [G.StatusEx]);
-    WriteLog('G.CountChildren:%d', [G.CountChildren]);
-    WriteLog('G.LastDocId:%s', [G.LastDocId]);
-    WriteLog('G.IntroducedDate:%U', [G.IntroducedDate]);
-    WriteLog('G.AgentName:%s', [G.AgentName]);
-    WriteLog('G.LastStatusChangeDate:%s', [G.LastStatusChangeDate]);
-    WriteLog('G.ProductGroup:%s', [G.ProductGroup]);
-  end;
+var
+  W: TEmployees;
+  E:TEmployee;
+begin
+  W:=TEmployees.Create;
+  W.LoadFromFile(DemoFilesFolder + 'employees.json');
+  for E in W.Employees do
+    DoDumpItem(E);
   W.Free;
+end;
+
+function TForm1.DemoFilesFolder: string;
+begin
+  Result:=AppendPathDelim(ExtractFileDir(Application.ExeName)) + 'demos' + PathDelim;
 end;
 
 procedure TForm1.WriteLog(S: string);
