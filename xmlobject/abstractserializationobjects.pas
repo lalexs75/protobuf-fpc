@@ -407,7 +407,7 @@ var
   D:Extended;
   C:Integer;
 begin
-  P:=PropertyList.PropertyByName(AName);
+  P:=PropertyList.PropertyByXMLName(AName);
   if Assigned(P) then
   begin
     FProp:=GetPropInfo(Self, P.PropertyName);

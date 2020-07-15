@@ -81,12 +81,13 @@ type
   TSerializationPropertys = class
   private
     FList:TFPList;
+    FOwner:TSerializationObject;
     function GetCount: integer;
     function GetItem(AIndex: integer): TSerializationProperty;
     procedure Clear;
     procedure Add(P:TSerializationProperty);
   public
-    constructor Create;
+    constructor Create(AOwner:TSerializationObject);
     destructor Destroy; override;
     function Find(APropName:string):TSerializationProperty;
     function FindByNum(APropNum:integer):TSerializationProperty;
@@ -473,7 +474,7 @@ begin
   for i:=0 to FList.Count-1 do
     if TSerializationProperty(FList[i]).FPropNum = AIndex then
       Exit(TSerializationProperty(FList[i]));
-  raise ESerializationException.CreateFmt(sProtoBufferPropNotFoundNum, [AIndex]);
+  raise ESerializationException.CreateFmt(sProtoBufferPropNotFoundNum, [FOwner.ClassName, AIndex]);
 end;
 
 function TSerializationPropertys.GetCount: integer;
@@ -495,10 +496,11 @@ begin
   FList.Add(P);
 end;
 
-constructor TSerializationPropertys.Create;
+constructor TSerializationPropertys.Create(AOwner: TSerializationObject);
 begin
   inherited Create;
   FList:=TFPList.Create;
+  FOwner:=AOwner;
 end;
 
 destructor TSerializationPropertys.Destroy;
@@ -915,7 +917,7 @@ end;
 constructor TSerializationObject.Create;
 begin
   inherited Create;
-  FPropertys:=TSerializationPropertys.Create;
+  FPropertys:=TSerializationPropertys.Create(Self);
   InternalRegisterProperty;
   InternalInit;
 end;
@@ -1170,7 +1172,7 @@ begin
       P.FModified:=true;
       Exit;
     end;
-  raise Exception.CreateFmt(sProtoBufferPropNotFoundNum, [APropertyNum]);
+  raise Exception.CreateFmt(sProtoBufferPropNotFoundNum, [ClassName, APropertyNum]);
 end;
 
 function TSerializationObject.SaveToSerializationBuffer(
