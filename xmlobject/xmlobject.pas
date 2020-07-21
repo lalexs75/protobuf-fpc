@@ -357,6 +357,7 @@ begin
           tkLString   : SetStrProp(Self, FProp, NV);
           tkInt64,
           tkInteger : SetInt64Prop(Self, FProp, StrToInt64(NV));
+          tkBool : SetOrdProp(Self, FProp, Ord(StrToBool(NV)));
           tkFloat :
             begin
               if TN = 'TTime' then
