@@ -176,18 +176,23 @@ begin
         FProp:=GetPropInfo(Self, P.PropertyName); //Retreive property informations
         K:=FProp^.PropType^.Kind;
 
-        FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
-        if not Assigned(FInst) then
-          raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
-        if FInst is TJSONSerializationObject then
-        begin
-          TJSONSerializationObject(FInst).FDoc:=J as TJSONObject;
-          TJSONSerializationObject(FInst).InternalReadDoc;
-          TJSONSerializationObject(FInst).FDoc:=nil;
-        end
+        if K in [tkSString, tkAString] then
+          InternalReadString(S, J.FormatJSON)
         else
-        if FInst is TXmlSerializationObjectList then
-          DoInObject('', TXmlSerializationObjectListHack(FInst), J as TJSONObject);
+        begin
+          FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+          if not Assigned(FInst) then
+            raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
+          if FInst is TJSONSerializationObject then
+          begin
+            TJSONSerializationObject(FInst).FDoc:=J as TJSONObject;
+            TJSONSerializationObject(FInst).InternalReadDoc;
+            TJSONSerializationObject(FInst).FDoc:=nil;
+          end
+          else
+          if FInst is TXmlSerializationObjectList then
+            DoInObject('', TXmlSerializationObjectListHack(FInst), J as TJSONObject);
+        end;
       end
       else
       begin

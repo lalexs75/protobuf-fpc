@@ -44,9 +44,10 @@
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="329"/>
-        <CursorPos X="27" Y="358"/>
+        <TopLine Value="66"/>
+        <CursorPos X="90" Y="82"/>
         <UsageCount Value="107"/>
         <Loaded Value="True"/>
       </Unit>
@@ -54,10 +55,9 @@
         <Filename Value="xsdprocessorunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdProcessorUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="155"/>
-        <CursorPos Y="172"/>
+        <CursorPos X="31" Y="171"/>
         <UsageCount Value="107"/>
         <Bookmarks Count="1">
           <Item0 Y="508" ID="2"/>
@@ -209,15 +209,7 @@
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="414" Column="38" TopLine="481"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
         <Caret Line="48" Column="15" TopLine="29"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="502" Column="3" TopLine="517"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
@@ -230,6 +222,14 @@
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
         <Caret Line="135" TopLine="118"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="358" Column="27" TopLine="281"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="41" Column="27" TopLine="28"/>
       </Position>
     </JumpHistory>
     <RunParams>

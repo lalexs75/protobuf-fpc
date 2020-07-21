@@ -79,7 +79,7 @@ begin
   SU:='';
   for S in FXSDModule.IncludeFiles do
     SU:=SU + ', ' + S;
-  Result:='uses'+LineEnding+'  Classes, SysUtils, xmlobject'+SU+';'+LineEnding+LineEnding;
+  Result:='uses'+LineEnding+'  Classes, SysUtils, xmlobject, AbstractSerializationObjects'+SU+';'+LineEnding+LineEnding;
 end;
 
 function TXsdPasCodegen.DoGenImplementationUses: string;
