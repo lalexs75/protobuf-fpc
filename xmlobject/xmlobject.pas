@@ -82,7 +82,7 @@ type
   end;
 
 implementation
-uses LazUTF8, XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, xmlobject_resource;
+uses sdo_date_utils, LazUTF8, XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, xmlobject_resource;
 
 type
   TXmlSerializationObjectListHack = class(TXmlSerializationObjectList);
@@ -228,6 +228,7 @@ var
   D:Extended;
   K: TTypeKind;
   DT: TDateTime;
+  R: TDateTimeRec;
 begin
   if not Assigned(AElement) then Exit;
   for i:=0 to AElement.Attributes.Length-1 do
@@ -282,8 +283,13 @@ begin
               else
               if TN = 'TDateTime' then
               begin
-                DT:=StrToDateTime(NV); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
-                SetFloatProp(Self, FProp, DT);
+                //DT:=StrToDateTime(NV); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+                //SetFloatProp(Self, FProp, DT);
+                if xsd_TryStrToDate(NV, R, xdkDateTime) then
+                begin
+                  DT:=NormalizeToUTC(R);
+                  SetFloatProp(Self, FProp, DT);
+                end;
               end
               else
               begin
@@ -317,6 +323,7 @@ var
   D:Extended;
   DT:TDateTime;
   FS: TFormatSettings;
+  R1: TDateTimeRec;
 begin
   for i:=0 to AElement.ChildNodes.Count-1 do
   begin
@@ -374,12 +381,19 @@ begin
               else
               if TN = 'TDateTime' then
               begin
+(*
                 C:=Pos('T', NV);
                 DS:=Copy(NV, 1, C-1);
                 TS:=Copy(NV, C+1, Length(NV));
                 DT:=StrToDate(DS, 'YYYY-MM-DD', '-') + StrToTime(TS, ':');
                 //DT:=StrToDateTime(NV, FS); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
                 SetFloatProp(Self, FProp, DT);
+*)
+                if xsd_TryStrToDate(NV, R1, xdkDateTime) then
+                begin
+                  DT:=NormalizeToUTC(R1);
+                  SetFloatProp(Self, FProp, DT);
+                end;
               end
               else
               begin
