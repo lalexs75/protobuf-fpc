@@ -12,7 +12,7 @@ msgstr ""
 
 #: xmlobject_resource.snotfoundpropertyforfield
 #, object-pascal-format
-msgid "Not found property in %s for data field %s"
+msgid "Not found property in \"%s\" for data field \"%s\""
 msgstr ""
 
 #: xmlobject_resource.sobjectpropertynotassigned

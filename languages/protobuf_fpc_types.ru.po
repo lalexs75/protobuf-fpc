@@ -24,9 +24,8 @@ msgstr "ProtoBuffer: Ошибка чтения значения QWord"
 
 #: protobuf_fpc_types.sprotobufferpropnotfoundnum
 #, object-pascal-format, fuzzy, badformat
-#| msgid "ProtoBuffer: Property number %d not found"
 msgid "ProtoBuffer: %s.Property number %d not found"
-msgstr "ProtoBuffer: Свойство номер %d не найдено"
+msgstr "ProtoBuffer: %s. Свойство номер %d не найдено"
 
 #: protobuf_fpc_types.sprotobufferpropvalueexpected
 #, object-pascal-format

@@ -11,9 +11,9 @@ msgid "Not assigned XML file"
 msgstr "Не указан XML файл"
 
 #: xmlobject_resource.snotfoundpropertyforfield
-#, object-pascal-format
-msgid "Not found property in %s for data field %s"
-msgstr "Не найдено свойство в %s для поля %s"
+#, object-pascal-format, fuzzy
+msgid "Not found property in \"%s\" for data field \"%s\""
+msgstr "Не найдено свойство в \"%s\" для поля \"%s\""
 
 #: xmlobject_resource.sobjectpropertynotassigned
 #, object-pascal-format

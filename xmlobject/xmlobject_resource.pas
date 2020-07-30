@@ -42,7 +42,7 @@ uses
   Classes, SysUtils;
 
 resourcestring
-  sNotFoundPropertyForField     = 'Not found property in %s for data field %s';
+  sNotFoundPropertyForField     = 'Not found property in "%s" for data field "%s"';
   sPropertyNotFound             = 'Not fond property %s.%s(%s)';
   sPropertyNotFound1            = '%s : property %s not found';
   sUnknowObject                 = 'Unknow object - %s';
