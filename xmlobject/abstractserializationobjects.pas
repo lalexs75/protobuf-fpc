@@ -141,6 +141,7 @@ type
   private
     FPropertyList:TPropertyList;
   protected
+    FIgnoreReadUndefProps:Boolean;
     property PropertyList:TPropertyList read FPropertyList;
     function IsEmpty:Boolean;
     procedure ValidateRequared;
@@ -187,7 +188,7 @@ type
     procedure CheckMinInclusiveValue(APropertyName:string; AValue:Double);
     procedure CheckMaxInclusiveValue(APropertyName:string; AValue:Double);
   public
-    constructor Create;
+    constructor Create; virtual;
     destructor Destroy; override;
     procedure Clear;
 
@@ -462,7 +463,8 @@ begin
     end;
   end
   else
-    raise exception.CreateFmt(sNotFoundPropertyForField, [ClassName, AName]);
+    if not FIgnoreReadUndefProps then
+      raise exception.CreateFmt(sNotFoundPropertyForField, [ClassName, AName]);
 end;
 
 procedure TAbstractSerializationObject.InternalReadDynArrayElement(
@@ -508,6 +510,7 @@ end;
 constructor TAbstractSerializationObject.Create;
 begin
   inherited Create;
+  FIgnoreReadUndefProps:=false;
   FPropertyList:=TPropertyList.Create(Self);
 
   InternalInitChilds;

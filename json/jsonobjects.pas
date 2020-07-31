@@ -65,6 +65,7 @@ type
     procedure InternalWriteClass(P: TPropertyDef; AObject:TAbstractSerializationObject); override;
     procedure InternalWriteClassCollection(P: TPropertyDef; AObjects:TXmlSerializationObjectList); override;
   public
+    constructor Create; override;
     procedure LoadFromStream(AStream:TStream); override;
     procedure SaveToStream(AStream:TStream); override;
 
@@ -351,6 +352,12 @@ begin
       FItem.FDoc:=nil;
     end;
   end;
+end;
+
+constructor TJSONSerializationObject.Create;
+begin
+  inherited Create;
+  FIgnoreReadUndefProps:=true;
 end;
 
 procedure TJSONSerializationObject.LoadFromStream(AStream: TStream);
