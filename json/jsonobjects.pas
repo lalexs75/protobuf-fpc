@@ -357,7 +357,7 @@ end;
 constructor TJSONSerializationObject.Create;
 begin
   inherited Create;
-  FIgnoreReadUndefProps:=true;
+  //FIgnoreReadUndefProps:=true;
 end;
 
 procedure TJSONSerializationObject.LoadFromStream(AStream: TStream);

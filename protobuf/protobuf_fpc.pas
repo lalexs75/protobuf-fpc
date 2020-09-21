@@ -49,6 +49,12 @@ type
   sfixed32 = type DWord;
   SInt32  = type system.Int32;
   SInt64  = type system.Int64;
+  TSInt32DynArray = array of SInt32;
+  TSInt64DynArray = array of SInt64;
+  TFixed32DynArray = array of fixed32;
+  TFixed64DynArray = array of fixed64;
+  TSFixed32DynArray = array of sfixed32;
+  TSFixed64DynArray = array of sfixed64;
 
 type
   TSerializationBuffer = class;
@@ -127,7 +133,7 @@ type
     function CopyFrom(ABuf:TSerializationBuffer; ALen:Cardinal):boolean;
 
     procedure WriteVarInt(AValue:Integer);
-
+    procedure SkipUknowProperty;
   public
     constructor Create;
     destructor Destroy; override;
@@ -474,7 +480,7 @@ begin
   for i:=0 to FList.Count-1 do
     if TSerializationProperty(FList[i]).FPropNum = AIndex then
       Exit(TSerializationProperty(FList[i]));
-  raise ESerializationException.CreateFmt(sProtoBufferPropNotFoundNum, [FOwner.ClassName, AIndex]);
+  //raise ESerializationException.CreateFmt(sProtoBufferPropNotFoundNum, [FOwner.ClassName, AIndex]);
 end;
 
 function TSerializationPropertys.GetCount: integer;
@@ -610,6 +616,18 @@ begin
       B:=B or %10000000;
     Stream.Write(B, SizeOf(Byte));
   until AValue = 0;
+end;
+
+procedure TSerializationBuffer.SkipUknowProperty;
+begin
+  case FPropType of
+    0:ReadAsInteger;
+    1:ReadAsInt64;
+    2:ReadAsString;
+    3:; //WriteLog('Start group	groups (deprecated)');
+    4:; //WriteLog('End group	groups (deprecated)');
+    5:ReadAsInteger;
+  end;
 end;
 
 procedure TSerializationBuffer.WriteAsInteger(P: TSerializationProperty;
@@ -1147,7 +1165,9 @@ begin
             raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
           end;
         end;
-      end;
+      end
+      else
+        ABuf.SkipUknowProperty;
     end;
   end;
   Result:=true;
