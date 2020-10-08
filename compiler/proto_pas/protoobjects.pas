@@ -260,6 +260,7 @@ function TMessageField.PascalDataType: string;
 var
   S: String;
   R: TProtoTypeToPas;
+  P: SizeInt;
 begin
   if FDataTypeFlag = pdtInternal then
   begin
@@ -279,13 +280,24 @@ begin
     raise Exception.CreateFmt('Uknow type %s', [FDataType]);
   end
   else
-  if (FDataTypeFlag = pdtClass) and (FFieldType = mftRepeated) then
-    Result:='T' + FDataType + 's'
-  else
-  if FFieldType = mftRepeated then
-    Result:='T' + FDataType + 'Array'
-  else
-    Result:='T' + FDataType;
+  begin
+    P:=Pos('.', FDataType);
+    if P > 0 then
+    begin
+      S:=Copy(FDataType, 1, P);
+      S:=S + 'T'+Copy(FDataType, P + 1, Length(FDataType));
+    end
+    else
+      S:='T' + FDataType;
+    if (FDataTypeFlag = pdtClass) and (FFieldType = mftRepeated) then
+      Result:=S + 's'
+    else
+    if FFieldType = mftRepeated then
+      Result:=S + 'Array'
+    else
+      Result:=S;
+
+  end;
 end;
 
 { TMessageFieldListEnumerator }

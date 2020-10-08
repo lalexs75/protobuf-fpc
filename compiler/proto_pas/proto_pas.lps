@@ -9,44 +9,43 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="6"/>
         <CursorPos X="35" Y="143"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="81"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="79"/>
         <CursorPos X="31" Y="103"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="23"/>
       </Unit1>
       <Unit2>
         <Filename Value="enumobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
       </Unit2>
       <Unit3>
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="47"/>
         <CursorPos X="14" Y="67"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="protoobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
-        <EditorIndex Value="5"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="49"/>
         <CursorPos Y="49"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -56,7 +55,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="670"/>
         <CursorPos X="31" Y="684"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -154,11 +153,10 @@
       </Unit19>
       <Unit20>
         <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="633"/>
         <CursorPos X="3" Y="644"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
@@ -176,7 +174,7 @@
         <Loaded Value="True"/>
       </Unit22>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="51" Column="15" TopLine="23"/>
@@ -266,36 +264,21 @@
         <Caret Line="252" Column="16" TopLine="241"/>
       </Position22>
       <Position23>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="157" Column="16" TopLine="142"/>
-      </Position23>
-      <Position24>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-      </Position24>
-      <Position25>
-        <Filename Value="../../../rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="170" Column="29" TopLine="147"/>
-      </Position25>
-      <Position26>
         <Filename Value="protoparser.pas"/>
         <Caret Line="683" Column="36" TopLine="670"/>
-      </Position26>
-      <Position27>
+      </Position23>
+      <Position24>
         <Filename Value="protoparser.pas"/>
         <Caret Line="684" Column="31" TopLine="670"/>
-      </Position27>
-      <Position28>
+      </Position24>
+      <Position25>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <Caret Line="1948" Column="3" TopLine="1945"/>
-      </Position28>
-      <Position29>
+      </Position25>
+      <Position26>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <Caret Line="716" Column="4" TopLine="708"/>
-      </Position29>
-      <Position30>
-        <Filename Value="controlobjects.pas"/>
-        <Caret Line="53" Column="14" TopLine="33"/>
-      </Position30>
+      </Position26>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -348,6 +348,8 @@ procedure TPascalCodeGenerator.FixSimpleTypeEnum;
 procedure DoProcessMsgType(P: TProtoMessage);
 var
   F: TMessageField;
+  k: SizeInt;
+  S: String;
 begin
   //FEL.Clear;
   //for F in P.Fields do
@@ -358,7 +360,14 @@ begin
   begin
     if F.DataTypeFlag = pdtClass then
     begin
-      if (FEnumList.IndexOf(UpperCase(F.DataType))>-1) {or (FEL.IndexOf(UpperCase(F.DataType))>-1)} then
+
+      k:=Pos('.', F.DataType);
+      if k > 0 then
+        S:=Copy(F.DataType, k+1,Length(F.DataType))
+      else
+        S:=F.DataType;
+
+      if (FEnumList.IndexOf(UpperCase(S))>-1) {or (FEL.IndexOf(UpperCase(F.DataType))>-1)} then
         F.DataTypeFlag:=pdtEnum
     end
     else
