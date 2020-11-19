@@ -208,7 +208,8 @@ begin
     end
     else
     begin
-      InternalReadString(S, J.AsString);
+      if not J.IsNull then
+        InternalReadString(S, J.AsString);
     end;
   end;
 end;
