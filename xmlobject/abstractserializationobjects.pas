@@ -585,7 +585,7 @@ begin
   P:=PropertyList.PropertyByName(APropertyName);
   if Assigned(P) and (P.MinSize>-1) then
     if UTF8Length(AValue) < P.MinSize then
-      raise Exception.CreateFmt(sValueShorterThat, [ClassName, APropertyName, AValue, P.MinSize]);
+      raise Exception.CreateFmt(sValueShorterThat, [UnitName +'.'+ ClassName, APropertyName, AValue, P.MinSize]);
 end;
 
 procedure TAbstractSerializationObject.CheckStrMaxSize(APropertyName: string;
