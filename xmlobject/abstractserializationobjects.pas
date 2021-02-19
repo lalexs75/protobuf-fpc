@@ -112,7 +112,7 @@ type
     constructor Create(AOwner:TAbstractSerializationObject);
     destructor Destroy; override;
 
-    function PropertyByName(APropertyName:string):TPropertyDef;
+    function PropertyByName(const APropertyName:string):TPropertyDef;
     function PropertyByXMLName(AXMLName:string):TPropertyDef;
     function PropertyByAlias(AAliasName:string):TPropertyDef;
     function Add(const APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer):TPropertyDef;
@@ -793,17 +793,19 @@ begin
   inherited Destroy;
 end;
 
-function TPropertyList.PropertyByName(APropertyName: string): TPropertyDef;
+function TPropertyList.PropertyByName(const APropertyName: string
+  ): TPropertyDef;
 var
   P: TPropertyDef;
   i: Integer;
 begin
   Result:=nil;
-  APropertyName:=UpperCase(APropertyName);
+  //APropertyName:=UpperCase(APropertyName);
   for i:=0 to FList.Count-1 do
   begin
-    P:=GetItems(I);
-    if UpperCase(P.FPropertyName) = APropertyName then
+    P:=TPropertyDef(FList[i]);
+    //if UpperCase(P.FPropertyName) = APropertyName then
+    if CompareText(P.FPropertyName, APropertyName) = 0 then
       Exit(P);
   end;
 
