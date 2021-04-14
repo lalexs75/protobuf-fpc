@@ -133,7 +133,7 @@ begin
 
     Result:=Result+
     '  public'+LineEnding+
-    '    constructor Create;'+LineEnding+
+    '    constructor Create; override;'+LineEnding+
     '    destructor Destroy; override;'+LineEnding+
     '  published'+LineEnding;
 
