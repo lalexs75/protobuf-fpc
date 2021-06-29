@@ -42,6 +42,7 @@ type
     FBaseType: string;
     FDefaultValue: string;
     FDescription: string;
+    FFixedValue: string;
     FFractionDigits: Integer;
     FIsRequired: boolean;
     FItemType: TPropertyItemType;
@@ -82,7 +83,7 @@ type
 
     property ValuesList:TStringList read FValuesList;
     property DefaultValue:string read FDefaultValue write FDefaultValue;
-    property FixedValue:string read FDefaultValue write FDefaultValue;
+    property FixedValue:string read FFixedValue write FFixedValue;
     property ValuePattern:string read FValuePattern write FValuePattern;
     property MaxLength:integer read FMaxLength write FMaxLength;
     property MinLength:integer read FMinLength write FMinLength;

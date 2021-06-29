@@ -28,7 +28,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="113"/>
-        <CursorPos X="77" Y="135"/>
+        <CursorPos X="25" Y="122"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit>
@@ -60,14 +60,10 @@
         <UsageCount Value="20"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="6">
+    <JumpHistory HistoryIndex="5">
       <Position>
         <Filename Value="XsdToPas.lpr"/>
         <Caret Line="38" Column="23" TopLine="16"/>
-      </Position>
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="99" Column="3" TopLine="112"/>
       </Position>
       <Position>
         <Filename Value="xsdpascodegenunit.pas"/>

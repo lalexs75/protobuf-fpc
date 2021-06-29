@@ -30,13 +30,13 @@
         <Filename Value="xsdelementtypesunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdElementTypesUnit"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="213"/>
-        <CursorPos X="73" Y="248"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="72"/>
+        <CursorPos X="37" Y="86"/>
         <UsageCount Value="107"/>
         <Bookmarks Count="2">
-          <Item0 X="3" Y="494" ID="1"/>
-          <Item1 X="11" Y="721" ID="3"/>
+          <Item0 X="3" Y="495" ID="1"/>
+          <Item1 X="11" Y="722" ID="3"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
@@ -45,9 +45,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="66"/>
-        <CursorPos X="90" Y="82"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="187"/>
+        <CursorPos X="55" Y="197"/>
         <UsageCount Value="107"/>
         <Loaded Value="True"/>
       </Unit>
@@ -56,8 +56,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdProcessorUnit"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="155"/>
-        <CursorPos X="31" Y="171"/>
+        <TopLine Value="298"/>
+        <CursorPos X="18" Y="311"/>
         <UsageCount Value="107"/>
         <Bookmarks Count="1">
           <Item0 Y="508" ID="2"/>
@@ -67,7 +67,7 @@
       <Unit>
         <Filename Value="xsdutils.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="22"/>
         <CursorPos X="10" Y="40"/>
         <UsageCount Value="107"/>
@@ -90,10 +90,11 @@
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="307"/>
-        <CursorPos Y="330"/>
-        <UsageCount Value="9"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="165"/>
+        <CursorPos Y="189"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
@@ -109,127 +110,144 @@
         <CursorPos Y="817"/>
         <UsageCount Value="9"/>
       </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-xml/src/dom.pp"/>
+        <UnitName Value="DOM"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="2802"/>
+        <CursorPos Y="2821"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="292"/>
+        <CursorPos Y="316"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="173" Column="57" TopLine="157"/>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="224" TopLine="203"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="225" TopLine="203"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="229" TopLine="205"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="231" TopLine="207"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-xml/src/dom.pp"/>
+        <Caret Line="2821" TopLine="2802"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="305" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="309" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="310" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="311" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="313" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="314" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/ustrings.inc"/>
+        <Caret Line="316" TopLine="292"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="179" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="180" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="182" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="183" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="184" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="186" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="188" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="189" TopLine="165"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="212" TopLine="177"/>
+        <Caret Line="309" TopLine="289"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="356" TopLine="336"/>
+        <Caret Line="310" TopLine="292"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="409" Column="47" TopLine="392"/>
+        <Caret Line="312" TopLine="292"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="61" Column="20" TopLine="47"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="303" Column="3" TopLine="300"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="607" Column="39" TopLine="582"/>
+        <Caret Line="305" Column="23" TopLine="292"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="42" Column="14" TopLine="38"/>
+        <Caret Line="223" Column="17" TopLine="206"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="91" Column="3" TopLine="88"/>
+        <Caret Line="311" Column="18" TopLine="298"/>
       </Position>
       <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="43" Column="15" TopLine="24"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="85" Column="66" TopLine="71"/>
       </Position>
       <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="100" Column="3" TopLine="95"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="55" Column="15" TopLine="25"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="568" Column="3" TopLine="546"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="40" Column="17" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="71" Column="3" TopLine="65"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="42" Column="14" TopLine="22"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="91" Column="3" TopLine="89"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="43" Column="15" TopLine="24"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="100" Column="3" TopLine="95"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="45" Column="15" TopLine="25"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="175" Column="3" TopLine="144"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="45" Column="15" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="124" Column="3" TopLine="115"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="46" Column="15" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="215" Column="42" TopLine="187"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="47" Column="15" TopLine="28"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="48" Column="15" TopLine="29"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="49" Column="15" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="106" TopLine="88"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="135" TopLine="118"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="358" Column="27" TopLine="281"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="41" Column="27" TopLine="28"/>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="86" Column="37" TopLine="72"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -245,6 +263,29 @@
     </HistoryLists>
   </ProjectSession>
   <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="xsdprocessorunit.pas"/>
+        <Line Value="307"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="xsdprocessorunit.pas"/>
+        <Line Value="242"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="xsdprocessorunit.pas"/>
+        <Line Value="311"/>
+      </Item>
+    </BreakPoints>
     <Watches>
       <Item>
         <Expression Value="AValue"/>
