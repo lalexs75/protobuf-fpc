@@ -35,6 +35,7 @@ type
     FMainDoc: TXMLDocument;
     FIncludeFolders: TStrings;
     FMainSchema: TDOMNode;
+    FNameAliases: TStrings;
     FOnProcessNodeEvent: TOnProcessNodeEvent;
     FXSDModule: TXSDModule;
     function FindSchemaElent(AName: string; FSchema: TDOMNode): TDOMNode;
@@ -54,6 +55,8 @@ type
     procedure LoadFromFile(AFileName:string);
     function ExecuteProcessor:TXSDModule;
     property IncludeFolders:TStrings read FIncludeFolders;
+    property NameAliases:TStrings read FNameAliases;
+
     property OnProcessNodeEvent:TOnProcessNodeEvent read FOnProcessNodeEvent write FOnProcessNodeEvent;
   end;
 
@@ -131,7 +134,12 @@ begin
     begin
       R:=N.Attributes.GetNamedItem('name');
       DoProcessNodeMsg(R.NodeName, R.NodeValue);
-      ST:=FXSDModule.SimpleTypes.Add(R.NodeValue);
+
+      S1:=R.NodeValue;
+      if FNameAliases.Values[S1]<>'' then
+        S1:=FNameAliases.Values[S1];
+      ST:=FXSDModule.SimpleTypes.Add(S1);
+//      ST:=FXSDModule.SimpleTypes.Add(R.NodeValue);
       ST.IncludedType:=AInclude;
       ProcessSimpleType(N, ST, AInclude);
     end
@@ -350,12 +358,19 @@ end;
 
 function DoComplexType(FA, FC: TDOMNode):TPropertyItem; //TXSDComplexType;
 var
-  S:string;
+  S, S1:string;
   Prop: TPropertyItem;
   CT:TXSDComplexType;
 begin
-  S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
-  CT:=FXSDModule.ComplexTypes.Add(S);
+  S1:=FA.Attributes.GetNamedItem('name').NodeValue;
+  if FNameAliases.Values[S1]<>'' then
+    S1:=FNameAliases.Values[S1];
+
+  //S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
+  S:=AComplexType.TypeName  +  '_' + S1;
+
+  CT:=FXSDModule.ComplexTypes.Add(S1);
+
   CT.IncludedType:=AInclude;
   ProcessComplexElement(FC, FC, FSchema, CT, AInclude);
   Result:=AComplexType.Propertys.Add(pitClass);
@@ -575,18 +590,21 @@ constructor TXSDProcessor.Create;
 begin
   inherited Create;
   FIncludeFolders:=TStringList.Create;
+  FNameAliases:=TStringList.Create;
 end;
 
 destructor TXSDProcessor.Destroy;
 begin
   Clear;
   FreeAndNil(FIncludeFolders);
+  FreeAndNil(FNameAliases);
   inherited Destroy;
 end;
 
 procedure TXSDProcessor.Clear;
 begin
   FIncludeFolders.Clear;
+  FNameAliases.Clear;
   FMainSchema:=nil;
   if Assigned(FMainDoc) then
     FreeAndNil(FMainDoc);
@@ -607,6 +625,7 @@ begin
   begin
     S:=FMainDoc.NamespaceURI;
     FXSDModule:=TXSDModule.Create;
+    FXSDModule.NameAliases.Assign(FNameAliases);
     FMainSchema:=FMainDoc.FindNode('xs:schema');
     if Assigned(FMainSchema) then
     begin

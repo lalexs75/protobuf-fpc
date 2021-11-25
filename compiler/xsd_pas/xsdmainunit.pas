@@ -51,6 +51,7 @@ type
     Label3: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
+    Memo2: TMemo;
     PageControl1: TPageControl;
     Panel1: TPanel;
     RxIniPropStorage1: TRxIniPropStorage;
@@ -60,6 +61,7 @@ type
     SynXMLSyn1: TSynXMLSyn;
     tabLogs: TTabSheet;
     tabEditor: TTabSheet;
+    TabSheet1: TTabSheet;
     tabSource: TTabSheet;
     TabSheet3: TTabSheet;
     procedure Button1Click(Sender: TObject);
@@ -107,10 +109,12 @@ begin
   if CheckBox3.Checked then
     FDO:=FDO + [cgdoDescribeTypes];
 
+  FProcessor.LoadFromFile(FileNameEdit1.FileName);
+
   FProcessor.OnProcessNodeEvent:=@ProcessNode;
   FProcessor.IncludeFolders.Assign(ListBox1.Items);
+  FProcessor.NameAliases.Assign(Memo2.Lines);
 
-  FProcessor.LoadFromFile(FileNameEdit1.FileName);
 
   if ExtractFileDir(FileNameEdit1.FileName) <>'' then
     FProcessor.IncludeFolders.Append(ExtractFileDir(FileNameEdit1.FileName));
@@ -132,6 +136,7 @@ begin
     ShowMessage(sErrorOnParseXDS);
   FXSDModule.Free;
   FProcessor.Free;
+  PageControl1.ActivePage:=tabEditor;
 end;
 
 procedure TXSDMainForm.Button2Click(Sender: TObject);

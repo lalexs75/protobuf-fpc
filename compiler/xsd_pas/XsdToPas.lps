@@ -60,32 +60,7 @@
         <UsageCount Value="20"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="5">
-      <Position>
-        <Filename Value="XsdToPas.lpr"/>
-        <Caret Line="38" Column="23" TopLine="16"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="51" Column="15" TopLine="37"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="400" Column="3" TopLine="387"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="50" Column="14" TopLine="36"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="383" Column="3" TopLine="378"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdpascodegenunit.pas"/>
-        <Caret Line="44" Column="14" TopLine="29"/>
-      </Position>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default">

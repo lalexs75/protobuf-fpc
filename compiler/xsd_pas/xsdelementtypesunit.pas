@@ -284,6 +284,7 @@ type
   private
     FComplexTypes: TXSDComplexTypes;
     FIncludeFiles: TStrings;
+    FNameAliases: TStrings;
     FSimpleTypes: TXSDSimpleTypes;
   public
     constructor Create;
@@ -293,6 +294,7 @@ type
     property ComplexTypes:TXSDComplexTypes read FComplexTypes;
     property SimpleTypes:TXSDSimpleTypes read FSimpleTypes;
     property IncludeFiles:TStrings read FIncludeFiles;
+    property NameAliases:TStrings read FNameAliases;
   end;
 
 implementation
@@ -437,6 +439,10 @@ begin
   end;
 
   FPascalName:=Name;
+  S:=FOwner.FOwner.FOwner.NameAliases.Values[FPascalName];
+  if S<>'' then
+    FPascalName:=S;
+
   I:=0;
   while IsKeyword(FPascalName) or (Assigned(FOwner.Propertys.FindProperty(FPascalName))) do
   begin
@@ -529,9 +535,17 @@ end;
 procedure TXSDComplexType.UpdatePascalNames;
 var
   P: TPropertyItem;
+  S: String;
 begin
   for P in Propertys do P.UpdatePascalNames;
-  PascalTypeName:='T'+TypeName;
+
+  S:=FOwner.FOwner.NameAliases.Values[TypeName];
+  if S<>'' then
+    PascalTypeName:='T'+S
+  else
+    PascalTypeName:='T'+TypeName;
+
+//  PascalTypeName:='T'+TypeName;
 
   if InheritedType <> '' then
     FInheritedXSDComplexType:=FOwner.FindType(InheritedType);
@@ -759,6 +773,7 @@ begin
   FComplexTypes:=TXSDComplexTypes.Create(Self);
   FSimpleTypes:=TXSDSimpleTypes.Create(Self);
   FIncludeFiles:=TStringList.Create;
+  FNameAliases:=TStringList.Create;
 end;
 
 destructor TXSDModule.Destroy;
@@ -767,6 +782,7 @@ begin
   FComplexTypes.Free;
   FSimpleTypes.Free;
   FIncludeFiles.Free;
+  FreeAndNil(FNameAliases);
   inherited Destroy;
 end;
 
@@ -775,6 +791,7 @@ begin
   FComplexTypes.Clear;
   FSimpleTypes.Clear;
   FIncludeFiles.Clear;
+  FNameAliases.Clear;
 end;
 
 procedure TXSDModule.UpdatePascalNames;
