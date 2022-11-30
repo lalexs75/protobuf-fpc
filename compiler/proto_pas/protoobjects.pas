@@ -584,18 +584,44 @@ begin
       AModule.Add('  F%s:%s;', [F.PascalName, F.PascalDataType]);
 
   for F in Fields do
+  begin
+    if F.DataTypeFlag = pdtEnum then
+    begin
+      AModule.Add('  function Get%s:%s;', [F.PascalName, F.PascalDataType]);
+      if F.IsSetProc then
+        AModule.Add('  procedure Set%s(AValue:%s);', [F.PascalName, F.PascalDataType]);
+    end
+    else
     if F.IsSetProc then
       AModule.Add('  procedure Set%s(AValue:%s);', [F.PascalName, F.PascalDataType]);
+  end;
 
   AModule.Add('protected');
   AModule.Add('  procedure InternalRegisterProperty; override;');
   AModule.Add('  procedure InternalInit; override;');
   AModule.Add('public');
   AModule.Add('  destructor Destroy; override;');
+
+  for F in Fields do
+  begin
+    if F.IsRealField and (F.DataTypeFlag = pdtEnum) then
+    begin
+      S:=Format('  property %s:%s read Get%s', [F.PascalName, F.PascalDataType, F.PascalName]);
+      if F.IsSetProc then
+      begin
+        S:=S + ' write Set'+F.PascalName;
+        if F.DefaultValue <> '' then
+          S:=S + ' default ' + F.DefaultValue;
+      end;
+      S:=S+ ';';
+      AModule.Add(S);
+    end;
+  end;
+
   AModule.Add('published');
 
   for F in Fields do
-  if F.IsRealField then
+  if F.IsRealField and not (F.DataTypeFlag = pdtEnum)  then
   begin
     S:=Format('  property %s:%s read F%s', [F.PascalName, F.PascalDataType, F.PascalName]);
     if F.IsSetProc then
@@ -613,7 +639,7 @@ end;
 procedure TProtoMessage.GenerateImplementationSection(AModule: TStrings);
 var
   F: TMessageField;
-  S: String;
+  S, S1: String;
   F1:boolean;
 begin
   F1:=false;
@@ -625,7 +651,12 @@ begin
   for F in Fields do
   if not (F.FieldType in [mftEnumDefinition, mftMessageDefinition]) then
   begin
-    S:='  RegisterProp(''' + F.PascalName + ''', ' + IntToStr(F.MessageNumber);
+    if F.DataTypeFlag = pdtEnum then
+    begin
+      S:=Format('  RegisterPropPublic(''%s'', %d, TMethod(@Set%s), TMethod(@Get%s)', [F.PascalName, F.MessageNumber, F.PascalName, F.PascalName]);
+    end
+    else
+      S:='  RegisterProp(''' + F.PascalName + ''', ' + IntToStr(F.MessageNumber);
     if F.FieldType = mftRequired then S:=S + ', true';
     AModule.Add(S + ');');
 
@@ -665,6 +696,21 @@ begin
 
 
   for F in Fields do
+  begin
+    if F.DataTypeFlag = pdtEnum then
+    begin
+      AModule.Add('procedure T'+Caption+'.Set'+F.PascalName+'(AValue:'+F.PascalDataType+');');
+      AModule.Add('begin');
+      AModule.Add('  F'+F.PascalName+ ':=AValue;');
+      AModule.Add('  Modified('+IntToStr(F.MessageNumber)+');');
+      AModule.Add('end;');
+      AModule.Add('');
+      AModule.Add('function T'+Caption+'.Get'+F.PascalName+':'+F.PascalDataType+';');
+      AModule.Add('begin');
+      AModule.Add('  Result:=F'+F.PascalName+ ';');
+      AModule.Add('end;');
+    end
+    else
     if F.IsSetProc then
     begin
       AModule.Add('procedure T'+Caption+'.Set'+F.PascalName+'(AValue:'+F.PascalDataType+');');
@@ -674,6 +720,7 @@ begin
       AModule.Add('end;');
       AModule.Add('');
     end;
+  end;
 end;
 
 constructor TProtoMessage.Create;

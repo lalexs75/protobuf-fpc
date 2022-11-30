@@ -7,8 +7,9 @@
       <Unit0>
         <Filename Value="proto_pas.lpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="6"/>
-        <CursorPos X="35" Y="143"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="46"/>
+        <CursorPos Y="63"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -41,7 +42,6 @@
         <Filename Value="protoobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="49"/>
         <CursorPos Y="49"/>
@@ -174,7 +174,7 @@
         <Loaded Value="True"/>
       </Unit22>
     </Units>
-    <JumpHistory Count="26" HistoryIndex="25">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="proto_pas.lpr"/>
         <Caret Line="51" Column="15" TopLine="23"/>
@@ -279,6 +279,10 @@
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <Caret Line="716" Column="4" TopLine="708"/>
       </Position26>
+      <Position27>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="49" TopLine="49"/>
+      </Position27>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -292,15 +296,6 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="proto_pas.lpr"/>
-        <Line Value="63"/>
-      </Item>
-    </BreakPoints>
     <Watches>
       <Item>
         <Expression Value="S"/>

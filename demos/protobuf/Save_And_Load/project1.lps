@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <BuildModes Active="Default"/>
     <Units Count="21">
       <Unit0>
@@ -20,8 +20,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="168"/>
+        <TopLine Value="151"/>
         <CursorPos X="18" Y="151"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
@@ -31,8 +30,9 @@
         <Filename Value="../common/commontesttypesunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="CommonTestTypesUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="128"/>
+        <TopLine Value="200"/>
         <CursorPos X="14" Y="144"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
@@ -62,11 +62,10 @@
       <Unit6>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/typinfo.pp"/>
         <UnitName Value="TypInfo"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1683"/>
         <CursorPos Y="1701"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="/home/install/source/fpcsrc/rtl/inc/objpas.inc"/>
@@ -86,11 +85,10 @@
       <Unit9>
         <Filename Value="../../../diadoc_src/diadocapi.pas"/>
         <UnitName Value="DiadocAPI"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1147"/>
         <CursorPos Y="1165"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="../../../protobuf/protobuf_fpc_types.pas"/>
@@ -143,20 +141,18 @@
       <Unit17>
         <Filename Value="../../../Documents/diadoctypes_documentlist.pas"/>
         <UnitName Value="DiadocTypes_DocumentList"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="47"/>
         <CursorPos Y="52"/>
         <UsageCount Value="13"/>
-        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="../../../Documents/diadoctypes_document.pas"/>
         <UnitName Value="DiadocTypes_Document"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="487"/>
         <CursorPos Y="504"/>
         <UsageCount Value="13"/>
-        <Loaded Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="/home/install/source/fpcsrc/rtl/objpas/objpas.pp"/>
@@ -297,30 +293,30 @@
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0" ActiveMode=""/>
+      <Modes ActiveMode=""/>
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="2">
-      <Item1>
+    <BreakPoints>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="unit1.pas"/>
         <Line Value="199"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="unit1.pas"/>
         <Line Value="139"/>
-      </Item2>
+      </Item>
     </BreakPoints>
-    <Watches Count="1">
-      <Item1>
+    <Watches>
+      <Item>
         <Expression Value="P.FPropName"/>
-      </Item1>
+      </Item>
     </Watches>
   </Debugging>
 </CONFIG>
