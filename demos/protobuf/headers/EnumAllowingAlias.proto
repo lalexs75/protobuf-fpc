@@ -1,0 +1,15 @@
+enum EnumAllowingAlias {
+  option allow_alias = true;
+  EAA_UNSPECIFIED = 0;
+  EAA_STARTED = 1;
+  EAA_RUNNING = 1;
+  EAA_FINISHED = 2;
+}
+enum EnumNotAllowingAlias {
+  ENAA_UNSPECIFIED = 0;
+  ENAA_STARTED = 1;
+  // ENAA_RUNNING = 1;  // Uncommenting this line will cause a compile error inside Google and a warning message outside.
+  ENAA_FINISHED = 2;
+}
+
+
