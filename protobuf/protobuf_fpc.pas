@@ -1,6 +1,6 @@
 { protobuf interface library for FPC and Lazarus
 
-  Copyright (C) 2018-2020 Lagunov Aleksey alexs75@yandex.ru
+  Copyright (C) 2018-2022 Lagunov Aleksey alexs75@yandex.ru
 
   base on docs from https://developers.google.com/protocol-buffers/docs/encoding
 
@@ -63,6 +63,8 @@ type
   TSerializationObjectClass = class of TSerializationObject;
   ESerializationException = class(Exception);
   TReadPropsProc = procedure(Buf:TSerializationBuffer) of object;
+  TSerializationPropertyType = (sptPublished, sptPublic);
+
   { TSerializationProperty }
 
   TSerializationProperty = class
@@ -73,6 +75,9 @@ type
     FPropNum: integer;
     FRequired:boolean;
     FModified:boolean;
+    FSerializationPropertyType: TSerializationPropertyType;
+    FSetProp:TMethod;
+    FGetProp:TMethod;
   public
     constructor Create(APropName:string; APropNum:integer; AOnReadProps:TReadPropsProc; ARequired:boolean);
     property OjbType:TSerializationObjectClass read FOjbType write FOjbType;
@@ -80,6 +85,7 @@ type
     property PropName:string read FPropName write FPropName;
     property PropNum:integer read FPropNum write FPropNum;
     property OnReadProps:TReadPropsProc read FOnReadProps;
+    property SerializationPropertyType:TSerializationPropertyType read FSerializationPropertyType write FSerializationPropertyType;
   end;
 
   { TSerializationPropertys }
@@ -183,6 +189,7 @@ type
     procedure InternalRegisterProperty; virtual;
     procedure InternalInit; virtual;
     procedure RegisterProp(APropName:string; APropNum:Integer; ARequired:boolean = false; AObjClass:TSerializationObjectClass = nil);
+    procedure RegisterPropPublic(APropName:string; APropNum:Integer; ASetProc, AGetProc:TMethod; ARequired:boolean = false);
     function InternalIsModifiedObject:boolean;virtual;
     procedure Modified(APropertyNum:integer);
   public
@@ -294,6 +301,10 @@ uses Types, TypInfo
   , rxlogging
 {$ENDIF}
 ;
+type
+  TGetIntegerProc = function:longint of object;
+  TSetIntegerProc = procedure(i:longint) of object;
+
 function EncodeValue32(AValue: Int32):LongWord;
 begin
   if AValue < 0 then
@@ -467,6 +478,7 @@ begin
   FPropNum:=APropNum;
   FOnReadProps:=AOnReadProps;
   FRequired:=ARequired;
+  FSerializationPropertyType:=sptPublished;
 end;
 
 { TSerializationPropertys }
@@ -1023,7 +1035,7 @@ var
   FProp: PPropInfo;
   K: TTypeKind;
   SS, TN, KN: String;
-  BB: Integer;
+  BB, Li: Integer;
   vDinArray: pointer;
   L: tdynarrayindex;
   PDT: PTypeData;
@@ -1063,108 +1075,119 @@ begin
         {$IFDEF DEBUG}
         RxWriteLog(etDebug, '%s : PropNum=%d, PropType = %d, PropLen = %d, MA = %d, PropName=%s', [Self.ClassName,  P.FPropNum, ABuf.PropType, ABuf.PropLen, Ord(Assigned(P.FOnReadProps)), P.FPropName]);
         {$ENDIF}
-        if Assigned(P.FOnReadProps) then
+        if P.SerializationPropertyType = sptPublished then
         begin
-          //TODO: Попробовать обработать repetable объекты как коллекции
-          if ABuf.PropType <> 2 then
-            raise Exception.Create('Error!');
+          if Assigned(P.FOnReadProps) then
+          begin
+            //TODO: Попробовать обработать repetable объекты как коллекции
+            if ABuf.PropType <> 2 then
+              raise Exception.Create('Error!');
 
-          Buf1:=TSerializationBuffer.Create;
-          Buf1.CopyFrom(ABuf, ABuf.PropLen);
-          P.OnReadProps(Buf1);
-          Buf1.Free;
+            Buf1:=TSerializationBuffer.Create;
+            Buf1.CopyFrom(ABuf, ABuf.PropLen);
+            P.OnReadProps(Buf1);
+            Buf1.Free;
+          end
+          else
+          begin
+            FProp:=GetPropInfo(Self, P.FPropName); //Retreive property informations
+            if not Assigned(FProp) then
+              raise ESerializationException.CreateFmt(sProtoBufNotFondProperty, [P.PropName]);
+
+            //Необходимо совместить определения типа читаемых данных по признаку из файла и из данных RTTI
+            K:=FProp^.PropType^.Kind;
+            TN:=UpperCase(FProp^.PropType^.Name);
+            case FProp^.PropType^.Kind of
+              tkChar,
+              tkAString,
+              tkWString,
+              tkSString,
+              tkLString   : SetStrProp(Self, FProp, ABuf.ReadAsString);
+
+              tkBool :
+                SetOrdProp(Self, FProp, Ord(ABuf.ReadAsBoolean));
+
+              tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
+
+              tkInt64   :
+                 begin
+                   if TN = 'SINT64' then
+                     SetOrdProp(Self, FProp, ABuf.ReadAsIntegerZZ)
+                   else
+                     SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
+                 end;
+              tkInteger :
+                 begin
+                   if TN = 'SINT32' then
+                     SetOrdProp(Self, FProp, ABuf.ReadAsIntegerZZ)
+                   else
+                     SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
+                 end;
+  {
+    tkSet                       : SetSetProp(t,PropInfo,S);
+              tkFloat                     : SetFloatProp(t,PropInfo, Value);}
+              tkEnumeration : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsInteger));
+              tkClass : LoadClassData(FProp, P);
+              tkDynArray:
+                begin
+                  if TN = 'TBYTES' then
+                    LoadBytes(FProp, P)
+                  else
+                  begin
+                    { TODO : Необходимо обработать динамический массив }
+                    //raise Exception.CreateFmt('Property %s.%s. Unknow dyn array type - %s', [ClassName, P.PropName, TN]);
+                    //BB:=ABuf.ReadVarInt;
+
+
+                    vDinArray:=GetObjectProp(Self, FProp);
+                    L:=DynArraySize(vDinArray);
+                    PDT:=GetTypeData(FProp^.PropType);
+                    O:=PDT^.OrdType;
+                    EL:=PDT^.ElType2;
+                    K:=EL^.Kind;
+                    KN:=EL^.Name;
+
+                    L:=L+1;
+                    DynArraySetLength(vDinArray, FProp^.PropType, 1, @L);
+
+                    case K of
+                      tkInteger,
+                      tkEnumeration:
+                      begin
+                        case O of
+                          //  otSByte,otUByte,otSWord,otUWord,
+                            otSLong:
+                              if (TN = 'SINT32') or (TN='SINT64') then
+                                TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadAsIntegerZZ
+                              else
+                                TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadVarInt;
+                            //otULong,otSQWord,otUQWor
+                        else
+                          raise exception.CreateFmt('sUknowPropertyType %s', [P.FPropName]);
+                        end;
+                      end;
+                      //tkAString,
+                      //tkString:TXSDStringArray(vDinArray)[L-1]:=ATextContent;
+                    else
+                      raise exception.CreateFmt('sUknowPropertyType %s.%s', [ClassName, P.PropName]);
+                    end;
+                    SetObjectProp(Self, FProp, TObject(vDinArray));
+
+                  end;
+                end
+            else
+              raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+            end;
+          end;
         end
         else
+        if P.SerializationPropertyType = sptPublic then
         begin
-          FProp:=GetPropInfo(Self, P.FPropName); //Retreive property informations
-          if not Assigned(FProp) then
-            raise ESerializationException.CreateFmt(sProtoBufNotFondProperty, [P.PropName]);
-
-          //Необходимо совместить определения типа читаемых данных по признаку из файла и из данных RTTI
-          K:=FProp^.PropType^.Kind;
-          TN:=UpperCase(FProp^.PropType^.Name);
-          case FProp^.PropType^.Kind of
-            tkChar,
-            tkAString,
-            tkWString,
-            tkSString,
-            tkLString   : SetStrProp(Self, FProp, ABuf.ReadAsString);
-
-            tkBool :
-              SetOrdProp(Self, FProp, Ord(ABuf.ReadAsBoolean));
-
-            tkQWord : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsQWord));
-
-            tkInt64   :
-               begin
-                 if TN = 'SINT64' then
-                   SetOrdProp(Self, FProp, ABuf.ReadAsIntegerZZ)
-                 else
-                   SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
-               end;
-            tkInteger :
-               begin
-                 if TN = 'SINT32' then
-                   SetOrdProp(Self, FProp, ABuf.ReadAsIntegerZZ)
-                 else
-                   SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
-               end;
-{
-  tkSet                       : SetSetProp(t,PropInfo,S);
-            tkFloat                     : SetFloatProp(t,PropInfo, Value);}
-            tkEnumeration : SetOrdProp(Self, FProp, Ord(ABuf.ReadAsInteger));
-            tkClass : LoadClassData(FProp, P);
-            tkDynArray:
-              begin
-                if TN = 'TBYTES' then
-                  LoadBytes(FProp, P)
-                else
-                begin
-                  { TODO : Необходимо обработать динамический массив }
-                  //raise Exception.CreateFmt('Property %s.%s. Unknow dyn array type - %s', [ClassName, P.PropName, TN]);
-                  //BB:=ABuf.ReadVarInt;
-
-
-                  vDinArray:=GetObjectProp(Self, FProp);
-                  L:=DynArraySize(vDinArray);
-                  PDT:=GetTypeData(FProp^.PropType);
-                  O:=PDT^.OrdType;
-                  EL:=PDT^.ElType2;
-                  K:=EL^.Kind;
-                  KN:=EL^.Name;
-
-                  L:=L+1;
-                  DynArraySetLength(vDinArray, FProp^.PropType, 1, @L);
-
-                  case K of
-                    tkInteger,
-                    tkEnumeration:
-                    begin
-                      case O of
-                        //  otSByte,otUByte,otSWord,otUWord,
-                          otSLong:
-                            if (TN = 'SINT32') or (TN='SINT64') then
-                              TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadAsIntegerZZ
-                            else
-                              TIntegerDynArray(vDinArray)[L-1]:=ABuf.ReadVarInt;
-                          //otULong,otSQWord,otUQWor
-                      else
-                        raise exception.CreateFmt('sUknowPropertyType %s', [P.FPropName]);
-                      end;
-                    end;
-                    //tkAString,
-                    //tkString:TXSDStringArray(vDinArray)[L-1]:=ATextContent;
-                  else
-                    raise exception.CreateFmt('sUknowPropertyType %s.%s', [ClassName, P.PropName]);
-                  end;
-                  SetObjectProp(Self, FProp, TObject(vDinArray));
-
-                end;
-              end
-          else
-            raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
-          end;
-        end;
+          Li:=Ord(ABuf.ReadAsInteger);
+          TSetIntegerProc(P.FSetProp)(Li);
+        end
+        else
+          raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
       end
       else
         ABuf.SkipUknowProperty;
@@ -1258,81 +1281,93 @@ begin
   InternalCheckRequired;
   for P in FPropertys do
   begin
-    FProp:=GetPropInfo(Self, P.FPropName); //Retreive property informations
-    if not Assigned(FProp) then
-      raise ESerializationException.CreateFmt(sProtoBufNotFondProperty, [P.PropName]);
-    K:=FProp^.PropType^.Kind;
-    case FProp^.PropType^.Kind of
-      tkChar,
-      tkAString,
-      tkWString,
-      tkSString,
-      tkLString   :
-        begin
-          PropValue:=GetStrProp(Self, FProp);
-//          if PropValue<>'' then
-            ABuf.WriteAsString(P, PropValue);
-        end;
+    if P.SerializationPropertyType = sptPublished then
+    begin
+      FProp:=GetPropInfo(Self, P.FPropName); //Retreive property informations
+      if not Assigned(FProp) then
+        raise ESerializationException.CreateFmt(sProtoBufNotFondProperty, [P.PropName]);
+      K:=FProp^.PropType^.Kind;
+      case FProp^.PropType^.Kind of
+        tkChar,
+        tkAString,
+        tkWString,
+        tkSString,
+        tkLString   :
+          begin
+            PropValue:=GetStrProp(Self, FProp);
+//            if PropValue<>'' then
+              ABuf.WriteAsString(P, PropValue);
+          end;
 
-      tkBool : ABuf.WriteAsInteger(P, GetOrdProp(Self, FProp));
-      tkQWord : ABuf.WriteAsQWord(P, GetOrdProp(Self, FProp));
-      //tkInt64   : SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
-      tkInt64   :
-        begin
-          STypeName:=UpperCase(FProp^.PropType^.Name);
-          if STypeName = 'SINT64' then
-            ABuf.WriteAsInt64ZZ(P, GetInt64Prop(Self, FProp))
-          else
-            ABuf.WriteAsInt64(P, GetInt64Prop(Self, FProp));
-        end;
-      tkInteger :
-        begin
-          STypeName:=UpperCase(FProp^.PropType^.Name);
-          if STypeName = 'SINT32' then
-            ABuf.WriteAsIntegerZZ(P, GetInt64Prop(Self, FProp))
-          else
-            ABuf.WriteAsInteger(P, GetInt64Prop(Self, FProp));
-        end;
-      tkEnumeration : ABuf.WriteAsInteger(P, GetOrdProp(Self, FProp));
-      tkDynArray:begin
-                   STypeName:=UpperCase(FProp^.PropType^.Name);
+        tkBool : ABuf.WriteAsInteger(P, GetOrdProp(Self, FProp));
+        tkQWord : ABuf.WriteAsQWord(P, GetOrdProp(Self, FProp));
+        //tkInt64   : SetOrdProp(Self, FProp, ABuf.ReadAsInteger);
+        tkInt64   :
+          begin
+            STypeName:=UpperCase(FProp^.PropType^.Name);
+            if STypeName = 'SINT64' then
+              ABuf.WriteAsInt64ZZ(P, GetInt64Prop(Self, FProp))
+            else
+              ABuf.WriteAsInt64(P, GetInt64Prop(Self, FProp));
+          end;
+        tkInteger :
+          begin
+            STypeName:=UpperCase(FProp^.PropType^.Name);
+            if STypeName = 'SINT32' then
+              ABuf.WriteAsIntegerZZ(P, GetInt64Prop(Self, FProp))
+            else
+              ABuf.WriteAsInteger(P, GetInt64Prop(Self, FProp));
+          end;
+        tkEnumeration : ABuf.WriteAsInteger(P, GetOrdProp(Self, FProp));
+        tkDynArray:begin
+                     STypeName:=UpperCase(FProp^.PropType^.Name);
 
-                   if STypeName = 'TBYTES' then
-                   begin
-                     PArr:=GetDynArrayProp(Self, FProp);
-                     if Assigned(PArr) then
-                       ABuf.WriteAsBytes(P, TBytes(PArr));
-                   end
-                   else
-                   begin
-                     vDinArray:=GetObjectProp(Self, FProp);
-                     L:=DynArraySize(vDinArray);
-                     PDT:=GetTypeData(FProp^.PropType);
-                     O:=PDT^.OrdType;
-                     EL:=PDT^.ElType2;
-                     K:=EL^.Kind;
-                     KN:=EL^.Name;
-
-                     for i:=0 to L-1 do
+                     if STypeName = 'TBYTES' then
                      begin
-                       case K of
-                         tkEnumeration,
-                         tkInteger:
-                           case O of
-                            otSLong:ABuf.WriteAsInteger(P, TIntegerDynArray(vDinArray)[i]);
-                           else
-                             raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
-                           end
-                       else
-                         raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+                       PArr:=GetDynArrayProp(Self, FProp);
+                       if Assigned(PArr) then
+                         ABuf.WriteAsBytes(P, TBytes(PArr));
+                     end
+                     else
+                     begin
+                       vDinArray:=GetObjectProp(Self, FProp);
+                       L:=DynArraySize(vDinArray);
+                       PDT:=GetTypeData(FProp^.PropType);
+                       O:=PDT^.OrdType;
+                       EL:=PDT^.ElType2;
+                       K:=EL^.Kind;
+                       KN:=EL^.Name;
+
+                       for i:=0 to L-1 do
+                       begin
+                         case K of
+                           tkEnumeration,
+                           tkInteger:
+                             case O of
+                              otSLong:ABuf.WriteAsInteger(P, TIntegerDynArray(vDinArray)[i]);
+                             else
+                               raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+                             end
+                         else
+                           raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+                         end;
                        end;
                      end;
                    end;
-                 end;
-      tkClass : SaveClassData(FProp, P);
+        tkClass : SaveClassData(FProp, P);
+      else
+        raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
+      end;
+    end
     else
-      raise exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
-    end;
+    if P.SerializationPropertyType = sptPublic then
+    begin
+      //tkEnumeration :
+      L:=TGetIntegerProc(P.FGetProp)();
+      ABuf.WriteAsInteger(P, L);
+    end
+    else
+      raise Exception.CreateFmt(sProtoBufUnknowPropType, [P.FPropName]);
   end;
   Result:=true;
 end;
@@ -1420,6 +1455,24 @@ begin
   begin
     P:=TSerializationProperty.Create(APropName, APropNum, nil, ARequired);
     P.OjbType:=AObjClass;
+    FPropertys.Add(P);
+  end
+  else
+    raise ESerializationException.CreateFmt(sPropertyAlreadyRegistered, [APropName]);
+end;
+
+procedure TSerializationObject.RegisterPropPublic(APropName: string;
+  APropNum: Integer; ASetProc, AGetProc: TMethod; ARequired: boolean);
+var
+  P: TSerializationProperty;
+begin
+  if not Assigned(FPropertys.Find(APropName)) then
+  begin
+    P:=TSerializationProperty.Create(APropName, APropNum, nil, ARequired);
+    P.OjbType:=nil; //AObjClass;
+    P.SerializationPropertyType:=sptPublic;
+    P.FSetProp:=ASetProc;
+    P.FGetProp:=AGetProc;
     FPropertys.Add(P);
   end
   else
