@@ -7,9 +7,7 @@
       <Unit0>
         <Filename Value="proto_pas.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="46"/>
-        <CursorPos Y="63"/>
+        <CursorPos X="26" Y="3"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -17,24 +15,23 @@
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="79"/>
-        <CursorPos X="31" Y="103"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="23"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="enumobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="23"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="pascodegen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="47"/>
-        <CursorPos X="14" Y="67"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -42,9 +39,7 @@
         <Filename Value="protoobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoObjects"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="49"/>
-        <CursorPos Y="49"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -52,9 +47,9 @@
         <Filename Value="protoparser.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoParser"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="670"/>
-        <CursorPos X="31" Y="684"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="9" Y="19"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -167,122 +162,134 @@
       </Unit21>
       <Unit22>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="708"/>
         <CursorPos X="4" Y="716"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit22>
     </Units>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="51" Column="15" TopLine="23"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="61" Column="23" TopLine="47"/>
       </Position1>
       <Position2>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="68" Column="12" TopLine="53"/>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="398" Column="3" TopLine="392"/>
       </Position2>
       <Position3>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="67" Column="88" TopLine="48"/>
+        <Caret Line="47" Column="15" TopLine="29"/>
       </Position3>
       <Position4>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="23" TopLine="47"/>
+        <Caret Line="61" Column="19" TopLine="53"/>
       </Position4>
       <Position5>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="398" Column="3" TopLine="392"/>
+        <Caret Line="407" Column="3" TopLine="401"/>
       </Position5>
       <Position6>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="47" Column="15" TopLine="29"/>
+        <Caret Line="47" Column="14" TopLine="25"/>
       </Position6>
       <Position7>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="19" TopLine="53"/>
+        <Caret Line="134" Column="21" TopLine="116"/>
       </Position7>
       <Position8>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="407" Column="3" TopLine="401"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="213" TopLine="183"/>
       </Position8>
       <Position9>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="47" Column="14" TopLine="25"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="49" Column="30" TopLine="18"/>
       </Position9>
       <Position10>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="134" Column="21" TopLine="116"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="182" Column="3" TopLine="180"/>
       </Position10>
       <Position11>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="213" TopLine="183"/>
+        <Caret Line="203" Column="17" TopLine="183"/>
       </Position11>
       <Position12>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="49" Column="30" TopLine="18"/>
+        <Caret Line="52" Column="25" TopLine="33"/>
       </Position12>
       <Position13>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="182" Column="3" TopLine="180"/>
+        <Caret Line="208" Column="34" TopLine="189"/>
       </Position13>
       <Position14>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="203" Column="17" TopLine="183"/>
+        <Caret Line="157" Column="25" TopLine="135"/>
       </Position14>
       <Position15>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="52" Column="25" TopLine="33"/>
+        <Caret Line="45" Column="15" TopLine="28"/>
       </Position15>
       <Position16>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="208" Column="34" TopLine="189"/>
+        <Caret Line="143" Column="33" TopLine="121"/>
       </Position16>
       <Position17>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="157" Column="25" TopLine="135"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="252" Column="29" TopLine="244"/>
       </Position17>
       <Position18>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="45" Column="15" TopLine="28"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="684" Column="28" TopLine="670"/>
       </Position18>
       <Position19>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="143" Column="33" TopLine="121"/>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="252" Column="16" TopLine="241"/>
       </Position19>
       <Position20>
         <Filename Value="protoparser.pas"/>
-        <Caret Line="252" Column="29" TopLine="244"/>
+        <Caret Line="683" Column="36" TopLine="670"/>
       </Position20>
       <Position21>
         <Filename Value="protoparser.pas"/>
-        <Caret Line="684" Column="28" TopLine="670"/>
+        <Caret Line="684" Column="31" TopLine="670"/>
       </Position21>
       <Position22>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="252" Column="16" TopLine="241"/>
-      </Position22>
-      <Position23>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="683" Column="36" TopLine="670"/>
-      </Position23>
-      <Position24>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="684" Column="31" TopLine="670"/>
-      </Position24>
-      <Position25>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <Caret Line="1948" Column="3" TopLine="1945"/>
-      </Position25>
-      <Position26>
+      </Position22>
+      <Position23>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <Caret Line="716" Column="4" TopLine="708"/>
-      </Position26>
-      <Position27>
+      </Position23>
+      <Position24>
         <Filename Value="protoobjects.pas"/>
         <Caret Line="49" TopLine="49"/>
+      </Position24>
+      <Position25>
+        <Filename Value="controlobjects.pas"/>
+        <Caret Line="99" Column="77" TopLine="79"/>
+      </Position25>
+      <Position26>
+        <Filename Value="enumobject.pas"/>
+        <Caret Line="18" Column="74"/>
+      </Position26>
+      <Position27>
+        <Filename Value="pascodegen.pas"/>
+        <Caret Line="66" Column="42" TopLine="47"/>
       </Position27>
+      <Position28>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="63" Column="40" TopLine="46"/>
+      </Position28>
+      <Position29>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="66" Column="33" TopLine="48"/>
+      </Position29>
+      <Position30>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="693" Column="37" TopLine="670"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

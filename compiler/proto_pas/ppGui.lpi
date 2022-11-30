@@ -19,8 +19,8 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="3"/>
-      <RevisionNr Value="3"/>
-      <BuildNr Value="15"/>
+      <RevisionNr Value="4"/>
+      <BuildNr Value="17"/>
       <Language Value="0419"/>
     </VersionInfo>
     <BuildModes Count="1">

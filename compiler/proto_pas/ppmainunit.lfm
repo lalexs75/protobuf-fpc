@@ -1,5 +1,5 @@
 object ProtoParserForm: TProtoParserForm
-  Left = 537
+  Left = 231
   Height = 832
   Top = 16
   Width = 1041
@@ -8,7 +8,7 @@ object ProtoParserForm: TProtoParserForm
   ClientWidth = 1041
   OnCreate = FormCreate
   SessionProperties = 'CheckBox1.Checked;DirectoryEdit1.Text;FileNameEdit1.Text;ListBox1.Items;RadioButton1.Checked;RadioButton1.Color;RadioButton2.Checked'
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   inline ResultCode: TSynEdit
     Left = 0
     Height = 329
@@ -459,10 +459,6 @@ object ProtoParserForm: TProtoParserForm
     SelectedColor.ItalicPriority = 50
     SelectedColor.UnderlinePriority = 50
     SelectedColor.StrikeOutPriority = 50
-    ScrollOnEditLeftOptions.ScrollExtraPercent = 20
-    ScrollOnEditLeftOptions.ScrollExtraMax = 10
-    ScrollOnEditRightOptions.ScrollExtraPercent = 30
-    ScrollOnEditRightOptions.ScrollExtraMax = 25
     BracketHighlightStyle = sbhsBoth
     BracketMatchColor.Background = clNone
     BracketMatchColor.Foreground = clNone
@@ -522,8 +518,8 @@ object ProtoParserForm: TProtoParserForm
     TabOrder = 1
     object TabSheet8: TTabSheet
       Caption = 'From File'
-      ClientHeight = 372
-      ClientWidth = 1031
+      ClientHeight = 370
+      ClientWidth = 1035
       ParentFont = False
       object FileNameEdit1: TFileNameEdit
         AnchorSideLeft.Control = TabSheet8
@@ -531,9 +527,9 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = BitBtn3
         Left = 6
-        Height = 33
-        Top = 35
-        Width = 926
+        Height = 25
+        Top = 34
+        Width = 937
         FilterIndex = 0
         HideDirectories = False
         ButtonWidth = 23
@@ -552,9 +548,9 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideBottom.Control = TabSheet8
         AnchorSideBottom.Side = asrBottom
         Left = 12
-        Height = 263
-        Top = 103
-        Width = 920
+        Height = 271
+        Top = 93
+        Width = 931
         BorderSpacing.Around = 6
         Anchors = [akTop, akLeft, akRight, akBottom]
         Font.Height = 13
@@ -1001,10 +997,6 @@ object ProtoParserForm: TProtoParserForm
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
-        ScrollOnEditLeftOptions.ScrollExtraPercent = 20
-        ScrollOnEditLeftOptions.ScrollExtraMax = 10
-        ScrollOnEditRightOptions.ScrollExtraPercent = 30
-        ScrollOnEditRightOptions.ScrollExtraMax = 25
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
@@ -1056,9 +1048,9 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideLeft.Control = TabSheet8
         AnchorSideTop.Control = TabSheet8
         Left = 6
-        Height = 23
+        Height = 22
         Top = 6
-        Width = 81
+        Width = 74
         BorderSpacing.Around = 6
         Caption = 'From file'
         Checked = True
@@ -1071,8 +1063,8 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideTop.Control = FileNameEdit1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 23
-        Top = 74
+        Height = 22
+        Top = 65
         Width = 133
         BorderSpacing.Around = 6
         Caption = 'Enter source code'
@@ -1083,28 +1075,30 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideTop.Control = TabSheet8
         AnchorSideRight.Control = TabSheet8
         AnchorSideRight.Side = asrBottom
-        Left = 938
-        Height = 33
+        Left = 949
+        Height = 28
         Top = 6
-        Width = 87
+        Width = 80
         Action = actCompile
         Anchors = [akTop, akRight]
         AutoSize = True
         BorderSpacing.Around = 6
+        Images = ImageList1
+        ImageIndex = 2
         TabOrder = 4
       end
     end
     object TabSheet9: TTabSheet
       Caption = 'Parser params'
-      ClientHeight = 372
-      ClientWidth = 1031
+      ClientHeight = 370
+      ClientWidth = 1035
       object Label2: TLabel
         AnchorSideLeft.Control = TabSheet9
         AnchorSideTop.Control = TabSheet9
         Left = 6
-        Height = 16
+        Height = 15
         Top = 6
-        Width = 113
+        Width = 116
         BorderSpacing.Around = 6
         Caption = 'Include files folders'
         ParentColor = False
@@ -1116,7 +1110,7 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideRight.Control = BitBtn2
         Left = 6
         Height = 121
-        Top = 28
+        Top = 27
         Width = 937
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -1133,13 +1127,15 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideRight.Side = asrBottom
         Left = 949
         Height = 28
-        Top = 28
+        Top = 27
         Width = 80
         Action = ifAdd
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         BorderSpacing.Top = 6
         BorderSpacing.Right = 6
+        Images = ImageList1
+        ImageIndex = 0
         TabOrder = 1
       end
       object BitBtn2: TBitBtn
@@ -1149,12 +1145,14 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideRight.Side = asrBottom
         Left = 949
         Height = 28
-        Top = 62
+        Top = 61
         Width = 80
         Action = ifRemove
         Anchors = [akTop, akRight]
         AutoSize = True
         BorderSpacing.Around = 6
+        Images = ImageList1
+        ImageIndex = 1
         TabOrder = 2
       end
       object Label3: TLabel
@@ -1162,9 +1160,9 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideTop.Control = CheckBox1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 16
-        Top = 183
-        Width = 75
+        Height = 15
+        Top = 182
+        Width = 81
         BorderSpacing.Around = 6
         Caption = 'Output folder'
         ParentColor = False
@@ -1176,8 +1174,8 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideRight.Control = TabSheet9
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 26
-        Top = 205
+        Height = 25
+        Top = 203
         Width = 1017
         ShowHidden = False
         ButtonWidth = 23
@@ -1193,8 +1191,8 @@ object ProtoParserForm: TProtoParserForm
         AnchorSideTop.Side = asrBottom
         Left = 5
         Height = 22
-        Top = 155
-        Width = 126
+        Top = 154
+        Width = 128
         BorderSpacing.Around = 5
         Caption = 'Save result to file'
         TabOrder = 4
@@ -1233,6 +1231,7 @@ object ProtoParserForm: TProtoParserForm
     CompilerMode = pcmObjFPC
     NestedComments = True
     TypeHelpers = False
+    StringMultilineMode = []
     Left = 167
     Top = 356
   end
