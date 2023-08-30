@@ -205,10 +205,10 @@ type
 
   TXmlSerializationObjectList = class
   private
-    FList:TFPList;
     FBaseClass:TAbstractSerializationObjectClass;
     function GetCount: Integer;
   protected
+    FList:TFPList;
     function InternalAddObject:TAbstractSerializationObject;
     function InternalGetItem(AIndex: Integer):TAbstractSerializationObject;
   public

@@ -43,13 +43,12 @@ type
 
   TJSONSerializationObject = class(TAbstractSerializationObject)
   private
-    FDoc: TJSONObject;
+    //FDoc: TJSONObject;
     FJSONName: string;
     procedure SetJSONName(AValue: string);
 
     function DefaultObjectList:TXmlSerializationObjectList;
   protected
-    procedure InternalReadDoc; override;
 
     procedure InternalWriteString(P: TPropertyDef; AValue:string); override;
     procedure InternalWriteBoolean(P: TPropertyDef; AValue:Boolean); override;
@@ -65,11 +64,54 @@ type
     procedure InternalWriteClass(P: TPropertyDef; AObject:TAbstractSerializationObject); override;
     procedure InternalWriteClassCollection(P: TPropertyDef; AObjects:TXmlSerializationObjectList); override;
   public
+    //
+    FDoc: TJSONObject;
+    procedure InternalReadDoc; override;
+    //
     constructor Create; override;
     procedure LoadFromStream(AStream:TStream); override;
     procedure SaveToStream(AStream:TStream); override;
 
     property JSONName:string read FJSONName write SetJSONName;
+  end;
+
+
+  { TJSONSerializationObjectList }
+
+  TJSONSerializationObjectList = class(TXmlSerializationObjectList)
+  private
+  protected
+  public
+    constructor Create(ABaseClass:TAbstractSerializationObjectClass);
+    procedure LoadFromStream(AStream:TStream);
+    procedure LoadFromFile(AFileName:string);
+  end;
+
+  { GJSONSerializationObjectListEnumerator }
+
+  generic GJSONSerializationObjectListEnumerator<GObjList, GObjType> = class
+  private
+    FList: TJSONSerializationObjectList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: GObjList);
+    function GetCurrent: GObjType;
+    function MoveNext: Boolean;
+    property Current: GObjType read GetCurrent;
+  end;
+
+  { GJSONSerializationObjectList }
+
+  generic GJSONSerializationObjectList<GObjType> = class(TJSONSerializationObjectList)
+  public type
+    TSerializationObjectListEnumerator = specialize GXMLSerializationObjectListEnumerator<TXmlSerializationObjectList, GObjType>;
+  private
+    function GetItem(AIndex: Integer): GObjType;
+  public
+    constructor Create;
+    function GetEnumerator: TSerializationObjectListEnumerator;
+    function AddItem:GObjType;
+    property Items[AIndex:Integer]:GObjType read GetItem; default;
   end;
 
 implementation
@@ -369,6 +411,7 @@ begin
   P:=TJSONParser.Create(AStream);
   try
     FDoc:=P.Parse as TJSONObject;
+    //FDoc:=P.Parse as TJSONData;
     InternalReadDoc;
     FDoc.Free;
   finally
@@ -390,6 +433,92 @@ begin
   finally
     FreeAndNil(FDoc);
   end;
+end;
+
+
+{ TJSONSerializationObjectList }
+
+constructor TJSONSerializationObjectList.Create(
+  ABaseClass: TAbstractSerializationObjectClass);
+begin
+  inherited Create(ABaseClass)
+end;
+
+procedure TJSONSerializationObjectList.LoadFromStream(AStream: TStream);
+var
+  P: TJSONParser;
+  FDoc: TJSONArray;
+  P1: TJSONEnum;
+  S: TJSONStringType;
+  T: TJSONSerializationObject;
+begin
+  P:=TJSONParser.Create(AStream);
+  try
+    FDoc:=P.Parse as TJSONArray;
+    //FDoc:=P.Parse as TJSONData;
+    for P1 in FDoc do
+    begin
+      S:=P1.Key;
+      S:=P1.Value.ClassName;
+      if P1.Value is TJSONObject then
+      begin
+        T:=InternalAddObject as TJSONSerializationObject;
+        T.FDoc:=P1.Value as TJSONObject;
+        T.InternalReadDoc;
+      end;
+    end;
+    FDoc.Free;
+  finally
+    P.Free;
+  end;
+end;
+
+procedure TJSONSerializationObjectList.LoadFromFile(AFileName: string);
+var
+  F: TFileStream;
+begin
+  F:=TFileStream.Create(AFileName, fmOpenRead);
+  LoadFromStream(F);
+  F.Free;
+end;
+
+{ GJSONSerializationObjectListEnumerator }
+
+constructor GJSONSerializationObjectListEnumerator.Create(AList: GObjList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function GJSONSerializationObjectListEnumerator.GetCurrent: GObjType;
+begin
+  Result := GObjType(FList.FList[FPosition]);
+end;
+
+function GJSONSerializationObjectListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+function GJSONSerializationObjectList.GetItem(AIndex: Integer): GObjType;
+begin
+  Result:=GObjType(FList[AIndex]);
+end;
+
+constructor GJSONSerializationObjectList.Create;
+begin
+  inherited Create(GObjType);
+end;
+
+function GJSONSerializationObjectList.GetEnumerator: TSerializationObjectListEnumerator;
+begin
+  Result:=TSerializationObjectListEnumerator.Create(Self);
+end;
+
+function GJSONSerializationObjectList.AddItem: GObjType;
+begin
+  Result:=GObjType(InternalAddObject);
 end;
 
 end.
