@@ -146,6 +146,7 @@ type
     function IsEmpty:Boolean;
     procedure ValidateRequared;
     function RegisterProperty(APropertyName, AXMLName:string; AAttribs:TXSAttribs; ACaption:string; AMinSize, AMaxSize:integer; Aliases:string = ''):TPropertyDef;
+    function RegisterProperty(APropertyName:string):TPropertyDef;
     procedure InternalRegisterPropertys; virtual;
     procedure InternalInitChilds; virtual;
     procedure ModifiedProperty(APropertyName:string);
@@ -315,6 +316,11 @@ function TAbstractSerializationObject.RegisterProperty(APropertyName,
 begin
   Result:=FPropertyList.Add(APropertyName, AXMLName, AAttribs, ACaption, AMinSize, AMaxSize);
   Result.FAliases:=Aliases;
+end;
+
+function TAbstractSerializationObject.RegisterProperty(APropertyName: string): TPropertyDef;
+begin
+  Result:=RegisterProperty(APropertyName, APropertyName, [], '', -1, -1);
 end;
 
 procedure TAbstractSerializationObject.InternalRegisterPropertys;
