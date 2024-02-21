@@ -294,8 +294,12 @@ end;
 
 procedure TJSONSerializationObject.InternalWriteDate(P: TPropertyDef;
   AValue: TDate);
+var
+  S: string;
 begin
-  FDoc.Add(P.XMLName, TJSONString.Create(DateToStr(AValue)));
+  DateTimeToString(S, 'yyyy-mm-dd', AValue);
+  FDoc.Add(P.XMLName, TJSONString.Create(S));
+  //FDoc.Add(P.XMLName, TJSONString.Create(DateToStr(AValue)));
 end;
 
 procedure TJSONSerializationObject.InternalWriteTime(P: TPropertyDef;
