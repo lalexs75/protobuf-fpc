@@ -35,7 +35,11 @@ type
     actCompile: TAction;
     BitBtn3: TBitBtn;
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
     DirectoryEdit1: TDirectoryEdit;
+    edtFileNamePrefix: TEdit;
+    FileNameEdit2: TFileNameEdit;
     ifAdd: TAction;
     ifRemove: TAction;
     ActionList1: TActionList;
@@ -43,11 +47,14 @@ type
     BitBtn2: TBitBtn;
     FileNameEdit1: TFileNameEdit;
     ImageList1: TImageList;
+    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
     PageControl1: TPageControl;
+    Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     RxIniPropStorage1: TRxIniPropStorage;
@@ -61,6 +68,7 @@ type
     TabSheet8: TTabSheet;
     TabSheet9: TTabSheet;
     procedure actCompileExecute(Sender: TObject);
+    procedure CheckBox2Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ifAddExecute(Sender: TObject);
     procedure ifRemoveExecute(Sender: TObject);
@@ -96,6 +104,11 @@ begin
     DoCompileFromFile(FileNameEdit1.FileName)
   else
     DoCompile(SourceEditor);
+end;
+
+procedure TProtoParserForm.CheckBox2Change(Sender: TObject);
+begin
+  //
 end;
 
 procedure TProtoParserForm.FormCreate(Sender: TObject);
@@ -204,6 +217,8 @@ begin
   CG.IgnoreMissingUnitName:=true;
   CG.IncludeFileFolders.Assign(ListBox1.Items);
   CG.OnStatus:=@CodeGenStatus;
+  CG.ResultFileNamePrfix:=edtFileNamePrefix.Text;
+  CG.ResultFileNameLowerCase:=CheckBox3.Checked;
   try
     Result:=CG.GeneratePascalCode;
   finally

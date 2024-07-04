@@ -24,7 +24,12 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, rxnew, ppMainUnit, ProtoParser, ProtoObjects, EnumObject, ControlObjects,
+  Forms,
+  ppMainUnit,
+  ProtoParser,
+  ProtoObjects,
+  EnumObject,
+  ControlObjects,
   PasCodegen
   { you can add units after this };
 

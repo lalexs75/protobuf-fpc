@@ -41,6 +41,8 @@ type
     FParser:TProtoParser;
     FPasUnitName: string;
     FResultCode:TStringList;
+    FResultFileNameLowerCase: Boolean;
+    FResultFileNamePrfix: string;
     FShowSourceProtoCode: boolean;
     FTempList:TStringList;
     procedure InternalStatus(AObject:TProtoObject; AMessage:string);
@@ -65,6 +67,8 @@ type
     property IncludeFileFolders:TStringList read FIncludeFileFolders;
     property ShowSourceProtoCode:boolean read FShowSourceProtoCode write FShowSourceProtoCode;
     property CopyrightInfoFile:string read FCopyrightInfoFile write FCopyrightInfoFile;
+    property ResultFileNamePrfix:string read FResultFileNamePrfix write FResultFileNamePrfix;
+    property ResultFileNameLowerCase:Boolean read FResultFileNameLowerCase write FResultFileNameLowerCase;
   end;
 
 function PascalCodeGen(AParser:TProtoParser):string;
@@ -154,7 +158,7 @@ begin
     FResultCode.Add(FileToString(FCopyrightInfoFile));
   end;
 
-  FResultCode.Add('unit ' + FPasUnitName+';');
+  FResultCode.Add('unit ' + FResultFileNamePrfix + FPasUnitName+';');
   FResultCode.Add('');
 end;
 
@@ -168,7 +172,7 @@ begin
     if O is TImport then
     begin
       if S<>'' then S:=S + ',';
-      S:=S + ' ' + DoFormatFileName(O.Caption);
+      S:=S + ' ' + FResultFileNamePrfix + DoFormatFileName(O.Caption);
     end;
   if S<>'' then
   begin
@@ -464,6 +468,7 @@ begin
   FResultCode:=TStringList.Create;
   FTempList:=TStringList.Create;
   FParser:=AParser;
+  FResultFileNameLowerCase:=true;
 end;
 
 destructor TPascalCodeGenerator.Destroy;
