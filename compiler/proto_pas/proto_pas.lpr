@@ -38,6 +38,8 @@ type
     FCodeGen:TPascalCodeGenerator;
     FOutDir:string;
     FFileName:string;
+    FResultFileNamePrefix:string;
+    FResultFileNameLC:Boolean;
     procedure InitParser;
     procedure ParserStatus(Sender:TProtoParser; ALine:integer; AObject:TProtoObject; AMessage:string);
     procedure CodeGenStatus(Sender:TPascalCodeGenerator; AObject:TProtoObject; AMessage:string);
@@ -68,10 +70,13 @@ begin
 
   FCodeGen.CopyrightInfoFile:=GetOptionValue('c','copyrightinfo');
   FOutDir:=GetOptionValue('o','out');
+  FResultFileNamePrefix:=GetOptionValue('p', 'prefix');
+  FResultFileNameLC:=HasOption('l','lower');
+
 
 
   ST:=TStringList.Create;
-  GetNonOptions('h:o:i:c:', ['help','out', 'include', 'copyrightinfo'], ST);
+  GetNonOptions('h:o:i:c:p:l', ['help','out', 'include', 'copyrightinfo', 'prefix', 'lower'], ST);
   if (ST.Count>0) then
   begin
     FFileName:=ST[0];
@@ -80,9 +85,11 @@ begin
   end;
   ST.Free;
 
-{  -i /home/install/source/diadocsdk-cpp/proto/
+{
+  -i /home/install/source/diadocsdk-cpp/proto/
   -i /home/install/source/diadocsdk-cpp/proto/Departments/
   -o /usr/local/share/lazarus/components/diadocsdk-fpc/Departments/
+  -p diadoc_
   /home/install/source/diadocsdk-cpp/proto/Departments/DepartmentList.proto
 }
 
@@ -125,7 +132,7 @@ var
   ErrorMsg: String;
 begin
   // quick check parameters
-  ErrorMsg:=CheckOptions('hoic', ['help','out', 'include', 'copyrightinfo']);
+  ErrorMsg:=CheckOptions('hoicpl', ['help','out', 'include', 'copyrightinfo', 'prefix', 'lower']);
   if ErrorMsg<>'' then begin
     ShowException(Exception.Create(ErrorMsg));
     Terminate;
@@ -156,8 +163,13 @@ begin
   begin
     S1:=ExtractFileNameOnly(AFileName);
     FCodeGen.PasUnitName:=S1;
-    S1:=ChangeFileExt(S1, '.pas');
+    S1:=ChangeFileExt(FResultFileNamePrefix + S1, '.pas');
+    if FResultFileNameLC then
+      S1:=LowerCase(S1);
+    FCodeGen.ResultFileNamePrfix:=FResultFileNamePrefix;
+
     S:=FCodeGen.GeneratePascalCode;
+
     SaveResultFile(S1, S);
   end
   else
@@ -203,14 +215,17 @@ begin
   writeln('-i, --include'#9'include files folder');
   writeln('Codegeneration options:');
   writeln('-c, --copyrightinfo'#9'copyright info for file header');
+  writeln('-p, --prefix'#9'add prefix for result filename (and files in uses sections');
+  writeln('-l, --lower'#9'generate file name in lower case');
+
   writeln('Other options:');
   writeln('-h, --help'#9'show help');
 end;
 
 procedure TProtoToPasApplication.WriteLogo;
 begin
-  writeln('Protobuf files to pascal source code compiller version 1.0 [' + {$I %DATE%}+'] for ' + {$I %FPCTARGETCPU%});
-  writeln('Copyright (c) 2018-2019 by Lagunov Aleksey');
+  writeln('Protobuf files to pascal source code compiller version 2.0 [' + {$I %DATE%}+'] for ' + {$I %FPCTARGETCPU%});
+  writeln('Copyright (c) 2018-2024 by Lagunov Aleksey');
 end;
 
 var

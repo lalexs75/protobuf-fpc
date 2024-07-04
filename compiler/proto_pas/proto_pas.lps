@@ -3,11 +3,13 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="23">
+    <Units Count="24">
       <Unit0>
         <Filename Value="proto_pas.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="26" Y="3"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="154"/>
+        <CursorPos X="47" Y="166"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -15,7 +17,7 @@
         <Filename Value="controlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ControlObjects"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -23,7 +25,7 @@
         <Filename Value="enumobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EnumObject"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -47,9 +49,8 @@
         <Filename Value="protoparser.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ProtoParser"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="9" Y="19"/>
+        <EditorIndex Value="4"/>
+        <CursorPos Y="19"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -162,133 +163,141 @@
       </Unit21>
       <Unit22>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="708"/>
         <CursorPos X="4" Y="716"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="/home/alexs/install/fpcsrc/packages/fcl-base/src/custapp.pp"/>
+        <UnitName Value="CustApp"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="62"/>
+        <CursorPos X="23" Y="84"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit23>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="23" TopLine="47"/>
+        <Caret Line="134" Column="21" TopLine="116"/>
       </Position1>
       <Position2>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="398" Column="3" TopLine="392"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="213" TopLine="183"/>
       </Position2>
       <Position3>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="47" Column="15" TopLine="29"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="49" Column="30" TopLine="18"/>
       </Position3>
       <Position4>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="61" Column="19" TopLine="53"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="182" Column="3" TopLine="180"/>
       </Position4>
       <Position5>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="407" Column="3" TopLine="401"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="203" Column="17" TopLine="183"/>
       </Position5>
       <Position6>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="47" Column="14" TopLine="25"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="52" Column="25" TopLine="33"/>
       </Position6>
       <Position7>
-        <Filename Value="pascodegen.pas"/>
-        <Caret Line="134" Column="21" TopLine="116"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="208" Column="34" TopLine="189"/>
       </Position7>
       <Position8>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="213" TopLine="183"/>
+        <Caret Line="157" Column="25" TopLine="135"/>
       </Position8>
       <Position9>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="49" Column="30" TopLine="18"/>
+        <Caret Line="45" Column="15" TopLine="28"/>
       </Position9>
       <Position10>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="182" Column="3" TopLine="180"/>
+        <Caret Line="143" Column="33" TopLine="121"/>
       </Position10>
       <Position11>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="203" Column="17" TopLine="183"/>
-      </Position11>
-      <Position12>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="52" Column="25" TopLine="33"/>
-      </Position12>
-      <Position13>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="208" Column="34" TopLine="189"/>
-      </Position13>
-      <Position14>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="157" Column="25" TopLine="135"/>
-      </Position14>
-      <Position15>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="45" Column="15" TopLine="28"/>
-      </Position15>
-      <Position16>
-        <Filename Value="proto_pas.lpr"/>
-        <Caret Line="143" Column="33" TopLine="121"/>
-      </Position16>
-      <Position17>
         <Filename Value="protoparser.pas"/>
         <Caret Line="252" Column="29" TopLine="244"/>
-      </Position17>
-      <Position18>
+      </Position11>
+      <Position12>
         <Filename Value="protoparser.pas"/>
         <Caret Line="684" Column="28" TopLine="670"/>
-      </Position18>
-      <Position19>
+      </Position12>
+      <Position13>
         <Filename Value="protoparser.pas"/>
         <Caret Line="252" Column="16" TopLine="241"/>
-      </Position19>
-      <Position20>
+      </Position13>
+      <Position14>
         <Filename Value="protoparser.pas"/>
         <Caret Line="683" Column="36" TopLine="670"/>
-      </Position20>
-      <Position21>
+      </Position14>
+      <Position15>
         <Filename Value="protoparser.pas"/>
         <Caret Line="684" Column="31" TopLine="670"/>
-      </Position21>
-      <Position22>
-        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
-        <Caret Line="1948" Column="3" TopLine="1945"/>
-      </Position22>
-      <Position23>
-        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
-        <Caret Line="716" Column="4" TopLine="708"/>
-      </Position23>
-      <Position24>
+      </Position15>
+      <Position16>
         <Filename Value="protoobjects.pas"/>
         <Caret Line="49" TopLine="49"/>
-      </Position24>
-      <Position25>
+      </Position16>
+      <Position17>
         <Filename Value="controlobjects.pas"/>
         <Caret Line="99" Column="77" TopLine="79"/>
-      </Position25>
-      <Position26>
+      </Position17>
+      <Position18>
         <Filename Value="enumobject.pas"/>
         <Caret Line="18" Column="74"/>
-      </Position26>
-      <Position27>
+      </Position18>
+      <Position19>
         <Filename Value="pascodegen.pas"/>
         <Caret Line="66" Column="42" TopLine="47"/>
+      </Position19>
+      <Position20>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="63" Column="40" TopLine="46"/>
+      </Position20>
+      <Position21>
+        <Filename Value="protoobjects.pas"/>
+        <Caret Line="66" Column="33" TopLine="48"/>
+      </Position21>
+      <Position22>
+        <Filename Value="protoparser.pas"/>
+        <Caret Line="693" Column="37" TopLine="670"/>
+      </Position22>
+      <Position23>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="71" Column="24" TopLine="50"/>
+      </Position23>
+      <Position24>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="73" Column="3" TopLine="50"/>
+      </Position24>
+      <Position25>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="53" Column="5" TopLine="21"/>
+      </Position25>
+      <Position26>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="47" Column="28" TopLine="30"/>
+      </Position26>
+      <Position27>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="153" Column="12" TopLine="130"/>
       </Position27>
       <Position28>
         <Filename Value="proto_pas.lpr"/>
-        <Caret Line="63" Column="40" TopLine="46"/>
+        <Caret Line="48" Column="15" TopLine="28"/>
       </Position28>
       <Position29>
-        <Filename Value="protoobjects.pas"/>
-        <Caret Line="66" Column="33" TopLine="48"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="161" TopLine="154"/>
       </Position29>
       <Position30>
-        <Filename Value="protoparser.pas"/>
-        <Caret Line="693" Column="37" TopLine="670"/>
+        <Filename Value="proto_pas.lpr"/>
+        <Caret Line="171" TopLine="154"/>
       </Position30>
     </JumpHistory>
     <RunParams>
@@ -296,13 +305,39 @@
       <Modes Count="1" ActiveMode="default">
         <Mode0 Name="default">
           <local>
-            <CommandLineParams Value="-i /home/install/source/diadocsdk-cpp/proto/ -i /home/install/source/diadocsdk-cpp/proto/Departments/ -o /usr/local/share/lazarus/components/diadocsdk-fpc/Departments/ /home/install/source/diadocsdk-cpp/proto/Departments/DepartmentList.proto"/>
+            <CommandLineParams Value="/home/alexs/install/source/diadocsdk-csharp/proto/Address.proto -o /home/alexs/1/2 -l -p aa_"/>
           </local>
         </Mode0>
       </Modes>
     </RunParams>
+    <HistoryLists Count="3">
+      <List0 Name="WorkingDirectory" Type="File" Count="1"/>
+      <List1 Name="LaunchingApplication" Type="File" Count="2">
+        <Item2 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
+      </List1>
+      <List2 Name="CommandLineParameters" Count="2">
+        <Item1 Value="/home/alexs/install/source/diadocsdk-csharp/proto/Address.proto -o /home/alexs/1/2 -l -p aa_"/>
+        <Item2 Value="-i /home/install/source/diadocsdk-cpp/proto/ -i /home/install/source/diadocsdk-cpp/proto/Departments/ -o /usr/local/share/lazarus/components/diadocsdk-fpc/Departments/ /home/install/source/diadocsdk-cpp/proto/Departments/DepartmentList.proto"/>
+      </List2>
+    </HistoryLists>
   </ProjectSession>
   <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="proto_pas.lpr"/>
+        <Line Value="169"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="proto_pas.lpr"/>
+        <Line Value="161"/>
+      </Item>
+    </BreakPoints>
     <Watches>
       <Item>
         <Expression Value="S"/>
