@@ -489,7 +489,7 @@ begin
 
     T:=AddToken(stSymbol, [T, TPacked2, TReserv1, TReserv3], ';', [], 8);
     T.AddChildToken([TOpt, TRec, TRep, TReserv, TEnum1, TMsg1]);
-  T1:=AddToken(stSymbol, T, '}', [], -1);
+  T1:=AddToken(stSymbol, [T, T1], '}', [], -1);
 end;
 
 procedure TProtoMessage.InternalProcessChildToken(AParser: TProtoParser;

@@ -22,8 +22,8 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="3"/>
-      <RevisionNr Value="4"/>
-      <BuildNr Value="25"/>
+      <RevisionNr Value="5"/>
+      <BuildNr Value="28"/>
       <Language Value="0419"/>
     </VersionInfo>
     <BuildModes Count="1">
