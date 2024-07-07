@@ -103,13 +103,13 @@ type
   { GJSONSerializationObjectList }
 
   generic GJSONSerializationObjectList<GObjType> = class(TJSONSerializationObjectList)
-  public type
-    TSerializationObjectListEnumerator = specialize GXMLSerializationObjectListEnumerator<TXmlSerializationObjectList, GObjType>;
+//  public type
+//    TSerializationObjectListEnumerator = specialize GXMLSerializationObjectListEnumerator<TXmlSerializationObjectList, GObjType>;
   private
     function GetItem(AIndex: Integer): GObjType;
   public
     constructor Create;
-    function GetEnumerator: TSerializationObjectListEnumerator;
+//    function GetEnumerator: TSerializationObjectListEnumerator;
     function AddItem:GObjType;
     property Items[AIndex:Integer]:GObjType read GetItem; default;
   end;
@@ -515,10 +515,10 @@ begin
   inherited Create(GObjType);
 end;
 
-function GJSONSerializationObjectList.GetEnumerator: TSerializationObjectListEnumerator;
-begin
-  Result:=TSerializationObjectListEnumerator.Create(Self);
-end;
+//function GJSONSerializationObjectList.GetEnumerator: TSerializationObjectListEnumerator;
+//begin
+//  Result:=TSerializationObjectListEnumerator.Create(Self);
+//end;
 
 function GJSONSerializationObjectList.AddItem: GObjType;
 begin
