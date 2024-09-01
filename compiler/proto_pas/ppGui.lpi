@@ -16,6 +16,10 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
+    <i18n>
+      <EnableI18N Value="True" LFM="False"/>
+      <OutDir Value="languages"/>
+    </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="3"/>
@@ -47,7 +51,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="ppGui.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -85,6 +89,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="PasCodegen"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="ppconsts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ppConsts"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
