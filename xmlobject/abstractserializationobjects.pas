@@ -46,6 +46,7 @@ type
   TXmlSerializationObjectList = class;
 
   TXSDIntegerArray = array of Integer;
+  TXSDInt64Array = array of Int64;
   TXSDStringArray = array of String;
 
 
