@@ -503,6 +503,16 @@ begin
       end;
     end
     else
+    if FA.NodeName = 'xs:simpleContent' then
+    begin;
+      FC1:=FA.FindNode('xs:extension');
+      if Assigned(FC1) then
+      begin
+        AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
+        ProcessComplexElement(ANode, FC1, FSchema, AComplexType, AInclude);
+      end;
+    end
+    else
     if FA.NodeName <> 'xs:annotation' then
       raise Exception.CreateFmt('Uknow element type - %s', [FA.NodeName]);
   end;

@@ -56,11 +56,11 @@
         <UnitName Value="XsdProcessorUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="124"/>
-        <CursorPos X="40" Y="141"/>
+        <TopLine Value="490"/>
+        <CursorPos X="39" Y="508"/>
         <UsageCount Value="110"/>
         <Bookmarks Count="1">
-          <Item0 Y="523" ID="2"/>
+          <Item0 Y="533" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
@@ -115,23 +115,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="27">
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="426" Column="3" TopLine="420"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="111" Column="31" TopLine="91"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="618" Column="3" TopLine="616"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdelementtypesunit.pas"/>
-        <Caret Line="150" Column="19" TopLine="135"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="xsdelementtypesunit.pas"/>
         <Caret Line="540" Column="3" TopLine="535"/>
@@ -226,6 +210,30 @@
         <Filename Value="xsdprocessorunit.pas"/>
         <Caret Line="138" Column="7" TopLine="124"/>
       </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="141" Column="40" TopLine="125"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="499" Column="25" TopLine="479"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="497" TopLine="476"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="232" Column="11" TopLine="215"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="48" Column="15" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdprocessorunit.pas"/>
+        <Caret Line="476" Column="3" TopLine="466"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -239,4 +247,15 @@
       </List>
     </HistoryLists>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="xsdprocessorunit.pas"/>
+        <Line Value="508"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
 </CONFIG>

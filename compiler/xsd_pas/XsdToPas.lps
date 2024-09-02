@@ -25,9 +25,8 @@
         <Filename Value="xsdpascodegenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XsdPasCodegenUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="113"/>
+        <TopLine Value="114"/>
         <CursorPos X="25" Y="122"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
