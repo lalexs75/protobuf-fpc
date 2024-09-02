@@ -1263,7 +1263,6 @@ object ProtoParserForm: TProtoParserForm
         Width = 305
         BorderSpacing.Around = 7
         TabOrder = 7
-        Text = 'edtFileNamePrefix'
       end
       object Panel1: TPanel
         AnchorSideTop.Control = ListBox1

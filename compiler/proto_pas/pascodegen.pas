@@ -1,6 +1,6 @@
 { google protobuf files compiler to FPC class
 
-  Copyright (C) 2018-2022 Lagunov Aleksey alexs@yandex.ru
+  Copyright (C) 2018-2024 Lagunov Aleksey alexs@yandex.ru
 
   This source is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
   License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later
@@ -22,7 +22,8 @@ unit PasCodegen;
 interface
 
 uses
-  Classes, SysUtils, ProtoParser, EnumObject, ControlObjects, ProtoObjects;
+  Classes, SysUtils, ProtoParser, EnumObject, ControlObjects, ProtoObjects,
+  ppConsts;
 
 type
   TPascalCodeGenerator = class;
@@ -41,8 +42,8 @@ type
     FParser:TProtoParser;
     FPasUnitName: string;
     FResultCode:TStringList;
-    FResultFileNameLowerCase: Boolean;
-    FResultFileNamePrfix: string;
+    //FResultFileNameLowerCase: Boolean;
+    //FResultFileNamePrfix: string;
     FShowSourceProtoCode: boolean;
     FTempList:TStringList;
     procedure InternalStatus(AObject:TProtoObject; AMessage:string);
@@ -67,8 +68,8 @@ type
     property IncludeFileFolders:TStringList read FIncludeFileFolders;
     property ShowSourceProtoCode:boolean read FShowSourceProtoCode write FShowSourceProtoCode;
     property CopyrightInfoFile:string read FCopyrightInfoFile write FCopyrightInfoFile;
-    property ResultFileNamePrfix:string read FResultFileNamePrfix write FResultFileNamePrfix;
-    property ResultFileNameLowerCase:Boolean read FResultFileNameLowerCase write FResultFileNameLowerCase;
+//    property ResultFileNamePrfix:string read FResultFileNamePrfix write FResultFileNamePrfix;
+//    property ResultFileNameLowerCase:Boolean read FResultFileNameLowerCase write FResultFileNameLowerCase;
   end;
 
 function PascalCodeGen(AParser:TProtoParser):string;
@@ -148,7 +149,7 @@ begin
       if FIgnoreMissingUnitName then
         Exit
       else
-        raise Exception.Create('Not defined output unit file name');
+        raise Exception.Create(sNotDefinedOutputUnitName);
   end;
 
   if (FCopyrightInfoFile<>'') then
@@ -158,7 +159,7 @@ begin
     FResultCode.Add(FileToString(FCopyrightInfoFile));
   end;
 
-  FResultCode.Add('unit ' + FResultFileNamePrfix + FPasUnitName+';');
+  FResultCode.Add('unit ' + ParserOptions.ResultFileNamePrefix + FPasUnitName+';');
   FResultCode.Add('');
 end;
 
@@ -172,7 +173,7 @@ begin
     if O is TImport then
     begin
       if S<>'' then S:=S + ',';
-      S:=S + ' ' + FResultFileNamePrfix + DoFormatFileName(O.Caption);
+      S:=S + ' ' + ParserOptions.ResultFileNamePrefix + DoFormatFileName(O.Caption);
     end;
   if S<>'' then
   begin
@@ -468,7 +469,7 @@ begin
   FResultCode:=TStringList.Create;
   FTempList:=TStringList.Create;
   FParser:=AParser;
-  FResultFileNameLowerCase:=true;
+  //FResultFileNameLowerCase:=true;
 end;
 
 destructor TPascalCodeGenerator.Destroy;

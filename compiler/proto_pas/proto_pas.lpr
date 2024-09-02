@@ -1,6 +1,6 @@
 { google protobuf files compiler to FPC class
 
-  Copyright (C) 2018-2022 Lagunov Aleksey alexs@yandex.ru
+  Copyright (C) 2018-2024 Lagunov Aleksey alexs@yandex.ru
 
   This source is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
   License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later
@@ -38,8 +38,10 @@ type
     FCodeGen:TPascalCodeGenerator;
     FOutDir:string;
     FFileName:string;
-    FResultFileNamePrefix:string;
-    FResultFileNameLC:Boolean;
+
+    FResultFileNamePrefix: String;
+    FResultFileNameLC: Boolean;
+
     procedure InitParser;
     procedure ParserStatus(Sender:TProtoParser; ALine:integer; AObject:TProtoObject; AMessage:string);
     procedure CodeGenStatus(Sender:TPascalCodeGenerator; AObject:TProtoObject; AMessage:string);
@@ -162,11 +164,13 @@ begin
   if PParser.State <> cmsError then
   begin
     S1:=ExtractFileNameOnly(AFileName);
+    S1:=StringReplace(S1, '-', '_', [rfReplaceAll]);
     FCodeGen.PasUnitName:=S1;
     S1:=ChangeFileExt(FResultFileNamePrefix + S1, '.pas');
     if FResultFileNameLC then
       S1:=LowerCase(S1);
-    FCodeGen.ResultFileNamePrfix:=FResultFileNamePrefix;
+    ParserOptions.ResultFileNamePrefix:=FResultFileNamePrefix;
+    ParserOptions.ResultFileNameLowerCase:=FResultFileNameLC;
 
     S:=FCodeGen.GeneratePascalCode;
 
@@ -198,11 +202,13 @@ begin
   StopOnException:=True;
   FCodeGen:=TPascalCodeGenerator.Create(PParser);
   PParser.OnStatus:=@ParserStatus;
+  ParserOptions:=TParserOptions.Create;
 end;
 
 destructor TProtoToPasApplication.Destroy;
 begin
   FreeAndNil(FCodeGen);
+  FreeAndNil(ParserOptions);
   inherited Destroy;
 end;
 
