@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Используем префикс t: для тегов -->
+<t:Invoice xmlns:t="http://example.com/invoice">
+    <t:InvoiceNumber>INV-2026-001</t:InvoiceNumber>
+    <t:Amount>1500.50</t:Amount>
+</t:Invoice>

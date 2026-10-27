@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="13"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="project1.lpr"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="39" Y="21"/>
+      </Unit>
+      <Unit>
+        <Filename Value="test_crash_namespace.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="40"/>
+        <CursorPos X="11" Y="50"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="1078"/>
+        <CursorPos X="5" Y="1094"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../xmlobject/abstractserializationobjects.pas"/>
+        <UnitName Value="AbstractSerializationObjects"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="74"/>
+        <CursorPos Y="86"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../json/jsonobjects.pas"/>
+        <UnitName Value="JSONObjects"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="38"/>
+        <CursorPos X="15" Y="53"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../protobuf/protobuf_fpc.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="139"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="398" TopLine="382"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="525" TopLine="511"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="515" Column="7" TopLine="499"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="8"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="9"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="10"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="11"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="12" Column="47"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="629" Column="13" TopLine="615"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="56" Column="27" TopLine="50"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="349" Column="66" TopLine="339"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="57" Column="15" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="966" Column="49" TopLine="948"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="317" Column="60" TopLine="304"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="59" Column="36" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="733" Column="3" TopLine="730"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="59" Column="100" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="744" TopLine="730"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="384" Column="11" TopLine="356"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="351" Column="35" TopLine="338"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="301" TopLine="287"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="355" Column="13" TopLine="340"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="358" Column="35" TopLine="344"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="364" Column="35" TopLine="350"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="379" Column="15" TopLine="364"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="985" Column="24" TopLine="976"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="88" Column="15" TopLine="66"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="1099" Column="25" TopLine="1077"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="1090" Column="7" TopLine="1074"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="1093" Column="5" TopLine="1077"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
