@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="13"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="project1.lpr"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <CursorPos X="40" Y="17"/>
+      </Unit>
+      <Unit>
+        <Filename Value="test_crash_array.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="16"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../json/jsonobjects.pas"/>
+        <UnitName Value="JSONObjects"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="26" Y="3"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../xmlobject/abstractserializationobjects.pas"/>
+        <UnitName Value="AbstractSerializationObjects"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="26" Y="3"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="517"/>
+        <CursorPos X="29" Y="545"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../xmlobject/xmlobject_resource.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="6"/>
+        <CursorPos X="26" Y="3"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/typinfo.pp"/>
+        <UnitName Value="TypInfo"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="1291"/>
+        <CursorPos X="11" Y="1278"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="10">
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="6" Column="3"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="7" Column="5"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="17" Column="40"/>
+      </Position>
+      <Position>
+        <Filename Value="test_crash_array.pas"/>
+        <Caret TopLine="16"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="56" Column="35" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="543" Column="30" TopLine="524"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="509" Column="33" TopLine="502"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="56" Column="35" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="413" Column="42" TopLine="390"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
