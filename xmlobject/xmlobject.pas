@@ -513,7 +513,8 @@ var
   K: TTypeKind;
   KN: String;
 begin
-  vDinArray:=GetObjectProp(Self, AProp);
+  //vDinArray:=GetObjectProp(Self, AProp);
+  vDinArray:=GetDynArrayProp(Self, AProp);
   L:=DynArraySize(vDinArray);
   PDT:=GetTypeData(AProp^.PropType);
   O:=PDT^.OrdType;
@@ -540,7 +541,8 @@ begin
   else
     raise exception.CreateFmt(sUknowPropertyType, [AXmlProp.PropertyName]);
   end;
-  SetObjectProp(Self, AProp, TObject(vDinArray));
+//  SetObjectProp(Self, AProp, TObject(vDinArray));
+  SetDynArrayProp(Self, AProp, vDinArray);
 end;
 
 procedure TXmlSerializationObject.InternalWriteString(P: TPropertyDef;
