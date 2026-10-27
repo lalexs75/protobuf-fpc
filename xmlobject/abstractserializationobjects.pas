@@ -141,6 +141,7 @@ type
   TAbstractSerializationObject = class
   private
     FPropertyList:TPropertyList;
+    FOwner:TAbstractSerializationObject;
   protected
     FIgnoreReadUndefProps:Boolean;
     property PropertyList:TPropertyList read FPropertyList;
@@ -191,6 +192,7 @@ type
     procedure CheckMaxInclusiveValue(APropertyName:string; AValue:Double);
   public
     constructor Create; virtual;
+    constructor CreateWithOwner(AOwner:TAbstractSerializationObject); virtual;
     destructor Destroy; override;
     procedure Clear;
 
@@ -522,6 +524,13 @@ begin
 
   InternalInitChilds;
   InternalRegisterPropertys;
+end;
+
+constructor TAbstractSerializationObject.CreateWithOwner(
+  AOwner: TAbstractSerializationObject);
+begin
+  Create;
+  FOwner:=AOwner;
 end;
 
 destructor TAbstractSerializationObject.Destroy;
