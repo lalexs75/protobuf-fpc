@@ -22,7 +22,11 @@ unit xsdutils;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, DOM;
+
+const
+  XSD_NAMESPACE = 'http://www.w3.org/2001/XMLSchema';
+
 type
   TXSDDataType = (xsdtString, xsdtDateTime, xsdtInteger, xsdtFloat, xsdtBoolean);
 
@@ -41,6 +45,8 @@ function FindStdTypeByPasName(APasName:string):TXSDStdType;
 
 function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
 function ExpandXSDFileName(AFileName:string; AIncludeFolders:TStrings):string;
+function IsXsdNode(ANode: TDOMNode; const ALocalName: string): Boolean;
+function FindXsdNode(AParent: TDOMNode; const ALocalName: string): TDOMNode;
 
 const
   charAlpha = ['A'..'Z', 'a'..'z', '_'];
@@ -300,6 +306,51 @@ begin
     Result:=TXSDStdType(StdTypesList.Objects[i]).PascalName
   else
     Result:='';
+end;
+
+
+function EndsWith(const S, SubStr: string): Boolean;
+begin
+  Result := (Length(S) >= Length(SubStr)) and
+            (Copy(S, Length(S) - Length(SubStr) + 1, Length(SubStr)) = SubStr);
+end;
+
+function IsXsdNode(ANode: TDOMNode; const ALocalName: string): Boolean;
+begin
+  Result := False;
+  if not Assigned(ANode) or (ANode.NodeType <> ELEMENT_NODE) then
+    Exit;
+
+  // Проверяем, что имя узла равно локальному имени или заканчивается на ':локальное_имя'
+  Result := (ANode.NodeName = ALocalName) or EndsWith(ANode.NodeName, ':' + ALocalName);
+end;
+
+{
+  Ищет прямой дочерний узел, принадлежащий пространству имен XSD
+  и имеющий указанное локальное имя.
+  Полностью игнорирует префиксы (xs:, xsd:, s: и т.д.).
+}
+function FindXsdNode(AParent: TDOMNode; const ALocalName: string): TDOMNode;
+var
+  ExpectedSuffix: String;
+begin
+  Result := nil;
+  if not Assigned(AParent) or not Assigned(AParent.FirstChild) then
+    Exit;
+
+  ExpectedSuffix := ':' + ALocalName;
+
+  Result := AParent.FirstChild;
+  while Assigned(Result) do
+  begin
+    if (Result.NodeType = ELEMENT_NODE) then
+    begin
+      if EndsWith(Result.NodeName, ExpectedSuffix) or (Result.CompareName(ALocalName)=0) then
+        Exit;
+
+    end;
+    Result := Result.NextSibling;
+  end;
 end;
 
 finalization

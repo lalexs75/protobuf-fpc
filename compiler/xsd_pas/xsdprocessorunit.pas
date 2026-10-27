@@ -79,7 +79,8 @@ begin
   for I := 0 to FLoadedDocs.Count - 1 do
   begin
     Doc := TXMLDocument(FLoadedDocs[I]);
-    SchemaNode := Doc.FindNode('xs:schema');
+    //SchemaNode := Doc.FindNode('xs:schema');
+    SchemaNode := FindXsdNode(Doc, 'schema');
     if not Assigned(SchemaNode) then
       Continue;
 
@@ -88,7 +89,8 @@ begin
     begin
       N:=SchemaNode.ChildNodes[J];
       S:=N.NodeName;
-      if (S = 'xs:element') or (S = 'xs:attribute') then
+      //if (S = 'xs:element') or (S = 'xs:attribute') then
+      if IsXsdNode(N, 'element') or IsXsdNode(N, 'attribute') then
         R:=N.Attributes.GetNamedItem('name')
       else
         R:=nil;
@@ -117,7 +119,8 @@ begin
     if Assigned(FIncDoc) then
     begin
       FLoadedDocs.Add(FIncDoc); // <--- ДОБАВЛЕНО: Добавляем в общий список
-      FIncSchema:=FIncDoc.FindNode('xs:schema');
+      //FIncSchema:=FIncDoc.FindNode('xs:schema');
+      FIncSchema:=FindXsdNode(FIncDoc, 'schema');
       if Assigned(FIncSchema) then
         ProcessSchema(FIncSchema, true);
     end
@@ -143,7 +146,8 @@ begin
   begin
     N:=ANode.ChildNodes[i];
     S:=N.NodeName;
-    if (S = 'xs:simpleType') then
+    //if (S = 'xs:simpleType') then
+    if IsXsdNode(N, 'simpleType') then
     begin
       R:=N.Attributes.GetNamedItem('name');
       DoProcessNodeMsg(R.NodeName, R.NodeValue);
@@ -157,7 +161,8 @@ begin
       ProcessSimpleType(N, ST, AInclude);
     end
     else
-    if (S = 'xs:include') then
+    //if (S = 'xs:include') then
+    if IsXsdNode(N, 'include') then
     begin
       R:=N.Attributes.GetNamedItem('schemaLocation');
       C:=FIncludeFolders.Count;
@@ -177,15 +182,18 @@ begin
   begin
     N:=ANode.ChildNodes[i];
     S:=N.NodeName;
-    if (S <> 'xs:simpleType') then
+//    if (S <> 'xs:simpleType') then
+    if not IsXsdNode(N, 'simpleType') then
     begin
       DoProcessNodeMsg(S, N.NodeValue);
-      if (S = 'xs:element')  then
+      if IsXsdNode(N, 'element') then
+//    if (S = 'xs:element')  then
       begin
         ProcessElement(N, ANode, AInclude)
       end
       else
-      if (S = 'xs:complexType') then
+      //if (S = 'xs:complexType') then
+      if IsXsdNode(N, 'complexType') then
       begin
         R:=N.Attributes.GetNamedItem('name');
         DoProcessNodeMsg(R.NodeName, R.NodeValue);
@@ -224,7 +232,8 @@ begin
   end
   else
   begin
-    R:=ANode.FindNode('xs:complexType');
+    //R:=ANode.FindNode('xs:complexType');
+    R:=FindXsdNode(ANode, 'complexType');
     if Assigned(R) then
     begin
       FComplexType:=FXSDModule.ComplexTypes.Add(RName.NodeValue);
@@ -270,10 +279,12 @@ begin
     Prop.BaseType:=R.NodeValue
   else
   begin
-    R:=FC.FindNode('xs:simpleType');
+    //R:=FC.FindNode('xs:simpleType');
+    R:=FindXsdNode(FC, 'simpleType');
     if Assigned(R) then
     begin
-      R1:=R.FindNode('xs:restriction');
+      //R1:=R.FindNode('xs:restriction');
+      R1:=FindXsdNode(R, 'restriction');
       if Assigned(R1) then
       begin
         Prop.BaseType:=R1.Attributes.GetNamedItem('base').NodeValue;
@@ -283,28 +294,35 @@ begin
         for i:=0 to R1.ChildNodes.Count-1 do
         begin
           M:=R1.ChildNodes[i];
-          if M.NodeName = 'xs:enumeration' then
+          //if M.NodeName = 'xs:enumeration' then
+          if IsXsdNode(M, 'enumeration') then
             Prop.ValuesList.Add(M.Attributes.GetNamedItem('value').NodeValue)
           else
-          if M.NodeName = 'xs:length' then
+          //if M.NodeName = 'xs:length' then
+          if IsXsdNode(M, 'length') then
           begin
             Prop.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
             Prop.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
           end
           else
-          if M.NodeName = 'xs:minLength' then
+          //if M.NodeName = 'xs:minLength' then
+          if IsXsdNode(M, 'minLength') then
             Prop.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
           else
-          if M.NodeName = 'xs:maxLength' then
+          //if M.NodeName = 'xs:maxLength' then
+          if IsXsdNode(M, 'maxLength') then
             Prop.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
           else
-          if M.NodeName = 'xs:pattern' then
+          //if M.NodeName = 'xs:pattern' then
+          if IsXsdNode(M, 'pattern') then
             Prop.ValuePattern:=M.Attributes.GetNamedItem('value').NodeValue
           else
-          if M.NodeName = 'xs:totalDigits' then
+          //if M.NodeName = 'xs:totalDigits' then
+          if IsXsdNode(M, 'totalDigits') then
             Prop.TotalDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
           else
-          if M.NodeName = 'xs:fractionDigits' then
+          //if M.NodeName = 'xs:fractionDigits' then
+          if IsXsdNode(M, 'fractionDigits') then
             Prop.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
         end;
       end
@@ -357,7 +375,8 @@ begin
   end
   else
   begin
-    R:=FA.FindNode('xs:complexType');
+    //R:=FA.FindNode('xs:complexType');
+    R:=FindXsdNode(FA, 'complexType');
     if Assigned(R) then
     begin
       Result:=AComplexType.Propertys.Add(pitClass);
@@ -404,7 +423,8 @@ begin
     Prop:=nil;
     FA:=RAll.ChildNodes[i];
     S:=FA.NodeName;
-    if FA.NodeName = 'xs:element' then
+    if IsXsdNode(FA, 'element') then
+//    if FA.NodeName = 'xs:element' then
     begin
       RMaxOccurs:=FA.Attributes.GetNamedItem('maxOccurs');
       if Assigned(RMaxOccurs) then
@@ -431,12 +451,14 @@ begin
       end
       else
       begin
-        FC:=FA.FindNode('xs:complexType');
+        //FC:=FA.FindNode('xs:complexType');
+        FC := FindXsdNode(FA, 'complexType');
         if Assigned(FC) then
           Prop:=DoComplexType(FA, FC)
         else
         begin
-          FC:=FA.FindNode('xs:simpleType');
+          //FC:=FA.FindNode('xs:simpleType');
+          FC := FindXsdNode(FA, 'simpleType');
           if Assigned(FC) then
           begin
             ST:=FXSDModule.SimpleTypes.Add(FA.Attributes.GetNamedItem('name').NodeValue);
@@ -475,7 +497,8 @@ begin
        //final=(#all | список (extension|restriction))
     end
     else
-    if FA.NodeName = 'xs:choice' then
+    //if FA.NodeName = 'xs:choice' then
+    if IsXsdNode(FA, 'choice') then
     begin
       ProcessAS(FA)
     end;
@@ -495,21 +518,27 @@ begin
     FA:=AContext.ChildNodes[i];
     S:=FA.NodeValue;
     S1:=FA.NodeName;
-    if FA.NodeName = 'xs:attribute' then
+    //if FA.NodeName = 'xs:attribute' then
+    if IsXsdNode(FA,'attribute') then
       ProcessAttribute(FA)
     else
-    if FA.NodeName = 'xs:sequence' then
+    //if FA.NodeName = 'xs:sequence' then
+    if IsXsdNode(FA,'sequence') then
       ProcessAS(FA)
     else
-    if FA.NodeName = 'xs:all' then
+    //if FA.NodeName = 'xs:all' then
+    if IsXsdNode(FA, 'all') then
       ProcessAS(FA)
     else
-    if FA.NodeName = 'xs:choice' then
+    //if FA.NodeName = 'xs:choice' then
+    if IsXsdNode(FA, 'choice') then
       ProcessAS(FA)
     else
-    if FA.NodeName = 'xs:complexContent' then
+    //if FA.NodeName = 'xs:complexContent' then
+    if IsXsdNode(FA, 'complexContent') then
     begin;
-      FC1:=FA.FindNode('xs:extension');
+      //FC1:=FA.FindNode('xs:extension');
+      FC1:=FindXsdNode(FA, 'extension');
       if Assigned(FC1) then
       begin
         AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
@@ -517,9 +546,11 @@ begin
       end;
     end
     else
-    if FA.NodeName = 'xs:simpleContent' then
+    //if FA.NodeName = 'xs:simpleContent' then
+    if IsXsdNode(FA, 'simpleContent') then
     begin;
-      FC1:=FA.FindNode('xs:extension');
+      //FC1:=FA.FindNode('xs:extension');
+      FC1:=FindXsdNode(FA, 'extension');
       if Assigned(FC1) then
       begin
         AComplexType.InheritedType:=FC1.Attributes.GetNamedItem('base').NodeValue;
@@ -540,7 +571,8 @@ var
   i: Integer;
 begin
   ASimpleType.Description:=GetAnnotation(AContext);
-  R:=AContext.FindNode('xs:restriction');
+  //R:=AContext.FindNode('xs:restriction');
+  R := FindXsdNode(AContext, 'restriction');
   if Assigned(R) then
   begin
     ASimpleType.BaseName:=R.Attributes.GetNamedItem('base').NodeValue;
@@ -549,40 +581,51 @@ begin
     for i:=0 to R.ChildNodes.Count-1 do
     begin
       M:=R.ChildNodes[i];
-      if M.NodeName = 'xs:enumeration' then
+      //if M.NodeName = 'xs:enumeration' then
+      if  IsXsdNode(M, 'enumeration') then
         ASimpleType.ValuesList.Add(M.Attributes.GetNamedItem('value').NodeValue)
       else
-      if M.NodeName = 'xs:length' then
+      //if M.NodeName = 'xs:length' then
+      if IsXsdNode(M, 'length') then
       begin
         ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
         ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1);
       end
       else
-      if M.NodeName = 'xs:minLength' then
+      //if M.NodeName = 'xs:minLength' then
+      if IsXsdNode(M, 'minLength') then
         ASimpleType.MinLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
       else
-      if M.NodeName = 'xs:maxLength' then
+      //if M.NodeName = 'xs:maxLength' then
+      if IsXsdNode(M, 'maxLength') then
         ASimpleType.MaxLength:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
       else
-      if M.NodeName = 'xs:pattern' then
+      //if M.NodeName = 'xs:pattern' then
+      if IsXsdNode(M, 'pattern') then
         ASimpleType.ValuePattern:=M.Attributes.GetNamedItem('value').NodeValue
       else
-      if M.NodeName = 'xs:totalDigits' then
+      //if M.NodeName = 'xs:totalDigits' then
+      if IsXsdNode(M, 'totalDigits') then
         ASimpleType.TotalDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
       else
-      if M.NodeName = 'xs:fractionDigits' then
+      //if M.NodeName = 'xs:fractionDigits' then
+      if IsXsdNode(M, 'fractionDigits') then
         ASimpleType.FractionDigits:=StrToIntDef(M.Attributes.GetNamedItem('value').NodeValue, -1)
       else
-      if M.NodeName = 'xs:minExclusive' then
+      //if M.NodeName = 'xs:minExclusive' then
+      if IsXsdNode(M, 'minExclusive') then
         ASimpleType.minExclusive:=M.Attributes.GetNamedItem('value').NodeValue
       else
-      if M.NodeName = 'xs:minInclusive' then
+      //if M.NodeName = 'xs:minInclusive' then
+      if IsXsdNode(M, 'minInclusive') then
         ASimpleType.minInclusive:=M.Attributes.GetNamedItem('value').NodeValue
       else
-      if M.NodeName = 'xs:maxExclusive' then
+      //if M.NodeName = 'xs:maxExclusive' then
+      if IsXsdNode(M, 'maxExclusive') then
         ASimpleType.maxExclusive:=M.Attributes.GetNamedItem('value').NodeValue
       else
-      if M.NodeName = 'xs:maxInclusive' then
+      //if M.NodeName = 'xs:maxInclusive' then
+      if IsXsdNode(M, 'maxInclusive') then
         ASimpleType.maxInclusive:=M.Attributes.GetNamedItem('value').NodeValue
     end;
     //totalDigits
@@ -597,18 +640,19 @@ var
   i: Integer;
 begin
   Result:='';
-  R:=AContext.FindNode('xs:annotation');
+  //R:=AContext.FindNode('xs:annotation');
+  R := FindXsdNode(AContext, 'annotation');
   if Assigned(R) then
   begin
     for i:=0 to R.ChildNodes.Count-1 do
     begin
       R1:=R.ChildNodes[i];
-      if (R1.NodeName = 'xs:documentation') or (R1.NodeName = 'xs:appinfo') then
-        Result:=Result + R.TextContent + LineEnding;
+      //if (R1.NodeName = 'xs:documentation') or (R1.NodeName = 'xs:appinfo') then
+      if IsXsdNode(R1, 'documentation') or IsXsdNode(R1, 'appinfo') then
+        Result:=Result + R1.TextContent + LineEnding;
     end;
+    Result:=Result + R.TextContent;
   end;
-  if Assigned(R) then
-    Result:=R.TextContent;
 end;
 
 constructor TXSDProcessor.Create;
@@ -649,16 +693,14 @@ begin
 end;
 
 function TXSDProcessor.ExecuteProcessor: TXSDModule;
-var
-  S: DOMString;
 begin
   FXSDModule:=nil;
   if Assigned(FMainDoc) then
   begin
-    S:=FMainDoc.NamespaceURI;
     FXSDModule:=TXSDModule.Create;
     FXSDModule.NameAliases.Assign(FNameAliases);
-    FMainSchema:=FMainDoc.FindNode('xs:schema');
+    //FMainSchema:=FMainDoc.FindNode('xs:schema');
+    FMainSchema := FindXsdNode(FMainDoc, 'schema');
     if Assigned(FMainSchema) then
     begin
       ProcessSchema(FMainSchema, false);
