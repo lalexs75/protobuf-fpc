@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Person>
+    Some text before elements
+    <FirstName>John</FirstName>
+    Some text between elements
+    <LastName>Doe</LastName>
+</Person>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="13"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="project1.lpr"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <CursorPos X="40" Y="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="test_crash_whitespace.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="20"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="24"/>
+        <CursorPos X="61" Y="39"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Loaded Value="True"/>
+        <UsageCount Value="10"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="320"/>
+        <CursorPos X="5" Y="338"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="6">
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="6" Column="14"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="7" Column="5"/>
+      </Position>
+      <Position>
+        <Filename Value="project1.lpr"/>
+        <Caret Line="11" Column="40"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="385" Column="69" TopLine="379"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+        <Caret Line="314" TopLine="290"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../../../xmlobject/xmlobject.pas"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
