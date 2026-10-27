@@ -329,6 +329,9 @@ begin
   begin
     FNode:=AElement.ChildNodes.Item[I];
 
+    if FNode.NodeType <> ELEMENT_NODE then
+      Continue;
+
     P:=PropertyList.PropertyByXMLName(FNode.NodeName);
     if not Assigned(P) then
       P:=PropertyList.PropertyByAlias(FNode.NodeName);
