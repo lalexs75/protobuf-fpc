@@ -45,8 +45,10 @@ function FindStdTypeByPasName(APasName:string):TXSDStdType;
 
 function GenerateTypeDescription(ADescription:string; ASpacing:integer = 2):string;
 function ExpandXSDFileName(AFileName:string; AIncludeFolders:TStrings):string;
+function EndsWith(const S, SubStr: string): Boolean;
 function IsXsdNode(ANode: TDOMNode; const ALocalName: string): Boolean;
 function FindXsdNode(AParent: TDOMNode; const ALocalName: string): TDOMNode;
+function ExtractLocalName(const AName: string): string;
 
 const
   charAlpha = ['A'..'Z', 'a'..'z', '_'];
@@ -271,41 +273,54 @@ end;
 function IsSimpleType(ATypeName:string):Boolean;
 var
   I: Integer;
+  LocalName: String;
 begin
   if not Assigned(StdTypesList) then
     InitStdTypes;
 
-  Result:=StdTypesList.Find(ATypeName, I);
+  // Сначала ищем как есть (для обратной совместимости)
+  if StdTypesList.Find(ATypeName, I) then
+    Exit(True);
+
+  // Если не нашли, пробуем найти с префиксом 'xs:' по локальному имени
+  LocalName := ExtractLocalName(ATypeName);
+  Result := StdTypesList.Find('xs:' + LocalName, I);
 end;
 
 function IsTypeQuotedStr(ATypeName: string): Boolean;
 var
   I: Integer;
-  S: String;
+  S, LocalName: String;
 begin
   if not Assigned(StdTypesList) then
     InitStdTypes;
-  Result:=false;
+
   if StdTypesList.Find(ATypeName, I) then
-  begin
-    S:=TXSDStdType(StdTypesList.Objects[i]).PascalName;
-    Result:=TXSDStdType(StdTypesList.Objects[i]).QuotedStr
-  end
-  else
-    Result:=false;
+    Exit(TXSDStdType(StdTypesList.Objects[i]).QuotedStr);
+
+  LocalName := ExtractLocalName(ATypeName);
+  if StdTypesList.Find('xs:' + LocalName, I) then
+    Exit(TXSDStdType(StdTypesList.Objects[i]).QuotedStr);
+
+  Result:=false;
 end;
 
 function GetSimpleType(ATypeName:string):string;
 var
   I: Integer;
+  LocalName: String;
 begin
   if not Assigned(StdTypesList) then
     InitStdTypes;
 
   if StdTypesList.Find(ATypeName, I) then
-    Result:=TXSDStdType(StdTypesList.Objects[i]).PascalName
-  else
-    Result:='';
+    Exit(TXSDStdType(StdTypesList.Objects[i]).PascalName);
+
+  LocalName := ExtractLocalName(ATypeName);
+  if StdTypesList.Find('xs:' + LocalName, I) then
+    Exit(TXSDStdType(StdTypesList.Objects[i]).PascalName);
+
+  Result:='';
 end;
 
 
@@ -351,6 +366,17 @@ begin
     end;
     Result := Result.NextSibling;
   end;
+end;
+
+function ExtractLocalName(const AName: string): string;
+var
+  P: Integer;
+begin
+  P := Pos(':', AName);
+  if P > 0 then
+    Result := Copy(AName, P + 1, MaxInt)
+  else
+    Result := AName;
 end;
 
 finalization

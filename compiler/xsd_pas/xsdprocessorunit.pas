@@ -288,8 +288,9 @@ begin
       if Assigned(R1) then
       begin
         Prop.BaseType:=R1.Attributes.GetNamedItem('base').NodeValue;
-        if IsSimpleType(Prop.BaseType) then
-          Prop.BaseType:=GetSimpleType(Prop.BaseType);
+//        if IsSimpleType(Prop.BaseType) then
+//          Prop.BaseType:=GetSimpleType(Prop.BaseType);
+
           //Prop.BaseType:=R1.Attributes.GetNamedItem('base');
         for i:=0 to R1.ChildNodes.Count-1 do
         begin
@@ -361,8 +362,12 @@ begin
   begin
     if IsSimpleType(R.NodeValue) then
     begin
+{      Result:=AComplexType.Propertys.Add(pitSimpleType);
+      Result.BaseType:=GetSimpleType(R.NodeValue);}
+
       Result:=AComplexType.Propertys.Add(pitSimpleType);
-      Result.BaseType:=GetSimpleType(R.NodeValue);
+      Result.BaseType:=R.NodeValue; // ✅ ПРАВИЛЬНО: сохраняем 'xsd:string' или 'xs:string'
+      // БЫЛО ОШИБКОЙ: Result.BaseType:=GetSimpleType(R.NodeValue);
     end
     else
     begin

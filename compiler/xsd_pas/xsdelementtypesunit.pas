@@ -706,11 +706,17 @@ end;
 function TXSDSimpleTypes.FindType(const ATypeName: string): TXSDSimpleType;
 var
   ST: TXSDSimpleType;
+  LocalName: String;
 begin
   Result:=nil;
+  LocalName := ExtractLocalName(ATypeName); // Извлекаем локальное имя из запроса
+
   for ST in Self do
-    if ST.TypeName = ATypeName then
+  begin
+    // ST.TypeName всегда хранится без префикса
+    if ST.TypeName = LocalName then
       Exit(ST);
+  end;
 end;
 
 procedure TXSDSimpleTypes.UpdatePascalNames;
@@ -920,11 +926,16 @@ end;
 function TXSDComplexTypes.FindType(const ATypeName: string): TXSDComplexType;
 var
   CT: TXSDComplexType;
+  LocalName: String;
 begin
   Result:=nil;
+  LocalName := ExtractLocalName(ATypeName);
+
   for CT in Self do
-    if CT.TypeName = ATypeName then
+  begin
+    if CT.TypeName = LocalName then
       Exit(CT);
+  end;
 end;
 
 end.

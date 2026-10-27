@@ -92,20 +92,28 @@ function TXsdPasCodegen.DoGenClasseInterface: string;
 var
   CT: TXSDComplexType;
   PT: TPropertyItem;
+  S: String;
 begin
   Result:='';
   {$IFDEF XSD_FORWARD_DECLARE}
-  Result:=Result + LineEnding + '  {  Forward declarations  }' + LineEnding;
+  S:='';
   for CT in FXSDModule.ComplexTypes do
     if not CT.IncludedType then
-      Result:=Result + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
+      S:=S + '  ' + CT.PascalTypeName + ' = class;'+LineEnding;
+  if S<>'' then
+    Result:=Result + LineEnding + '  {  Forward declarations  }' + LineEnding + S;
 
-  Result:=Result + LineEnding + '  {  Generic classes for collections  }' + LineEnding;
+
+  S:='';
   for CT in FXSDModule.ComplexTypes do
     if not CT.IncludedType then
-      Result:=Result + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
+      S:=S + '  ' + CT.PascalTypeName +'List = specialize GXMLSerializationObjectList<'+CT.PascalTypeName+'>;' + LineEnding;
+  if S<>'' then
+    Result:=Result + LineEnding + '  {  Generic classes for collections  }' + LineEnding + S;
   {$ENDIF}
-  Result:=Result + LineEnding;
+  if Result<> '' then
+    Result:=Result + LineEnding;
+
 
   for CT in FXSDModule.ComplexTypes do
   if not CT.IncludedType then
@@ -362,7 +370,7 @@ begin
       Result:=Result + '  ' + ST.PasTypeName + ' = ' + ST.PasBaseName + ';' + LineEnding;
     end;
   if Result <> '' then
-    Result:='type' + LineEnding + Result;
+    Result:='type' + LineEnding + Result + LineEnding;
 end;
 
 constructor TXsdPasCodegen.Create(AXSDModule: TXSDModule);
