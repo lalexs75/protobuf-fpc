@@ -7,7 +7,7 @@
       <Unit>
         <Filename Value="xsd_pas_gui.lpr"/>
         <Loaded Value="True"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="129"/>
         <EditorIndex Value="5"/>
       </Unit>
       <Unit>
@@ -19,15 +19,15 @@
         <UnitName Value="XSDMainUnit"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <UsageCount Value="127"/>
-        <TopLine Value="116"/>
+        <UsageCount Value="129"/>
+        <TopLine Value="96"/>
         <CursorPos X="3" Y="96"/>
       </Unit>
       <Unit>
         <Filename Value="xsdelementtypesunit.pas"/>
         <UnitName Value="XsdElementTypesUnit"/>
         <Loaded Value="True"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="129"/>
         <EditorIndex Value="3"/>
         <TopLine Value="428"/>
         <CursorPos X="31" Y="438"/>
@@ -40,18 +40,17 @@
         <Filename Value="xsdpascodegenunit.pas"/>
         <UnitName Value="XsdPasCodegenUnit"/>
         <Loaded Value="True"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="129"/>
         <EditorIndex Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="xsdprocessorunit.pas"/>
         <UnitName Value="XsdProcessorUnit"/>
         <Loaded Value="True"/>
-        <UsageCount Value="127"/>
-        <IsVisibleTab Value="True"/>
+        <UsageCount Value="129"/>
         <EditorIndex Value="1"/>
         <TopLine Value="481"/>
-        <CursorPos X="41" Y="505"/>
+        <CursorPos X="11" Y="487"/>
         <Bookmarks Count="1">
           <Item0 Y="585" ID="2"/>
         </Bookmarks>
@@ -59,7 +58,7 @@
       <Unit>
         <Filename Value="xsdutils.pas"/>
         <Loaded Value="True"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="129"/>
         <EditorIndex Value="2"/>
         <TopLine Value="303"/>
         <CursorPos X="119" Y="312"/>
@@ -67,13 +66,14 @@
       <Unit>
         <Filename Value="xsd_gui_consts_unit.pas"/>
         <Loaded Value="True"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="102"/>
         <EditorIndex Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="xsdconsts.pas"/>
         <Loaded Value="True"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="65"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
       </Unit>
       <Unit>

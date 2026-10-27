@@ -73,12 +73,17 @@ type
     FValidList: TStringList;
     FXMLName: string;
     FAliases:string;
+    FPrefix: string;        // Конкретный префикс (например 't', 'ns1')
+    FPrefixExplicit: Boolean; // True = префикс задан явно (из XML или программно)
   public
     constructor Create;
     destructor Destroy; override;
     property PropertyName:string read FPropertyName;
     property Caption:string read FCaption;
     property XMLName:string read FXMLName;
+    property Prefix: string read FPrefix write FPrefix;
+    property PrefixExplicit: Boolean read FPrefixExplicit write FPrefixExplicit;
+
     property Modified:boolean read FModified;
     property MinSize:integer read FMinSize;
     property MaxSize:integer read FMaxSize;

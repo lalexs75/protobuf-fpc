@@ -39,11 +39,16 @@ uses
 
 type
 
-
   { TXmlSerializationObject }
 
   TXmlSerializationObject = class(TAbstractSerializationObject)
   private
+    FDefaultPrefix: string;
+    FNamespaces: TStringList;
+    procedure SetDefaultPrefix(const AValue: string);
+    function GetEffectivePrefix(P: TPropertyDef): string;
+    procedure PropagatePrefix;
+
     procedure InternalRead(AElement: TDOMNode);
     procedure DoLoadAtributes(AElement: TDOMNode);
     procedure DoLoadChild(AElement: TDOMNode);
@@ -51,7 +56,7 @@ type
     procedure InternalWrite(FXML: TXMLDocument; AElement: TDOMElement);
     procedure InternalWriteChild(FXML: TXMLDocument; AChild:TObject; AElement: TDOMElement; P: TPropertyDef);
     procedure SetAtribute(P: TDOMElement; AttribName, AttribValue:DOMString; Prop:TPropertyDef);
-    function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string):TDOMElement;
+    function CreateElement(FXML: TXMLDocument; AParent:TDOMNode; AName:string; APrefix: string = ''):TDOMElement;
     procedure InternalWriteDynArrayXML(FXML: TXMLDocument; P: TDOMElement; AXmlProp:TPropertyDef; AProp:PPropInfo);
     procedure InternalReadDynArray(AXmlProp:TPropertyDef; AProp:PPropInfo; ATextContent:string);
   protected
@@ -71,6 +76,9 @@ type
   protected
     function RootNodeName:string; virtual;
   public
+    constructor Create; override;
+    destructor Destroy; override;
+
     procedure LoadFromStream(AStream:TStream); override;
     procedure SaveToStream(AStream:TStream); override;
 
@@ -79,15 +87,78 @@ type
 
     procedure SaveToXML(const XML: TXMLDocument);
     procedure LoadFromXML(const XML: TXMLDocument);
+
+    property DefaultPrefix: string read FDefaultPrefix write SetDefaultPrefix;
+    property Namespaces: TStringList read FNamespaces;
   end;
 
 implementation
 uses sdo_date_utils, LazUTF8, XMLRead, XMLWrite, {$IFDEF WINDOWS} xmliconv_windows {$ELSE} xmliconv {$ENDIF}, xmlobject_resource;
 
+// В implementation секции xmlobject.pas
+function ExtractPrefix(const ANodeName: string): string;
+var
+  P: Integer;
+begin
+  P := Pos(':', ANodeName);
+  if P > 0 then
+    Result := Copy(ANodeName, 1, P - 1)
+  else
+    Result := '';
+end;
+
+function ExtractLocalName(const ANodeName: string): string;
+var
+  P: Integer;
+begin
+  P := Pos(':', ANodeName);
+  if P > 0 then
+    Result := Copy(ANodeName, P + 1, MaxInt)
+  else
+    Result := ANodeName;
+end;
+
 type
   TXmlSerializationObjectListHack = class(TXmlSerializationObjectList);
 
 { TXmlSerializationObject }
+
+procedure TXmlSerializationObject.SetDefaultPrefix(const AValue: string);
+begin
+  if FDefaultPrefix <> AValue then
+  begin
+    FDefaultPrefix := AValue;
+    PropagatePrefix;
+  end;
+end;
+
+function TXmlSerializationObject.GetEffectivePrefix(P: TPropertyDef): string;
+begin
+  if P.PrefixExplicit then
+    Result := P.Prefix       // Явно задан (из XML или программно)
+  else
+    Result := FDefaultPrefix; // Наследуем от объекта верхнего уровня
+end;
+
+procedure TXmlSerializationObject.PropagatePrefix;
+var
+  P: TPropertyDef;
+  Obj: TObject;
+  FProp: PPropInfo;
+begin
+  for P in PropertyList do
+  begin
+    FProp := GetPropInfo(Self, P.PropertyName);
+    if not Assigned(FProp) then Continue;
+
+    if FProp^.PropType^.Kind = tkClass then
+    begin
+      Obj := TObject(PtrInt(GetOrdProp(Self, FProp)));
+      if Assigned(Obj) and (Obj is TXmlSerializationObject) then
+        TXmlSerializationObject(Obj).DefaultPrefix := FDefaultPrefix;
+    end;
+  end;
+end;
 
 procedure TXmlSerializationObject.InternalRead(AElement: TDOMNode);
 begin
@@ -97,6 +168,7 @@ begin
   DoLoadChild(AElement);
 end;
 
+(*
 procedure TXmlSerializationObject.InternalWrite(FXML: TXMLDocument;
   AElement: TDOMElement);
 var
@@ -111,9 +183,8 @@ var
 begin
   ValidateRequared;
 
-  for P in PropertyList do
+  for P in  PropertyList do
   begin
-
     FProp:=GetPropInfo(Self, P.PropertyName);
     if not Assigned(FProp) then
       raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
@@ -217,7 +288,120 @@ begin
     end;
   end;
 end;
+*)
 
+procedure TXmlSerializationObject.InternalWrite(FXML: TXMLDocument;
+  AElement: TDOMElement);
+var
+  P: TPropertyDef;
+  FProp: PPropInfo;
+  E: TDOMElement;
+  UsePrefix, S: string;
+  D:TDateTime;
+  i: SizeInt;
+begin
+  ValidateRequared;
+
+  for P in PropertyList do
+  begin
+    FProp := GetPropInfo(Self, P.PropertyName);
+    if not Assigned(FProp) then
+      raise Exception.CreateFmt(sPropertyNotFound, [ClassName, P.PropertyName, P.Caption]);
+
+    UsePrefix := GetEffectivePrefix(P);
+
+    case FProp^.PropType^.Kind of
+      tkChar, tkAString, tkWString, tkSString, tkLString:
+        if P.Modified then
+        begin
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E := CreateElement(FXML, AElement, P.XMLName, UsePrefix);
+            E.TextContent := GetStrProp(Self, P.PropertyName);
+          end
+          else
+            SetAtribute(AElement, P.XMLName, GetStrProp(Self, P.PropertyName), P);
+        end;
+
+      tkBool:
+        if P.Modified then
+        begin
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E := CreateElement(FXML, AElement, P.XMLName, UsePrefix);
+            E.TextContent := BoolToStr(GetOrdProp(Self, P.PropertyName) = 1, 'true', 'false');
+          end
+          else
+            SetAtribute(AElement, P.XMLName, BoolToStr(GetOrdProp(Self, P.PropertyName) = 1, 'true', 'false'), P);
+        end;
+
+      tkInt64, tkInteger:
+        if P.Modified then
+        begin
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E := CreateElement(FXML, AElement, P.XMLName, UsePrefix);
+            E.TextContent := IntToStr(GetInt64Prop(Self, P.PropertyName));
+          end
+          else
+            SetAtribute(AElement, P.XMLName, IntToStr(GetInt64Prop(Self, P.PropertyName)), P);
+        end;
+
+      tkFloat:
+        if P.Modified then
+        begin
+          if FProp^.PropType^.Name = 'TTime' then
+          begin
+            D:=GetFloatProp(Self, P.PropertyName);
+            S:=FormatDateTime('HH:NN:SS', D);
+          end
+          else
+          if FProp^.PropType^.Name = 'TDate' then
+          begin
+            D:=GetFloatProp(Self, P.PropertyName);
+            S:=FormatDateTime('YYYY-MM-DD', D);
+          end
+          else
+          if FProp^.PropType^.Name = 'TDateTime' then
+          begin
+            D:=GetFloatProp(Self, P.PropertyName);
+            S:=FormatDateTime('YYYY-MM-DD''T''HH:NN:SS''Z''', D);
+          end
+          else
+          begin
+            if P.TotalDigits > 0 then
+              Str(GetFloatProp(Self, P.PropertyName):P.TotalDigits:P.FractionDigits, S)
+            else
+              Str(GetFloatProp(Self, P.PropertyName):15:4, S);
+
+            if (Length(S)>0) and (Pos('.', S) > 0) then
+            begin
+              i:=Length(S);
+              while (I>0) and (S[i] = '0') { and (S[i-1]<>'.')} do Dec(i);
+              if (I>0) and (S[i]='.') then Dec(i);
+              S:=Copy(S, 1, i);
+            end;
+          end;
+
+          if xsaSimpleObject in P.Attribs then
+          begin
+            E := CreateElement(FXML, AElement, P.XMLName, UsePrefix);
+            E.TextContent := Trim(S);
+          end
+          else
+            SetAtribute(AElement, P.XMLName, Trim(S), P);
+        end;
+
+      tkClass:
+        InternalWriteChild(FXML, TObject(PtrInt(GetOrdProp(Self, FProp))), AElement, P);
+
+      tkDynArray:
+        InternalWriteDynArrayXML(FXML, AElement, P, FProp);
+    else
+      raise exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
+    end;
+  end;
+end;
 procedure TXmlSerializationObject.DoLoadAtributes(AElement: TDOMNode);
 var
   i, C: Integer;
@@ -310,6 +494,7 @@ begin
   end;
 end;
 
+(*
 procedure TXmlSerializationObject.DoLoadChild(AElement: TDOMNode);
 var
   i, C: Integer;
@@ -438,6 +623,135 @@ begin
       raise exception.CreateFmt(sUnknowClassProperty, [ClassName, FNode.NodeName]);
   end;
 end;
+*)
+procedure TXmlSerializationObject.DoLoadChild(AElement: TDOMNode);
+var
+  i, C: Integer;
+  FNode: TDOMNode;
+  P: TPropertyDef;
+  FProp: PPropInfo;
+  K: TTypeKind;
+  FInst: TObject;
+  NodeName, LocalName, Prefix: string;
+  TN, NV, DS, TS, S: String;
+  DT: TDateTime;
+  R1: TDateTimeRec;
+  D:Extended;
+  R: TXmlSerializationObject;
+begin
+  for i := 0 to AElement.ChildNodes.Count - 1 do
+  begin
+    FNode := AElement.ChildNodes.Item[i];
+    if FNode.NodeType <> ELEMENT_NODE then
+      Continue;
+
+    NodeName := FNode.NodeName;
+    LocalName := ExtractLocalName(NodeName);
+    Prefix := ExtractPrefix(NodeName);
+
+    P := PropertyList.PropertyByXMLName(LocalName);
+    if not Assigned(P) then
+      P := PropertyList.PropertyByAlias(LocalName);
+
+    if Assigned(P) then
+    begin
+      // Сохраняем префикс элемента из исходного XML
+      P.Prefix := Prefix;
+      P.PrefixExplicit := True;
+
+      FProp := GetPropInfo(Self, P.PropertyName);
+      if not Assigned(FProp) then
+        raise Exception.CreateFmt(sPropertyNotFound2, [P.PropertyName]);
+
+      K := FProp^.PropType^.Kind;
+
+      if (xsaSimpleObject in P.Attribs) or (K <> tkClass) then
+      begin
+        NV:=FNode.TextContent;
+        case K of
+          tkChar,
+          tkAString,
+          tkWString,
+          tkSString,
+          tkLString   : SetStrProp(Self, FProp, NV);
+          tkInt64,
+          tkInteger : SetInt64Prop(Self, FProp, StrToInt64(NV));
+          tkBool : SetOrdProp(Self, FProp, Ord(StrToBool(NV)));
+          tkFloat :
+            begin
+              if TN = 'TTime' then
+              begin
+                DT:=StrToTime(NV, {'HH:NN:SS',} ':');
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              if TN = 'TDate' then
+              begin
+                DT:=StrToDate(NV, 'YYYY-MM-DD', '-');
+                SetFloatProp(Self, FProp, DT);
+              end
+              else
+              if TN = 'TDateTime' then
+              begin
+(*
+                C:=Pos('T', NV);
+                DS:=Copy(NV, 1, C-1);
+                TS:=Copy(NV, C+1, Length(NV));
+                DT:=StrToDate(DS, 'YYYY-MM-DD', '-') + StrToTime(TS, ':');
+                //DT:=StrToDateTime(NV, FS); //FormatDateTime('YYYY-MM-DD''T''HH:NN:SS', D);
+                SetFloatProp(Self, FProp, DT);
+*)
+                if xsd_TryStrToDate(NV, R1, xdkDateTime) then
+                begin
+                  DT:=NormalizeToUTC(R1);
+                  SetFloatProp(Self, FProp, DT);
+                end;
+              end
+              else
+              begin
+                Val(NV, D, C);
+                if C = 0 then
+                  SetFloatProp(Self, FProp, D);
+              end;
+            end;
+          tkClass:if TN = 'TStringList' then
+          begin
+            FInst := TObject(PtrInt( GetOrdProp(Self, FProp)));
+            TStringList(FInst).Add(NV)
+          end;
+          tkDynArray:InternalReadDynArray(P, FProp, NV);
+        else
+          raise exception.CreateFmt(sUknowPropertyType, [P.PropertyName]);
+        end;
+      end
+      else
+      begin
+        // Обработка дочерних объектов
+        if K <> tkClass then
+          raise Exception.CreateFmt(sPropertyIsNotClassType, [P.PropertyName]);
+
+        FInst := TObject(PtrInt(GetOrdProp(Self, FProp)));
+        if not Assigned(FInst) then
+          raise Exception.CreateFmt(sClassPropertyNotInit, [P.PropertyName]);
+
+        if FInst is TXmlSerializationObject then
+        begin
+          // Передаём префикс дочернему объекту для наследования его детьми
+          TXmlSerializationObject(FInst).DefaultPrefix := Prefix;
+          TXmlSerializationObject(FInst).InternalRead(FNode);
+        end
+        else if FInst is TXmlSerializationObjectList then
+        begin
+          R:=TXmlSerializationObjectListHack(FInst).InternalAddObject as TXmlSerializationObject;
+          TXmlSerializationObject(R).DefaultPrefix := Prefix;
+          R.InternalRead(FNode)
+        end;
+      end;
+    end
+    else
+      raise exception.CreateFmt(sUnknowClassProperty, [ClassName, FNode.NodeName]);
+  end;
+end;
 
 procedure TXmlSerializationObject.SetAtribute(P: TDOMElement; AttribName,
   AttribValue: DOMString; Prop: TPropertyDef);
@@ -448,9 +762,16 @@ begin
 end;
 
 function TXmlSerializationObject.CreateElement(FXML: TXMLDocument;
-  AParent: TDOMNode; AName: string): TDOMElement;
+  AParent: TDOMNode; AName: string; APrefix: string = ''): TDOMElement;
+var
+  FullName: string;
 begin
-  Result:=FXML.CreateElement(AName);
+  if APrefix <> '' then
+    FullName := APrefix + ':' + AName
+  else
+    FullName := AName;
+
+  Result := FXML.CreateElement(FullName);
   if Assigned(AParent) then
     AParent.AppendChild(Result);
 end;
@@ -623,9 +944,9 @@ var
   E: TDOMElement;
   Itm: TXmlSerializationObject;
   i: Integer;
-  S: String;
+  S, UsePrefix: String;
 begin
-  if not Assigned(AChild) then Exit;
+(*  if not Assigned(AChild) then Exit;
   if AChild is TXmlSerializationObject then
   begin
     if TXmlSerializationObject(AChild).IsEmpty then Exit;
@@ -653,12 +974,64 @@ begin
     end;
   end
   else
+    raise Exception.CreateFmt(sUnknowObject, [AChild.ClassName]); *)
+
+  if not Assigned(AChild) then Exit;
+
+  UsePrefix := GetEffectivePrefix(P);
+
+  if AChild is TXmlSerializationObject then
+  begin
+    if TXmlSerializationObject(AChild).IsEmpty then Exit;
+
+    // Передаём префикс дочернему объекту перед записью
+    TXmlSerializationObject(AChild).DefaultPrefix := UsePrefix;
+
+    E := CreateElement(FXML, AElement, P.XMLName, UsePrefix);
+    TXmlSerializationObject(AChild).InternalWrite(FXML, E);
+  end
+  else
+  if AChild is TXmlSerializationObjectList then
+  begin
+    for i:=0 to TXmlSerializationObjectList(AChild).Count-1 do
+    begin
+      Itm:=TXmlSerializationObjectListHack(AChild).InternalGetItem(I) as TXmlSerializationObject;
+      Itm.DefaultPrefix := UsePrefix;
+      E:=CreateElement(FXML, AElement, P.XMLName);
+      Itm.InternalWrite(FXML, E);
+    end;
+  end
+  else
+  if AChild is TStrings then
+  begin
+    for i:=0 to TStrings(AChild).Count-1 do
+    begin
+      S:=TStrings(AChild)[i];
+      E:=CreateElement(FXML, AElement, P.XMLName);
+      E.TextContent:=S;
+    end;
+  end
+  else
     raise Exception.CreateFmt(sUnknowObject, [AChild.ClassName]);
 end;
 
 function TXmlSerializationObject.RootNodeName: string;
 begin
   Result:=ClassName;
+end;
+
+constructor TXmlSerializationObject.Create;
+begin
+  inherited Create;
+  FNamespaces := TStringList.Create;
+  FNamespaces.Duplicates := dupIgnore;
+  FDefaultPrefix := '';
+end;
+
+destructor TXmlSerializationObject.Destroy;
+begin
+  FreeAndNil(FNamespaces);
+  inherited Destroy;
 end;
 
 procedure TXmlSerializationObject.LoadFromStream(AStream: TStream);
@@ -705,17 +1078,56 @@ end;
 procedure TXmlSerializationObject.SaveToXML(const XML: TXMLDocument);
 var
   E: TDOMElement;
+  i: Integer;
+  Prefix, URI: String;
 begin
+(*
   E:=CreateElement(XML, XML, RootNodeName);
+  InternalWrite(XML, E);
+*)
+  E := CreateElement(XML, XML, RootNodeName);
+
+  // Восстанавливаем все объявления пространств имен
+  for i := 0 to FNamespaces.Count - 1 do
+  begin
+    Prefix := FNamespaces.Names[i];
+    URI := FNamespaces.Values[Prefix];
+    if Prefix = '' then
+      E.SetAttribute('xmlns', URI)
+    else
+      E.SetAttribute('xmlns:' + Prefix, URI);
+  end;
+
   InternalWrite(XML, E);
 end;
 
 procedure TXmlSerializationObject.LoadFromXML(const XML: TXMLDocument);
+var
+  i: Integer;
+  Attr: TDOMNode;
+  AttrName, AttrValue: DOMString;
 begin
-  if Assigned(XML) then
+(*  if Assigned(XML) then
     InternalRead(XML.DocumentElement)
   else
+    raise Exception.Create(sNotAssignedXMLFile);*)
+  if not Assigned(XML) or not Assigned(XML.DocumentElement) then
     raise Exception.Create(sNotAssignedXMLFile);
+
+  FNamespaces.Clear;
+  for i := 0 to XML.DocumentElement.Attributes.Length - 1 do
+  begin
+    Attr := XML.DocumentElement.Attributes.Item[i];
+    AttrName := Attr.NodeName;
+    AttrValue := Attr.NodeValue;
+
+    if Copy(AttrName, 1, 6) = 'xmlns:' then
+      FNamespaces.Values[Copy(AttrName, 7, MaxInt)] := AttrValue
+    else if AttrName = 'xmlns' then
+      FNamespaces.Values[''] := AttrValue;
+  end;
+
+  InternalRead(XML.DocumentElement);
 end;
 
 end.
