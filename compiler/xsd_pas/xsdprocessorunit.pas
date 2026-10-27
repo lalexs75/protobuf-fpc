@@ -22,7 +22,7 @@ unit XsdProcessorUnit;
 interface
 
 uses
-  Classes, SysUtils, DOM, XsdElementTypesUnit;
+  Classes, SysUtils, DOM, XsdElementTypesUnit, Contnrs;
 
 type
   TXSDProcessor = class;
@@ -33,12 +33,13 @@ type
   TXSDProcessor = class
   private
     FMainDoc: TXMLDocument;
+    FLoadedDocs: TObjectList;
     FIncludeFolders: TStrings;
     FMainSchema: TDOMNode;
     FNameAliases: TStrings;
     FOnProcessNodeEvent: TOnProcessNodeEvent;
     FXSDModule: TXSDModule;
-    function FindSchemaElent(AName: string; FSchema: TDOMNode): TDOMNode;
+    function FindSchemaElent(AName: string): TDOMNode;
   protected
     procedure DoProcessNodeMsg(ANodeName:string; AMessage:string);
     procedure DoLoadXMLIncludeDoc(AFileName:string);
@@ -65,25 +66,36 @@ uses StrUtils, XMLRead, xsdutils, xsdconsts, LazFileUtils;
 
 { TXSDProcessor }
 
-function TXSDProcessor.FindSchemaElent(AName: string; FSchema:TDOMNode): TDOMNode;
+function TXSDProcessor.FindSchemaElent(AName: string): TDOMNode;
 var
-  N, R: TDOMNode;
-  I: Integer;
+  Doc: TXMLDocument;
+  SchemaNode, N, R: TDOMNode;
+  I, J: Integer;
   S: DOMString;
 begin
   Result:=nil;
 
-  for I:=0 to FSchema.ChildNodes.Count-1 do
+  // Перебираем все загруженные XML-документы
+  for I := 0 to FLoadedDocs.Count - 1 do
   begin
-    N:=FSchema.ChildNodes[i];
-    S:=N.NodeName;
-    if (S = 'xs:element') or (S = 'xs:attribute') then
-      R:=N.Attributes.GetNamedItem('name')
-    else
-      R:=nil;
+    Doc := TXMLDocument(FLoadedDocs[I]);
+    SchemaNode := Doc.FindNode('xs:schema');
+    if not Assigned(SchemaNode) then
+      Continue;
 
-    if Assigned(R) and (R.NodeValue = AName) then
-      Exit(N);
+    // Ищем элемент или атрибут в текущей схеме
+    for J:=0 to SchemaNode.ChildNodes.Count-1 do
+    begin
+      N:=SchemaNode.ChildNodes[J];
+      S:=N.NodeName;
+      if (S = 'xs:element') or (S = 'xs:attribute') then
+        R:=N.Attributes.GetNamedItem('name')
+      else
+        R:=nil;
+
+      if Assigned(R) and (R.NodeValue = AName) then
+        Exit(N);
+    end;
   end;
 
   raise Exception.CreateFmt(sNotFoundElementInSchema, [AName]);
@@ -104,6 +116,7 @@ begin
   try
     if Assigned(FIncDoc) then
     begin
+      FLoadedDocs.Add(FIncDoc); // <--- ДОБАВЛЕНО: Добавляем в общий список
       FIncSchema:=FIncDoc.FindNode('xs:schema');
       if Assigned(FIncSchema) then
         ProcessSchema(FIncSchema, true);
@@ -111,7 +124,7 @@ begin
     else
       raise Exception.Create(sNotFoundSchemaInDocument);
   finally
-    FIncDoc.Free;
+    // FIncDoc.Free;  <--- УБРАТЬ! Теперь объект владеет FLoadedDocs
   end;
 end;
 
@@ -238,7 +251,7 @@ var
 begin
   R:=FA.Attributes.GetNamedItem('ref'); //ref=QName
   if Assigned(R) then
-    FC:=FindSchemaElent(R.NodeValue, FSchema)
+    FC:=FindSchemaElent(R.NodeValue{, FSchema})
   else
     FC:=FA;
 
@@ -369,7 +382,8 @@ begin
   //S:=AComplexType.TypeName  +  '_' + FA.Attributes.GetNamedItem('name').NodeValue;
   S:=AComplexType.TypeName  +  '_' + S1;
 
-  CT:=FXSDModule.ComplexTypes.Add(S1);
+  //CT:=FXSDModule.ComplexTypes.Add(S1);
+  CT:=FXSDModule.ComplexTypes.Add(S);
 
   CT.IncludedType:=AInclude;
   ProcessComplexElement(FC, FC, FSchema, CT, AInclude);
@@ -412,7 +426,7 @@ begin
       FC:=FA.Attributes.GetNamedItem('ref');
       if Assigned(FC) then
       begin
-        FA:=FindSchemaElent(FC.NodeValue, FSchema);
+        FA:=FindSchemaElent(FC.NodeValue{, FSchema});
         Prop:=DoAttributeProp(FA)
       end
       else
@@ -440,7 +454,7 @@ begin
           begin
             Prop:=DoAttributeProp(FA);
           end;
-          Prop.ItemType:=pitSimpleType;
+          //Prop.ItemType:=pitSimpleType;
         end;
       end;
 
@@ -513,7 +527,8 @@ begin
       end;
     end
     else
-    if FA.NodeName <> 'xs:annotation' then
+//    if (FA.NodeName <> 'xs:annotation') and (FA.NodeName <> '#comment') then
+    if FA.NodeType = ELEMENT_NODE then
       raise Exception.CreateFmt('Uknow element type - %s', [FA.NodeName]);
   end;
 end;
@@ -601,6 +616,7 @@ begin
   inherited Create;
   FIncludeFolders:=TStringList.Create;
   FNameAliases:=TStringList.Create;
+  FLoadedDocs := TObjectList.Create(True);
 end;
 
 destructor TXSDProcessor.Destroy;
@@ -608,6 +624,7 @@ begin
   Clear;
   FreeAndNil(FIncludeFolders);
   FreeAndNil(FNameAliases);
+  FreeAndNil(FLoadedDocs);
   inherited Destroy;
 end;
 
@@ -616,14 +633,19 @@ begin
   FIncludeFolders.Clear;
   FNameAliases.Clear;
   FMainSchema:=nil;
-  if Assigned(FMainDoc) then
-    FreeAndNil(FMainDoc);
+{  if Assigned(FMainDoc) then
+    FreeAndNil(FMainDoc);}
+
+  if Assigned(FLoadedDocs) then
+    FLoadedDocs.Clear; // Очистит и освободит все TXMLDocument, включая FMainDoc
 end;
 
 procedure TXSDProcessor.LoadFromFile(AFileName: string);
 begin
   Clear;
   ReadXMLFile(FMainDoc, AFileName);
+  if Assigned(FMainDoc) then
+    FLoadedDocs.Add(FMainDoc); // <--- ДОБАВЛЕНО: Сохраняем основной документ
 end;
 
 function TXSDProcessor.ExecuteProcessor: TXSDModule;
