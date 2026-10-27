@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="Person">
+        <complexType>
+            <sequence>
+                <element name="Name" type="string"/>
+                <element name="Age" type="integer"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>
