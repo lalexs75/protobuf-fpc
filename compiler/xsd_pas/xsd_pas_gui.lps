@@ -7,7 +7,7 @@
       <Unit>
         <Filename Value="xsd_pas_gui.lpr"/>
         <Loaded Value="True"/>
-        <UsageCount Value="118"/>
+        <UsageCount Value="127"/>
         <EditorIndex Value="5"/>
       </Unit>
       <Unit>
@@ -19,204 +19,223 @@
         <UnitName Value="XSDMainUnit"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-        <UsageCount Value="118"/>
+        <UsageCount Value="127"/>
+        <TopLine Value="116"/>
+        <CursorPos X="3" Y="96"/>
       </Unit>
       <Unit>
         <Filename Value="xsdelementtypesunit.pas"/>
         <UnitName Value="XsdElementTypesUnit"/>
         <Loaded Value="True"/>
-        <UsageCount Value="118"/>
+        <UsageCount Value="127"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="39"/>
-        <CursorPos X="3" Y="386"/>
+        <TopLine Value="428"/>
+        <CursorPos X="31" Y="438"/>
         <Bookmarks Count="2">
           <Item0 X="3" Y="501" ID="1"/>
-          <Item1 X="11" Y="736" ID="3"/>
+          <Item1 X="11" Y="742" ID="3"/>
         </Bookmarks>
       </Unit>
       <Unit>
         <Filename Value="xsdpascodegenunit.pas"/>
         <UnitName Value="XsdPasCodegenUnit"/>
         <Loaded Value="True"/>
-        <UsageCount Value="118"/>
+        <UsageCount Value="127"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="16"/>
       </Unit>
       <Unit>
         <Filename Value="xsdprocessorunit.pas"/>
         <UnitName Value="XsdProcessorUnit"/>
         <Loaded Value="True"/>
-        <UsageCount Value="118"/>
+        <UsageCount Value="127"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="519"/>
-        <CursorPos Y="532"/>
+        <TopLine Value="481"/>
+        <CursorPos X="41" Y="505"/>
         <Bookmarks Count="1">
-          <Item0 Y="548" ID="2"/>
+          <Item0 Y="585" ID="2"/>
         </Bookmarks>
       </Unit>
       <Unit>
         <Filename Value="xsdutils.pas"/>
         <Loaded Value="True"/>
-        <UsageCount Value="118"/>
+        <UsageCount Value="127"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="73"/>
+        <TopLine Value="303"/>
+        <CursorPos X="119" Y="312"/>
       </Unit>
       <Unit>
         <Filename Value="xsd_gui_consts_unit.pas"/>
         <Loaded Value="True"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="100"/>
         <EditorIndex Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="xsdconsts.pas"/>
         <Loaded Value="True"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="63"/>
         <EditorIndex Value="4"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-sdo/src/base/xsd_generator.pas"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="37"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/classes/stringl.inc"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1155"/>
         <CursorPos Y="1178"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../lcl/interfaces/gtk2/gtk2memostrings.inc"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="119"/>
         <CursorPos Y="143"/>
       </Unit>
       <Unit>
         <Filename Value="/home/alexs/install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="134"/>
         <CursorPos Y="158"/>
       </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/install/source/fpcsrc/packages/fcl-xml/src/dom.pp"/>
+        <UnitName Value="DOM"/>
+        <UsageCount Value="11"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1799"/>
+        <CursorPos Y="1814"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/home/alexs/install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
+        <UsageCount Value="10"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1140"/>
+        <CursorPos X="14" Y="1154"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="165" TopLine="151"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="395" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="391" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="393" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="97" TopLine="82"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="395" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="398" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="400" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="398" TopLine="380"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="363" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="364" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="365" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="366" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="368" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="370" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="365" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="372" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="373" Column="28" TopLine="358"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="45" Column="14" TopLine="31"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdpascodegenunit.pas"/>
+        <Caret Line="328" Column="54" TopLine="321"/>
+      </Position>
+      <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="492" Column="56" TopLine="480"/>
+        <Caret Line="272" Column="14" TopLine="270"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="356" Column="37" TopLine="354"/>
+        <Caret Line="712" Column="35" TopLine="688"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="293" Column="15" TopLine="278"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="805" Column="3" TopLine="803"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="264" Column="15" TopLine="249"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
+        <Caret Line="733" Column="33" TopLine="733"/>
+      </Position>
+      <Position>
+        <Filename Value="xsdelementtypesunit.pas"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="359" Column="23" TopLine="354"/>
+        <Caret Line="693" Column="11" TopLine="688"/>
       </Position>
       <Position>
         <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="423" Column="30" TopLine="400"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="371" Column="76" TopLine="356"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="48" Column="15" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="68" Column="94" TopLine="52"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="53" Column="19" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="624" Column="27" TopLine="600"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="56" Column="15" TopLine="41"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="647" Column="46" TopLine="629"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="38" Column="38" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="40" Column="34" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="45" Column="34" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="110" Column="54" TopLine="95"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="42" Column="29" TopLine="18"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="103" TopLine="74"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="254" Column="47" TopLine="247"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="42" Column="14" TopLine="26"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="69" Column="53" TopLine="69"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="42" Column="14" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="230" Column="45" TopLine="224"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="457" Column="13" TopLine="435"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="527" Column="37" TopLine="514"/>
-      </Position>
-      <Position>
-        <Filename Value="xsdprocessorunit.pas"/>
-        <Caret Line="49" Column="28" TopLine="35"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -231,4 +250,11 @@
       </List>
     </HistoryLists>
   </ProjectSession>
+  <Debugging>
+    <Watches>
+      <Item ClassAutoCast="True">
+        <Expression Value="Result"/>
+      </Item>
+    </Watches>
+  </Debugging>
 </CONFIG>

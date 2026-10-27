@@ -434,8 +434,8 @@ begin
 {      else
         ItemType:=pitAttribute;}
     end
-{    else
-      ItemType:=pitAttribute;}
+    else
+      ItemType:=pitSimpleType;
   end;
 
   FPascalName:=Name;

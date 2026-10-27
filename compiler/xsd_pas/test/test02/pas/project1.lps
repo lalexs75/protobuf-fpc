@@ -8,27 +8,26 @@
         <Filename Value="project1.lpr"/>
         <Loaded Value="True"/>
         <UsageCount Value="20"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos X="23" Y="7"/>
+        <CursorPos X="77" Y="13"/>
       </Unit>
       <Unit>
         <Filename Value="MainWithRef.pas"/>
         <Loaded Value="True"/>
         <UsageCount Value="20"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="24"/>
+        <TopLine Value="30"/>
         <CursorPos X="63" Y="39"/>
       </Unit>
       <Unit>
         <Filename Value="CommonTypes.pas"/>
         <Loaded Value="True"/>
         <UsageCount Value="10"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="34"/>
-        <CursorPos X="38" Y="51"/>
+        <TopLine Value="52"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory HistoryIndex="2">
       <Position>
         <Filename Value="project1.lpr"/>
         <Caret Line="11" Column="39"/>
@@ -36,6 +35,10 @@
       <Position>
         <Filename Value="CommonTypes.pas"/>
         <Caret Line="51" Column="38" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="MainWithRef.pas"/>
+        <Caret Line="39" Column="63" TopLine="30"/>
       </Position>
     </JumpHistory>
     <RunParams>

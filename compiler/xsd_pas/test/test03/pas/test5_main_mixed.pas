@@ -20,6 +20,7 @@ type
   private
     FName:TFullNameType;
     FAge:Int64;
+    procedure SetName( AValue:TFullNameType);
     procedure SetAge( AValue:Int64);
   protected
     procedure InternalRegisterPropertys; override;
@@ -29,13 +30,20 @@ type
     constructor Create; override;
     destructor Destroy; override;
   published
-    property Name:TFullNameType read FName;
+    property Name:TFullNameType read FName write SetName;
     property Age:Int64 read FAge write SetAge;
   end;
 
 implementation
 
   {  TPerson  }
+procedure TPerson.SetName(AValue: TFullNameType);
+begin
+  CheckStrMaxSize('Name', AValue);
+  FName:=AValue;
+  ModifiedProperty('Name');
+end;
+
 procedure TPerson.SetAge(AValue: Int64);
 begin
   FAge:=AValue;
@@ -47,19 +55,17 @@ var
   P: TPropertyDef;
 begin
   inherited InternalRegisterPropertys;
-  P:=RegisterProperty('Name', 'Name', [], '', -1, 100);
+  P:=RegisterProperty('Name', 'Name', [xsaSimpleObject], '', -1, 100);
   P:=RegisterProperty('Age', 'Age', [xsaSimpleObject], '', -1, -1);
 end;
 
 procedure TPerson.InternalInitChilds;
 begin
   inherited InternalInitChilds;
-  FName:=TFullNameType.Create;
 end;
 
 destructor TPerson.Destroy;
 begin
-  FName.Free;
   inherited Destroy;
 end;
 
