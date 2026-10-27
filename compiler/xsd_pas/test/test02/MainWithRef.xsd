@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Подключаем внешний файл. Транслятор корректно прочитает его и добавит типы. -->
+    <xs:include schemaLocation="CommonTypes.xsd"/>
+
+    <xs:element name="Document">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Title" type="xs:string"/>
+                
+                <!-- ПАДЕНИЕ ТРАНСЛЯТОРА: Использование ref для элемента из included-файла.
+                     FindSchemaElent будет искать 'GlobalID' в дочерних узлах MainWithRef.xsd.
+                     Он его там не найдет и выбросит исключение: 
+                     Exception: 'Element GlobalID not found in schema'. -->
+                <xs:element ref="GlobalID"/>
+            </xs:sequence>
+            
+            <!-- То же самое сработает и для атрибутов -->
+            <xs:attribute ref="version"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Person>
+  <Name>John Doe</Name>
+  <Address>
+    <Street>Main St</Street>
+    <City>Springfield</City>
+  </Address>
+  <ContactInfo>
+    <Phone>555-1234</Phone>
+  </ContactInfo>
+</Person>

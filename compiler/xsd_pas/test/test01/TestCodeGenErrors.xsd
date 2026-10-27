@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Сложный тип, объявленный глобально -->
+    <xs:complexType name="AddressType">
+        <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="City" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Корневой элемент -->
+    <xs:element name="Person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string"/>
+                
+                <!-- БАГ 1 (Перезапись типа): Элемент ссылается на сложный тип через атрибут type.
+                     В ProcessAS вызывается DoAttributeProp, который ставит ItemType = pitClass.
+                     Но сразу после этого выполняется Prop.ItemType := pitSimpleType.
+                     В сгенерированном коде свойство Address будет объявлено как String, а не как TAddressType. -->
+                <xs:element name="Address" type="AddressType"/>
+
+                <!-- БАГ 2 (Несовпадение имен): Встроенный (inline) сложный тип.
+                     Класс будет сгенерирован как TContactInfo, но свойство внутри TPerson 
+                     будет иметь тип TPerson_ContactInfo. -->
+                <xs:element name="ContactInfo">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Phone" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
